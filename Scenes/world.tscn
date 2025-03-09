@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://cax40kgn23m3q"]
 
-[ext_resource type="Script" uid="uid://bq6d71fqsv1h6" path="res://world.gd" id="1_fj7yv"]
-[ext_resource type="Script" uid="uid://c8jktfgrt1snq" path="res://knife_chop.gd" id="2_tlwt5"]
-[ext_resource type="PackedScene" uid="uid://xinvbq0sm0mf" path="res://food_chunk.tscn" id="3_tlwt5"]
+[ext_resource type="Script" uid="uid://bq6d71fqsv1h6" path="res://scripts/world.gd" id="1_fj7yv"]
+[ext_resource type="Script" uid="uid://c8jktfgrt1snq" path="res://scripts/knife_chop.gd" id="2_tlwt5"]
+[ext_resource type="PackedScene" uid="uid://xinvbq0sm0mf" path="res://Scenes/food_chunk.tscn" id="3_tlwt5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_036b0"]
 size = Vector2(447, 196)

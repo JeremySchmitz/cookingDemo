@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://xinvbq0sm0mf"]
+
+[ext_resource type="Script" uid="uid://s873fpwyy2ei" path="res://scripts/foodChunk.gd" id="1_5ciq2"]
+[ext_resource type="Script" uid="uid://ip3nwschvvkb" path="res://scripts/food_chunk_area_2d.gd" id="2_8nlit"]
+[ext_resource type="Script" uid="uid://cr7eutmdqhm0i" path="res://scripts/food_chunk_collider.gd" id="3_2k815"]
+
+[node name="foodChunk" type="Polygon2D"]
+polygon = PackedVector2Array(0, 0, 300, 0, 300, 300, 0, 300)
+script = ExtResource("1_5ciq2")
+
+[node name="FoodChunkArea" type="Area2D" parent="."]
+script = ExtResource("2_8nlit")
+metadata/_custom_type_script = "uid://ip3nwschvvkb"
+
+[node name="FoodChunkCollision" type="CollisionPolygon2D" parent="FoodChunkArea"]
+script = ExtResource("3_2k815")
+metadata/_custom_type_script = "uid://cr7eutmdqhm0i"
