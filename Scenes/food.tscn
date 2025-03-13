@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccw7uq7go4ivt"]
+[gd_scene load_steps=7 format=3 uid="uid://ccw7uq7go4ivt"]
 
 [ext_resource type="Script" uid="uid://ip3nwschvvkb" path="res://scripts/dragable_area.gd" id="1_fhto3"]
 [ext_resource type="Script" uid="uid://bunuku5x2rt24" path="res://Food/food.gd" id="1_h4kkx"]
 [ext_resource type="Script" uid="uid://0l0lpkxtrjtx" path="res://components/choppable.gd" id="3_h4kkx"]
 [ext_resource type="Script" uid="uid://3qtest46ag4a" path="res://components/health.gd" id="4_d37wj"]
+[ext_resource type="Script" uid="uid://dik22bwv6x5l5" path="res://components/hurtbox.gd" id="5_4hb68"]
+[ext_resource type="Script" uid="uid://det5k60wcmbbf" path="res://components/updateable_collider.gd" id="6_t0fp1"]
 
 [node name="food" type="Node2D" groups=["food"]]
 script = ExtResource("1_h4kkx")
@@ -25,7 +27,17 @@ foodShape = NodePath("../Polygon2D")
 collisionArea = NodePath("../draggableArea")
 collisionNode = NodePath("../draggableArea/CollisionPolygon2D")
 
-[node name="cook" type="Node" parent="."]
+[node name="health" type="Node" parent="."]
 script = ExtResource("4_d37wj")
+
+[node name="hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("5_4hb68")
+health = NodePath("../health")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="hurtbox" node_paths=PackedStringArray("collisionShape")]
+polygon = PackedVector2Array(0, 0, 104, 6, 116, 84, 63, 124, -22, 65, -3, -1)
+script = ExtResource("6_t0fp1")
+collisionShape = NodePath("../../draggableArea/CollisionPolygon2D")
+updateOn = "chopped"
 
 [connection signal="chopped" from="choppable" to="." method="_on_choppable_chopped"]

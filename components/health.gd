@@ -1,4 +1,4 @@
-class_name Cook
+class_name Health
 extends Node
 
 signal cookedChanged(diff: int)

@@ -1,16 +1,32 @@
-[gd_scene load_steps=6 format=3 uid="uid://cax40kgn23m3q"]
+[gd_scene load_steps=7 format=3 uid="uid://cax40kgn23m3q"]
 
 [ext_resource type="Script" uid="uid://bq6d71fqsv1h6" path="res://scripts/world.gd" id="1_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://ccw7uq7go4ivt" path="res://Scenes/food.tscn" id="3_5a7ea"]
 [ext_resource type="Script" uid="uid://cplwxfa5c4wal" path="res://components/knife_chopper.gd" id="4_8j60k"]
+[ext_resource type="Script" uid="uid://jgkb3k3cebao" path="res://components/hitbox.gd" id="4_fo5ed"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_036b0"]
-size = Vector2(447, 196)
+[sub_resource type="CircleShape2D" id="CircleShape2D_8j60k"]
+radius = 81.0062
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fo5ed"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_fj7yv")
+
+[node name="fryingPan" type="Node2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="fryingPan"]
+position = Vector2(726, 446)
+color = Color(0.0768358, 0.0768358, 0.0768358, 1)
+polygon = PackedVector2Array(0, -114.509, 114.509, 0, 0, 114.509, -114.509, 0)
+uv = PackedVector2Array(-256, -64, -144, 24, -248, 88, -320, 16)
+
+[node name="hitbox" type="Area2D" parent="fryingPan"]
+script = ExtResource("4_fo5ed")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fryingPan/hitbox"]
+position = Vector2(731, 445)
+shape = SubResource("CircleShape2D_8j60k")
 
 [node name="food" parent="." instance=ExtResource("3_5a7ea")]
 position = Vector2(392, 155)
@@ -37,16 +53,6 @@ offset_bottom = 204.0
 toggle_mode = true
 text = "Grab"
 
-[node name="fryingpan" type="Area2D" parent="."]
-
-[node name="Polygon2D" type="Polygon2D" parent="fryingpan"]
-color = Color(0.531237, 0.551193, 0.653891, 1)
-polygon = PackedVector2Array(614, 382, 1057, 386, 1057, 579, 611, 579)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="fryingpan"]
-position = Vector2(835, 482)
-shape = SubResource("RectangleShape2D_036b0")
-
 [node name="knifeChopper" type="Area2D" parent="."]
 script = ExtResource("4_8j60k")
 
@@ -56,5 +62,3 @@ shape = SubResource("CircleShape2D_fo5ed")
 [connection signal="pressed" from="chopBtn" to="." method="_on_chop_btn_pressed"]
 [connection signal="pressed" from="sliceBtn" to="." method="_on_slice_btn_pressed"]
 [connection signal="pressed" from="grabBtn" to="." method="_on_grab_btn_pressed"]
-[connection signal="area_entered" from="fryingpan" to="." method="_on_fryingpan_area_entered"]
-[connection signal="area_exited" from="fryingpan" to="." method="_on_fryingpan_area_exited"]

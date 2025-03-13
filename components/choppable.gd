@@ -27,7 +27,6 @@ func _on_area_entered(body: Area2D):
 		knifeEntered = body.position
 	
 func _on_area_exited(body: Area2D):
-	print('on area exited. Is knighChopper: ' + str(body is KnifeChopper))
 	if body is KnifeChopper && body.monitoring && body.cutting:
 		knifeExited = body.position
 		var line = _correctChopLine([knifeEntered, knifeExited])
