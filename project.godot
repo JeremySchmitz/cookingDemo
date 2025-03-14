@@ -14,6 +14,10 @@ config/name="cookingDemo"
 run/main_scene="uid://cax40kgn23m3q"
 config/features=PackedStringArray("4.4", "Forward Plus")
 
+[autoload]
+
+Signals="*res://Scenes/Singletons/signals.gd"
+
 [display]
 
 window/size/always_on_top=true

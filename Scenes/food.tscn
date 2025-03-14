@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ccw7uq7go4ivt"]
+[gd_scene load_steps=8 format=3 uid="uid://ccw7uq7go4ivt"]
 
 [ext_resource type="Script" uid="uid://ip3nwschvvkb" path="res://scripts/dragable_area.gd" id="1_fhto3"]
 [ext_resource type="Script" uid="uid://bunuku5x2rt24" path="res://Food/food.gd" id="1_h4kkx"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://3qtest46ag4a" path="res://components/health.gd" id="4_d37wj"]
 [ext_resource type="Script" uid="uid://dik22bwv6x5l5" path="res://components/hurtbox.gd" id="5_4hb68"]
 [ext_resource type="Script" uid="uid://det5k60wcmbbf" path="res://components/updateable_collider.gd" id="6_t0fp1"]
+[ext_resource type="Script" uid="uid://w6ocrvw6sksd" path="res://Scenes/sliceable.gd" id="7_t0fp1"]
 
 [node name="food" type="Node2D" groups=["food"]]
 script = ExtResource("1_h4kkx")
@@ -15,15 +16,12 @@ script = ExtResource("1_fhto3")
 metadata/_custom_type_script = "uid://ip3nwschvvkb"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="draggableArea" groups=["food"]]
-polygon = PackedVector2Array(0, 0, 100, 0, 100, 100, 0, 100)
-
-[node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(0, 0, 100, 0, 100, 100, 0, 100)
+polygon = PackedVector2Array(0, 0, 200, 0, 200, 200, 0, 200)
 
 [node name="choppable" type="Node2D" parent="." node_paths=PackedStringArray("foodShape", "collisionArea", "collisionNode")]
 script = ExtResource("3_h4kkx")
 scene = "res://Scenes/food.tscn"
-foodShape = NodePath("../Polygon2D")
+foodShape = NodePath("../CanvasGroup/Polygon2D")
 collisionArea = NodePath("../draggableArea")
 collisionNode = NodePath("../draggableArea/CollisionPolygon2D")
 
@@ -35,9 +33,19 @@ script = ExtResource("5_4hb68")
 health = NodePath("../health")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="hurtbox" node_paths=PackedStringArray("collisionShape")]
-polygon = PackedVector2Array(0, 0, 104, 6, 116, 84, 63, 124, -22, 65, -3, -1)
+polygon = PackedVector2Array(0, 0, 200, 0, 200, 200, 0, 200)
 script = ExtResource("6_t0fp1")
 collisionShape = NodePath("../../draggableArea/CollisionPolygon2D")
 updateOn = "chopped"
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="CanvasGroup"]
+polygon = PackedVector2Array(0, 0, 200, 0, 200, 200, 0, 200)
+
+[node name="sliceable" type="Node2D" parent="." node_paths=PackedStringArray("collisionArea", "group")]
+script = ExtResource("7_t0fp1")
+collisionArea = NodePath("../draggableArea")
+group = NodePath("../CanvasGroup")
 
 [connection signal="chopped" from="choppable" to="." method="_on_choppable_chopped"]

@@ -18,7 +18,8 @@ func _on_chop_btn_pressed() -> void:
 	$chopBtn.disabled = true
 	$sliceBtn.disabled = false
 	$grabBtn.disabled = false
-	($knifeChopper as Area2D).set_deferred("monitoring", true)
+	$knifeChopper.active = true
+	$knifeSlicer.active = false
 	get_tree().get_root().set_input_as_handled()
 
 func _on_grab_btn_pressed() -> void:
@@ -26,7 +27,8 @@ func _on_grab_btn_pressed() -> void:
 	$chopBtn.disabled = false
 	$sliceBtn.disabled = false
 	$grabBtn.disabled = true
-	($knifeChopper as Area2D).set_deferred("monitoring", false)
+	$knifeChopper.active = false
+	$knifeSlicer.active = false
 	get_tree().get_root().set_input_as_handled()
 
 func _on_slice_btn_pressed() -> void:
@@ -34,5 +36,6 @@ func _on_slice_btn_pressed() -> void:
 	$chopBtn.disabled = false
 	$sliceBtn.disabled = true
 	$grabBtn.disabled = false
-	($knifeChopper as Area2D).set_deferred("monitoring", false)
+	$knifeChopper.active = false
+	$knifeSlicer.active = true
 	get_tree().get_root().set_input_as_handled()
