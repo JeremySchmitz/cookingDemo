@@ -33,7 +33,7 @@ script = ExtResource("5_4hb68")
 health = NodePath("../health")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="hurtbox" node_paths=PackedStringArray("collisionShape")]
-polygon = PackedVector2Array(0, 0, 200, 0, 200, 200, 0, 200)
+polygon = PackedVector2Array(0, 0, 200, 0, 200, 200, 0, 200, -22, 65, -3, -1)
 script = ExtResource("6_t0fp1")
 collisionShape = NodePath("../../draggableArea/CollisionPolygon2D")
 updateOn = "chopped"

@@ -1,18 +1,17 @@
 class_name Sliceable
 extends Node2D
 
+const sliceMaterial = preload("res://resources/subtract.material")
+
 const angle1 = 20 * PI/180
 const angle2 = 10 * PI/180
 const percent1 = 0.2
 const percent2 = 0.3
-const sliceMaterial = preload("res://resources/subtract.material")
 
 @export var collisionArea: Area2D
 @export var group: CanvasGroup
 
 @onready var slices: Polygon2D = Polygon2D.new()
-
-var g = Geometry2D
 
 var knifeInside = false
 var sliceStart: Vector2
@@ -46,17 +45,13 @@ func slice(line: PackedVector2Array):
 	
 	var newLine = [line[0], p1, p2, p3, line[1], p4, p5, p6]
 	
-	print('global' + str(global_position))
 	for i in range(0, newLine.size()):
 		newLine[i] = newLine[i] - global_position
 		
-		#_addNewSlice(newLine)
 	_addNewSlice(newLine)
-		
-	pass
+	
 	
 func _addNewSlice(line: PackedVector2Array):
-	#slices.polygons.append(line)
 	var slice = Polygon2D.new()
 	slice.polygon = line
 	slice.color = Color(0,1,0,1)
@@ -65,22 +60,23 @@ func _addNewSlice(line: PackedVector2Array):
 	group.add_child(slice)
 
 
-	
 func _on_area_entered(body: Area2D):
-	if body is KnifeSlicer:
+	if body is KnifeSlicer && body.active:
 		knifeInside = true
 		Signals.startSlice.connect(_on_start_slice)
 		Signals.endSlice.connect(_on_end_slice)
-	
+
+
 func _on_area_exited(body: Area2D):
-	if body is KnifeSlicer:
+	if body is KnifeSlicer && body.active:
 		knifeInside = false
 		Signals.startSlice.disconnect(_on_start_slice)
 		Signals.endSlice.disconnect(_on_end_slice)
-		
+
+
 func _on_start_slice(p: Vector2):
 	sliceStart = p;
-	
+
 func _on_end_slice(p: Vector2):
 	slice([sliceStart, p])
 	sliceStart = Vector2(-1,-1)
