@@ -4,7 +4,8 @@ extends Node2D
 var g = Geometry2D
 
 const maxFloatSize: float = 99999.0
-const lineExpansion = 2
+const lineExpansion = 1
+const sliceMaterial = preload("res://resources/subtract.material")
 
 signal chopped(polygon:PackedVector2Array)
 
@@ -12,6 +13,7 @@ signal chopped(polygon:PackedVector2Array)
 @export var foodShape: Polygon2D
 @export var collisionArea: Area2D
 @export var collisionNode: CollisionPolygon2D
+@export var group: CanvasGroup
 
 var knifeEntered: Vector2
 var knifeExited: Vector2
@@ -48,16 +50,27 @@ func _toRelativePositon(p1: Vector2):
 func _chop (line: PackedVector2Array, polygon: PackedVector2Array):
 	var thiccLine = g.offset_polyline(line, lineExpansion)[0]
 	var clip = g.clip_polygons(polygon, thiccLine)
+	
 	if clip.size():
-		var poly1 = clip[0]
-		var poly2 = clip[0]
+		var poly1 =g.offset_polygon(clip[0], lineExpansion )[0]
+		var poly2 = g.offset_polygon(clip[1], lineExpansion )[0]
 
 		foodShape.polygon = poly1
 		collisionNode.set_deferred("polygon", poly1)
+		_addNew(poly2)
 		chopped.emit(poly2)
 	chopped.emit([])
 
 
+func _addNew(line: PackedVector2Array):
+	print('add Slice')
+	var slice = Polygon2D.new()
+	slice.polygon = line
+	slice.color = Color(0,1,0,1)
+	slice.clip_children = true
+	slice.material = sliceMaterial
+	group.add_child(slice)
+	
 func _getLineOnShape(line: PackedVector2Array, polygon: PackedVector2Array):
 	var updatedLine: PackedVector2Array = [Vector2(), Vector2()]
 

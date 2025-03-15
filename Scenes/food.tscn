@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ccw7uq7go4ivt"]
+[gd_scene load_steps=9 format=3 uid="uid://ccw7uq7go4ivt"]
 
 [ext_resource type="Script" uid="uid://ip3nwschvvkb" path="res://scripts/dragable_area.gd" id="1_fhto3"]
 [ext_resource type="Script" uid="uid://bunuku5x2rt24" path="res://Food/food.gd" id="1_h4kkx"]
@@ -7,45 +7,51 @@
 [ext_resource type="Script" uid="uid://dik22bwv6x5l5" path="res://components/hurtbox.gd" id="5_4hb68"]
 [ext_resource type="Script" uid="uid://det5k60wcmbbf" path="res://components/updateable_collider.gd" id="6_t0fp1"]
 [ext_resource type="Script" uid="uid://w6ocrvw6sksd" path="res://Scenes/sliceable.gd" id="7_t0fp1"]
+[ext_resource type="Texture2D" uid="uid://3gwau4ncgypn" path="res://resources/Sprites/PufferFish/PufferFish_Outline.png" id="7_ud83k"]
 
 [node name="food" type="Node2D" groups=["food"]]
 script = ExtResource("1_h4kkx")
 
-[node name="draggableArea" type="Area2D" parent="."]
-script = ExtResource("1_fhto3")
-metadata/_custom_type_script = "uid://ip3nwschvvkb"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="draggableArea" groups=["food"]]
-polygon = PackedVector2Array(0, 0, 200, 0, 200, 200, 0, 200)
-
-[node name="choppable" type="Node2D" parent="." node_paths=PackedStringArray("foodShape", "collisionArea", "collisionNode")]
-script = ExtResource("3_h4kkx")
-scene = "res://Scenes/food.tscn"
-foodShape = NodePath("../CanvasGroup/Polygon2D")
-collisionArea = NodePath("../draggableArea")
-collisionNode = NodePath("../draggableArea/CollisionPolygon2D")
-
 [node name="health" type="Node" parent="."]
 script = ExtResource("4_d37wj")
+
+[node name="choppable" type="Node2D" parent="." node_paths=PackedStringArray("foodShape", "collisionArea", "collisionNode", "group")]
+script = ExtResource("3_h4kkx")
+scene = "res://Scenes/food.tscn"
+foodShape = NodePath("../Polygon2D")
+collisionArea = NodePath("../draggableArea")
+collisionNode = NodePath("../draggableArea/CollisionPolygon2D")
+group = NodePath("../CanvasGroup")
+
+[node name="sliceable" type="Node2D" parent="." node_paths=PackedStringArray("collisionArea", "group")]
+script = ExtResource("7_t0fp1")
+collisionArea = NodePath("../draggableArea")
+group = NodePath("../CanvasGroup")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-85, -3, -62, -24, -29, -36, 17, -40, 47, -58, 59, -77, 65, -84, 77, -79, 84, -78, 74, -24, 63, 13, 53, 34, 37, 61, -1, 83, -20, 89, -43, 90, -67, 87, -87, 63, -91, 25)
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup"]
+scale = Vector2(3, 3)
+texture = ExtResource("7_ud83k")
 
 [node name="hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("5_4hb68")
 health = NodePath("../health")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="hurtbox" node_paths=PackedStringArray("collisionShape")]
-polygon = PackedVector2Array(0, 0, 200, 0, 200, 200, 0, 200, -22, 65, -3, -1)
 script = ExtResource("6_t0fp1")
 collisionShape = NodePath("../../draggableArea/CollisionPolygon2D")
 updateOn = "chopped"
 
-[node name="CanvasGroup" type="CanvasGroup" parent="."]
+[node name="draggableArea" type="Area2D" parent="."]
+script = ExtResource("1_fhto3")
+metadata/_custom_type_script = "uid://ip3nwschvvkb"
 
-[node name="Polygon2D" type="Polygon2D" parent="CanvasGroup"]
-polygon = PackedVector2Array(0, 0, 200, 0, 200, 200, 0, 200)
-
-[node name="sliceable" type="Node2D" parent="." node_paths=PackedStringArray("collisionArea", "group")]
-script = ExtResource("7_t0fp1")
-collisionArea = NodePath("../draggableArea")
-group = NodePath("../CanvasGroup")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="draggableArea" groups=["food"]]
+polygon = PackedVector2Array(-88, 16, -82, 57, -56, 84, -30, 87, 4, 77, 37, 54, 57, 18, 72, -26, 81, -76, 65, -83, 40, -49, -11, -34, -33, -32, -76, -9)
 
 [connection signal="chopped" from="choppable" to="." method="_on_choppable_chopped"]

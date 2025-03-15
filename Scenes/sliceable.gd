@@ -11,7 +11,6 @@ const percent2 = 0.3
 @export var collisionArea: Area2D
 @export var group: CanvasGroup
 
-@onready var slices: Polygon2D = Polygon2D.new()
 
 var knifeInside = false
 var sliceStart: Vector2
@@ -20,8 +19,6 @@ var sliceStart: Vector2
 func _ready() -> void:
 	collisionArea.area_entered.connect(_on_area_entered)
 	collisionArea.area_exited.connect(_on_area_exited)
-	add_child(slices)
-	slices.color = Color(0,1,0,1)
 	
 
 func slice(line: PackedVector2Array):
