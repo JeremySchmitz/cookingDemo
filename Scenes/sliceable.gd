@@ -49,12 +49,12 @@ func slice(line: PackedVector2Array):
 	
 	
 func _addNewSlice(line: PackedVector2Array):
-	var slice = Polygon2D.new()
-	slice.polygon = line
-	slice.color = Color(0,1,0,1)
-	slice.clip_children = true
-	slice.material = sliceMaterial
-	group.add_child(slice)
+	var newSlice = Polygon2D.new()
+	newSlice.polygon = line
+	newSlice.color = Color(0,1,0,1)
+	newSlice.clip_children = true
+	newSlice.material = sliceMaterial
+	group.add_child(newSlice)
 
 
 func _on_area_entered(body: Area2D):

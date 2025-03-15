@@ -13,7 +13,7 @@ signal chopped(polygon:PackedVector2Array)
 @export var foodShape: Polygon2D
 @export var collisionArea: Area2D
 @export var collisionNode: CollisionPolygon2D
-@export var group: CanvasGroup
+@export var groups:Array[CanvasGroup]
 
 var knifeEntered: Vector2
 var knifeExited: Vector2
@@ -48,6 +48,7 @@ func _toRelativePositon(p1: Vector2):
 
 
 func _chop (line: PackedVector2Array, polygon: PackedVector2Array):
+	print('chop')
 	var thiccLine = g.offset_polyline(line, lineExpansion)[0]
 	var clip = g.clip_polygons(polygon, thiccLine)
 	
@@ -57,12 +58,16 @@ func _chop (line: PackedVector2Array, polygon: PackedVector2Array):
 
 		foodShape.polygon = poly1
 		collisionNode.set_deferred("polygon", poly1)
-		_addNew(poly2)
+		print('adding to groups')
+#		TODO This is not the most efficient way to do this case
+#			we are adding the same shape twice
+		for group in groups:
+			_addNew(poly2, group)
 		chopped.emit(poly2)
 	chopped.emit([])
 
 
-func _addNew(line: PackedVector2Array):
+func _addNew(line: PackedVector2Array, group: CanvasGroup):
 	print('add Slice')
 	var slice = Polygon2D.new()
 	slice.polygon = line
