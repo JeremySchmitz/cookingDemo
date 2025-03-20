@@ -11,8 +11,11 @@
 [ext_resource type="Texture2D" uid="uid://j2dho68ajy6v" path="res://resources/Sprites/PufferFish/PufferFish_Outline.png" id="7_ud83k"]
 [ext_resource type="Texture2D" uid="uid://d2xppba4lg8o" path="res://resources/Sprites/PufferFish/PufferFish_Guts.png" id="8_1gaok"]
 
-[node name="food" type="Node2D" groups=["food"]]
+[node name="food" type="Node2D" node_paths=PackedStringArray("polygon2D", "collisionPoly", "choppable") groups=["food"]]
 script = ExtResource("1_h4kkx")
+polygon2D = NodePath("Polygon2D")
+collisionPoly = NodePath("draggableArea/CollisionPolygon2D")
+choppable = NodePath("choppable")
 
 [node name="health" type="Node" parent="."]
 script = ExtResource("4_d37wj")

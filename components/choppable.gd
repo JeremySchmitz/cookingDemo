@@ -7,7 +7,7 @@ const maxFloatSize: float = 99999.0
 const lineExpansion = 1
 const sliceMaterial = preload("res://resources/subtract.material")
 
-signal chopped(polygon:PackedVector2Array)
+signal chopped(poly1:PackedVector2Array,poly2:PackedVector2Array)
 
 @export var scene: String
 @export var foodShape: Polygon2D
@@ -48,24 +48,26 @@ func _toRelativePositon(p1: Vector2):
 
 
 func _chop (line: PackedVector2Array, polygon: PackedVector2Array):
-	print('chop')
 	var thiccLine = g.offset_polyline(line, lineExpansion)[0]
 	var clip = g.clip_polygons(polygon, thiccLine)
 	
-	if clip.size():
-		var poly1 =g.offset_polygon(clip[0], lineExpansion )[0]
-		var poly2 = g.offset_polygon(clip[1], lineExpansion )[0]
+	if !clip.size():
+		chopped.emit([], [])
+		return
+		
+	var poly1 =g.offset_polygon(clip[0], lineExpansion)[0]
+	var poly2 = g.offset_polygon(clip[1], lineExpansion)[0]
+	collisionNode.set_deferred("polygon", poly1)
+	
+	addChops(poly2)
+	chopped.emit(poly1, poly2)
 
-		foodShape.polygon = poly1
-		collisionNode.set_deferred("polygon", poly1)
-		print('adding to groups')
-#		TODO This is not the most efficient way to do this case
-#			we are adding the same shape twice
-		for group in groups:
-			_addNew(poly2, group)
-		chopped.emit(poly2)
-	chopped.emit([])
 
+func addChops(poly):
+	#TODO This is not the most efficient way to do this case
+	#we are adding the same shape twice
+	for group in groups:
+		_addNew(poly, group)
 
 func _addNew(line: PackedVector2Array, group: CanvasGroup):
 	print('add Slice')
