@@ -1,6 +1,8 @@
 class_name Sliceable
 extends Node2D
 
+signal sliced(line: PackedVector2Array)
+
 const sliceMaterial = preload("res://resources/subtract.material")
 
 const angle1 = 20 * PI/180
@@ -46,7 +48,7 @@ func slice(line: PackedVector2Array):
 		newLine[i] = newLine[i] - global_position
 		
 	_addNewSlice(newLine)
-	
+	sliced.emit(newLine)
 	
 func _addNewSlice(line: PackedVector2Array):
 	var newSlice = Polygon2D.new()
