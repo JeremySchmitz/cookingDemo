@@ -4,6 +4,7 @@ extends CanvasGroup
 var g = Geometry2D
 
 const maxFloatSize: float = 99999.0
+const cutLineGrow = 200
 const lineExpansion = 1
 const sliceMaterial = preload("res://resources/subtract.material")
 
@@ -38,10 +39,14 @@ func _on_area_exited(body: Area2D):
 
 
 func _correctChopLine(line: PackedVector2Array):
+	var relStart = _toRelativePositon(line[0])
+	var relEnd = _toRelativePositon(line[1])
+	var dir = (relEnd - relStart).normalized()
+	
+	var newStart = relStart + (dir * -cutLineGrow)
+	var newEnd = relEnd + (dir * cutLineGrow)
 #	Move points to relative position and make sure they sit on the borders of the shape
-	return  _getLineOnShape(
-			[_toRelativePositon(line[0]), _toRelativePositon(line[1])],
-			 collisionNode.polygon)
+	return  [newStart, newEnd]
 
 
 func _toRelativePositon(p1: Vector2):
