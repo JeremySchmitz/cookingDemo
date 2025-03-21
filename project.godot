@@ -21,6 +21,7 @@ Signals="*res://Scenes/Singletons/signals.gd"
 [display]
 
 window/size/always_on_top=true
+window/size/transparent=true
 
 [editor]
 

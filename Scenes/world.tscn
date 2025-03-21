@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cax40kgn23m3q"]
+[gd_scene load_steps=10 format=3 uid="uid://cax40kgn23m3q"]
 
 [ext_resource type="Script" uid="uid://bq6d71fqsv1h6" path="res://scripts/world.gd" id="1_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://ccw7uq7go4ivt" path="res://Scenes/food.tscn" id="3_5a7ea"]
 [ext_resource type="Script" uid="uid://cplwxfa5c4wal" path="res://components/knife_chopper.gd" id="4_8j60k"]
 [ext_resource type="Script" uid="uid://jgkb3k3cebao" path="res://components/hitbox.gd" id="4_fo5ed"]
 [ext_resource type="Script" uid="uid://cepynjnto0btg" path="res://components/knife_slicer.gd" id="5_fo5ed"]
+[ext_resource type="PackedScene" uid="uid://c1ixyyfmpabav" path="res://Food/organ.tscn" id="6_5ukr8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8j60k"]
 radius = 81.0062
@@ -67,6 +68,9 @@ script = ExtResource("5_fo5ed")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="knifeSlicer"]
 shape = SubResource("CircleShape2D_5ukr8")
+
+[node name="Organ" parent="." instance=ExtResource("6_5ukr8")]
+position = Vector2(165, 122)
 
 [connection signal="pressed" from="chopBtn" to="." method="_on_chop_btn_pressed"]
 [connection signal="pressed" from="sliceBtn" to="." method="_on_slice_btn_pressed"]

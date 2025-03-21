@@ -29,7 +29,6 @@ func slice(line: PackedVector2Array):
 		line[1] = line[0]
 		line[0] = tp
 		
-	var slope = (line[1].y - line[0].y)/ (line[1].x - line[0].x)
 	var dist = line[0].distance_to(line[1])
 	var dir = (line[1] - line[0]).normalized()
 	

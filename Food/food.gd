@@ -3,29 +3,11 @@ extends Node2D
 
 @export var polygon2D: Polygon2D
 @export var collisionPoly: CollisionPolygon2D
-@export var choppable: Choppable
-var scene = preload("res://Scenes/food.tscn")
 
 var draggable = false
 
 func _ready():
 	Signals.modeChange.connect(_on_mode_change)
-
-func _on_choppable_chopped(poly1: PackedVector2Array, poly2: PackedVector2Array) -> void:
-	if !poly1.size():
-		return
-	
-	var food:= await scene.instantiate()
-	updateSibling.call_deferred(food, poly2, poly1)
-
-
-func updateSibling(sibling: Food, poly: PackedVector2Array, chopPoly: PackedVector2Array):
-	print('addSibling')
-	sibling.position = position
-	sibling.collisionPoly.polygon = poly
-	sibling.choppable.addChops(chopPoly)
-	sibling.updateOrgans.call_deferred()
-	add_sibling(sibling)
 
 
 func _on_sliceable_sliced(line: PackedVector2Array) -> void:
