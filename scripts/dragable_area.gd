@@ -22,18 +22,16 @@ func _unhandled_input(event):
 			and event.pressed
 		):
 			lifted = true
-			get_viewport().set_input_as_handled()
 			
 		if event is InputEventMouseButton and not event.pressed:
 			lifted = false
-			get_viewport().set_input_as_handled()
 			
 		if lifted and event is InputEventMouseMotion:
 			get_parent().position += event.relative
 			get_viewport().set_input_as_handled()
 
 func _mouse_over(value):
-	self.mouse_over = value
+	mouse_over = value
 
 func _on_mode_change(m: GlobalEnums.Mode):
 	match m:
