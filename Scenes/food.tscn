@@ -42,7 +42,7 @@ texture = ExtResource("8_1gaok")
 
 [node name="Organs" type="Node2D" parent="."]
 
-[node name="Node2D" parent="Organs" instance=ExtResource("7_mmhua")]
+[node name="organ" parent="Organs" instance=ExtResource("7_mmhua")]
 position = Vector2(-41, 45)
 
 [node name="draggableArea" type="Area2D" parent="."]

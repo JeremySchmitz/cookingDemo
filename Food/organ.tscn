@@ -5,16 +5,9 @@
 [ext_resource type="Script" uid="uid://ip3nwschvvkb" path="res://scripts/dragable_area.gd" id="3_7trvv"]
 [ext_resource type="Script" uid="uid://0l0lpkxtrjtx" path="res://components/choppable.gd" id="4_j2hgb"]
 
-[node name="Organ" type="Node2D" node_paths=PackedStringArray("collision")]
+[node name="Organ" type="Node2D" node_paths=PackedStringArray("collisionPoly")]
 script = ExtResource("1_b2tfb")
-collision = NodePath("DraggableArea/CollisionPolygon2D")
-
-[node name="DraggableArea" type="Area2D" parent="."]
-script = ExtResource("3_7trvv")
-metadata/_custom_type_script = "uid://ip3nwschvvkb"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DraggableArea"]
-polygon = PackedVector2Array(-13, -24, -21, -13, -24, -1, -24, 13, -27, 22, -22, 31, -9, 31, -1, 29, 14, 25, 26, 11, 25, -6, 16, -21, 2, -29)
+collisionPoly = NodePath("DraggableArea/CollisionPolygon2D")
 
 [node name="Choppable" type="CanvasGroup" parent="." node_paths=PackedStringArray("collisionArea", "collisionNode")]
 script = ExtResource("4_j2hgb")
@@ -26,3 +19,10 @@ metadata/_custom_type_script = "uid://0l0lpkxtrjtx"
 [node name="Sprite2D" type="Sprite2D" parent="Choppable"]
 texture_filter = 3
 texture = ExtResource("2_j2hgb")
+
+[node name="DraggableArea" type="Area2D" parent="."]
+script = ExtResource("3_7trvv")
+metadata/_custom_type_script = "uid://ip3nwschvvkb"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DraggableArea"]
+polygon = PackedVector2Array(-13, -24, -21, -13, -24, -1, -24, 13, -27, 22, -22, 31, -9, 31, -1, 29, 14, 25, 26, 11, 25, -6, 16, -21, 2, -29)

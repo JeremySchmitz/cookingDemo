@@ -62,7 +62,8 @@ func _chop (line: PackedVector2Array, polygon: PackedVector2Array):
 	collisionNode.set_deferred("polygon", poly1)
 	
 	addChops(poly2)
-	_createCunk(poly1, poly2)
+	var organs = updateOrgans(poly1)
+	_createChunk(poly1, poly2, organs)
 	chopped.emit(poly1, poly2)
 
 
@@ -78,9 +79,10 @@ func _addNew(line: PackedVector2Array, group: CanvasGroup):
 	slice.polygon = line
 	slice.clip_children = true
 	slice.material = sliceMaterial
-	group.add_child(slice)
 	#DEBUG
 	#slice.color = Color(0,1,0,1)
+	group.add_child(slice)
+	
 	
 func _getLineOnShape(line: PackedVector2Array, polygon: PackedVector2Array):
 	var updatedLine: PackedVector2Array = [Vector2(), Vector2()]
@@ -104,14 +106,14 @@ func _getLineOnShape(line: PackedVector2Array, polygon: PackedVector2Array):
 
 	return updatedLine
 	
-func _createCunk(poly1: PackedVector2Array, poly2: PackedVector2Array) -> void:
+func _createChunk(poly1: PackedVector2Array, poly2: PackedVector2Array, newOrgans: Dictionary) -> void:
 	if !poly1.size():
 		return
 	
 	var chunk: Node2D = await scene.instantiate()
-	_updateChunk.call_deferred(chunk, poly2, poly1)
+	_updateChunk.call_deferred(chunk, poly2, poly1, newOrgans)
 	
-func _updateChunk(chunk: Node2D, poly: PackedVector2Array, chopPoly: PackedVector2Array):
+func _updateChunk(chunk: Node2D, poly: PackedVector2Array, chopPoly: PackedVector2Array, newOrgans: Dictionary):
 	chunk.position = get_parent().position
 	if "collisionPoly" in chunk:
 		chunk.collisionPoly.polygon = poly
@@ -119,8 +121,79 @@ func _updateChunk(chunk: Node2D, poly: PackedVector2Array, chopPoly: PackedVecto
 	for child in chunk.get_children():
 		if child is Choppable:
 			child.addChops(chopPoly)
-			
-	if "updateOrgans" in chunk:
-		chunk.updateOrgans.call_deferred()
+			if "replaceOrgans" in child:
+				child.replaceOrgans.call_deferred(newOrgans)
 		
 	get_parent().add_sibling(chunk)	
+
+func replaceOrgans(newOrgans: Dictionary):
+	var organs
+	var vOrgans
+	
+	if "organs" in newOrgans:
+		organs = newOrgans.organs
+	if "vOrgans" in newOrgans:
+		vOrgans = newOrgans.vOrgans
+		
+	var siblings = get_parent().get_children()
+	if !organs and !vOrgans:
+		return
+	
+	for child in siblings:
+		if child.name == "Organs" and organs:
+			for n in child.get_children():
+				child.remove_child(n)
+				n.queue_free()
+			for organ in organs:
+				(organ as Node2D).get_parent().remove_child(organ)
+				child.add_child(organ)
+				
+		elif child.name == "VisibleOrgans" and vOrgans:
+			for n in child.get_children():
+				child.remove_child(n)
+				n.queue_free()
+			for organ in vOrgans:
+				(organ as Node2D).get_parent().remove_child(organ)
+				child.add_child(organ)
+
+func updateOrgans(newPoly: PackedVector2Array):
+	var siblings = get_parent().get_children()
+	var organs
+	var vOrgans
+	var removeOrgans = []
+	var removeVOrgans = []
+	for child in siblings:
+		if child.name == "Organs": organs = child.get_children()
+		elif child.name == "VisibleOrgans": vOrgans = child.get_children()
+	
+	var globalPoly = _getGlobalPoly(newPoly)
+	
+	if organs:
+		for organ in organs:
+			if organ is not Organ: break
+			var organCenter = _getGobalCenter(organ.global_position, organ.polygon)
+			if !Geometry2D.is_point_in_polygon(organCenter, globalPoly):
+				removeOrgans.append(organ)
+	if vOrgans:
+		for organ in vOrgans:
+			if organ is not Organ: break
+			var organCenter = _getGobalCenter(organ.global_position, organ.polygon)
+			if !Geometry2D.is_point_in_polygon(organCenter, globalPoly):
+				removeVOrgans.append(organ)
+	return {"organs":removeOrgans, "vOrgans": removeVOrgans}
+
+
+func _getGobalCenter(globalPos:Vector2, points: PackedVector2Array) -> Vector2:
+	var avg = Vector2(0,0)
+	for p in points:
+		avg += p
+	avg /= points.size()
+	
+	return globalPos + avg
+	
+	
+func _getGlobalPoly(poly: PackedVector2Array) -> PackedVector2Array:
+	var newPoly = []
+	for p in poly:
+		newPoly.append(global_position + p)
+	return newPoly

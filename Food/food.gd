@@ -38,39 +38,3 @@ func _on_mode_change(m: GlobalEnums.Mode):
 			draggable = true
 		_:
 			draggable = false
-
-
-func updateOrgans():
-	var organs:= get_node("Organs").get_children() 
-	var vOrgans:= get_node("VisibleOrgans").get_children() 
-	
-	var globalPoly = _getGlobalPoly()
-	
-	for organ in organs:
-		if organ is not Organ: break
-		var organCenter = _getGobalCenter(organ.global_position, organ.polygon)
-		if !Geometry2D.is_point_in_polygon(organCenter, globalPoly):
-			organ.queue_free()
-		
-	for organ in vOrgans:
-		if organ is not Organ: break
-		var organCenter = _getGobalCenter(organ.global_position, organ.polygon)
-		if !Geometry2D.is_point_in_polygon(organCenter, globalPoly):
-			organ.queue_free()
-	
-	
-func _getGobalCenter(globalPos:Vector2, points: PackedVector2Array) -> Vector2:
-	var avg = Vector2(0,0)
-	for p in points:
-		avg += p
-	avg /= points.size()
-	
-	return globalPos - avg
-	
-	
-func _getGlobalPoly() -> PackedVector2Array:
-	var newPoly = []
-	for p in collisionPoly.polygon:
-		newPoly.append(global_position + p)
-	return newPoly
-	
