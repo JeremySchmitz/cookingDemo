@@ -14,7 +14,7 @@ func _ready():
 func _on_choppable_chopped(poly1: PackedVector2Array, poly2: PackedVector2Array) -> void:
 	if !poly1.size():
 		return
-		
+	
 	var food:= await scene.instantiate()
 	updateSibling.call_deferred(food, poly2, poly1)
 
@@ -22,9 +22,9 @@ func _on_choppable_chopped(poly1: PackedVector2Array, poly2: PackedVector2Array)
 func updateSibling(sibling: Food, poly: PackedVector2Array, chopPoly: PackedVector2Array):
 	print('addSibling')
 	sibling.position = position
-	#sibling.polygon2D.polygon = polygon
 	sibling.collisionPoly.polygon = poly
 	sibling.choppable.addChops(chopPoly)
+	sibling.updateOrgans.call_deferred()
 	add_sibling(sibling)
 
 
@@ -57,10 +57,38 @@ func _on_mode_change(m: GlobalEnums.Mode):
 		_:
 			draggable = false
 
-func _duplicate() -> Food:
-	var newFood = duplicate()
-	print('polygon2D' + str(polygon2D))
-	newFood.polygon2D = polygon2D.duplicate()
-	newFood.collisionPoly = collisionPoly.duplicate()
+
+func updateOrgans():
+	var organs:= get_node("Organs").get_children() 
+	var vOrgans:= get_node("VisibleOrgans").get_children() 
 	
-	return newFood
+	var globalPoly = _getGlobalPoly()
+	
+	for organ in organs:
+		if organ is not Organ: break
+		var organCenter = _getGobalCenter(organ.global_position, organ.polygon)
+		if !Geometry2D.is_point_in_polygon(organCenter, globalPoly):
+			organ.queue_free()
+		
+	for organ in vOrgans:
+		if organ is not Organ: break
+		var organCenter = _getGobalCenter(organ.global_position, organ.polygon)
+		if !Geometry2D.is_point_in_polygon(organCenter, globalPoly):
+			organ.queue_free()
+	
+	
+func _getGobalCenter(globalPos:Vector2, points: PackedVector2Array) -> Vector2:
+	var avg = Vector2(0,0)
+	for p in points:
+		avg += p
+	avg /= points.size()
+	
+	return globalPos - avg
+	
+	
+func _getGlobalPoly() -> PackedVector2Array:
+	var newPoly = []
+	for p in collisionPoly.polygon:
+		newPoly.append(global_position + p)
+	return newPoly
+	

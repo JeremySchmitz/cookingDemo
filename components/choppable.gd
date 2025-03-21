@@ -51,7 +51,7 @@ func _chop (line: PackedVector2Array, polygon: PackedVector2Array):
 	var thiccLine = g.offset_polyline(line, lineExpansion)[0]
 	var clip = g.clip_polygons(polygon, thiccLine)
 	
-	if !clip.size():
+	if clip.size() != 2:
 		chopped.emit([], [])
 		return
 		
