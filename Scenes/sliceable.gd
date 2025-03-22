@@ -12,6 +12,8 @@ const percent2 = 0.3
 
 @export var collisionArea: Area2D
 @export var group: CanvasGroup
+@export var organs: Node2D
+@export var visibleOrgans: Node2D
 
 
 var knifeInside = false
@@ -47,7 +49,23 @@ func slice(line: PackedVector2Array):
 		newLine[i] = newLine[i] - global_position
 		
 	_addNewSlice(newLine)
-	sliced.emit(newLine)
+	if organs and visibleOrgans:
+		_updateOrgans(newLine)
+	
+
+func _updateOrgans(line: PackedVector2Array) -> void:
+	var organs = organs.get_children()
+	for organ: Organ in organs:
+		var intersections = Geometry2D.intersect_polygons(_setGlobal(organ), line)
+		if intersections.size():
+			organ.reparent(visibleOrgans)
+	
+func _setGlobal(organ: Organ):
+	var newLine = []
+	var p = organ.position
+	for point in organ.polygon:
+		newLine.append(Vector2(point.x + p.x, point.y + p.y))
+	return newLine
 	
 func _addNewSlice(line: PackedVector2Array):
 	var newSlice = Polygon2D.new()

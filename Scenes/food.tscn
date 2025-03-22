@@ -19,10 +19,12 @@ collisionPoly = NodePath("draggableArea/CollisionPolygon2D")
 [node name="health" type="Node" parent="."]
 script = ExtResource("4_d37wj")
 
-[node name="sliceable" type="Node2D" parent="." node_paths=PackedStringArray("collisionArea", "group")]
+[node name="sliceable" type="Node2D" parent="." node_paths=PackedStringArray("collisionArea", "group", "organs", "visibleOrgans")]
 script = ExtResource("7_t0fp1")
 collisionArea = NodePath("../draggableArea")
 group = NodePath("../sliceGroup")
+organs = NodePath("../Organs")
+visibleOrgans = NodePath("../VisibleOrgans")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 visible = false
@@ -71,5 +73,4 @@ script = ExtResource("6_t0fp1")
 collisionShape = NodePath("../../draggableArea/CollisionPolygon2D")
 updateOn = "chopped"
 
-[connection signal="sliced" from="sliceable" to="." method="_on_sliceable_sliced"]
 [connection signal="area_exited" from="draggableArea" to="." method="_on_draggable_area_area_exited"]
