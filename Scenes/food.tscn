@@ -11,9 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://j2dho68ajy6v" path="res://resources/Sprites/PufferFish/PufferFish_Outline.png" id="7_ud83k"]
 [ext_resource type="Texture2D" uid="uid://d2xppba4lg8o" path="res://resources/Sprites/PufferFish/PufferFish_Guts.png" id="8_1gaok"]
 
-[node name="food" type="Node2D" node_paths=PackedStringArray("polygon2D", "collisionPoly") groups=["food"]]
+[node name="food" type="Node2D" node_paths=PackedStringArray("collisionPoly") groups=["food"]]
 script = ExtResource("1_h4kkx")
-polygon2D = NodePath("Polygon2D")
 collisionPoly = NodePath("draggableArea/CollisionPolygon2D")
 
 [node name="health" type="Node" parent="."]
@@ -25,10 +24,6 @@ collisionArea = NodePath("../draggableArea")
 group = NodePath("../sliceGroup")
 organs = NodePath("../Organs")
 visibleOrgans = NodePath("../VisibleOrgans")
-
-[node name="Polygon2D" type="Polygon2D" parent="."]
-visible = false
-polygon = PackedVector2Array(-90, 10, -88, 46, -76, 72, -53, 89, -9, 90, 28, 66, 56, 33, 78, -24, 80, -67, 73, -90, 59, -84, 47, -62, 24, -46, -17, -38, -40, -33, -76, -16)
 
 [node name="chopGroup" type="CanvasGroup" parent="." node_paths=PackedStringArray("collisionArea", "collisionNode", "sliceGroup")]
 script = ExtResource("3_h4kkx")

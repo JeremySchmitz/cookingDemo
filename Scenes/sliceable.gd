@@ -54,8 +54,8 @@ func slice(line: PackedVector2Array):
 	
 
 func _updateOrgans(line: PackedVector2Array) -> void:
-	var organs = organs.get_children()
-	for organ: Organ in organs:
+	var newOrgans = organs.get_children()
+	for organ: Organ in newOrgans:
 		var intersections = Geometry2D.intersect_polygons(_setGlobal(organ), line)
 		if intersections.size():
 			organ.reparent(visibleOrgans)

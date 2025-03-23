@@ -34,13 +34,13 @@ func _on_area_entered(body: Area2D):
 func _on_area_exited(body: Area2D):
 	if body is KnifeChopper && body.monitoring && body.cutting:
 		knifeExited = body.position
-		var line = _correctChopLine([knifeEntered, knifeExited])
+		var line = _correctChopLine(knifeEntered, knifeExited)
 		_chop(line, collisionNode.polygon)		
 
 
-func _correctChopLine(line: PackedVector2Array):
-	var relStart = _toRelativePositon(line[0])
-	var relEnd = _toRelativePositon(line[1])
+func _correctChopLine(start: Vector2, end: Vector2):
+	var relStart = _toRelativePositon(start)
+	var relEnd = _toRelativePositon(end)
 	var dir = (relEnd - relStart).normalized()
 	
 	var newStart = relStart + (dir * -cutLineGrow)
@@ -89,28 +89,6 @@ func _addNew(line: PackedVector2Array, group: CanvasGroup):
 	group.add_child(slice)
 	
 	
-func _getLineOnShape(line: PackedVector2Array, polygon: PackedVector2Array):
-	var updatedLine: PackedVector2Array = [Vector2(), Vector2()]
-
-#	since the colidder has size we have to get the closest points to it
-#	entering and exiting
-	for i in range(0, line.size()):
-		var smallestDist: float = maxFloatSize
-		var p1: Vector2
-		var p2: Vector2
-
-		for j in range(0, polygon.size()):
-			p1 = polygon[j]
-			p2 = polygon[j + 1] if j + 1 < polygon.size() else polygon[0]
-			
-			var cp = g.get_closest_point_to_segment(line[i], p1, p2)
-			var dist = abs(line[i].distance_to(cp))
-			if(dist < smallestDist):
-				smallestDist = dist
-				updatedLine[i] = cp
-
-	return updatedLine
-	
 func _createChunk(poly1: PackedVector2Array, poly2: PackedVector2Array, newOrgans: Dictionary) -> void:
 	if !poly1.size():
 		return
@@ -118,6 +96,7 @@ func _createChunk(poly1: PackedVector2Array, poly2: PackedVector2Array, newOrgan
 	var chunk: Node2D = await scene.instantiate()
 	_updateChunk.call_deferred(chunk, poly2, poly1, newOrgans)
 	
+
 func _updateChunk(chunk: Node2D, poly: PackedVector2Array, chopPoly: PackedVector2Array, newOrgans: Dictionary):
 	chunk.position = get_parent().position
 	if "collisionPoly" in chunk:
@@ -144,25 +123,23 @@ func replaceOrgans(newOrgans: Dictionary):
 		vOrgans = newOrgans.vOrgans
 		
 	var siblings = get_parent().get_children()
-	if !organs and !vOrgans:
-		return
 	
-	for child in siblings:
-		if child.name == "Organs" and organs:
-			for n in child.get_children():
-				child.remove_child(n)
+	for sibling in siblings:
+		if sibling.name == "Organs":
+			for n in sibling.get_children():
+				sibling.remove_child(n)
 				n.queue_free()
+			if !organs: break
 			for organ in organs:
-				(organ as Node2D).get_parent().remove_child(organ)
-				child.add_child(organ)
+				(organ as Node2D).reparent(sibling)
 				
-		elif child.name == "VisibleOrgans" and vOrgans:
-			for n in child.get_children():
-				child.remove_child(n)
+		elif sibling.name == "VisibleOrgans":
+			for n in sibling.get_children():
+				sibling.remove_child(n)
 				n.queue_free()
+			if !vOrgans: break
 			for organ in vOrgans:
-				(organ as Node2D).get_parent().remove_child(organ)
-				child.add_child(organ)
+				(organ as Node2D).reparent(sibling)
 
 func updateOrgans(newPoly: PackedVector2Array):
 	var siblings = get_parent().get_children()
@@ -182,12 +159,14 @@ func updateOrgans(newPoly: PackedVector2Array):
 			var organCenter = _getGobalCenter(organ.global_position, organ.polygon)
 			if !Geometry2D.is_point_in_polygon(organCenter, globalPoly):
 				removeOrgans.append(organ)
+				
 	if vOrgans:
 		for organ in vOrgans:
 			if organ is not Organ: break
 			var organCenter = _getGobalCenter(organ.global_position, organ.polygon)
 			if !Geometry2D.is_point_in_polygon(organCenter, globalPoly):
 				removeVOrgans.append(organ)
+				
 	return {"organs":removeOrgans, "vOrgans": removeVOrgans}
 
 
