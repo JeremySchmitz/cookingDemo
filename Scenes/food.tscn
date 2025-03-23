@@ -44,8 +44,9 @@ texture = ExtResource("8_1gaok")
 
 [node name="Organs" type="Node2D" parent="."]
 
-[node name="organ" parent="Organs" instance=ExtResource("7_mmhua")]
+[node name="organ" parent="Organs" node_paths=PackedStringArray("parentArea") instance=ExtResource("7_mmhua")]
 position = Vector2(-41, 45)
+parentArea = NodePath("../../draggableArea")
 
 [node name="draggableArea" type="Area2D" parent="."]
 script = ExtResource("1_fhto3")
@@ -72,5 +73,3 @@ polygon = PackedVector2Array(-90, 10, -88, 46, -76, 72, -53, 89, -9, 90, 28, 66,
 script = ExtResource("6_t0fp1")
 collisionShape = NodePath("../../draggableArea/CollisionPolygon2D")
 updateOn = "chopped"
-
-[connection signal="area_exited" from="draggableArea" to="." method="_on_draggable_area_area_exited"]

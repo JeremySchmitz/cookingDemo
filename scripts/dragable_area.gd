@@ -4,8 +4,9 @@ extends Area2D
 
 var draggable: bool = true
 var lifted = false
-
 var mouse_over = false
+
+signal dragging()
 
 func _ready():
 	Signals.modeChange.connect(_on_mode_change)
@@ -28,6 +29,7 @@ func _unhandled_input(event):
 			
 		if lifted and event is InputEventMouseMotion:
 			get_parent().position += event.relative
+			dragging.emit()
 			get_viewport().set_input_as_handled()
 
 func _mouse_over(value):

@@ -8,13 +8,7 @@ var draggable = false
 
 func _ready():
 	Signals.modeChange.connect(_on_mode_change)
-	
 
-func _on_draggable_area_area_exited(area: Area2D) -> void:
-	var parent = area.get_parent()
-	if draggable and parent is Organ:
-		parent.reparent.call_deferred(get_parent())
-		
 func _on_mode_change(m: GlobalEnums.Mode):
 	match m:
 		GlobalEnums.Mode.GRAB:

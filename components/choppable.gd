@@ -123,6 +123,9 @@ func _updateChunk(chunk: Node2D, poly: PackedVector2Array, chopPoly: PackedVecto
 	if "collisionPoly" in chunk:
 		chunk.collisionPoly.polygon = poly
 		
+	if "parented" in chunk and "parented" in get_parent():
+		chunk.parented = get_parent().parented
+		
 	for child in chunk.get_children():
 		if child is Choppable:
 			child.addChops(chopPoly)
