@@ -1,20 +1,17 @@
 class_name KnifeSlicer
-extends Area2D
+extends Knife
 
 var active: bool = false
 var cutting: bool = false
-
-func _ready() -> void:
-	Signals.modeChange.connect(_on_mode_change)
 
 
 func _process(_delta):
 	if(active):
 		global_position = get_global_mouse_position()
-		if Input.is_action_just_pressed("left_click"):
+		if inCuttingBoard && Input.is_action_just_pressed("left_click"):
 			cutting = true
 			Signals.startSlice.emit(global_position)
-		elif  Input.is_action_just_released("left_click"):
+		elif inCuttingBoard && Input.is_action_just_released("left_click"):
 			cutting = false
 			Signals.endSlice.emit(global_position)
 	else:
