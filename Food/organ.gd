@@ -1,11 +1,9 @@
 class_name Organ
-extends Node2D
+extends Food
 
-@export var collisionPoly: CollisionPolygon2D
 @onready var polygon: PackedVector2Array = collisionPoly.polygon
 
 var parented = true;
-
 
 
 func _on_draggable_area_dragging() -> void:

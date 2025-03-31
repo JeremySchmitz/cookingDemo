@@ -105,6 +105,10 @@ func _updateChunk(chunk: Node2D, poly: PackedVector2Array, chopPoly: PackedVecto
 	if "parented" in chunk and "parented" in get_parent():
 		chunk.parented = get_parent().parented
 		
+	if "health" in chunk:
+		(chunk.health as Health).cooked = get_parent().health.cooked
+		chunk.polygon2D.color = get_parent().polygon2D.color
+		
 	for child in chunk.get_children():
 		if child is Choppable:
 			child.addChops(chopPoly)

@@ -1,5 +1,5 @@
 class_name Sliceable
-extends Node2D
+extends Node
 
 signal sliced(line: PackedVector2Array)
 
@@ -46,7 +46,7 @@ func slice(line: PackedVector2Array):
 	var newLine = [line[0], p1, p2, p3, line[1], p4, p5, p6]
 	
 	for i in range(0, newLine.size()):
-		newLine[i] = newLine[i] - global_position
+		newLine[i] = newLine[i] - get_parent().global_position
 		
 	_addNewSlice(newLine)
 	if organs and visibleOrgans:

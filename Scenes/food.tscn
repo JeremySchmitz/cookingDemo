@@ -11,19 +11,22 @@
 [ext_resource type="Texture2D" uid="uid://j2dho68ajy6v" path="res://resources/Sprites/PufferFish/PufferFish_Outline.png" id="7_ud83k"]
 [ext_resource type="Texture2D" uid="uid://d2xppba4lg8o" path="res://resources/Sprites/PufferFish/PufferFish_Guts.png" id="8_1gaok"]
 
-[node name="food" type="Node2D" node_paths=PackedStringArray("collisionPoly") groups=["food"]]
+[node name="food" type="Node2D" node_paths=PackedStringArray("polygon2D", "collisionPoly", "health") groups=["food"]]
 script = ExtResource("1_h4kkx")
+polygon2D = NodePath("sliceGroup/TestPolyTop")
 collisionPoly = NodePath("draggableArea/CollisionPolygon2D")
+health = NodePath("health")
 
 [node name="health" type="Node" parent="."]
 script = ExtResource("4_d37wj")
 
-[node name="sliceable" type="Node2D" parent="." node_paths=PackedStringArray("collisionArea", "group", "organs", "visibleOrgans")]
+[node name="Sliceable" type="Node" parent="." node_paths=PackedStringArray("collisionArea", "group", "organs", "visibleOrgans")]
 script = ExtResource("7_t0fp1")
 collisionArea = NodePath("../draggableArea")
 group = NodePath("../sliceGroup")
 organs = NodePath("../Organs")
 visibleOrgans = NodePath("../VisibleOrgans")
+metadata/_custom_type_script = "uid://w6ocrvw6sksd"
 
 [node name="chopGroup" type="CanvasGroup" parent="." node_paths=PackedStringArray("collisionArea", "collisionNode", "sliceGroup")]
 script = ExtResource("3_h4kkx")
@@ -33,9 +36,14 @@ sliceGroup = NodePath("../sliceGroup")
 scenePath = "res://Scenes/food.tscn"
 
 [node name="Sprite2D2" type="Sprite2D" parent="chopGroup"]
+visible = false
 texture_filter = 1
 scale = Vector2(3, 3)
 texture = ExtResource("8_1gaok")
+
+[node name="TestPolyBottom" type="Polygon2D" parent="chopGroup"]
+color = Color(0.68, 0.40392, 0.3944, 1)
+polygon = PackedVector2Array(-90, 10, -88, 46, -76, 72, -53, 89, -9, 90, 28, 66, 56, 33, 78, -24, 80, -67, 73, -90, 59, -84, 47, -62, 24, -46, -17, -38, -40, -33, -76, -16)
 
 [node name="Organs" type="Node2D" parent="."]
 
@@ -55,8 +63,12 @@ polygon = PackedVector2Array(-90, 10, -88, 46, -76, 72, -53, 89, -9, 90, 28, 66,
 texture_filter = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="sliceGroup"]
+visible = false
 scale = Vector2(3, 3)
 texture = ExtResource("7_ud83k")
+
+[node name="TestPolyTop" type="Polygon2D" parent="sliceGroup"]
+polygon = PackedVector2Array(-90, 10, -88, 46, -76, 72, -53, 89, -9, 90, 28, 66, 56, 33, 78, -24, 80, -67, 73, -90, 59, -84, 47, -62, 24, -46, -17, -38, -40, -33, -76, -16)
 
 [node name="hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("5_4hb68")

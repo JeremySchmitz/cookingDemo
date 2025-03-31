@@ -45,7 +45,7 @@ texture = ExtResource("3_k7acu")
 script = ExtResource("4_fo5ed")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="fryingPan/hitbox"]
-position = Vector2(723, 411)
+position = Vector2(728, 409)
 shape = SubResource("CircleShape2D_8j60k")
 
 [node name="food" parent="." instance=ExtResource("3_5a7ea")]
