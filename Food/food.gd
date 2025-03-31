@@ -14,12 +14,12 @@ func _ready() -> void:
 		health.cookedBurnt.connect(_on_health_cooked_burnt)
 
 func _on_health_cooked_changed(diff: int) -> void:
-	print('cookedChanged')
 	if cookedBurnt:
-		polygon2D.color.r -= min(diff * .005, 40)
-	polygon2D.color.g -= min(diff * .01, 40)
-	polygon2D.color.b -= min(diff * .01, 40)
+		polygon2D.color.r = max(polygon2D.color.r - (diff * .015), .4)
+	polygon2D.color.g = max(polygon2D.color.g - (diff * .01), .4)
+	polygon2D.color.b = max(polygon2D.color.b - (diff * .01), .4)
 
 
 func _on_health_cooked_burnt() -> void:
 	cookedBurnt = true
+	
