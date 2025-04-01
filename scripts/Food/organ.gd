@@ -18,7 +18,7 @@ func _on_draggable_area_dragging() -> void:
 
 func _on_health_cooked_changed(diff: int) -> void:
 	print('cookedChanged')
-	if cookedBurnt:
+	if cooked == GlobalEnums.Cooked.BURNT:
 		polygon2D.color.r = max(polygon2D.color.r - (diff * .005), .4)
 		polygon2D.color.g = min(polygon2D.color.g + (diff * .01), 1)
 	else: 

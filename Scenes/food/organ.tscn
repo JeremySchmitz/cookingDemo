@@ -24,7 +24,7 @@ metadata/_custom_type_script = "uid://3qtest46ag4a"
 script = ExtResource("3_jih0q")
 collisionArea = NodePath("../DraggableArea")
 collisionNode = NodePath("../DraggableArea/CollisionPolygon2D")
-scenePath = "res://Food/organ.tscn"
+scenePath = "res://Scenes/food/organ.tscn"
 metadata/_custom_type_script = "uid://0l0lpkxtrjtx"
 
 [node name="Sprite2D" type="Sprite2D" parent="Choppable"]
