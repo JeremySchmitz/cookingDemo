@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://ccw7uq7go4ivt"]
+[gd_scene load_steps=13 format=3 uid="uid://ccw7uq7go4ivt"]
 
 [ext_resource type="Script" uid="uid://ip3nwschvvkb" path="res://scripts/components/dragable_area.gd" id="1_fhto3"]
 [ext_resource type="Script" uid="uid://bunuku5x2rt24" path="res://scripts/Food/food.gd" id="1_h4kkx"]
 [ext_resource type="Script" uid="uid://0l0lpkxtrjtx" path="res://scripts/components/choppable.gd" id="3_h4kkx"]
+[ext_resource type="Script" uid="uid://c5ox7hexp2ty8" path="res://scripts/components/poison.gd" id="4_83vc0"]
 [ext_resource type="Script" uid="uid://3qtest46ag4a" path="res://scripts/components/health.gd" id="4_d37wj"]
+[ext_resource type="Script" uid="uid://cx3k7xle3gw0c" path="res://scripts/components/nutrition.gd" id="4_rqftv"]
 [ext_resource type="Script" uid="uid://dik22bwv6x5l5" path="res://scripts/components/hurtbox.gd" id="5_4hb68"]
 [ext_resource type="Script" uid="uid://det5k60wcmbbf" path="res://scripts/components/updateable_collider.gd" id="6_t0fp1"]
 [ext_resource type="PackedScene" uid="uid://c1ixyyfmpabav" path="res://Scenes/food/organ.tscn" id="7_mmhua"]
@@ -27,6 +29,15 @@ group = NodePath("../sliceGroup")
 organs = NodePath("../Organs")
 visibleOrgans = NodePath("../VisibleOrgans")
 metadata/_custom_type_script = "uid://w6ocrvw6sksd"
+
+[node name="Nutrition" type="Node" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("4_rqftv")
+health = NodePath("../health")
+
+[node name="Poison" type="Node" parent="."]
+script = ExtResource("4_83vc0")
+poisonWhileRaw = 10
+maxPoison = 10
 
 [node name="chopGroup" type="CanvasGroup" parent="." node_paths=PackedStringArray("collisionArea", "collisionNode", "sliceGroup")]
 script = ExtResource("3_h4kkx")

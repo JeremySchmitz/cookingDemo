@@ -12,10 +12,29 @@ func _ready() -> void:
 	
 func _on_food_entered(area: Area2D) -> void:
 	if area is DraggableArea and area.get_parent() is Food:
-		poison += (area.get_parent() as Food).poison
-		nutrition += (area.get_parent() as Food).nutrition
+		_updatePoison(area.get_parent(), false)
+		_updateNutrition(area.get_parent(), false)
 	
 func _on_food_exit(area: Area2D) -> void:
 	if area is DraggableArea and area.get_parent() is Food:
-		poison -= (area.get_parent() as Food).poison
-		nutrition -= (area.get_parent() as Food).nutrition
+		_updatePoison(area.get_parent(), true)
+		_updateNutrition(area.get_parent(), true)
+		
+		
+func _updatePoison(parent: Food, subtract = false):
+	var poisonChild = _getChild(Poison, parent)
+	if poisonChild:
+		if subtract: poison = poison - poisonChild.poison
+		else: poison = poison + poisonChild.poison
+
+func _updateNutrition(parent: Food, subtract = false):
+	var nutritionChild = _getChild(Nutrition, parent)
+	if nutritionChild:
+		if subtract: nutrition = nutrition - nutritionChild.nutrition
+		else: nutrition = nutrition + nutritionChild.nutrition
+
+func _getChild(className: Variant, parent: Node = self) -> Poison:
+	for child in parent.get_children():
+		if is_instance_of(child, className):
+			return child
+	return null

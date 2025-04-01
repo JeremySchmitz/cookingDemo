@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://c1ixyyfmpabav"]
+[gd_scene load_steps=9 format=3 uid="uid://c1ixyyfmpabav"]
 
 [ext_resource type="Script" uid="uid://dg7r1dj7qqv6f" path="res://scripts/Food/organ.gd" id="1_0i6ut"]
 [ext_resource type="Script" uid="uid://3qtest46ag4a" path="res://scripts/components/health.gd" id="2_4nas8"]
 [ext_resource type="Script" uid="uid://0l0lpkxtrjtx" path="res://scripts/components/choppable.gd" id="3_jih0q"]
+[ext_resource type="Script" uid="uid://cx3k7xle3gw0c" path="res://scripts/components/nutrition.gd" id="3_nnpc6"]
 [ext_resource type="Texture2D" uid="uid://d4cw104vbrgr" path="res://resources/Sprites/PufferFish/organ_test.png" id="4_nnpc6"]
+[ext_resource type="Script" uid="uid://c5ox7hexp2ty8" path="res://scripts/components/poison.gd" id="4_snl8s"]
 [ext_resource type="Script" uid="uid://ip3nwschvvkb" path="res://scripts/components/dragable_area.gd" id="5_snl8s"]
 [ext_resource type="Script" uid="uid://dik22bwv6x5l5" path="res://scripts/components/hurtbox.gd" id="6_1n0ni"]
 
@@ -19,6 +21,18 @@ medium = 60
 wellDone = 70
 burnt = 80
 metadata/_custom_type_script = "uid://3qtest46ag4a"
+
+[node name="Nutrition" type="Node" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("3_nnpc6")
+health = NodePath("../Health")
+nutrition = 0
+metadata/_custom_type_script = "uid://cx3k7xle3gw0c"
+
+[node name="Poison" type="Node" parent="."]
+script = ExtResource("4_snl8s")
+poisonWhileRaw = 50
+maxPoison = 50
+metadata/_custom_type_script = "uid://c5ox7hexp2ty8"
 
 [node name="Choppable" type="CanvasGroup" parent="." node_paths=PackedStringArray("collisionArea", "collisionNode")]
 script = ExtResource("3_jih0q")
