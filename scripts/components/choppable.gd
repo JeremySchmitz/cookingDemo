@@ -93,7 +93,7 @@ func _addNew(line: PackedVector2Array, group: CanvasGroup):
 	
 	
 func _createChunk(chops: Array[PackedVector2Array], poly2: PackedVector2Array, newOrgans: Dictionary) -> void:
-	if !chops.size() || chops[0].size():
+	if !chops.size() || !chops[0].size():
 		return
 	
 	var chunk: Node2D = await scene.instantiate()
