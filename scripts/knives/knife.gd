@@ -14,10 +14,8 @@ func _on_mode_change(m: GlobalEnums.Mode):
 func _on_area_entered(body: Area2D):
 	if body.name.to_lower() == 'cuttingboard':
 		inCuttingBoard = true
-		print('cuttingBoard entered')
 
 
 func _on_area_exited(body: Area2D):
 	if body.name.to_lower() == 'cuttingboard':
 		inCuttingBoard = false
-		print('cuttingBoard exited')

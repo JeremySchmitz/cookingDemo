@@ -47,14 +47,9 @@ sliceGroup = NodePath("../sliceGroup")
 scenePath = "res://Scenes/food/food.tscn"
 
 [node name="Sprite2D2" type="Sprite2D" parent="chopGroup"]
-visible = false
 texture_filter = 1
 scale = Vector2(3, 3)
 texture = ExtResource("8_1gaok")
-
-[node name="TestPolyBottom" type="Polygon2D" parent="chopGroup"]
-color = Color(0.68, 0.40392, 0.3944, 1)
-polygon = PackedVector2Array(-90, 10, -88, 46, -76, 72, -53, 89, -9, 90, 28, 66, 56, 33, 78, -24, 80, -67, 73, -90, 59, -84, 47, -62, 24, -46, -17, -38, -40, -33, -76, -16)
 
 [node name="Organs" type="Node2D" parent="."]
 

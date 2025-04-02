@@ -66,9 +66,12 @@ func _chop (line: PackedVector2Array, polygon: PackedVector2Array):
 	var poly2 = g.offset_polygon(clip[1], lineExpansion)[0]
 	collisionNode.set_deferred("polygon", poly1)
 	
+#	has to happen before we add chops to this food or we'll include what we just created
+	var siblingChop = _getExistingChopPolys()
+
 	addChops(poly2)
 	var organs = updateOrgans(poly1)
-	_createChunk(poly1, poly2, organs)
+	_createChunk([poly1, siblingChop], poly2, organs)
 	chopped.emit(poly1, poly2)
 
 
@@ -89,15 +92,15 @@ func _addNew(line: PackedVector2Array, group: CanvasGroup):
 	group.add_child(slice)
 	
 	
-func _createChunk(poly1: PackedVector2Array, poly2: PackedVector2Array, newOrgans: Dictionary) -> void:
-	if !poly1.size():
+func _createChunk(chops: Array[PackedVector2Array], poly2: PackedVector2Array, newOrgans: Dictionary) -> void:
+	if !chops.size() || chops[0].size():
 		return
 	
 	var chunk: Node2D = await scene.instantiate()
-	_updateChunk.call_deferred(chunk, poly2, poly1, newOrgans)
+	_updateChunk.call_deferred(chunk, poly2, chops, newOrgans)
 	
 
-func _updateChunk(chunk: Node2D, poly: PackedVector2Array, chopPoly: PackedVector2Array, newOrgans: Dictionary):
+func _updateChunk(chunk: Node2D, poly: PackedVector2Array, chops: Array[PackedVector2Array], newOrgans: Dictionary):
 	chunk.position = get_parent().position
 	if "collisionPoly" in chunk:
 		chunk.collisionPoly.polygon = poly
@@ -111,7 +114,8 @@ func _updateChunk(chunk: Node2D, poly: PackedVector2Array, chopPoly: PackedVecto
 		
 	for child in chunk.get_children():
 		if child is Choppable:
-			child.addChops(chopPoly)
+			for chop in chops:
+				child.addChops(chop)
 			if "replaceOrgans" in child:
 				child.replaceOrgans.call_deferred(newOrgans)
 		
@@ -187,4 +191,26 @@ func _getGlobalPoly(poly: PackedVector2Array) -> PackedVector2Array:
 	var newPoly = []
 	for p in poly:
 		newPoly.append(global_position + p)
+	return newPoly
+
+func _getExistingChopPolys():
+	var chopGroup: Choppable
+	for s in get_parent().get_children():
+		if s is Choppable:
+			chopGroup = s;
+			break
+			
+	if !chopGroup: return;
+	
+	var polys: Array[PackedVector2Array] = []
+	for c in chopGroup.get_children():
+		if c is Polygon2D:
+			polys.append(c.polygon)
+			
+			
+	var newPoly: PackedVector2Array = []
+			
+	for poly in polys:
+		newPoly = g.merge_polygons(newPoly, poly)[0]
+			
 	return newPoly
