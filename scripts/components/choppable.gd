@@ -6,6 +6,7 @@ var g = Geometry2D
 const maxFloatSize: float = 99999.0
 const cutLineGrow = 200
 const lineExpansion = 1
+const sperationSize = 5;
 const sliceMaterial = preload("res://resources/subtract.material")
 
 signal chopped(poly1:PackedVector2Array,poly2:PackedVector2Array)
@@ -68,10 +69,13 @@ func _chop (line: PackedVector2Array, polygon: PackedVector2Array):
 	
 #	has to happen before we add chops to this food or we'll include what we just created
 	var siblingChop = _getExistingChopPolys()
-
+	
+	var newPos = _getSeperatedPositions(poly1, poly2)
+	get_parent().position = newPos[0]
+	
 	addChops(poly2)
 	var organs = updateOrgans(poly1)
-	_createChunk([poly1, siblingChop], poly2, organs)
+	_createChunk([poly1, siblingChop], poly2, organs, newPos[1])
 	chopped.emit(poly1, poly2)
 
 
@@ -92,16 +96,17 @@ func _addNew(line: PackedVector2Array, group: CanvasGroup):
 	group.add_child(slice)
 	
 	
-func _createChunk(chops: Array[PackedVector2Array], poly2: PackedVector2Array, newOrgans: Dictionary) -> void:
+func _createChunk(chops: Array[PackedVector2Array], poly2: PackedVector2Array, newOrgans: Dictionary, pos: Vector2) -> void:
 	if !chops.size() || !chops[0].size():
 		return
 	
 	var chunk: Node2D = await scene.instantiate()
-	_updateChunk.call_deferred(chunk, poly2, chops, newOrgans)
+	_updateChunk.call_deferred(chunk, poly2, chops, newOrgans, pos)
 	
 
-func _updateChunk(chunk: Node2D, poly: PackedVector2Array, chops: Array[PackedVector2Array], newOrgans: Dictionary):
-	chunk.position = get_parent().position
+func _updateChunk(chunk: Node2D, poly: PackedVector2Array, chops: Array[PackedVector2Array], newOrgans: Dictionary, pos: Vector2):
+	chunk.position = pos
+	
 	if "collisionPoly" in chunk:
 		chunk.collisionPoly.polygon = poly
 		
@@ -214,3 +219,19 @@ func _getExistingChopPolys():
 		newPoly = g.merge_polygons(newPoly, poly)[0]
 			
 	return newPoly
+
+func _getSeperatedPositions(poly1: PackedVector2Array, poly2: PackedVector2Array):
+	var c1 = Vector2(0,0)
+	var c2 = Vector2(0,0)
+	
+	for poly in poly1:
+		c1 += poly
+	for poly in poly2:
+		c2 += poly
+	c1 /= poly1.size()	
+	c2 /= poly2.size()	
+	
+	var dir = (c1 - c2).normalized()
+	var p1 = get_parent().position + (dir * sperationSize)
+	var p2 = get_parent().position - (dir * sperationSize)
+	return [p1, p2]
