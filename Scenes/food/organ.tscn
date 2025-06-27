@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c1ixyyfmpabav"]
+[gd_scene load_steps=11 format=3 uid="uid://c1ixyyfmpabav"]
 
 [ext_resource type="Script" uid="uid://dg7r1dj7qqv6f" path="res://scripts/Food/organ.gd" id="1_0i6ut"]
 [ext_resource type="Script" uid="uid://3qtest46ag4a" path="res://scripts/components/health.gd" id="2_4nas8"]
@@ -8,12 +8,19 @@
 [ext_resource type="Script" uid="uid://c5ox7hexp2ty8" path="res://scripts/components/poison.gd" id="4_snl8s"]
 [ext_resource type="Script" uid="uid://ip3nwschvvkb" path="res://scripts/components/dragable_area.gd" id="5_snl8s"]
 [ext_resource type="Script" uid="uid://dik22bwv6x5l5" path="res://scripts/components/hurtbox.gd" id="6_1n0ni"]
+[ext_resource type="Shader" uid="uid://brchmr5hs31qg" path="res://resources/cook.gdshader" id="6_nnpc6"]
 
-[node name="Organ" type="Node2D" node_paths=PackedStringArray("polygon2D", "collisionPoly", "health")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_snl8s"]
+shader = ExtResource("6_nnpc6")
+shader_parameter/cookVal = 0.0
+shader_parameter/isBurnt = false
+
+[node name="Organ" type="Node2D" node_paths=PackedStringArray("polygon2D", "collisionPoly", "health", "sprite")]
 script = ExtResource("1_0i6ut")
 polygon2D = NodePath("Choppable/Polygon2D")
 collisionPoly = NodePath("DraggableArea/CollisionPolygon2D")
 health = NodePath("Health")
+sprite = NodePath("Choppable/Sprite2D")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_4nas8")
@@ -42,11 +49,12 @@ scenePath = "res://Scenes/food/organ.tscn"
 metadata/_custom_type_script = "uid://0l0lpkxtrjtx"
 
 [node name="Sprite2D" type="Sprite2D" parent="Choppable"]
-visible = false
 texture_filter = 3
+material = SubResource("ShaderMaterial_snl8s")
 texture = ExtResource("4_nnpc6")
 
 [node name="Polygon2D" type="Polygon2D" parent="Choppable"]
+visible = false
 color = Color(1, 1, 0.156863, 1)
 polygon = PackedVector2Array(-13, -24, -21, -13, -24, -1, -24, 13, -27, 22, -22, 31, -9, 31, -1, 29, 14, 25, 26, 11, 25, -6, 16, -21, 2, -29)
 

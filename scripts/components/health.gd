@@ -32,4 +32,4 @@ func setCooked(val: int):
 			cookedBurnt.emit()
 		var dif = val - cooked
 		cooked = val
-		cookedChanged.emit(dif)
+		cookedChanged.emit(cooked)

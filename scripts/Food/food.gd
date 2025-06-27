@@ -6,6 +6,10 @@ extends Node2D
 @export var collisionPoly: CollisionPolygon2D
 @export var health: Health
 
+@export var sprite: Sprite2D
+@onready var shader_mat = sprite.material
+
+	
 var cooked:= GlobalEnums.Cooked.RAW
 
 func _ready() -> void:
@@ -13,12 +17,9 @@ func _ready() -> void:
 		health.cookedChanged.connect(_on_health_cooked_changed)
 		health.cookedBurnt.connect(_on_health_cooked_burnt)
 
-func _on_health_cooked_changed(diff: int) -> void:
-	if cooked== GlobalEnums.Cooked.BURNT:
-		polygon2D.color.r = max(polygon2D.color.r - (diff * .015), .4)
-	polygon2D.color.g = max(polygon2D.color.g - (diff * .01), .4)
-	polygon2D.color.b = max(polygon2D.color.b - (diff * .01), .4)
-
+func _on_health_cooked_changed(val: int) -> void:
+	shader_mat.set_shader_parameter("cookVal", float(val))
 
 func _on_health_cooked_burnt() -> void:
 	cooked = GlobalEnums.Cooked.BURNT
+	shader_mat.set_shader_parameter("isBurnt", true)

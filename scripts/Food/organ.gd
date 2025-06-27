@@ -5,7 +5,6 @@ extends Food
 
 var parented = true;
 
-
 func _on_draggable_area_dragging() -> void:
 	if !parented:
 		return
@@ -13,11 +12,3 @@ func _on_draggable_area_dragging() -> void:
 	reparent(get_parent().get_parent().get_parent())
 	parented = false
 	pass # Replace with function body.
-
-func _on_health_cooked_changed(diff: int) -> void:
-	if cooked == GlobalEnums.Cooked.BURNT:
-		polygon2D.color.r = max(polygon2D.color.r - (diff * .005), .4)
-		polygon2D.color.g = min(polygon2D.color.g + (diff * .01), 1)
-	else: 
-		polygon2D.color.g = max(polygon2D.color.g - (diff * .01), .4)
-		polygon2D.color.b = max(polygon2D.color.b - (diff * .01), .4)

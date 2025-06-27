@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ccw7uq7go4ivt"]
+[gd_scene load_steps=15 format=3 uid="uid://ccw7uq7go4ivt"]
 
 [ext_resource type="Script" uid="uid://ip3nwschvvkb" path="res://scripts/components/dragable_area.gd" id="1_fhto3"]
 [ext_resource type="Script" uid="uid://bunuku5x2rt24" path="res://scripts/Food/food.gd" id="1_h4kkx"]
@@ -10,14 +10,21 @@
 [ext_resource type="Script" uid="uid://det5k60wcmbbf" path="res://scripts/components/updateable_collider.gd" id="6_t0fp1"]
 [ext_resource type="PackedScene" uid="uid://c1ixyyfmpabav" path="res://Scenes/food/organ.tscn" id="7_mmhua"]
 [ext_resource type="Script" uid="uid://w6ocrvw6sksd" path="res://scripts/components/sliceable.gd" id="7_t0fp1"]
-[ext_resource type="Texture2D" uid="uid://j2dho68ajy6v" path="res://resources/Sprites/PufferFish/PufferFish_Outline.png" id="7_ud83k"]
 [ext_resource type="Texture2D" uid="uid://d2xppba4lg8o" path="res://resources/Sprites/PufferFish/PufferFish_Guts.png" id="8_1gaok"]
+[ext_resource type="Texture2D" uid="uid://dfa6ipvesr0ga" path="res://resources/Sprites/PufferFish/PufferFish_Outline_02.png" id="10_83vc0"]
+[ext_resource type="Shader" uid="uid://brchmr5hs31qg" path="res://resources/cook.gdshader" id="10_mwd75"]
 
-[node name="food" type="Node2D" node_paths=PackedStringArray("polygon2D", "collisionPoly", "health") groups=["food"]]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b4uh0"]
+shader = ExtResource("10_mwd75")
+shader_parameter/cookVal = 0.0
+shader_parameter/isBurnt = false
+
+[node name="food" type="Node2D" node_paths=PackedStringArray("polygon2D", "collisionPoly", "health", "sprite") groups=["food"]]
 script = ExtResource("1_h4kkx")
 polygon2D = NodePath("sliceGroup/TestPolyTop")
 collisionPoly = NodePath("draggableArea/CollisionPolygon2D")
 health = NodePath("health")
+sprite = NodePath("sliceGroup/sliceSprite")
 
 [node name="health" type="Node" parent="."]
 script = ExtResource("4_d37wj")
@@ -68,12 +75,13 @@ polygon = PackedVector2Array(-90, 10, -88, 46, -76, 72, -53, 89, -9, 90, 28, 66,
 [node name="sliceGroup" type="CanvasGroup" parent="."]
 texture_filter = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="sliceGroup"]
-visible = false
+[node name="sliceSprite" type="Sprite2D" parent="sliceGroup"]
+material = SubResource("ShaderMaterial_b4uh0")
 scale = Vector2(3, 3)
-texture = ExtResource("7_ud83k")
+texture = ExtResource("10_83vc0")
 
 [node name="TestPolyTop" type="Polygon2D" parent="sliceGroup"]
+visible = false
 polygon = PackedVector2Array(-90, 10, -88, 46, -76, 72, -53, 89, -9, 90, 28, 66, 56, 33, 78, -24, 80, -67, 73, -90, 59, -84, 47, -62, 24, -46, -17, -38, -40, -33, -76, -16)
 
 [node name="hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
