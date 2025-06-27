@@ -9,7 +9,7 @@ const lineExpansion = 1
 const sperationSize = 5;
 const sliceMaterial = preload("res://resources/subtract.material")
 
-signal chopped(poly1:PackedVector2Array,poly2:PackedVector2Array)
+signal chopped(percentage: float)
 
 @export var collisionArea: Area2D
 @export var collisionNode: CollisionPolygon2D
@@ -17,6 +17,7 @@ signal chopped(poly1:PackedVector2Array,poly2:PackedVector2Array)
 @export var scenePath: String
 
 var scene: PackedScene
+var area: float
 
 var knifeEntered: Vector2
 var knifeExited: Vector2
@@ -26,6 +27,7 @@ func _ready() -> void:
 	scene = load(scenePath)
 	collisionArea.area_entered.connect(_on_area_entered)
 	collisionArea.area_exited.connect(_on_area_exited)
+	area = _getAreaOfPolygon(collisionNode.polygon)
 
 
 func _on_area_entered(body: Area2D):
@@ -59,10 +61,6 @@ func _chop (line: PackedVector2Array, polygon: PackedVector2Array):
 	var thiccLine = g.offset_polyline(line, lineExpansion)[0]
 	var clip = g.clip_polygons(polygon, thiccLine)
 	
-	if clip.size() != 2:
-		chopped.emit([], [])
-		return
-		
 	var poly1 =g.offset_polygon(clip[0], lineExpansion)[0]
 	var poly2 = g.offset_polygon(clip[1], lineExpansion)[0]
 	collisionNode.set_deferred("polygon", poly1)
@@ -76,7 +74,8 @@ func _chop (line: PackedVector2Array, polygon: PackedVector2Array):
 	addChops(poly2)
 	var organs = updateOrgans(poly1)
 	_createChunk([poly1, siblingChop], poly2, organs, newPos[1])
-	chopped.emit(poly1, poly2)
+	
+	call_deferred("_updateArea",poly1)
 
 
 func addChops(poly: PackedVector2Array):
@@ -106,6 +105,7 @@ func _createChunk(chops: Array[PackedVector2Array], poly2: PackedVector2Array, n
 
 func _updateChunk(chunk: Node2D, poly: PackedVector2Array, chops: Array[PackedVector2Array], newOrgans: Dictionary, pos: Vector2):
 	chunk.position = pos
+	get_parent().add_sibling(chunk)	
 	
 	if "collisionPoly" in chunk:
 		chunk.collisionPoly.polygon = poly
@@ -114,17 +114,17 @@ func _updateChunk(chunk: Node2D, poly: PackedVector2Array, chops: Array[PackedVe
 		chunk.parented = get_parent().parented
 		
 	if "health" in chunk:
-		(chunk.health as Health).cooked = get_parent().health.cooked
-		chunk.polygon2D.color = get_parent().polygon2D.color
+		(chunk.health as Health).cooked = (get_parent() as Food).health.cooked
+		#chunk.polygon2D.color = get_parent().polygon2D.color
 		
 	for child in chunk.get_children():
 		if child is Choppable:
+			child._updateArea(poly)
 			for chop in chops:
 				child.addChops(chop)
 			if "replaceOrgans" in child:
 				child.replaceOrgans.call_deferred(newOrgans)
 		
-	get_parent().add_sibling(chunk)	
 
 func replaceOrgans(newOrgans: Dictionary):
 	var organs
@@ -235,3 +235,18 @@ func _getSeperatedPositions(poly1: PackedVector2Array, poly2: PackedVector2Array
 	var p1 = get_parent().position + (dir * sperationSize)
 	var p2 = get_parent().position - (dir * sperationSize)
 	return [p1, p2]
+	
+func _updateArea(ps: PackedVector2Array):
+	var newArea = _getAreaOfPolygon(ps)
+	var percent = newArea / area
+	area = newArea
+	chopped.emit(percent)
+	
+func _getAreaOfPolygon(ps: PackedVector2Array) -> float:
+	var sum = 0.0
+	for i in range(0, ps.size() - 1):
+		var p1 = ps[i]
+		var p2 = ps[i+1]
+		sum += (p2.x - p1.x) * (p1.y+p2.y)
+	
+	return abs(sum) * 0.5

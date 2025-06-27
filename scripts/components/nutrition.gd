@@ -1,10 +1,11 @@
 class_name Nutrition
 extends Node
 
+
 @export var health: Health
 @export var maxNutrition:= 100
 @export var nutrition:= 10 : set = _setNutrition
-
+@export var rentention: float = .99
 
 var cooked:= GlobalEnums.Cooked.RAW
 
@@ -47,6 +48,10 @@ func updateNutrition(diff: int):
 			
 	nutrition = nutrition + (diff * strength)
 
+func updateNutritionAfterChop(percent: float):
+	var newMax = maxNutrition * percent * rentention
+	nutrition = nutrition * percent * rentention
+	maxNutrition = newMax
 
 func _setNutrition(val: int) -> void:
 	nutrition = min(val, maxNutrition)

@@ -19,14 +19,13 @@ shader = ExtResource("10_mwd75")
 shader_parameter/cookVal = 0.0
 shader_parameter/isBurnt = false
 
-[node name="food" type="Node2D" node_paths=PackedStringArray("polygon2D", "collisionPoly", "health", "sprite") groups=["food"]]
+[node name="food" type="Node2D" node_paths=PackedStringArray("polygon2D", "collisionPoly", "sprite") groups=["food"]]
 script = ExtResource("1_h4kkx")
-polygon2D = NodePath("sliceGroup/TestPolyTop")
+polygon2D = NodePath("")
 collisionPoly = NodePath("draggableArea/CollisionPolygon2D")
-health = NodePath("health")
 sprite = NodePath("sliceGroup/sliceSprite")
 
-[node name="health" type="Node" parent="."]
+[node name="Health" type="Node" parent="."]
 script = ExtResource("4_d37wj")
 
 [node name="Sliceable" type="Node" parent="." node_paths=PackedStringArray("collisionArea", "group", "organs", "visibleOrgans")]
@@ -39,21 +38,22 @@ metadata/_custom_type_script = "uid://w6ocrvw6sksd"
 
 [node name="Nutrition" type="Node" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("4_rqftv")
-health = NodePath("../health")
+health = NodePath("../Health")
 
 [node name="Poison" type="Node" parent="."]
 script = ExtResource("4_83vc0")
 poisonWhileRaw = 10
 maxPoison = 10
+rentention = 1
 
-[node name="chopGroup" type="CanvasGroup" parent="." node_paths=PackedStringArray("collisionArea", "collisionNode", "sliceGroup")]
+[node name="Choppable" type="CanvasGroup" parent="." node_paths=PackedStringArray("collisionArea", "collisionNode", "sliceGroup")]
 script = ExtResource("3_h4kkx")
 collisionArea = NodePath("../draggableArea")
 collisionNode = NodePath("../draggableArea/CollisionPolygon2D")
 sliceGroup = NodePath("../sliceGroup")
 scenePath = "res://Scenes/food/food.tscn"
 
-[node name="Sprite2D2" type="Sprite2D" parent="chopGroup"]
+[node name="Sprite2D2" type="Sprite2D" parent="Choppable"]
 texture_filter = 1
 scale = Vector2(3, 3)
 texture = ExtResource("8_1gaok")
@@ -80,13 +80,9 @@ material = SubResource("ShaderMaterial_b4uh0")
 scale = Vector2(3, 3)
 texture = ExtResource("10_83vc0")
 
-[node name="TestPolyTop" type="Polygon2D" parent="sliceGroup"]
-visible = false
-polygon = PackedVector2Array(-90, 10, -88, 46, -76, 72, -53, 89, -9, 90, 28, 66, 56, 33, 78, -24, 80, -67, 73, -90, 59, -84, 47, -62, 24, -46, -17, -38, -40, -33, -76, -16)
-
 [node name="hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("5_4hb68")
-health = NodePath("../health")
+health = NodePath("../Health")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="hurtbox" node_paths=PackedStringArray("collisionShape")]
 polygon = PackedVector2Array(-90, 10, -88, 46, -76, 72, -53, 89, -9, 90, 28, 66, 56, 33, 78, -24, 80, -67, 73, -90, 59, -84, 47, -62, 24, -46, -17, -38, -40, -33, -76, -16)

@@ -15,11 +15,10 @@ shader = ExtResource("6_nnpc6")
 shader_parameter/cookVal = 0.0
 shader_parameter/isBurnt = false
 
-[node name="Organ" type="Node2D" node_paths=PackedStringArray("polygon2D", "collisionPoly", "health", "sprite")]
+[node name="Organ" type="Node2D" node_paths=PackedStringArray("polygon2D", "collisionPoly", "sprite")]
 script = ExtResource("1_0i6ut")
-polygon2D = NodePath("Choppable/Polygon2D")
+polygon2D = NodePath("")
 collisionPoly = NodePath("DraggableArea/CollisionPolygon2D")
-health = NodePath("Health")
 sprite = NodePath("Choppable/Sprite2D")
 
 [node name="Health" type="Node" parent="."]
@@ -52,11 +51,6 @@ metadata/_custom_type_script = "uid://0l0lpkxtrjtx"
 texture_filter = 3
 material = SubResource("ShaderMaterial_snl8s")
 texture = ExtResource("4_nnpc6")
-
-[node name="Polygon2D" type="Polygon2D" parent="Choppable"]
-visible = false
-color = Color(1, 1, 0.156863, 1)
-polygon = PackedVector2Array(-13, -24, -21, -13, -24, -1, -24, 13, -27, 22, -22, 31, -9, 31, -1, 29, 14, 25, 26, 11, 25, -6, 16, -21, 2, -29)
 
 [node name="DraggableArea" type="Area2D" parent="."]
 script = ExtResource("5_snl8s")

@@ -1,10 +1,12 @@
 class_name Poison
 extends Node
 
+
 @export var health: Health
 @export var poisonWhileRaw := 0
 @export var maxPoison:= 30
 @onready var poison:= poisonWhileRaw if poisonWhileRaw else 0 : set = _setPoison
+@export var rentention: float = 1
 
 
 var cooked:= GlobalEnums.Cooked.RAW
@@ -21,3 +23,8 @@ func _on_health_cooked_medium() -> void:
 
 func _setPoison(val:int) -> void:
 	poison = min(val, maxPoison)
+	
+func updatePoisonAfterChop(percent: float):
+	var newMax = maxPoison * percent * rentention
+	poison = poison * percent * rentention
+	maxPoison = newMax
