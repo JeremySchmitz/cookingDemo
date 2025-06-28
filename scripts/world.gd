@@ -43,7 +43,6 @@ func _on_slice_btn_pressed() -> void:
 
 func _on_to_serve_area_mouse_entered() -> void:
 	if curCam == CameraMode.PREP  && !holdCam:
-		print('toServe')
 		_build_timer(
 			Vector2(get_viewport().get_visible_rect().size.x,$CameraMain.position.y),
 			CameraMode.SERVE
@@ -55,7 +54,6 @@ func _on_to_serve_area_mouse_exited() -> void:
 
 func _on_to_prep_area_mouse_entered() -> void:
 	if curCam == CameraMode.SERVE && !holdCam:
-		print('toPrep')
 		_build_timer(Vector2(0, 0), CameraMode.PREP)
 
 func _on_to_prep_area_mouse_exited() -> void:
@@ -80,5 +78,4 @@ func _move_camera(pos: Vector2, newCam: CameraMode):
 	camHoldTimer.start()
 	
 func _setHold(val: bool):
-	print('setHold: ', val)
 	holdCam = val

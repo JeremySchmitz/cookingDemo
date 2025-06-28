@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cax40kgn23m3q"]
+[gd_scene load_steps=16 format=3 uid="uid://cax40kgn23m3q"]
 
 [ext_resource type="Script" uid="uid://bq6d71fqsv1h6" path="res://scripts/world.gd" id="1_fj7yv"]
 [ext_resource type="Texture2D" uid="uid://roubacvs6dht" path="res://resources/Sprites/Kitchen/CuttingBoard.png" id="2_o06y3"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://jgkb3k3cebao" path="res://scripts/components/hitbox.gd" id="4_fo5ed"]
 [ext_resource type="Script" uid="uid://cepynjnto0btg" path="res://scripts/knives/knife_slicer.gd" id="5_fo5ed"]
 [ext_resource type="PackedScene" uid="uid://cpp0ybo4g536c" path="res://Scenes/bowl.tscn" id="8_k7acu"]
+[ext_resource type="Script" uid="uid://c2pkk8qcndtku" path="res://Scenes/camera_main.gd" id="9_0fj1v"]
 [ext_resource type="Script" uid="uid://blx703circky0" path="res://Scenes/viewportEdgeArea.gd" id="9_5v1tr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fo5ed"]
@@ -99,6 +100,7 @@ shape = SubResource("CircleShape2D_5ukr8")
 [node name="CameraMain" type="Camera2D" parent="."]
 anchor_mode = 0
 position_smoothing_enabled = true
+script = ExtResource("9_0fj1v")
 
 [node name="toServeArea" type="Area2D" parent="." node_paths=PackedStringArray("camera")]
 script = ExtResource("9_5v1tr")
