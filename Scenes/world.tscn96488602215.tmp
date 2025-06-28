@@ -26,7 +26,7 @@ radius = 154.003
 script = ExtResource("1_fj7yv")
 
 [node name="Bowl" parent="." instance=ExtResource("8_k7acu")]
-position = Vector2(1394, 175)
+position = Vector2(149, 465)
 scale = Vector2(1.84, 1.84)
 
 [node name="cuttingBoard" type="Area2D" parent="."]

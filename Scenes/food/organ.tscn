@@ -57,7 +57,7 @@ script = ExtResource("5_snl8s")
 metadata/_custom_type_script = "uid://ip3nwschvvkb"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DraggableArea"]
-polygon = PackedVector2Array(-13, -24, -21, -13, -24, -1, -24, 13, -27, 22, -22, 31, -9, 31, -1, 29, 14, 25, 26, 11, 25, -6, 16, -21, 2, -29)
+polygon = PackedVector2Array(-12, -26, -18, -20, -21, -14, -23, -8, -24, -5, -25, -1, -25, 9, -24, 13, -27, 20, -27, 24, -25, 28, -22, 31, -12, 31, -1, 29, 7, 28, 12, 27, 15, 26, 23, 20, 27, 11, 27, 0, 25, -6, 23, -11, 18, -20, 12, -26, 10, -27, 5, -29, -6, -29)
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("6_1n0ni")
@@ -65,6 +65,6 @@ health = NodePath("../Health")
 metadata/_custom_type_script = "uid://dik22bwv6x5l5"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox"]
-polygon = PackedVector2Array(-13, -24, -21, -13, -24, -1, -24, 13, -27, 22, -22, 31, -9, 31, -1, 29, 14, 25, 26, 11, 25, -6, 16, -21, 2, -29)
+polygon = PackedVector2Array(-12, -26, -18, -20, -21, -14, -23, -8, -24, -5, -25, -1, -25, 9, -24, 13, -27, 20, -27, 24, -25, 28, -22, 31, -12, 31, -1, 29, 7, 28, 12, 27, 15, 26, 23, 20, 27, 11, 27, 0, 25, -6, 23, -11, 18, -20, 12, -26, 10, -27, 5, -29, -6, -29)
 
 [connection signal="dragging" from="DraggableArea" to="." method="_on_draggable_area_dragging"]

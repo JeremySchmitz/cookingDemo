@@ -19,9 +19,8 @@ shader = ExtResource("10_mwd75")
 shader_parameter/cookVal = 0.0
 shader_parameter/isBurnt = false
 
-[node name="food" type="Node2D" node_paths=PackedStringArray("polygon2D", "collisionPoly", "sprite") groups=["food"]]
+[node name="food" type="Node2D" node_paths=PackedStringArray("collisionPoly", "sprite") groups=["food"]]
 script = ExtResource("1_h4kkx")
-polygon2D = NodePath("")
 collisionPoly = NodePath("draggableArea/CollisionPolygon2D")
 sprite = NodePath("sliceGroup/sliceSprite")
 
@@ -44,7 +43,6 @@ health = NodePath("../Health")
 script = ExtResource("4_83vc0")
 poisonWhileRaw = 10
 maxPoison = 10
-rentention = 1
 
 [node name="Choppable" type="CanvasGroup" parent="." node_paths=PackedStringArray("collisionArea", "collisionNode", "sliceGroup")]
 script = ExtResource("3_h4kkx")
