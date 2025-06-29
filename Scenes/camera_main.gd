@@ -9,11 +9,11 @@ func _process(delta: float) -> void:
 	var curPos = cam.get_screen_center_position()
 	if !moving && curPos != lastPos:
 		print('moving')
-		Signals.cameraMove.emit()
+		Utils.cameraMove.emit()
 		moving = true
 	elif moving && curPos == lastPos:
 		print('stoped')
-		Signals.cameraStop.emit()
+		Utils.cameraStop.emit()
 		moving = false
 	
 	lastPos = curPos

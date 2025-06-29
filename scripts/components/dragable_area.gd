@@ -10,9 +10,9 @@ var camMoving = false
 signal dragging()
 
 func _ready():
-	Signals.modeChange.connect(_on_mode_change)
-	Signals.cameraMove.connect(_on_camera_move)
-	Signals.cameraStop.connect(_on_camera_stop)
+	Utils.modeChange.connect(_on_mode_change)
+	Utils.cameraMove.connect(_on_camera_move)
+	Utils.cameraStop.connect(_on_camera_stop)
 	
 	connect("mouse_entered", _mouse_over.bind(true))
 	connect("mouse_exited", _mouse_over.bind(false))

@@ -6,7 +6,7 @@ var inCuttingBoard = false
 func _ready():
 	connect("area_entered", _on_area_entered)
 	connect("area_exited", _on_area_exited)
-	Signals.modeChange.connect(_on_mode_change)
+	Utils.modeChange.connect(_on_mode_change)
 
 func _on_mode_change(m: GlobalEnums.Mode):
 	pass

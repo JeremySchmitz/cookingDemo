@@ -22,7 +22,7 @@ func _on_chop_btn_pressed() -> void:
 	$chopBtn.disabled = true
 	$sliceBtn.disabled = false
 	$grabBtn.disabled = false
-	Signals.modeChange.emit(curMode)
+	Utils.modeChange.emit(curMode)
 	get_tree().get_root().set_input_as_handled()
 
 func _on_grab_btn_pressed() -> void:
@@ -30,7 +30,7 @@ func _on_grab_btn_pressed() -> void:
 	$chopBtn.disabled = false
 	$sliceBtn.disabled = false
 	$grabBtn.disabled = true
-	Signals.modeChange.emit(curMode)
+	Utils.modeChange.emit(curMode)
 	get_tree().get_root().set_input_as_handled()
 
 func _on_slice_btn_pressed() -> void:
@@ -38,7 +38,7 @@ func _on_slice_btn_pressed() -> void:
 	$chopBtn.disabled = false
 	$sliceBtn.disabled = true
 	$grabBtn.disabled = false
-	Signals.modeChange.emit(curMode)
+	Utils.modeChange.emit(curMode)
 	get_tree().get_root().set_input_as_handled()
 
 func _on_to_serve_area_mouse_entered() -> void:
