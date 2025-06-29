@@ -11,4 +11,3 @@ func _on_draggable_area_dragging() -> void:
 #	TODO This needs to be made more surefire 
 	reparent(get_parent().get_parent().get_parent())
 	parented = false
-	pass # Replace with function body.

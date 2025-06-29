@@ -31,7 +31,7 @@ func _unhandled_input(event):
 			and event.pressed
 		):
 			lifted = true
-			offset = get_global_mouse_position() - get_parent().position
+			offset = get_global_mouse_position() - get_parent().global_position
 			
 		if event is InputEventMouseButton and not event.pressed:
 			lifted = false
@@ -41,7 +41,8 @@ func _unhandled_input(event):
 			get_viewport().set_input_as_handled()
 
 func _set_position():
-	get_parent().position = get_global_mouse_position() - offset
+	get_parent().global_position = get_global_mouse_position() - offset
+	get_local_mouse_position()
 	dragging.emit()
 	
 func _mouse_over(value):
