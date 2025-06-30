@@ -1,9 +1,28 @@
 extends Node2D
 enum Mode {CHOP, SLICE, GRAB}
 
+const bowlScene = preload("res://Scenes/food/bowl.tscn")
+
 @export var cameraMoveWait = .2;
 
 var curMode = Mode.CHOP
+@onready var crew:= CrewStatus.crew
+
+func _ready() -> void:
+	for i in range(0, crew.size()):
+		_buildBowl(i)
+	pass
+
+func _buildBowl(i: int):
+	var scene: Bowl = bowlScene.instantiate()
+	scene.setNameTag("{0} ({1})".format([crew[i].name, GlobalEnums.Role.keys()[crew[i].role]]))
+	add_child(scene)
+	scene.scale *= 2
+	scene.position = Vector2(
+		get_viewport_rect().size.x + 200 + (300 * i),
+		 200 )
+	
+
 
 func _on_chop_btn_pressed() -> void:
 	curMode = Mode.CHOP

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cax40kgn23m3q"]
+[gd_scene load_steps=15 format=3 uid="uid://cax40kgn23m3q"]
 
 [ext_resource type="Script" uid="uid://bq6d71fqsv1h6" path="res://scripts/world.gd" id="1_fj7yv"]
 [ext_resource type="Texture2D" uid="uid://roubacvs6dht" path="res://resources/Sprites/Kitchen/CuttingBoard.png" id="2_o06y3"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://cplwxfa5c4wal" path="res://scripts/knives/knife_chopper.gd" id="4_8j60k"]
 [ext_resource type="Script" uid="uid://jgkb3k3cebao" path="res://scripts/components/hitbox.gd" id="4_fo5ed"]
 [ext_resource type="Script" uid="uid://cepynjnto0btg" path="res://scripts/knives/knife_slicer.gd" id="5_fo5ed"]
-[ext_resource type="PackedScene" uid="uid://cpp0ybo4g536c" path="res://Scenes/food/bowl.tscn" id="8_k7acu"]
 [ext_resource type="Script" uid="uid://c2pkk8qcndtku" path="res://scripts/Utils/camera_main.gd" id="9_0fj1v"]
 [ext_resource type="Script" uid="uid://blx703circky0" path="res://scripts/Utils/viewportEdgeArea.gd" id="9_5v1tr"]
 
@@ -25,10 +24,6 @@ radius = 154.003
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_fj7yv")
-
-[node name="Bowl" parent="." instance=ExtResource("8_k7acu")]
-position = Vector2(1394, 175)
-scale = Vector2(1.84, 1.84)
 
 [node name="cuttingBoard" type="Area2D" parent="."]
 position = Vector2(400, 250)

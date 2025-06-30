@@ -27,12 +27,11 @@ const meanSatiety:float = .9
 
 func generate(count: int, crewOnly := false) -> Array[Crew]:
 	var crew: Array[Crew] = []
-	var role
 	for i in range(0, count):
-		crew.append(_buildCrewMember(_getRole(crewOnly, 1)))
+		crew.append(_buildCrewMember(_getRole(crewOnly, i)))
 	return crew
 
-func _getRole(crewOnly: bool, i: int):
+func _getRole(crewOnly: bool, i: int) -> GlobalEnums.Role:
 	var role: GlobalEnums.Role
 	if crewOnly:
 		role = GlobalEnums.Role.CREW
@@ -46,9 +45,9 @@ func _getRole(crewOnly: bool, i: int):
 	return role
 
 func _buildCrewMember(role: GlobalEnums.Role) -> Crew:
-	var member = Crew.new()
-	
-	member.Role = role
+	var member:= Crew.new()
+	member.role = role
+	member.name = _generateName()
 	member.health = floor(Utils.triangleDistribution(minHealth, maxHealth, meanHealth))
 	member.constitution = floor(Utils.triangleDistribution(minConstitution, maxConstitution, meanConstitution))
 	member.strength = floor(Utils.triangleDistribution(minStrength, maxStrength, meanStrength))
@@ -57,3 +56,11 @@ func _buildCrewMember(role: GlobalEnums.Role) -> Crew:
 	member.maxSatiety = floor(Utils.triangleDistribution(minSatiety, maxSatiety, meanSatiety))
 	
 	return member
+
+
+func _generateName():
+	var name = ""
+	for i in 3:
+		var letter = char("A".unicode_at(0) + randi() % 26)
+		name += letter
+	return name

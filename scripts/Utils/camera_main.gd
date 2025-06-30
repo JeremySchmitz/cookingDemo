@@ -30,11 +30,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var curPos = cam.get_screen_center_position()
 	if !moving && curPos != lastPos:
-		print('moving')
 		Utils.cameraMove.emit()
 		moving = true
 	elif moving && curPos == lastPos:
-		print('stoped')
 		Utils.cameraStop.emit()
 		moving = false
 	
@@ -54,7 +52,6 @@ func _on_to_right_area_mouse_exited() -> void:
 
 func _on_to_left_area_mouse_entered() -> void:
 	if curCam == CameraMode.SERVE && !holdCam:
-		print('toLEft')
 		_build_timer(Vector2(0, 0), CameraMode.PREP)
 
 func _on_to_left_area_mouse_exited() -> void:
@@ -71,7 +68,6 @@ func _build_timer(pos: Vector2, camMode: CameraMode):
 	timer.start()
 
 func _move_camera(pos: Vector2, newCam: CameraMode):
-	print('moveCam')
 	position = pos;
 	curCam = newCam
 	timers.erase(newCam)

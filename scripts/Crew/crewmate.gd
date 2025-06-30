@@ -1,18 +1,19 @@
 class_name Crew
 
 var role: GlobalEnums.Role
+var name: String
 var health: int
 #How Susceptable they are poisoned food and how quickly they heal
 var constitution: float
-var maxSatiation: int
-var satiety: int = maxSatiation
+var maxSatiety: int
+var satiety: int = maxSatiety
 var strength: int
 var fishing: int
 var sanity: float
 
 
 func eat(nutrition: float, poison: float):
-	satiety = min(nutrition + satiety, maxSatiation)
+	satiety = min(nutrition + satiety, maxSatiety)
 	health -= poison - (poison * constitution)
 
 func _trial(attr: int, success: int, opposition: int) -> bool:

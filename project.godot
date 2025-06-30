@@ -11,12 +11,13 @@ config_version=5
 [application]
 
 config/name="cookingDemo"
-run/main_scene="uid://cax40kgn23m3q"
+run/main_scene="uid://b1a42wro6vq1r"
 config/features=PackedStringArray("4.4", "Forward Plus")
 
 [autoload]
 
 Utils="*res://scripts/Singletons/utils.gd"
+CrewStatus="*res://scripts/Crew/crewStatus.gd"
 
 [display]
 
