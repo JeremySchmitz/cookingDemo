@@ -7,9 +7,9 @@
 [ext_resource type="Script" uid="uid://cplwxfa5c4wal" path="res://scripts/knives/knife_chopper.gd" id="4_8j60k"]
 [ext_resource type="Script" uid="uid://jgkb3k3cebao" path="res://scripts/components/hitbox.gd" id="4_fo5ed"]
 [ext_resource type="Script" uid="uid://cepynjnto0btg" path="res://scripts/knives/knife_slicer.gd" id="5_fo5ed"]
-[ext_resource type="PackedScene" uid="uid://cpp0ybo4g536c" path="res://Scenes/bowl.tscn" id="8_k7acu"]
-[ext_resource type="Script" uid="uid://c2pkk8qcndtku" path="res://Scenes/camera_main.gd" id="9_0fj1v"]
-[ext_resource type="Script" uid="uid://blx703circky0" path="res://Scenes/viewportEdgeArea.gd" id="9_5v1tr"]
+[ext_resource type="PackedScene" uid="uid://cpp0ybo4g536c" path="res://Scenes/food/bowl.tscn" id="8_k7acu"]
+[ext_resource type="Script" uid="uid://c2pkk8qcndtku" path="res://scripts/Utils/camera_main.gd" id="9_0fj1v"]
+[ext_resource type="Script" uid="uid://blx703circky0" path="res://scripts/Utils/viewportEdgeArea.gd" id="9_5v1tr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fo5ed"]
 size = Vector2(499, 293)
