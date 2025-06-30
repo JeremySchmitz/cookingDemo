@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cax40kgn23m3q"]
+[gd_scene load_steps=17 format=3 uid="uid://cax40kgn23m3q"]
 
 [ext_resource type="Script" uid="uid://bq6d71fqsv1h6" path="res://scripts/world.gd" id="1_fj7yv"]
 [ext_resource type="Texture2D" uid="uid://roubacvs6dht" path="res://resources/Sprites/Kitchen/CuttingBoard.png" id="2_o06y3"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://cepynjnto0btg" path="res://scripts/knives/knife_slicer.gd" id="5_fo5ed"]
 [ext_resource type="Script" uid="uid://c2pkk8qcndtku" path="res://scripts/Utils/camera_main.gd" id="9_0fj1v"]
 [ext_resource type="Script" uid="uid://blx703circky0" path="res://scripts/Utils/viewportEdgeArea.gd" id="9_5v1tr"]
+[ext_resource type="Texture2D" uid="uid://dd72dj4uhmmek" path="res://resources/Sprites/Kitchen/bell.png" id="10_0fj1v"]
+[ext_resource type="BitMap" uid="uid://b3i0k8is4vlvh" path="res://resources/Sprites/Kitchen/bell_clickMask.png" id="11_ikia7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fo5ed"]
 size = Vector2(499, 293)
@@ -113,8 +115,18 @@ metadata/_custom_type_script = "uid://blx703circky0"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraMain/toLeft"]
 shape = SubResource("RectangleShape2D_0fj1v")
 
+[node name="dinnerBellBtn" type="TextureButton" parent="."]
+offset_left = 2074.0
+offset_top = 493.0
+offset_right = 2138.0
+offset_bottom = 557.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("10_0fj1v")
+texture_click_mask = ExtResource("11_ikia7")
+
+[node name="Bowls" type="Node" parent="."]
+
 [connection signal="pressed" from="chopBtn" to="." method="_on_chop_btn_pressed"]
 [connection signal="pressed" from="sliceBtn" to="." method="_on_slice_btn_pressed"]
 [connection signal="pressed" from="grabBtn" to="." method="_on_grab_btn_pressed"]
-[connection signal="mouse_entered" from="CameraMain/toLeft" to="." method="_on_to_prep_area_mouse_entered"]
-[connection signal="mouse_exited" from="CameraMain/toLeft" to="." method="_on_to_prep_area_mouse_exited"]
+[connection signal="pressed" from="dinnerBellBtn" to="." method="_on_dinner_bell_btn_pressed"]

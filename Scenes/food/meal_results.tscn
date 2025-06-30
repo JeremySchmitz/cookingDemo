@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnun76p5l30rw"]
+
+[ext_resource type="Script" uid="uid://dki7ups2s6e8i" path="res://Scenes/food/meal_results.gd" id="1_jjlkr"]
+
+[node name="MealResults" type="Node2D"]
+script = ExtResource("1_jjlkr")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.462291, 0.462291, 0.462291, 1)
+polygon = PackedVector2Array(0, 0, 300, 0, 300, 400, 0, 400)

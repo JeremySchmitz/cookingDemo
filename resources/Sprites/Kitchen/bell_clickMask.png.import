@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://b3i0k8is4vlvh"
+path="res://.godot/imported/bell_clickMask.png-4e9746fb8abafd61f6d0925fd2fc3610.res"
+
+[deps]
+
+source_file="res://resources/Sprites/Kitchen/bell_clickMask.png"
+dest_files=["res://.godot/imported/bell_clickMask.png-4e9746fb8abafd61f6d0925fd2fc3610.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

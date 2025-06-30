@@ -16,6 +16,8 @@ var poison = 0:
 	set(val):
 		$PoisonLabel.text = "Poison: " + str(val)
 		poison = val
+		
+var crewName: String
 
 func _ready() -> void:
 	area.area_entered.connect(_on_food_entered)
@@ -52,6 +54,10 @@ func _getChild(className: Variant, parent: Node = self) -> Poison:
 			return child
 	return null
 	
-func setNameTag(val: String):
-	$Namecard.text = val
+func setNameTag(name: String, role: GlobalEnums.Role):
+	crewName = name
+	$Namecard.text = "{0} ({1})".format([name, GlobalEnums.Role.keys()[role]])
+	
+func getName() -> String:
+	return crewName
 	
