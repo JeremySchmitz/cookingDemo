@@ -102,26 +102,24 @@ anchor_mode = 0
 position_smoothing_enabled = true
 script = ExtResource("9_0fj1v")
 
-[node name="toServeArea" type="Area2D" parent="." node_paths=PackedStringArray("camera")]
+[node name="toRight" type="Area2D" parent="CameraMain" node_paths=PackedStringArray("camera")]
 script = ExtResource("9_5v1tr")
 locationRight = true
-camera = NodePath("../CameraMain")
+camera = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="toServeArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraMain/toRight"]
 shape = SubResource("RectangleShape2D_0fj1v")
 
-[node name="toPrepArea" type="Area2D" parent="." node_paths=PackedStringArray("camera")]
+[node name="toLeft" type="Area2D" parent="CameraMain" node_paths=PackedStringArray("camera")]
 script = ExtResource("9_5v1tr")
-camera = NodePath("../CameraMain")
+camera = NodePath("..")
 metadata/_custom_type_script = "uid://blx703circky0"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="toPrepArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraMain/toLeft"]
 shape = SubResource("RectangleShape2D_0fj1v")
 
 [connection signal="pressed" from="chopBtn" to="." method="_on_chop_btn_pressed"]
 [connection signal="pressed" from="sliceBtn" to="." method="_on_slice_btn_pressed"]
 [connection signal="pressed" from="grabBtn" to="." method="_on_grab_btn_pressed"]
-[connection signal="mouse_entered" from="toServeArea" to="." method="_on_to_serve_area_mouse_entered"]
-[connection signal="mouse_exited" from="toServeArea" to="." method="_on_to_serve_area_mouse_exited"]
-[connection signal="mouse_entered" from="toPrepArea" to="." method="_on_to_prep_area_mouse_entered"]
-[connection signal="mouse_exited" from="toPrepArea" to="." method="_on_to_prep_area_mouse_exited"]
+[connection signal="mouse_entered" from="CameraMain/toLeft" to="." method="_on_to_prep_area_mouse_entered"]
+[connection signal="mouse_exited" from="CameraMain/toLeft" to="." method="_on_to_prep_area_mouse_exited"]

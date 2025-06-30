@@ -10,11 +10,10 @@ class_name viewPortEdgeArea
 var lastCameraPos: Vector2
 var timer: Timer
 
-func _process(_delta):
-	#TODO Find way to listen for screen resize instead
-	update_collision_height()
+func _ready() -> void:
+	update_collision_position()
 	
-func update_collision_height():
+func update_collision_position():
 	var viewportHeight = get_viewport().get_visible_rect().size.y
 	var viewportWidth = get_viewport().get_visible_rect().size.x
 	rect_shape.size.y = viewportHeight

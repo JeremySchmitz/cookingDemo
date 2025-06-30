@@ -22,7 +22,7 @@ void fragment() {
 		cookedColor.b = base_color.b - (cookVal * .005);
 		cookedColor.a = base_color.a;
 	}
-	
+
 	COLOR = cookedColor;
 }
 
