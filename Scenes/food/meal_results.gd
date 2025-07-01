@@ -18,5 +18,5 @@ func _buildSummary(before: Crew, after: Crew) -> MealSummary:
 	summary.crewName = after.name
 	summary.setHealth(before.health, after.health)
 	summary.setHunger(before.health, after.health)
-	add_child(summary)
+	$summarySpawn.add_child(summary)
 	return summary

@@ -66,7 +66,8 @@ func _on_dinner_bell_btn_pressed() -> void:
 	results.crewBefore = crewBefore
 	results.crewAfter = crew
 	results.buildResults()
-	add_child(results)
+	Utils.switchScene.emit(results)
+	#add_child(results)
 	
 
 func _buildCrewDictionary():
