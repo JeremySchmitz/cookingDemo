@@ -13,16 +13,19 @@ signal switchScene(s: Node2D)
 var RNG = RandomNumberGenerator.new()
 
 
-func generateNormalDistribution(min: float, max: float):
-	var center = (max - min) / 2 + min
-	var stddev = (max - min) / 6.0
+func generateIntInRange(minimum: int, maximum: int) -> int:
+	return RNG.randi() % (maximum - minimum + 1) + minimum
+
+func generateNormalDistribution(minimum: float, maximum: float):
+	var center = (maximum - minimum) / 2 + minimum
+	var stddev = (maximum - minimum) / 6.0
 	var value = RNG.randfn(center, stddev) # returns a Gaussian random number
-	return clamp(value, min, max)
+	return clamp(value, minimum, maximum)
 	
-func triangleDistribution(min: float, max: float, mode: float) -> float:
+func triangleDistribution(minimum: float, maximum: float, mode: float) -> float:
 	var u = RNG.randf() # Uniform random in [0, 1]
-	var f = (mode - min) / (max - min)
+	var f = (mode - minimum) / (maximum - minimum)
 	if u < f:
-		return min + sqrt(u * (max - min) * (mode - min))
+		return minimum + sqrt(u * (maximum - minimum) * (mode - minimum))
 	else:
-		return max - sqrt((1 - u) * (max - min) * (max - mode))
+		return maximum - sqrt((1 - u) * (maximum - minimum) * (maximum - mode))
