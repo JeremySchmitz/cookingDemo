@@ -27,6 +27,12 @@ radius = 154.003
 [node name="World" type="Node2D"]
 script = ExtResource("1_fj7yv")
 
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(593, 41)
+color = Color(0.703808, 0.703808, 0.703808, 1)
+polygon = PackedVector2Array(-608, -56, 2272, -40, 2278, 717, -608, 728)
+uv = PackedVector2Array(-608, -56, 584, -80, 576, 256, -584, 264)
+
 [node name="cuttingBoard" type="Area2D" parent="."]
 position = Vector2(400, 250)
 

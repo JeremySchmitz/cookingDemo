@@ -25,7 +25,7 @@ func load_encounters_from_cfg(path):
 			var data = {}
 			for key in cfg.get_section_keys(section):
 				data[key] = cfg.get_value(section, key)
-			var encounter = Encounter.new(massageData(data))
+			var encounter = Encounter_Entry.new(massageData(data))
 			
 			var diff = encounter.difficulty
 			if encounters.has(diff):

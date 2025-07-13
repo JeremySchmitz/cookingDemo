@@ -1,7 +1,6 @@
 extends Node2D
 
 const NUM_CREW = 3
-var encounters
 
 
 func _ready() -> void:
