@@ -11,45 +11,71 @@ var currentEncounter: Encounter_Entry:
 	get:
 		return currentEncounter
 	set(val):
-		nameLabel.text = currentEncounter.name
-		description.text = currentEncounter.desc
 		currentEncounter = val
+		nameLabel.text = val.name
+		description.text = val.desc
+		results.text = ""
 
-var crew = Array[Crew]
+var crew: Array[Crew] = CrewStatus.crew
 
+
+func _ready() -> void:
+	currentEncounter = Utils.getEncounter()
 
 func runEncounter():
 	crew = CrewStatus.crew
 	_runTrial(currentEncounter)
 	
 func _runTrial(encounter: Encounter_Entry):
+	print('run trial')
 	var target: Crew = _getTrialTarget(encounter.trial_type)
 
 	var success := false
 	match encounter.trial_type:
 		GlobalEnums.TrialType.SUM:
 			success = _trySum(encounter.trial, encounter.trial_requirement)
+			
+			for mate in crew:
+				mate.satiety -= encounter.satiety_consumed()
 		_:
 			success = _trySingle(target, encounter.trial, encounter.trial_requirement)
-	
-	target.satiety -= encounter.satiety_consumed()
+			target.satiety -= encounter.satiety_consumed()
 
 
 	if !success:
-		var penaltyTarget = _getPenaltyTarget(
-			encounter.trial_target,
-			target,
-			encounter.trial_penalty_count(crew.size())
-		)
+		# var penaltyTarget = _getPenaltyTarget(
+		# 	encounter.trial_target,
+		# 	target,
+		# 	encounter.trial_penalty_count(crew.size())
+		# )
+		# _executePenalty(penaltyTarget,
+		# 	encounter.trial_penalty,
+		# 	encounter.trial_penalty_count(crew.size())
+		# )
+		# TODO Update
+		var vars = []
+		for entry in encounter.fail_vars:
+			vars.append(encounter[entry])
+		print('FAIL fail_vars: ', encounter.fail_vars)
+		print('FAIL vars: ', vars)
 
-		_executePenalty(penaltyTarget,
-			encounter.trial_penalty,
-			encounter.trial_penalty_count(crew.size())
-		)
+		results.text = encounter.fail_text.format(vars)
+
+	else:
+		# TODO Update
+		var vars = []
+		for entry in encounter.pass_vars:
+			vars.append(encounter[entry])
+		print('PASS pass_vars: ', encounter.pass_vars)
+		print('PASS vars: ', vars)
+
+		results.text = encounter.pass_text.format(vars)
+
 
 	# TODO theres more to do here
 
 func _getTrialTarget(type: GlobalEnums.TrialType):
+	print('_getTrialTarget trial type: ', type)
 	var target: Crew
 	match type:
 		GlobalEnums.TrialType.MAX_RAN:
@@ -61,9 +87,11 @@ func _getTrialTarget(type: GlobalEnums.TrialType):
 		_:
 			target = null
 
+	print('_getTrialTarget trial target: ', target)
 	return target
 
 func _getPenaltyTarget(type: GlobalEnums.Target, trialTarget: Crew, count: int):
+	print('_getPenaltyTarget trial type: ', type)
 	var target
 	match type:
 		GlobalEnums.Target.RANDOM:
@@ -79,26 +107,33 @@ func _getPenaltyTarget(type: GlobalEnums.Target, trialTarget: Crew, count: int):
 		_:
 			target = null
 
+	print('_getPenaltyTarget target: ', target)
 	return target
 
 func _trySingle(target: Crew, trialAttr: GlobalEnums.Trial, requirement: int) -> bool:
+	print('_trySingle')
 	return _trial(target, trialAttr) >= requirement
 
 func _trySum(trialAttr: GlobalEnums.Trial, requirement: int) -> bool:
+	print('_trySum')
 	var sum := 0.0
 	for mate in crew:
-		sum += _trial(crew, trialAttr)
+		sum += _trial(mate, trialAttr)
+	print('_trySum sum: ', sum, " requirement: ", requirement)
 
 	return sum >= requirement
 
 
 func _trial(mate: Crew, trialAttr: GlobalEnums.Trial):
+	print('_trial mate:', mate)
+	print('_trial mate:', mate.name)
+
 	var attr := 0.0
 	match trialAttr:
 		GlobalEnums.Trial.SANITY:
 			attr = mate.getResistForSum()
 		GlobalEnums.Trial.STRENGTH:
-			attr = mate.getStrengthForSum()
+			attr = mate.getFightForSum()
 		GlobalEnums.Trial.FISHING:
 			attr = mate.getFishingForSum()
 		GlobalEnums.Trial.WORK:
@@ -106,6 +141,7 @@ func _trial(mate: Crew, trialAttr: GlobalEnums.Trial):
 		GlobalEnums.Trial.COUNT:
 			attr = 1
 
+	print('_trial attr:', attr)
 	return attr
 
 func _executePenalty(target, penalty: GlobalEnums.TrialPenalty, count: int):
@@ -128,7 +164,7 @@ func _penalty(target: Crew, penalty: GlobalEnums.TrialPenalty, count: int):
 		GlobalEnums.TrialPenalty.DEATH:
 			CrewStatus.killCrew(target)
 		GlobalEnums.TrialPenalty.POISON:
-			target.poison(count)
+			target.recievePoison(count)
 		GlobalEnums.TrialPenalty.CONSTITUTION:
 			target.constitution -= count
 		GlobalEnums.TrialPenalty.SATIETY:
@@ -139,3 +175,17 @@ func _penalty(target: Crew, penalty: GlobalEnums.TrialPenalty, count: int):
 			target.health -= count
 		GlobalEnums.TrialPenalty.FISHING:
 			target.fishing -= count
+
+
+func _on_replay_btn_pressed() -> void:
+	currentEncounter = Utils.getEncounter()
+	pass # Replace with function body.
+
+
+func _on_cont_btn_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_run_pressed() -> void:
+	runEncounter()
+	pass # Replace with function body.

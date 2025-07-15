@@ -32,7 +32,7 @@ func load_encounters_from_cfg(path):
 				encounters[diff].append(encounter)
 			else:
 				encounters[diff] = [encounter]
-		
+
 func massageData(data):
 	data["difficulty"] = massageDifficulty(data["difficulty"]);
 
@@ -51,10 +51,6 @@ func massageData(data):
 	# reward count doesnt need massage
 	data["reward_target"] = massageTarget(data["reward_target"]);
 
-	data["pass_text"] = massagePassText(data["pass_text"]);
-	data["fail_text"] = massageFailText(data["fail_text"]);
-
-
 	return data;
 
 func massageDifficulty(difficulty: String) -> GlobalEnums.Difficulty:
@@ -68,7 +64,6 @@ func massageTrial(trial: String) -> GlobalEnums.Trial:
 	return GlobalEnums.Trial.get(trial)
 
 func massageTrialType(type: String) -> GlobalEnums.TrialType:
-	print('trial type:', type)
 	return GlobalEnums.TrialType.get(type)
 
 func massageTrialPenalty(penalty: String) -> GlobalEnums.TrialPenalty:
@@ -138,12 +133,6 @@ func massageReward(reward: String) -> GlobalEnums.Reward:
 func massageRewardType(reward: String):
 	# TODO
 	return reward
-
-func massagePassText(passText: String):
-	return func(reward: Array): return passText % reward
-
-func massageFailText(failText: String):
-	return func(target): return failText % target
 
 # Example usage:
 # load_encounters_from_cfg("res://resources/Configs/events.cfg")

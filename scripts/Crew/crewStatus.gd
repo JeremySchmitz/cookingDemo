@@ -5,9 +5,11 @@ const GENERATE_PATH = "res://scripts/Crew/generateCrew.gd"
 
 var crew: Array[Crew] = []:
 	get():
-		return crew.duplicate(true)
+		# return crew.duplicate(true)
+		return crew
 	set(val):
-		crew = val.duplicate(true)
+		# crew = val.duplicate(true)
+		crew = val
 
 func killCrew(mate: Crew, newCrew := crew):
 	var i = newCrew.find(mate)
@@ -39,7 +41,7 @@ func killCrew(mate: Crew, newCrew := crew):
 		
 		
 func buildCrew(count: int):
-	const GENERATE_CREW = preload(GENERATE_PATH)
+	var GENERATE_CREW = load(GENERATE_PATH)
 	crew = GENERATE_CREW.new().generate(count)
 
 func getRole(role: GlobalEnums.Role, myCrew := crew) -> Crew:

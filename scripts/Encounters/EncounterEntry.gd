@@ -15,10 +15,10 @@ var reward: GlobalEnums.Reward
 var reward_type = ""
 var reward_count = 0
 var reward_target: GlobalEnums.Target
-func pass_text(rewardVar) -> String: return rewardVar
-var pass_vars: Array[String] = []
-func fail_text(fail_var) -> String: return fail_var
-var fail_vars: Array[String] = []
+var pass_text: String = ""
+var pass_vars: Array = []
+var fail_text: String = ""
+var fail_vars: Array = []
 
 func _init(data = {}):
     for key in data.keys():

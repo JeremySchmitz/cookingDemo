@@ -1,28 +1,28 @@
 extends Node
 
-const minHealth:int = 60
-const maxHealth:int = 120
-const meanHealth:int = 100
+const minHealth: int = 60
+const maxHealth: int = 120
+const meanHealth: int = 100
 
-const minConstitution:float = 0.0
-const maxConstitution:float = 1.0
-const meanConstitution:float = 0.2
+const minConstitution: float = 0.0
+const maxConstitution: float = 1.0
+const meanConstitution: float = 0.2
 
-const minStrength:int = 40
-const maxStrength:int = 200
-const meanStrength:int = 100
+const minStrength: int = 40
+const maxStrength: int = 200
+const meanStrength: int = 100
 
-const minFishing:int = 60
-const maxFishing:int = 200
-const meanFishing:int = 100
+const minFishing: int = 60
+const maxFishing: int = 200
+const meanFishing: int = 100
 
-const minSanity:int = 50
-const maxSanity:int = 100
-const meanSanity:int = 80
+const minSanity: int = 50
+const maxSanity: int = 100
+const meanSanity: int = 80
 
-const minSatiety:float = 0
-const maxSatiety:float = 1.2
-const meanSatiety:float = .9
+const minSatiety: float = 0
+const maxSatiety: float = 1.2
+const meanSatiety: float = .9
 
 
 func generate(count: int, crewOnly := false) -> Array[Crew]:
@@ -45,7 +45,9 @@ func _getRole(crewOnly: bool, i: int) -> GlobalEnums.Role:
 	return role
 
 func _buildCrewMember(role: GlobalEnums.Role) -> Crew:
-	var member:= Crew.new()
+	var member := Crew.new()
+	print('generate crew member:', member)
+	print('generate has func:', member.has_method("getWorkForSum"))
 	member.role = role
 	member.name = _generateName()
 	member.health = floor(Utils.triangleDistribution(minHealth, maxHealth, meanHealth))

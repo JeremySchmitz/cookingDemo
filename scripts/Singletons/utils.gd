@@ -1,5 +1,7 @@
 extends Node
 
+var _encounters = []
+
 # Signals
 signal startSlice(p: Vector2)
 signal endSlice(p: Vector2)
@@ -12,6 +14,18 @@ signal switchScene(s: Node2D)
 
 var RNG = RandomNumberGenerator.new()
 
+func setEncounters(val):
+	_encounters = val
+
+func getEncounter(difficulty := GlobalEnums.Difficulty.RAN):
+	var i
+	if difficulty == GlobalEnums.Difficulty.RAN:
+		i = RNG.randi() % (GlobalEnums.Difficulty.size() - 1)
+	else:
+		i = GlobalEnums.Difficulty.get(difficulty)
+	
+	var j = RNG.randi() % _encounters[i].size()
+	return _encounters[i][j]
 
 func generateIntInRange(minimum: int, maximum: int) -> int:
 	return RNG.randi() % (maximum - minimum + 1) + minimum
