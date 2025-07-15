@@ -2,7 +2,7 @@ extends Node2D
 enum Mode {CHOP, SLICE, GRAB}
 
 const BOWL_SCENE = preload("res://Scenes/food/bowl.tscn")
-const RESULTS_SCENE = preload("res://Scenes/food/meal_results.tscn")
+const RESULTS_SCENE = preload("res://Scenes/food/results.tscn")
 
 @export var cameraMoveWait = .2;
 
@@ -52,7 +52,6 @@ func _on_slice_btn_pressed() -> void:
 
 
 func _on_dinner_bell_btn_pressed() -> void:
-	print('bell rang!')
 	var crewBefore = crew.duplicate(true)
 	var bowls = $Bowls.get_children()
 	

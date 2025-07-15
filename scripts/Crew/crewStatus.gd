@@ -5,11 +5,9 @@ const GENERATE_PATH = "res://scripts/Crew/generateCrew.gd"
 
 var crew: Array[Crew] = []:
 	get():
-		# return crew.duplicate(true)
-		return crew
+		return crew.duplicate(true)
 	set(val):
-		# crew = val.duplicate(true)
-		crew = val
+		crew = val.duplicate(true)
 
 func killCrew(mate: Crew, newCrew := crew):
 	var i = newCrew.find(mate)

@@ -51,11 +51,13 @@ func _buildCrewMember(role: GlobalEnums.Role) -> Crew:
 	member.role = role
 	member.name = _generateName()
 	member.health = floor(Utils.triangleDistribution(minHealth, maxHealth, meanHealth))
-	member.constitution = floor(Utils.triangleDistribution(minConstitution, maxConstitution, meanConstitution))
+	member.constitution = Utils.triangleDistribution(minConstitution, maxConstitution, meanConstitution)
 	member.strength = floor(Utils.triangleDistribution(minStrength, maxStrength, meanStrength))
 	member.fishing = floor(Utils.triangleDistribution(minFishing, maxFishing, meanFishing))
 	member.sanity = floor(Utils.triangleDistribution(minSanity, maxSanity, meanSanity))
-	member.maxSatiety = floor(Utils.triangleDistribution(minSatiety, maxSatiety, meanSatiety))
+	var satiety = Utils.triangleDistribution(minSatiety, maxSatiety, meanSatiety)
+	member.maxSatiety = satiety
+	member.satiety = satiety
 	
 	return member
 

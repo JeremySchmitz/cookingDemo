@@ -1,11 +1,14 @@
 extends Node2D
-
 class_name Encounter
+
+const RESULTS_SCENE = preload("res://Scenes/food/results.tscn")
 
 @onready var nameLabel = $Name
 @onready var description = $Description
 @onready var results = $Results
 
+var crewBefore: Array[Crew] = []
+var crewAfter: Array[Crew] = []
 
 var currentEncounter: Encounter_Entry:
 	get:
@@ -27,6 +30,7 @@ func runEncounter():
 	_runTrial(currentEncounter)
 	
 func _runTrial(encounter: Encounter_Entry):
+	crewBefore = crew
 	print('run trial')
 	var target: Crew = _getTrialTarget(encounter.trial_type)
 
@@ -183,6 +187,11 @@ func _on_replay_btn_pressed() -> void:
 
 
 func _on_cont_btn_pressed() -> void:
+	var results = RESULTS_SCENE.instantiate()
+	results.crewBefore = crewBefore
+	results.crewAfter = crew
+	results.buildResults()
+	Utils.switchScene.emit(results)
 	pass # Replace with function body.
 
 

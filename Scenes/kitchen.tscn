@@ -1,16 +1,16 @@
 [gd_scene load_steps=17 format=3 uid="uid://cax40kgn23m3q"]
 
-[ext_resource type="Script" uid="uid://bq6d71fqsv1h6" path="res://scripts/world.gd" id="1_fj7yv"]
-[ext_resource type="Texture2D" uid="uid://roubacvs6dht" path="res://resources/Sprites/Kitchen/CuttingBoard.png" id="2_o06y3"]
-[ext_resource type="PackedScene" uid="uid://ccw7uq7go4ivt" path="res://Scenes/food/food.tscn" id="3_5a7ea"]
-[ext_resource type="Texture2D" uid="uid://bbyvhj26ia1t7" path="res://resources/Sprites/Kitchen/FryingPan.png" id="3_k7acu"]
-[ext_resource type="Script" uid="uid://cplwxfa5c4wal" path="res://scripts/knives/knife_chopper.gd" id="4_8j60k"]
-[ext_resource type="Script" uid="uid://jgkb3k3cebao" path="res://scripts/components/hitbox.gd" id="4_fo5ed"]
-[ext_resource type="Script" uid="uid://cepynjnto0btg" path="res://scripts/knives/knife_slicer.gd" id="5_fo5ed"]
-[ext_resource type="Script" uid="uid://c2pkk8qcndtku" path="res://scripts/Utils/camera_main.gd" id="9_0fj1v"]
-[ext_resource type="Script" uid="uid://blx703circky0" path="res://scripts/Utils/viewportEdgeArea.gd" id="9_5v1tr"]
-[ext_resource type="Texture2D" uid="uid://dd72dj4uhmmek" path="res://resources/Sprites/Kitchen/bell.png" id="10_0fj1v"]
-[ext_resource type="BitMap" uid="uid://b3i0k8is4vlvh" path="res://resources/Sprites/Kitchen/bell_clickMask.png" id="11_ikia7"]
+[ext_resource type="Script" uid="uid://bq6d71fqsv1h6" path="res://scripts/kitchen.gd" id="1_4clir"]
+[ext_resource type="Texture2D" uid="uid://roubacvs6dht" path="res://resources/Sprites/Kitchen/CuttingBoard.png" id="2_t5hpn"]
+[ext_resource type="Texture2D" uid="uid://bbyvhj26ia1t7" path="res://resources/Sprites/Kitchen/FryingPan.png" id="3_lkloo"]
+[ext_resource type="Script" uid="uid://jgkb3k3cebao" path="res://scripts/components/hitbox.gd" id="4_ykbxl"]
+[ext_resource type="PackedScene" uid="uid://ccw7uq7go4ivt" path="res://Scenes/food/food.tscn" id="5_32235"]
+[ext_resource type="Script" uid="uid://cplwxfa5c4wal" path="res://scripts/knives/knife_chopper.gd" id="6_5ukof"]
+[ext_resource type="Script" uid="uid://cepynjnto0btg" path="res://scripts/knives/knife_slicer.gd" id="7_iw6an"]
+[ext_resource type="Script" uid="uid://c2pkk8qcndtku" path="res://scripts/Utils/camera_main.gd" id="8_2l700"]
+[ext_resource type="Script" uid="uid://blx703circky0" path="res://scripts/Utils/viewportEdgeArea.gd" id="9_r0dk1"]
+[ext_resource type="Texture2D" uid="uid://dd72dj4uhmmek" path="res://resources/Sprites/Kitchen/bell.png" id="10_i6vcq"]
+[ext_resource type="BitMap" uid="uid://b3i0k8is4vlvh" path="res://resources/Sprites/Kitchen/bell_clickMask.png" id="11_bgcuo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fo5ed"]
 size = Vector2(499, 293)
@@ -24,8 +24,8 @@ radius = 154.003
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0fj1v"]
 
-[node name="World" type="Node2D"]
-script = ExtResource("1_fj7yv")
+[node name="Kitchen" type="Node2D"]
+script = ExtResource("1_4clir")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 position = Vector2(593, 41)
@@ -44,7 +44,7 @@ shape = SubResource("RectangleShape2D_fo5ed")
 texture_filter = 1
 position = Vector2(-118, -63)
 scale = Vector2(4.78125, 4.78125)
-texture = ExtResource("2_o06y3")
+texture = ExtResource("2_t5hpn")
 
 [node name="fryingPan" type="Node2D" parent="."]
 position = Vector2(231, 32)
@@ -54,16 +54,16 @@ texture_filter = 1
 position = Vector2(456, 403)
 rotation = 1.5708
 scale = Vector2(3.12891, 3.12891)
-texture = ExtResource("3_k7acu")
+texture = ExtResource("3_lkloo")
 
 [node name="hitbox" type="Area2D" parent="fryingPan"]
-script = ExtResource("4_fo5ed")
+script = ExtResource("4_ykbxl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="fryingPan/hitbox"]
 position = Vector2(496, 361)
 shape = SubResource("CircleShape2D_8j60k")
 
-[node name="food" parent="." instance=ExtResource("3_5a7ea")]
+[node name="food" parent="." instance=ExtResource("5_32235")]
 position = Vector2(392, 155)
 
 [node name="chopBtn" type="Button" parent="."]
@@ -89,13 +89,13 @@ toggle_mode = true
 text = "Grab"
 
 [node name="knifeChopper" type="Area2D" parent="."]
-script = ExtResource("4_8j60k")
+script = ExtResource("6_5ukof")
 
 [node name="knifeCollider" type="CollisionShape2D" parent="knifeChopper"]
 shape = SubResource("CircleShape2D_fo5ed")
 
 [node name="knifeSlicer" type="Area2D" parent="."]
-script = ExtResource("5_fo5ed")
+script = ExtResource("7_iw6an")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="knifeSlicer"]
 shape = SubResource("CircleShape2D_5ukr8")
@@ -103,10 +103,10 @@ shape = SubResource("CircleShape2D_5ukr8")
 [node name="CameraMain" type="Camera2D" parent="."]
 anchor_mode = 0
 position_smoothing_enabled = true
-script = ExtResource("9_0fj1v")
+script = ExtResource("8_2l700")
 
 [node name="toRight" type="Area2D" parent="CameraMain" node_paths=PackedStringArray("camera")]
-script = ExtResource("9_5v1tr")
+script = ExtResource("9_r0dk1")
 locationRight = true
 camera = NodePath("..")
 
@@ -114,7 +114,7 @@ camera = NodePath("..")
 shape = SubResource("RectangleShape2D_0fj1v")
 
 [node name="toLeft" type="Area2D" parent="CameraMain" node_paths=PackedStringArray("camera")]
-script = ExtResource("9_5v1tr")
+script = ExtResource("9_r0dk1")
 camera = NodePath("..")
 metadata/_custom_type_script = "uid://blx703circky0"
 
@@ -127,8 +127,8 @@ offset_top = 493.0
 offset_right = 2138.0
 offset_bottom = 557.0
 scale = Vector2(2, 2)
-texture_normal = ExtResource("10_0fj1v")
-texture_click_mask = ExtResource("11_ikia7")
+texture_normal = ExtResource("10_i6vcq")
+texture_click_mask = ExtResource("11_bgcuo")
 
 [node name="Bowls" type="Node" parent="."]
 

@@ -5,8 +5,11 @@ var name: String
 var health: int
 # How Susceptable they are poisoned food and how quickly they heal
 var constitution: float
-var maxSatiety: int
-var satiety: int = maxSatiety
+var maxSatiety: int = 0:
+	set(val):
+		maxSatiety = val
+		satiety = min(satiety, val)
+var satiety: int
 var strength: int
 var fishing: int
 var sanity: float

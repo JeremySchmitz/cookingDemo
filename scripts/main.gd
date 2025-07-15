@@ -10,13 +10,13 @@ func _ready() -> void:
 	CrewStatus.buildCrew(NUM_CREW)
 	loadEncounters()
 
-	#var prepScene := ResourceLoader.load("res://Scenes/world.tscn")
-	#var prepInstance = prepScene.instantiate()
-	#add_child(prepInstance)
-	
-	var prepScene := ResourceLoader.load("res://Scenes/Encounters/encounter.tscn")
+	var prepScene := ResourceLoader.load("res://Scenes/kitchen.tscn")
 	var prepInstance = prepScene.instantiate()
 	add_child(prepInstance)
+	
+	# var prepScene := ResourceLoader.load("res://Scenes/Encounters/encounter.tscn")
+	# var prepInstance = prepScene.instantiate()
+	# add_child(prepInstance)
 
 	loadEncounters()
 
@@ -29,8 +29,3 @@ func loadEncounters():
 	var loader = EncounterLoader.new()
 	loader.load_encounters_from_cfg("res://resources/Configs/events_testing.cfg")
 	Utils.setEncounters(loader.encounters)
-	print('EASY: ', loader.encounters[GlobalEnums.Difficulty.EASY].size())
-	print('MEDIUM: ', loader.encounters[GlobalEnums.Difficulty.MEDIUM].size())
-	print('HARD: ', loader.encounters[GlobalEnums.Difficulty.HARD].size())
-	print('INSANE: ', loader.encounters[GlobalEnums.Difficulty.INSANE].size())
-	print('COSMIC: ', loader.encounters[GlobalEnums.Difficulty.COSMIC].size())
