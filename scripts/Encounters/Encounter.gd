@@ -6,6 +6,13 @@ const RESULTS_SCENE = preload("res://Scenes/food/results.tscn")
 @onready var nameLabel = $Name
 @onready var description = $Description
 @onready var results = $Results
+@onready var contBtn = $ContBtn
+
+var encounterRun:
+	set(val):
+		encounterRun = val
+		contBtn.disabled = !val
+
 
 var crewBefore: Array[Crew] = []
 var crewAfter: Array[Crew] = []
@@ -18,6 +25,7 @@ var currentEncounter: Encounter_Entry:
 		nameLabel.text = val.name
 		description.text = val.desc
 		results.text = ""
+		encounterRun = false
 
 var crew: Array[Crew] = CrewStatus.crew
 
@@ -187,14 +195,28 @@ func _on_replay_btn_pressed() -> void:
 
 
 func _on_cont_btn_pressed() -> void:
-	var results = RESULTS_SCENE.instantiate()
-	results.crewBefore = crewBefore
-	results.crewAfter = crew
-	results.buildResults()
-	Utils.switchScene.emit(results)
-	pass # Replace with function body.
+	var resultsScn = buildResultsScn()
+	Utils.switchScene.emit(resultsScn)
 
 
 func _on_run_pressed() -> void:
 	runEncounter()
-	pass # Replace with function body.
+	encounterRun = true
+
+
+func buildResultsScn():
+	var resultsScn = RESULTS_SCENE.instantiate()
+	resultsScn.crewBefore = crewBefore
+	resultsScn.crewAfter = crew
+	var resultsAttrs: Array[GlobalEnums.CrewAttrs] = [
+		GlobalEnums.CrewAttrs.HEALTH,
+		GlobalEnums.CrewAttrs.HUNGER,
+		GlobalEnums.CrewAttrs.CONSTITUTION,
+		GlobalEnums.CrewAttrs.STRENGTH,
+		GlobalEnums.CrewAttrs.FISHING,
+		GlobalEnums.CrewAttrs.SANITY
+		 ]
+	resultsScn.buildResults(resultsAttrs)
+	resultsScn.nextScene = "kitchen"
+
+	return resultsScn

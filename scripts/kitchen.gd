@@ -6,8 +6,9 @@ const RESULTS_SCENE = preload("res://Scenes/food/results.tscn")
 
 @export var cameraMoveWait = .2;
 
+@onready var crew := CrewStatus.crew
+
 var curMode = Mode.CHOP
-@onready var crew:= CrewStatus.crew
 var crewDict: Dictionary = {}
 
 func _ready() -> void:
@@ -22,9 +23,8 @@ func _buildBowl(i: int):
 	scene.scale *= 2
 	scene.position = Vector2(
 		get_viewport_rect().size.x + 200 + (300 * i),
-		 200 )
+		 200)
 	
-
 
 func _on_chop_btn_pressed() -> void:
 	curMode = Mode.CHOP
@@ -61,12 +61,9 @@ func _on_dinner_bell_btn_pressed() -> void:
 			(member as Crew).eat(bowl.nutrition, bowl.poison)
 		else: printerr("Could Not Find Crew Member: %s", name)
 		
-	var results = RESULTS_SCENE.instantiate()
-	results.crewBefore = crewBefore
-	results.crewAfter = crew
-	results.buildResults()
-	Utils.switchScene.emit(results)
-	#add_child(results)
+
+	var resultsScn = buildResultsScn(crewBefore, crew)
+	Utils.switchScene.emit(resultsScn)
 	
 
 func _buildCrewDictionary():
@@ -74,3 +71,13 @@ func _buildCrewDictionary():
 	for i in range(0, crew.size()):
 		dict[crew[i].name] = crew[i]
 	crewDict = dict
+
+func buildResultsScn(crewBefore: Array[Crew], crewAfter: Array[Crew]):
+	var results = RESULTS_SCENE.instantiate()
+	results.crewBefore = crewBefore
+	results.crewAfter = crew
+	var resultsAttrs: Array[GlobalEnums.CrewAttrs] = [GlobalEnums.CrewAttrs.HEALTH, GlobalEnums.CrewAttrs.HUNGER]
+	results.buildResults(resultsAttrs)
+	results.nextScene = "encounter"
+
+	return results

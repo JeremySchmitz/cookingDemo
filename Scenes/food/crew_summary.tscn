@@ -8,19 +8,18 @@ script = ExtResource("1_ql38m")
 paddingTop = 25.0
 paddingLeft = 10.0
 labelHeight = 25.0
-titleWidth = 70.0
+titleWidth = 150.0
 resultsWidth = 100.0
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(0, 0, 200, 0, 200, 100, 0, 100)
+polygon = PackedVector2Array(0, 0, 300, 0, 300, 100, 0, 100)
 
 [node name="LabelSpawn" type="Node2D" parent="."]
 position = Vector2(15, 40)
 
 [node name="Name" type="Label" parent="."]
-offset_left = 50.0
 offset_top = 10.0
-offset_right = 150.0
+offset_right = 300.0
 offset_bottom = 33.0
 text = "[!DYN!]"
 label_settings = ExtResource("1_wnfpm")

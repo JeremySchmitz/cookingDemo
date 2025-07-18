@@ -7,3 +7,12 @@ script = ExtResource("1_jjlkr")
 
 [node name="summarySpawn" type="Node2D" parent="."]
 position = Vector2(202, 66)
+
+[node name="ContBtn" type="Button" parent="."]
+offset_left = 918.0
+offset_top = 530.0
+offset_right = 1018.0
+offset_bottom = 570.0
+text = "Cont."
+
+[connection signal="pressed" from="ContBtn" to="." method="_on_cont_btn_pressed"]

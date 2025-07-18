@@ -20,7 +20,7 @@ var crewName: String = "":
 var beforeAttrs = {
 	GlobalEnums.CrewAttrs.HEALTH: 0,
 	GlobalEnums.CrewAttrs.CONSTITUTION: 0,
-	GlobalEnums.CrewAttrs.SATIETY: 0,
+	GlobalEnums.CrewAttrs.HUNGER: 0,
 	GlobalEnums.CrewAttrs.STRENGTH: 0,
 	GlobalEnums.CrewAttrs.FISHING: 0,
 	GlobalEnums.CrewAttrs.SANITY: 0
@@ -29,7 +29,7 @@ var beforeAttrs = {
 var afterAttrs = {
 	GlobalEnums.CrewAttrs.HEALTH: 0,
 	GlobalEnums.CrewAttrs.CONSTITUTION: 0,
-	GlobalEnums.CrewAttrs.SATIETY: 0,
+	GlobalEnums.CrewAttrs.HUNGER: 0,
 	GlobalEnums.CrewAttrs.STRENGTH: 0,
 	GlobalEnums.CrewAttrs.FISHING: 0,
 	GlobalEnums.CrewAttrs.SANITY: 0
@@ -60,24 +60,14 @@ func setAttr(attr: GlobalEnums.CrewAttrs, before: int, after: int):
 	beforeAttrs[attr] = before
 	afterAttrs[attr] = after
 
-
-# func setHealth(before: int, after: int):
-# 	healthBefore = before
-# 	healthAfter = after
-# 	$HealthResults.text = "%s -> %s" % [healthBefore, healthAfter]
-
-# func setHunger(before: int, after: int):
-# 	hungerBefore = before
-# 	hungerAfter = after
-# 	$HungerResults.text = "%s -> %s" % [hungerBefore, hungerAfter]
-	
-	
 func buildSummary(attrs: Array):
 	for i in range(0, attrs.size()):
 		var attr = attrs[i]
 		var label = buildAttr(attr, beforeAttrs[attr], afterAttrs[attr])
 		$LabelSpawn.add_child(label)
 		label.position.y += paddingTop * i
+
+	setBackgroundSize(attrs.size())
 
 func buildAttr(attr: GlobalEnums.CrewAttrs, before: int, after: int) -> Label:
 	var title = Label.new()
@@ -97,3 +87,12 @@ func buildAttr(attr: GlobalEnums.CrewAttrs, before: int, after: int) -> Label:
 	results.position.x = titleWidth + paddingLeft
 
 	return title
+
+func setBackgroundSize(count: int):
+	var bg: Polygon2D = $Polygon2D
+	var poly = bg.polygon
+
+	var y = $LabelSpawn.position[0] + count * (paddingTop + labelHeight)
+	poly[2].y = y
+	poly[3].y = y
+	bg.polygon = poly

@@ -55,7 +55,7 @@ func _buildCrewMember(role: GlobalEnums.Role) -> Crew:
 	member.strength = floor(Utils.triangleDistribution(minStrength, maxStrength, meanStrength))
 	member.fishing = floor(Utils.triangleDistribution(minFishing, maxFishing, meanFishing))
 	member.sanity = floor(Utils.triangleDistribution(minSanity, maxSanity, meanSanity))
-	var satiety = Utils.triangleDistribution(minSatiety, maxSatiety, meanSatiety)
+	var satiety := Utils.triangleDistribution(minSatiety, maxSatiety, meanSatiety)
 	member.maxSatiety = satiety
 	member.satiety = satiety
 	
