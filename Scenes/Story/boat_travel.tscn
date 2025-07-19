@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://djeobadgn1dv6"]
+
+[ext_resource type="Script" uid="uid://bq6s6xn4lyojp" path="res://Scripts/Story/boat_travel.gd" id="1_otj04"]
+
+[node name="BoatTravel" type="Node2D"]
+script = ExtResource("1_otj04")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+visible = false
+color = Color(0.435192, 0.435192, 0.435192, 1)
+polygon = PackedVector2Array(-19, -22, 1196, -30, 1202, 668, -33, 676)
+
+[node name="BoatSprite" type="Sprite2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="BoatSprite"]
+position = Vector2(249, 600)
+color = Color(0.469552, 0.192346, 0.0860902, 1)
+offset = Vector2(-249, -600)
+polygon = PackedVector2Array(-40, 8, -88, 8, -80, 32, -32, 40, 16, 40, 64, 32, 72, 8, 8.00003, 8, 3.05176e-05, -48, -16, -40, -7.99997, -32, 3.05176e-05, -24, 3.05176e-05, 8)
+uv = PackedVector2Array(-336, 16, -384, 16, -376, 40, -328, 48, -280, 48, -232, 40, -224, 16, -288, 16, -296, -40, -312, -32, -304, -24, -296, -16, -296, 16)
