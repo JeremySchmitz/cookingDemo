@@ -12,7 +12,6 @@ func _ready() -> void:
 
 	var boat_scene = preload("res://Scenes/Story/boat_travel.tscn").instantiate()
 	add_child(boat_scene)
-	boat_scene.start_boat_travel([Vector2(100, 100), Vector2(400, 120), Vector2(700, 200)], ["Port Sunrise", "Port Twilight"])
 
 	# var prepScene := ResourceLoader.load("res://Scenes/kitchen.tscn")
 	# var prepInstance = prepScene.instantiate()
