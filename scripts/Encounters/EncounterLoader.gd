@@ -133,7 +133,3 @@ func massageReward(reward: String) -> GlobalEnums.Reward:
 func massageRewardType(reward: String):
 	# TODO
 	return reward
-
-# Example usage:
-# load_encounters_from_cfg("res://resources/Configs/events.cfg")
-# print(encounters["MEDIUM"])

@@ -4,9 +4,6 @@ const NUM_CREW = 3
 
 
 func _ready() -> void:
-	print('run main')
-	Utils.switchScene.connect(_switchScene)
-	
 	CrewStatus.buildCrew(NUM_CREW)
 	loadEncounters()
 
@@ -17,17 +14,13 @@ func _ready() -> void:
 	# var prepInstance = prepScene.instantiate()
 	# add_child(prepInstance)
 	
-	# var prepScene := ResourceLoader.load("res://Scenes/Encounters/encounter.tscn")
-	# var prepInstance = prepScene.instantiate()
-	# add_child(prepInstance)
+	# var encounterScn := ResourceLoader.load("res://Scenes/Encounters/encounter.tscn")
+	# var encounterInstance = encounterScn.instantiate()
+	# add_child(encounterInstance)
 
 	loadEncounters()
 
 
-func _switchScene(scene: Node2D):
-	get_child(0).queue_free()
-	add_child(scene)
-	
 func loadEncounters():
 	var loader = EncounterLoader.new()
 	loader.load_encounters_from_cfg("res://resources/Configs/events_testing.cfg")

@@ -1,5 +1,9 @@
 class_name GlobalEnums
 
+# Scenes
+enum Scenes {Kitchen, Results, Encounter, BoatTravel}
+
+
 #Cooking
 enum Mode {CHOP, SLICE, GRAB}
 enum Cooked {RAW, MEDIUM, WELL, BURNT}

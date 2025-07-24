@@ -1,5 +1,5 @@
 extends Node2D
-class_name Encounter
+class_name EncounterScene
 
 const RESULTS_SCENE = preload("res://Scenes/food/results.tscn")
 
@@ -195,8 +195,15 @@ func _on_replay_btn_pressed() -> void:
 
 
 func _on_cont_btn_pressed() -> void:
-	var resultsScn = buildResultsScn()
-	Utils.switchScene.emit(resultsScn)
+	var resultsAttrs: Array[GlobalEnums.CrewAttrs] = [
+		GlobalEnums.CrewAttrs.HEALTH,
+		GlobalEnums.CrewAttrs.HUNGER,
+		GlobalEnums.CrewAttrs.CONSTITUTION,
+		GlobalEnums.CrewAttrs.STRENGTH,
+		GlobalEnums.CrewAttrs.FISHING,
+		GlobalEnums.CrewAttrs.SANITY
+		]
+	SceneLoader.gotoResults(crewBefore, crew, resultsAttrs)
 
 
 func _on_run_pressed() -> void:

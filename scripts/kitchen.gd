@@ -1,4 +1,6 @@
 extends Node2D
+class_name Kitchen
+
 enum Mode {CHOP, SLICE, GRAB}
 
 const BOWL_SCENE = preload("res://Scenes/food/bowl.tscn")
@@ -62,8 +64,11 @@ func _on_dinner_bell_btn_pressed() -> void:
 		else: printerr("Could Not Find Crew Member: %s", name)
 		
 
-	var resultsScn = buildResultsScn(crewBefore, crew)
-	Utils.switchScene.emit(resultsScn)
+	var resultsAttrs: Array[GlobalEnums.CrewAttrs] = [
+		GlobalEnums.CrewAttrs.HEALTH,
+		GlobalEnums.CrewAttrs.HUNGER
+		]
+	SceneLoader.gotoResults(crewBefore, crew, resultsAttrs)
 	
 
 func _buildCrewDictionary():

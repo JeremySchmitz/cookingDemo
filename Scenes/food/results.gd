@@ -48,11 +48,7 @@ func _buildSummary(before: Crew, after: Crew, attrs: Array[GlobalEnums.CrewAttrs
 
 
 func _on_cont_btn_pressed() -> void:
-	match nextScene:
-		"kitchen":
-			_loadKitchen()
-		"encounter":
-			_loadEncounter()
+	SceneLoader.goto_scene(Utils.TRAVEL_PATH)
 
 func _loadKitchen():
 	var kitchenScn := load(Utils.KITCHEN_PATH)

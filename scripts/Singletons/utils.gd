@@ -1,5 +1,11 @@
 extends Node
 
+const KITCHEN_PATH = "res://Scenes/kitchen.tscn"
+const TRAVEL_PATH = "res://Scenes/Story/boat_travel.tscn"
+const ENCOUNTER_PATH = "res://Scenes/Encounters/encounter.tscn"
+const RESULTS_PATH = "res://Scenes/food/results.tscn"
+
+
 var _encounters = []
 
 # Signals
@@ -9,8 +15,6 @@ signal modeChange(m: GlobalEnums.Mode)
 
 signal cameraMove()
 signal cameraStop()
-
-signal switchScene(s: Node2D)
 
 signal dockSelected(p: Vector2)
 
