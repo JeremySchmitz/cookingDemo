@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var label: Label = $Label
 
-@export var labelName := '' 
+@export var labelName := ''
 
 var mouse_over
 			
@@ -17,7 +17,6 @@ func _unhandled_input(event: InputEvent):
 		mouse_over and
 		event.pressed):
 		Utils.dockSelected.emit(global_position)
-		print('dock clic')
 		
 func _mouse_over(value):
 	mouse_over = value

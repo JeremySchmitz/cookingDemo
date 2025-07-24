@@ -7,12 +7,14 @@ signal port_docked(port_data)
 signal satiety_changed(new_value)
 
 var crew_satiety: int = 100
-var path_points: Array = []
 var dock_ports: Array = []
 var encounter_chance: float = 0.15 # 15% chance per segment
 var port_dock_chance: float = 0.08 # 8% chance per segment
 
-@onready var boat: CharacterBody2D = $BoatChar
+@export var dayLength = 2 # seconds
+var dayTimer := Timer.new()
+
+@onready var boat: BoatChar = $BoatChar
 
 var boat_position_index: int = 0
 var traveled_path: Array = []
@@ -22,16 +24,15 @@ var boatMoving = false;
 
 func _ready():
 	Utils.dockSelected.connect(_setTargetPos)
-	if path_points.size() < 2:
-		#push_error("Path must have at least two points.")
-		return
 	set_process(true)
+
+	dayTimer.wait_time = dayLength
+	dayTimer.connect("timeout", _dayEnd)
+	add_child(dayTimer)
 
 func _process(delta):
 	if boatMoving:
 		updateTraveledPos(boat.position)
-	else:
-		set_process(false)
 
 
 func exhaust_satiety():
@@ -70,6 +71,7 @@ func _draw_hashed_line(from_pos, to_pos, color, width, dash_length, gap_length):
 
 func _setTargetPos(val: Vector2):
 	boat.setTargetPos(val)
+	dayTimer.start()
 
 func updateTraveledPos(val: Vector2):
 	traveled_path[traveled_path.size() - 1] = val
@@ -81,3 +83,10 @@ func _on_boat_char_next_position(val: Vector2) -> void:
 
 func _on_boat_char_moving(val: bool) -> void:
 	boatMoving = val
+	if !val:
+		dayTimer.stop()
+
+func _dayEnd():
+	boat.isMoving = false
+
+	print('dayEnd')

@@ -60,39 +60,41 @@ debug_enabled = true
 position = Vector2(0, 9)
 shape = SubResource("RectangleShape2D_duiqf")
 
-[node name="Dock - Iguanna" parent="." instance=ExtResource("5_7ds11")]
+[node name="Docks" type="Node" parent="."]
+
+[node name="Dock - Iguanna" parent="Docks" instance=ExtResource("5_7ds11")]
 position = Vector2(95, 357)
 labelName = "Iguanna City"
 
-[node name="Dock -  Xatle" parent="." instance=ExtResource("5_7ds11")]
+[node name="Dock -  Xatle" parent="Docks" instance=ExtResource("5_7ds11")]
 position = Vector2(432, 94)
 labelName = "Xatle"
 
-[node name="Dock - Kualpe" parent="." instance=ExtResource("5_7ds11")]
+[node name="Dock - Kualpe" parent="Docks" instance=ExtResource("5_7ds11")]
 position = Vector2(890, 259)
 labelName = "Kualpe"
 
-[node name="Dock - Waternon" parent="." instance=ExtResource("5_7ds11")]
+[node name="Dock - Waternon" parent="Docks" instance=ExtResource("5_7ds11")]
 position = Vector2(725, 532)
 labelName = "Waternon"
 
-[node name="Dock - Platelipse" parent="." instance=ExtResource("5_7ds11")]
+[node name="Dock - Platelipse" parent="Docks" instance=ExtResource("5_7ds11")]
 position = Vector2(874, 560)
 labelName = "Platelipse"
 
-[node name="Dock - Jalpe" parent="." instance=ExtResource("5_7ds11")]
+[node name="Dock - Jalpe" parent="Docks" instance=ExtResource("5_7ds11")]
 position = Vector2(408, 226)
 labelName = "Jalpe"
 
-[node name="Dock -  Huan" parent="." instance=ExtResource("5_7ds11")]
+[node name="Dock -  Huan" parent="Docks" instance=ExtResource("5_7ds11")]
 position = Vector2(268, 576)
 labelName = "Huan"
 
-[node name="Dock -  Opelt" parent="." instance=ExtResource("5_7ds11")]
+[node name="Dock -  Opelt" parent="Docks" instance=ExtResource("5_7ds11")]
 position = Vector2(162, 0)
 labelName = "Opelt"
 
-[node name="Dock - Drossmon" parent="." instance=ExtResource("5_7ds11")]
+[node name="Dock - Drossmon" parent="Docks" instance=ExtResource("5_7ds11")]
 position = Vector2(770, 169)
 labelName = "Drossmon"
 
