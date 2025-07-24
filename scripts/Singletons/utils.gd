@@ -12,6 +12,8 @@ signal cameraStop()
 
 signal switchScene(s: Node2D)
 
+signal dockSelected(p: Vector2)
+
 var RNG = RandomNumberGenerator.new()
 
 func setEncounters(val):

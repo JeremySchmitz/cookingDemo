@@ -21,8 +21,9 @@ var boatMoving = false;
 
 
 func _ready():
+	Utils.dockSelected.connect(_setTargetPos)
 	if path_points.size() < 2:
-		push_error("Path must have at least two points.")
+		#push_error("Path must have at least two points.")
 		return
 	set_process(true)
 
@@ -67,9 +68,8 @@ func _draw_hashed_line(from_pos, to_pos, color, width, dash_length, gap_length):
 		p = dash_end + direction * gap_length
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		boat.setTargetPos(get_global_mouse_position())
+func _setTargetPos(val: Vector2):
+	boat.setTargetPos(val)
 
 func updateTraveledPos(val: Vector2):
 	traveled_path[traveled_path.size() - 1] = val

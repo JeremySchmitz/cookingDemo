@@ -5,7 +5,7 @@ extends Area2D
 var draggable: bool = true
 var lifted = false
 var mouse_over = false
-var offset := Vector2(0,0)
+var offset := Vector2(0, 0)
 var camMoving = false
 signal dragging()
 
@@ -25,9 +25,9 @@ func _process(delta: float) -> void:
 
 func _unhandled_input(event):
 	if draggable:
-		if (mouse_over 
-			and event is InputEventMouseButton 
-			and event.button_index == MOUSE_BUTTON_LEFT 
+		if (mouse_over
+			and event is InputEventMouseButton
+			and event.button_index == MOUSE_BUTTON_LEFT
 			and event.pressed
 		):
 			lifted = true
