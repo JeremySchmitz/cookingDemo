@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cax40kgn23m3q"]
+[gd_scene load_steps=17 format=3 uid="uid://cax40kgn23m3q"]
 
 [ext_resource type="Script" uid="uid://bq6d71fqsv1h6" path="res://scripts/kitchen.gd" id="1_4clir"]
 [ext_resource type="Texture2D" uid="uid://roubacvs6dht" path="res://resources/Sprites/Kitchen/CuttingBoard.png" id="2_t5hpn"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://blx703circky0" path="res://scripts/Utils/viewportEdgeArea.gd" id="9_r0dk1"]
 [ext_resource type="PackedScene" uid="uid://dulgslr8ylt6a" path="res://Scenes/food/frying_pan.tscn" id="10_2cl3g"]
 [ext_resource type="Texture2D" uid="uid://dd72dj4uhmmek" path="res://resources/Sprites/Kitchen/bell.png" id="10_i6vcq"]
+[ext_resource type="Script" uid="uid://duhqdxi6amymv" path="res://scripts/knives/knife_drag.gd" id="11_4clir"]
 [ext_resource type="BitMap" uid="uid://b3i0k8is4vlvh" path="res://resources/Sprites/Kitchen/bell_clickMask.png" id="11_bgcuo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fo5ed"]
@@ -19,6 +20,9 @@ size = Vector2(499, 293)
 [sub_resource type="CircleShape2D" id="CircleShape2D_5ukr8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0fj1v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5hpn"]
+size = Vector2(20, 400)
 
 [node name="Kitchen" type="Node2D"]
 script = ExtResource("1_4clir")
@@ -88,6 +92,7 @@ position_smoothing_enabled = true
 script = ExtResource("8_2l700")
 
 [node name="toRight" type="Area2D" parent="CameraMain" node_paths=PackedStringArray("camera")]
+visible = false
 script = ExtResource("9_r0dk1")
 locationRight = true
 camera = NodePath("..")
@@ -96,6 +101,7 @@ camera = NodePath("..")
 shape = SubResource("RectangleShape2D_0fj1v")
 
 [node name="toLeft" type="Area2D" parent="CameraMain" node_paths=PackedStringArray("camera")]
+visible = false
 script = ExtResource("9_r0dk1")
 camera = NodePath("..")
 metadata/_custom_type_script = "uid://blx703circky0"
@@ -113,6 +119,16 @@ texture_normal = ExtResource("10_i6vcq")
 texture_click_mask = ExtResource("11_bgcuo")
 
 [node name="Bowls" type="Node" parent="."]
+
+[node name="knifeDrag" type="Area2D" parent="."]
+script = ExtResource("11_4clir")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="knifeDrag"]
+shape = SubResource("RectangleShape2D_t5hpn")
+
+[node name="Polygon2D" type="Polygon2D" parent="knifeDrag"]
+color = Color(0.84482, 0.915166, 0.972368, 1)
+polygon = PackedVector2Array(-11, -202, 10, -203, 8, 198, -4, 198, -2, 336, -12, 334)
 
 [connection signal="pressed" from="chopBtn" to="." method="_on_chop_btn_pressed"]
 [connection signal="pressed" from="sliceBtn" to="." method="_on_slice_btn_pressed"]

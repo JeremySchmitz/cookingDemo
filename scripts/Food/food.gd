@@ -21,7 +21,7 @@ func _ready() -> void:
 		$Choppable.chopped.connect(_on_choppable_choped)
 
 func _process(delta: float) -> void:
-	if $Label: $Label.text = str(health.cooked)
+	if find_child("Label"): find_child("Label").text = str(health.cooked)
 
 func _on_health_cooked_changed(val: int) -> void:
 	shader_mat.set_shader_parameter("cookVal", float(val))
