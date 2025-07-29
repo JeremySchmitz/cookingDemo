@@ -1,23 +1,18 @@
-[gd_scene load_steps=18 format=3 uid="uid://cax40kgn23m3q"]
+[gd_scene load_steps=15 format=3 uid="uid://cax40kgn23m3q"]
 
 [ext_resource type="Script" uid="uid://bq6d71fqsv1h6" path="res://scripts/kitchen.gd" id="1_4clir"]
 [ext_resource type="Texture2D" uid="uid://roubacvs6dht" path="res://resources/Sprites/Kitchen/CuttingBoard.png" id="2_t5hpn"]
-[ext_resource type="Texture2D" uid="uid://bbyvhj26ia1t7" path="res://resources/Sprites/Kitchen/FryingPan.png" id="3_lkloo"]
-[ext_resource type="Script" uid="uid://jgkb3k3cebao" path="res://scripts/components/hitbox.gd" id="4_ykbxl"]
 [ext_resource type="PackedScene" uid="uid://ccw7uq7go4ivt" path="res://Scenes/food/food.tscn" id="5_32235"]
 [ext_resource type="Script" uid="uid://cplwxfa5c4wal" path="res://scripts/knives/knife_chopper.gd" id="6_5ukof"]
 [ext_resource type="Script" uid="uid://cepynjnto0btg" path="res://scripts/knives/knife_slicer.gd" id="7_iw6an"]
 [ext_resource type="Script" uid="uid://c2pkk8qcndtku" path="res://scripts/Utils/camera_main.gd" id="8_2l700"]
 [ext_resource type="Script" uid="uid://blx703circky0" path="res://scripts/Utils/viewportEdgeArea.gd" id="9_r0dk1"]
+[ext_resource type="PackedScene" uid="uid://dulgslr8ylt6a" path="res://Scenes/food/frying_pan.tscn" id="10_2cl3g"]
 [ext_resource type="Texture2D" uid="uid://dd72dj4uhmmek" path="res://resources/Sprites/Kitchen/bell.png" id="10_i6vcq"]
 [ext_resource type="BitMap" uid="uid://b3i0k8is4vlvh" path="res://resources/Sprites/Kitchen/bell_clickMask.png" id="11_bgcuo"]
-[ext_resource type="PackedScene" uid="uid://crrms0407et8t" path="res://Scenes/food/dial.tscn" id="12_t5hpn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fo5ed"]
 size = Vector2(499, 293)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_8j60k"]
-radius = 154.003
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fo5ed"]
 
@@ -34,6 +29,9 @@ color = Color(0.703808, 0.703808, 0.703808, 1)
 polygon = PackedVector2Array(-608, -56, 2272, -40, 2278, 717, -608, 728)
 uv = PackedVector2Array(-608, -56, 584, -80, 576, 256, -584, 264)
 
+[node name="FryingPan" parent="." instance=ExtResource("10_2cl3g")]
+position = Vector2(729, 461)
+
 [node name="cuttingBoard" type="Area2D" parent="."]
 position = Vector2(400, 250)
 
@@ -46,23 +44,6 @@ texture_filter = 1
 position = Vector2(-118, -63)
 scale = Vector2(4.78125, 4.78125)
 texture = ExtResource("2_t5hpn")
-
-[node name="fryingPan" type="Node2D" parent="."]
-position = Vector2(231, 32)
-
-[node name="Sprite2D" type="Sprite2D" parent="fryingPan"]
-texture_filter = 1
-position = Vector2(456, 403)
-rotation = 1.5708
-scale = Vector2(3.12891, 3.12891)
-texture = ExtResource("3_lkloo")
-
-[node name="hitbox" type="Area2D" parent="fryingPan"]
-script = ExtResource("4_ykbxl")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="fryingPan/hitbox"]
-position = Vector2(496, 361)
-shape = SubResource("CircleShape2D_8j60k")
 
 [node name="food" parent="." instance=ExtResource("5_32235")]
 position = Vector2(392, 155)
@@ -132,10 +113,6 @@ texture_normal = ExtResource("10_i6vcq")
 texture_click_mask = ExtResource("11_bgcuo")
 
 [node name="Bowls" type="Node" parent="."]
-
-[node name="Dial" parent="." instance=ExtResource("12_t5hpn")]
-position = Vector2(935, 552)
-scale = Vector2(5, 5)
 
 [connection signal="pressed" from="chopBtn" to="." method="_on_chop_btn_pressed"]
 [connection signal="pressed" from="sliceBtn" to="." method="_on_slice_btn_pressed"]

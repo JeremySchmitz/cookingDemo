@@ -1,0 +1,93 @@
+[gd_scene load_steps=12 format=3 uid="uid://dulgslr8ylt6a"]
+
+[ext_resource type="Script" uid="uid://b3i3e3h6edgxo" path="res://scripts/Food/frying_pan.gd" id="1_7g1by"]
+[ext_resource type="PackedScene" uid="uid://crrms0407et8t" path="res://Scenes/food/dial.tscn" id="1_v0t8c"]
+[ext_resource type="Texture2D" uid="uid://bx7ec808lpmcl" path="res://resources/Sprites/Kitchen/Burner_02.png" id="2_7g1by"]
+[ext_resource type="Texture2D" uid="uid://bbyvhj26ia1t7" path="res://resources/Sprites/Kitchen/FryingPan.png" id="2_t74hd"]
+[ext_resource type="Script" uid="uid://jgkb3k3cebao" path="res://scripts/components/hitbox.gd" id="3_7g1by"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t74hd"]
+atlas = ExtResource("2_7g1by")
+region = Rect2(0, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7g1by"]
+atlas = ExtResource("2_7g1by")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtqxm"]
+atlas = ExtResource("2_7g1by")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dj5rl"]
+atlas = ExtResource("2_7g1by")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lol07"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t74hd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7g1by")
+}],
+"loop": true,
+"name": &"on_high",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtqxm")
+}],
+"loop": true,
+"name": &"on_low",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dj5rl")
+}],
+"loop": true,
+"name": &"on_med",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8j60k"]
+radius = 154.003
+
+[node name="FryingPan" type="Node2D"]
+script = ExtResource("1_7g1by")
+
+[node name="Dial" parent="." instance=ExtResource("1_v0t8c")]
+position = Vector2(290, -25)
+scale = Vector2(5, 5)
+
+[node name="Burner" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(40, -40)
+rotation = 1.5708
+scale = Vector2(3.12891, 3.12891)
+sprite_frames = SubResource("SpriteFrames_lol07")
+
+[node name="Pan" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Pan"]
+texture_filter = 1
+rotation = 1.5708
+scale = Vector2(3.12891, 3.12891)
+texture = ExtResource("2_t74hd")
+
+[node name="hitbox" type="Area2D" parent="Pan"]
+visible = false
+script = ExtResource("3_7g1by")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pan/hitbox"]
+position = Vector2(41, -42)
+shape = SubResource("CircleShape2D_8j60k")
+
+[connection signal="valSet" from="Dial" to="." method="_on_dial_val_set"]
