@@ -17,6 +17,12 @@ func _on_area_entered(body: Area2D):
 		var hitbox = body as Hitbox
 		if hitbox.frequency != 0:
 			_buildTimer(hitbox)
+
+			if !hitbox.is_connected("frequencyChanged", _updateTimer):
+				hitbox.connect("frequencyChanged", _updateTimer.bind(hitbox))
+
+			if !hitbox.is_connected("damageChanged", _updateTimer):
+				hitbox.connect("damageChanged", _updateTimer.bind(hitbox))
 		else:
 			_addDamage(hitbox.damage)
 
@@ -27,6 +33,12 @@ func _on_area_exited(body: Area2D):
 		if timer != null:
 			timer.stop()
 			timer.queue_free()
+
+		if body.is_connected("frequencyChanged", _updateTimer):
+			body.disconnect("frequencyChanged", _updateTimer)
+
+		if body.is_connected("damageChanged", _updateTimer):
+			body.disconnect("damageChanged", _updateTimer)
 
 
 func _buildTimer(hitbox: Hitbox):
@@ -41,3 +53,13 @@ func _buildTimer(hitbox: Hitbox):
 func _addDamage(damage: int):
 	health.cooked += damage
 	recievedDamage.emit(damage)
+
+func _updateTimer(hitbox: Hitbox):
+	if hitbox.name in timers:
+		var timer: Timer = timers[hitbox.name]
+		timer.wait_time = hitbox.frequency
+		timer.start()
+		
+		if timer.is_connected("timeout", _addDamage):
+			timer.disconnect("timeout", _addDamage)
+			timer.connect("timeout", _addDamage.bind(hitbox.damage))

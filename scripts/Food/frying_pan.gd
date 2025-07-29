@@ -4,10 +4,14 @@ extends Node2D
 @onready var hitbox: Hitbox = $Pan/hitbox
 @export var damage: Array[float] = [0, 3, 8, 20]
 
+var currentDialValue: int = 0
+
 
 func _on_dial_val_set(val: int) -> void:
-	print('dial set: ', val)
 	if !burner || !hitbox: return
+	if val == currentDialValue: return
+
+	currentDialValue = val
 	match val:
 		1:
 			burner.animation = "on_low"
