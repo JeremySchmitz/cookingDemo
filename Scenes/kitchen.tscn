@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cax40kgn23m3q"]
+[gd_scene load_steps=18 format=3 uid="uid://cax40kgn23m3q"]
 
 [ext_resource type="Script" uid="uid://bq6d71fqsv1h6" path="res://scripts/kitchen.gd" id="1_4clir"]
 [ext_resource type="Texture2D" uid="uid://roubacvs6dht" path="res://resources/Sprites/Kitchen/CuttingBoard.png" id="2_t5hpn"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://blx703circky0" path="res://scripts/Utils/viewportEdgeArea.gd" id="9_r0dk1"]
 [ext_resource type="Texture2D" uid="uid://dd72dj4uhmmek" path="res://resources/Sprites/Kitchen/bell.png" id="10_i6vcq"]
 [ext_resource type="BitMap" uid="uid://b3i0k8is4vlvh" path="res://resources/Sprites/Kitchen/bell_clickMask.png" id="11_bgcuo"]
+[ext_resource type="PackedScene" uid="uid://crrms0407et8t" path="res://Scenes/food/dial.tscn" id="12_t5hpn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fo5ed"]
 size = Vector2(499, 293)
@@ -131,6 +132,10 @@ texture_normal = ExtResource("10_i6vcq")
 texture_click_mask = ExtResource("11_bgcuo")
 
 [node name="Bowls" type="Node" parent="."]
+
+[node name="Dial" parent="." instance=ExtResource("12_t5hpn")]
+position = Vector2(935, 552)
+scale = Vector2(5, 5)
 
 [connection signal="pressed" from="chopBtn" to="." method="_on_chop_btn_pressed"]
 [connection signal="pressed" from="sliceBtn" to="." method="_on_slice_btn_pressed"]

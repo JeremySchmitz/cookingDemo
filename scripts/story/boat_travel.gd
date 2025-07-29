@@ -9,7 +9,7 @@ signal satiety_changed(new_value)
 
 var crew_satiety: int = 100
 var dock_ports: Array = []
-var encounter_chance: float = 0.15 # 15% chance per segment
+var encounter_chance: float = 0.05 # %chance
 
 @export var dayLength = 1.5 # seconds
 var dayTimer := Timer.new()
@@ -33,7 +33,6 @@ func _ready():
 	add_child(dayTimer)
 
 	encounterTimer.wait_time = encounterSpeed
-	encounterTimer.one_shot = true
 	encounterTimer.connect("timeout", check_for_encounter)
 	add_child(encounterTimer)
 
@@ -96,6 +95,7 @@ func _on_boat_char_moving(val: bool) -> void:
 
 func _dayEnd():
 	boat.isMoving = false
+	setTimers(false)
 	SceneLoader.goto_scene(Utils.KITCHEN_PATH)
 
 func _triggerEncounter():
