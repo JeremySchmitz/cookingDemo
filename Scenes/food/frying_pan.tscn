@@ -85,6 +85,7 @@ texture = ExtResource("2_t74hd")
 [node name="hitbox" type="Area2D" parent="Pan"]
 visible = false
 script = ExtResource("3_7g1by")
+damage = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pan/hitbox"]
 position = Vector2(41, -42)

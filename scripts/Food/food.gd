@@ -5,12 +5,13 @@ extends Node2D
 #Should be the draggableArea's Collision Poly
 @export var collisionPoly: CollisionPolygon2D
 @onready var health = $Health
+@onready var hurtbox = $Hurtbox
 
 @export var sprite: Sprite2D
 @onready var shader_mat = sprite.material
 
 	
-var cooked:= GlobalEnums.Cooked.RAW
+var cooked := GlobalEnums.Cooked.RAW
 
 func _ready() -> void:
 	if health:
@@ -18,6 +19,9 @@ func _ready() -> void:
 		health.cookedBurnt.connect(_on_health_cooked_burnt)
 	if has_node("Choppable") and $Choppable is Choppable:
 		$Choppable.chopped.connect(_on_choppable_choped)
+
+func _process(delta: float) -> void:
+	if $Label: $Label.text = str(health.cooked)
 
 func _on_health_cooked_changed(val: int) -> void:
 	shader_mat.set_shader_parameter("cookVal", float(val))

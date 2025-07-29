@@ -15,6 +15,7 @@
 [ext_resource type="Shader" uid="uid://brchmr5hs31qg" path="res://resources/cook.gdshader" id="10_mwd75"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b4uh0"]
+resource_local_to_scene = true
 shader = ExtResource("10_mwd75")
 shader_parameter/cookVal = 0.0
 shader_parameter/isBurnt = false
@@ -78,12 +79,18 @@ material = SubResource("ShaderMaterial_b4uh0")
 scale = Vector2(3, 3)
 texture = ExtResource("10_83vc0")
 
-[node name="hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("5_4hb68")
 health = NodePath("../Health")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="hurtbox" node_paths=PackedStringArray("collisionShape")]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox" node_paths=PackedStringArray("collisionShape")]
 polygon = PackedVector2Array(-90, 10, -88, 46, -76, 72, -53, 89, -9, 90, 28, 66, 56, 33, 78, -24, 80, -67, 73, -90, 59, -84, 47, -62, 24, -46, -17, -38, -40, -33, -76, -16)
 script = ExtResource("6_t0fp1")
 collisionShape = NodePath("../../draggableArea/CollisionPolygon2D")
 updateOn = "chopped"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 87.0
+offset_top = -26.0
+offset_right = 208.0
+offset_bottom = 54.0

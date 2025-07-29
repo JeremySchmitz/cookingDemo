@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var burner: AnimatedSprite2D = $Burner
 @onready var hitbox: Hitbox = $Pan/hitbox
+@export var damage: Array[float] = [0, 3, 8, 20]
 
 
 func _on_dial_val_set(val: int) -> void:
@@ -10,13 +11,13 @@ func _on_dial_val_set(val: int) -> void:
 	match val:
 		1:
 			burner.animation = "on_low"
-			hitbox.damage = 3
+			hitbox.damage = damage[val]
 		2:
 			burner.animation = "on_med"
-			hitbox.damage = 8
+			hitbox.damage = damage[val]
 		3:
 			burner.animation = "on_high"
-			hitbox.damage = 20
+			hitbox.damage = damage[val]
 		_:
 			burner.animation = "default"
-			hitbox.damage = 0
+			hitbox.damage = damage[val]

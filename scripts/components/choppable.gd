@@ -38,7 +38,7 @@ func _on_area_exited(body: Area2D):
 	if body is KnifeChopper && body.monitoring && body.cutting:
 		knifeExited = body.position
 		var line = _correctChopLine(knifeEntered, knifeExited)
-		_chop(line, collisionNode.polygon)		
+		_chop(line, collisionNode.polygon)
 
 
 func _correctChopLine(start: Vector2, end: Vector2):
@@ -49,7 +49,7 @@ func _correctChopLine(start: Vector2, end: Vector2):
 	var newStart = relStart + (dir * -cutLineGrow)
 	var newEnd = relEnd + (dir * cutLineGrow)
 #	Move points to relative position and make sure they sit on the borders of the shape
-	return  [newStart, newEnd]
+	return [newStart, newEnd]
 
 
 func _toRelativePositon(p1: Vector2):
@@ -57,11 +57,11 @@ func _toRelativePositon(p1: Vector2):
 	return p1 - dist
 
 
-func _chop (line: PackedVector2Array, polygon: PackedVector2Array):
+func _chop(line: PackedVector2Array, polygon: PackedVector2Array):
 	var thiccLine = g.offset_polyline(line, lineExpansion)[0]
 	var clip = g.clip_polygons(polygon, thiccLine)
 	
-	var poly1 =g.offset_polygon(clip[0], lineExpansion)[0]
+	var poly1 = g.offset_polygon(clip[0], lineExpansion)[0]
 	var poly2 = g.offset_polygon(clip[1], lineExpansion)[0]
 	collisionNode.set_deferred("polygon", poly1)
 	
@@ -75,7 +75,7 @@ func _chop (line: PackedVector2Array, polygon: PackedVector2Array):
 	var organs = updateOrgans(poly1)
 	_createChunk([poly1, siblingChop], poly2, organs, newPos[1])
 	
-	call_deferred("_updateArea",poly1)
+	call_deferred("_updateArea", poly1)
 
 
 func addChops(poly: PackedVector2Array):
@@ -99,15 +99,15 @@ func _createChunk(chops: Array[PackedVector2Array], poly2: PackedVector2Array, n
 	if !chops.size() || !chops[0].size():
 		return
 	
-	var chunk: Node2D = await scene.instantiate()
+	var chunk: Food = await scene.instantiate()
 	_updateChunk.call_deferred(chunk, poly2, chops, newOrgans, pos)
 	
 
-func _updateChunk(chunk: Node2D, poly: PackedVector2Array, chops: Array[PackedVector2Array], newOrgans: Dictionary, pos: Vector2):
+func _updateChunk(chunk: Food, poly: PackedVector2Array, chops: Array[PackedVector2Array], newOrgans: Dictionary, pos: Vector2):
 	chunk.position = pos
-	get_parent().add_sibling(chunk)	
+	get_parent().add_sibling(chunk)
 	
-	if "collisionPoly" in chunk:
+	if chunk.collisionPoly:
 		chunk.collisionPoly.polygon = poly
 		
 	if "parented" in chunk and "parented" in get_parent():
@@ -115,8 +115,7 @@ func _updateChunk(chunk: Node2D, poly: PackedVector2Array, chops: Array[PackedVe
 		
 	if "health" in chunk:
 		(chunk.health as Health).cooked = (get_parent() as Food).health.cooked
-		#chunk.polygon2D.color = get_parent().polygon2D.color
-		
+
 	for child in chunk.get_children():
 		if child is Choppable:
 			child._updateArea(poly)
@@ -180,11 +179,11 @@ func updateOrgans(newPoly: PackedVector2Array):
 			if !Geometry2D.is_point_in_polygon(organCenter, globalPoly):
 				removeVOrgans.append(organ)
 				
-	return {"organs":removeOrgans, "vOrgans": removeVOrgans}
+	return {"organs": removeOrgans, "vOrgans": removeVOrgans}
 
 
-func _getGobalCenter(globalPos:Vector2, points: PackedVector2Array) -> Vector2:
-	var avg = Vector2(0,0)
+func _getGobalCenter(globalPos: Vector2, points: PackedVector2Array) -> Vector2:
+	var avg = Vector2(0, 0)
 	for p in points:
 		avg += p
 	avg /= points.size()
@@ -205,7 +204,7 @@ func _getExistingChopPolys():
 			chopGroup = s;
 			break
 			
-	if !chopGroup: return;
+	if !chopGroup: return ;
 	
 	var polys: Array[PackedVector2Array] = []
 	for c in chopGroup.get_children():
@@ -221,15 +220,15 @@ func _getExistingChopPolys():
 	return newPoly
 
 func _getSeperatedPositions(poly1: PackedVector2Array, poly2: PackedVector2Array):
-	var c1 = Vector2(0,0)
-	var c2 = Vector2(0,0)
+	var c1 = Vector2(0, 0)
+	var c2 = Vector2(0, 0)
 	
 	for poly in poly1:
 		c1 += poly
 	for poly in poly2:
 		c2 += poly
-	c1 /= poly1.size()	
-	c2 /= poly2.size()	
+	c1 /= poly1.size()
+	c2 /= poly2.size()
 	
 	var dir = (c1 - c2).normalized()
 	var p1 = get_parent().position + (dir * sperationSize)
@@ -246,7 +245,7 @@ func _getAreaOfPolygon(ps: PackedVector2Array) -> float:
 	var sum = 0.0
 	for i in range(0, ps.size() - 1):
 		var p1 = ps[i]
-		var p2 = ps[i+1]
-		sum += (p2.x - p1.x) * (p1.y+p2.y)
+		var p2 = ps[i + 1]
+		sum += (p2.x - p1.x) * (p1.y + p2.y)
 	
 	return abs(sum) * 0.5

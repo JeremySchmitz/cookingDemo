@@ -1,6 +1,6 @@
 shader_type canvas_item;
-uniform float cookVal: hint_range(0.0,100.0) = 0.0;
-uniform bool isBurnt = false;
+ uniform float cookVal: hint_range(0.0,100.0) = 0.0;
+ uniform bool isBurnt = false;
 
 void vertex() {
 	// Called for every vertex the material is visible on.
