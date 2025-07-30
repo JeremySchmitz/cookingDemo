@@ -3,10 +3,11 @@ extends Area2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
 var movement := Vector2(0, 0)
+var velocity := Vector2(0, 0)
 
 func _ready():
 	monitoring = false
-
+	visible = false
 
 func _unhandled_input(event):
 	if (event is InputEventMouseButton
@@ -14,19 +15,22 @@ func _unhandled_input(event):
 		and event.pressed
 	):
 		monitoring = true
-		
+		visible = true
+
 	if event is InputEventMouseButton and not event.pressed:
 		monitoring = false
+		visible = false
 		
 	if monitoring and event is InputEventMouseMotion:
 		movement = event.relative
+		velocity = event.velocity
 		_updatePosition()
 		_updateRotation()
 		get_viewport().set_input_as_handled()
 
 
 func _updateRotation():
-	rotation = movement.normalized().angle()
+	rotation = velocity.angle()
 
 func _updatePosition():
 	global_position = get_global_mouse_position()
