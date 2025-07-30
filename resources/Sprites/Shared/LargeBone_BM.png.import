@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://db7afsw3m8qm5"
+path="res://.godot/imported/LargeBone_BM.png-c54eab3ae4173705fc2c05ce73f1fc64.res"
+
+[deps]
+
+source_file="res://resources/Sprites/Shared/LargeBone_BM.png"
+dest_files=["res://.godot/imported/LargeBone_BM.png-c54eab3ae4173705fc2c05ce73f1fc64.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

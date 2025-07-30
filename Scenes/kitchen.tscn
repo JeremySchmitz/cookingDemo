@@ -78,11 +78,28 @@ offset_bottom = 204.0
 toggle_mode = true
 text = "Grab"
 
-[node name="knifeChopper" type="Area2D" parent="."]
+[node name="knifeChopper" type="Area2D" parent="." node_paths=PackedStringArray("boneParticles")]
 script = ExtResource("6_5ukof")
+boneParticles = NodePath("BoneParticles")
 
 [node name="knifeCollider" type="CollisionShape2D" parent="knifeChopper"]
 shape = SubResource("CircleShape2D_fo5ed")
+
+[node name="BoneParticles" type="CPUParticles2D" parent="knifeChopper"]
+emitting = false
+amount = 20
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+randomness = 0.5
+lifetime_randomness = 0.5
+direction = Vector2(0, 0)
+spread = 120.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 300.0
+initial_velocity_max = 500.0
+scale_amount_min = 2.0
+scale_amount_max = 5.0
 
 [node name="knifeSlicer" type="Area2D" parent="."]
 script = ExtResource("7_iw6an")

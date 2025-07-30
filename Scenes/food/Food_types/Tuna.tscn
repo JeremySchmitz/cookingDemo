@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dior7sydc3uif"]
+[gd_scene load_steps=16 format=3 uid="uid://dior7sydc3uif"]
 
 [ext_resource type="Script" uid="uid://bunuku5x2rt24" path="res://scripts/Food/food.gd" id="1_elblm"]
 [ext_resource type="Script" uid="uid://3qtest46ag4a" path="res://scripts/components/health.gd" id="2_6rgbf"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://c5ox7hexp2ty8" path="res://scripts/components/poison.gd" id="5_b8nc2"]
 [ext_resource type="Script" uid="uid://0l0lpkxtrjtx" path="res://scripts/components/choppable.gd" id="6_1ib3v"]
 [ext_resource type="Texture2D" uid="uid://cpyt7r2iurcms" path="res://resources/Sprites/Tuna/tuna_Flesh.png" id="7_37b5m"]
+[ext_resource type="PackedScene" uid="uid://d33muh3gkkpu5" path="res://Scenes/food/bone.tscn" id="9_6rgbf"]
 [ext_resource type="Script" uid="uid://ip3nwschvvkb" path="res://scripts/components/dragable_area.gd" id="9_ddhe2"]
 [ext_resource type="Shader" uid="uid://brchmr5hs31qg" path="res://resources/cook.gdshader" id="10_26fyx"]
 [ext_resource type="Texture2D" uid="uid://dh00iq0l367ma" path="res://resources/Sprites/Tuna/tuna_Skin.png" id="10_elblm"]
@@ -61,6 +62,21 @@ texture = ExtResource("7_37b5m")
 
 [node name="Organs" type="Node2D" parent="."]
 
+[node name="Bone" parent="Organs" instance=ExtResource("9_6rgbf")]
+position = Vector2(28, -4)
+rotation = -1.60491
+scale = Vector2(1, 1)
+
+[node name="Bone2" parent="Organs" instance=ExtResource("9_6rgbf")]
+position = Vector2(-3, -4)
+rotation = -1.70311
+scale = Vector2(1, 1)
+
+[node name="Bone3" parent="Organs" instance=ExtResource("9_6rgbf")]
+position = Vector2(-35, -2)
+rotation = -1.70311
+scale = Vector2(1, 1)
+
 [node name="DraggableArea" type="Area2D" parent="."]
 script = ExtResource("9_ddhe2")
 metadata/_custom_type_script = "uid://ip3nwschvvkb"
@@ -83,7 +99,6 @@ position = Vector2(61, -3)
 scale = Vector2(3, 3)
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
-visible = false
 script = ExtResource("12_46my7")
 health = NodePath("../Health")
 

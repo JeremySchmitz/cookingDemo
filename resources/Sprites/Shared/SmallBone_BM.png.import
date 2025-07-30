@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://dv1i47t0afj75"
+path="res://.godot/imported/SmallBone_BM.png-0f29cf9195bcf5e18be04902c42cd57b.res"
+
+[deps]
+
+source_file="res://resources/Sprites/Shared/SmallBone_BM.png"
+dest_files=["res://.godot/imported/SmallBone_BM.png-0f29cf9195bcf5e18be04902c42cd57b.res"]
+
+[params]
+
+create_from=0
+threshold=0.5
