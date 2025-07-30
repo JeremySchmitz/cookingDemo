@@ -46,8 +46,7 @@ func _setCollisionFromBM():
 	var poly = _buildCollisionFromBM()
 	$DraggableArea/CollisionPolygon2D.polygon = poly
 	$Hurtbox/CollisionPolygon2D.polygon = poly.duplicate()
-
-	pass
+	collisionPoly = $Hurtbox/CollisionPolygon2D
 	
 func _buildCollisionFromBM() -> PackedVector2Array:
 	var bm: BitMap = load(bitmapSrc)
@@ -59,9 +58,4 @@ func _buildCollisionFromBM() -> PackedVector2Array:
 	var colPoly = []
 	for i in range(0, poly.size()):
 		colPoly.append(Vector2(poly[i].x - (size.x / 2.0), poly[i].y - (size.y / 2.0)))
-		
-	#var polygon = Polygon2D.new()
-	#polygon.polygon = colPoly
-	#polygon.color = Color(1, 1, 0, 1)
-	#add_child(polygon)
 	return colPoly

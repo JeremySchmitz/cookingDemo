@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://d33muh3gkkpu5"]
 
-[ext_resource type="Script" uid="uid://dy5jsktcy7jn2" path="res://scripts/Food/bone.gd" id="1_qnmy5"]
+[ext_resource type="Script" path="res://scripts/Food/bone.gd" id="1_qnmy5"]
 [ext_resource type="Script" uid="uid://3qtest46ag4a" path="res://scripts/components/health.gd" id="2_eg7rq"]
 [ext_resource type="Script" uid="uid://cx3k7xle3gw0c" path="res://scripts/components/nutrition.gd" id="3_e3csk"]
 [ext_resource type="Script" uid="uid://c5ox7hexp2ty8" path="res://scripts/components/poison.gd" id="4_yy7fe"]
@@ -51,6 +51,7 @@ script = ExtResource("8_afh6b")
 metadata/_custom_type_script = "uid://ip3nwschvvkb"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DraggableArea"]
+polygon = PackedVector2Array(-1, -16, -5, -14, -4, -8, -3, 2, -4, 11, -7, 13, -7, 16, -2, 16, 0, 15, 2, 10, 3, 6, 4, 3, 4, -7, 3, -9, 3, -11, 4, -13, 2, -16)
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("9_kh3l2")
@@ -58,5 +59,6 @@ health = NodePath("../Health")
 metadata/_custom_type_script = "uid://dik22bwv6x5l5"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox"]
+polygon = PackedVector2Array(-1, -16, -5, -14, -4, -8, -3, 2, -4, 11, -7, 13, -7, 16, -2, 16, 0, 15, 2, 10, 3, 6, 4, 3, 4, -7, 3, -9, 3, -11, 4, -13, 2, -16)
 
 [connection signal="dragging" from="DraggableArea" to="." method="_on_draggable_area_dragging"]

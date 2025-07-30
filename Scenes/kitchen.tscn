@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cax40kgn23m3q"]
+[gd_scene load_steps=19 format=3 uid="uid://cax40kgn23m3q"]
 
 [ext_resource type="Script" uid="uid://bq6d71fqsv1h6" path="res://scripts/kitchen.gd" id="1_4clir"]
 [ext_resource type="Texture2D" uid="uid://roubacvs6dht" path="res://resources/Sprites/Kitchen/CuttingBoard.png" id="2_t5hpn"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dd72dj4uhmmek" path="res://resources/Sprites/Kitchen/bell.png" id="10_i6vcq"]
 [ext_resource type="Script" uid="uid://duhqdxi6amymv" path="res://scripts/knives/knife_drag.gd" id="11_4clir"]
 [ext_resource type="BitMap" uid="uid://b3i0k8is4vlvh" path="res://resources/Sprites/Kitchen/bell_clickMask.png" id="11_bgcuo"]
+[ext_resource type="PackedScene" uid="uid://d33muh3gkkpu5" path="res://Scenes/food/bone.tscn" id="13_lkloo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fo5ed"]
 size = Vector2(499, 293)
@@ -148,6 +149,10 @@ shape = SubResource("RectangleShape2D_t5hpn")
 [node name="Polygon2D" type="Polygon2D" parent="knifeDrag"]
 color = Color(0.84482, 0.915166, 0.972368, 1)
 polygon = PackedVector2Array(-11, -202, 10, -203, 8, 198, -4, 198, -2, 336, -12, 334)
+
+[node name="Bone" parent="." instance=ExtResource("13_lkloo")]
+position = Vector2(201, 538)
+scale = Vector2(5, 5)
 
 [connection signal="pressed" from="chopBtn" to="." method="_on_chop_btn_pressed"]
 [connection signal="pressed" from="sliceBtn" to="." method="_on_slice_btn_pressed"]

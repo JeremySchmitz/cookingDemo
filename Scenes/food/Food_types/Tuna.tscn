@@ -65,17 +65,14 @@ texture = ExtResource("7_37b5m")
 [node name="Bone" parent="Organs" instance=ExtResource("9_6rgbf")]
 position = Vector2(28, -4)
 rotation = -1.60491
-scale = Vector2(1, 1)
 
 [node name="Bone2" parent="Organs" instance=ExtResource("9_6rgbf")]
 position = Vector2(-3, -4)
 rotation = -1.70311
-scale = Vector2(1, 1)
 
 [node name="Bone3" parent="Organs" instance=ExtResource("9_6rgbf")]
 position = Vector2(-35, -2)
 rotation = -1.70311
-scale = Vector2(1, 1)
 
 [node name="DraggableArea" type="Area2D" parent="."]
 script = ExtResource("9_ddhe2")
@@ -84,6 +81,8 @@ metadata/_custom_type_script = "uid://ip3nwschvvkb"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DraggableArea" groups=["food"]]
 polygon = PackedVector2Array(-81, -37, -69, -21, -68, -2, -56, -14, -45, -18, -48, -22, -48, -31, -41, -28, -38, -18, -35, -21, 33, -21, 57, -17, 81, -8, 82, 2, 72, 9, 60, 15, 45, 18, 12, 21, -23, 21, -29, 18, -33, 24, -39, 24, -37, 19, -58, 15, -68, 6, -68, 19, -82, 33, -94, 32, -86, 24, -81, 7, -74, 0, -75, -17, -82, -28, -88, -35)
 
+[node name="VisibleOrgans" type="Node2D" parent="."]
+
 [node name="sliceGroup" type="CanvasGroup" parent="."]
 texture_filter = 1
 
@@ -91,12 +90,6 @@ texture_filter = 1
 material = SubResource("ShaderMaterial_lbb8q")
 scale = Vector2(3, 3)
 texture = ExtResource("10_elblm")
-
-[node name="VisibleOrgans" type="Node2D" parent="."]
-
-[node name="eye" parent="VisibleOrgans" instance=ExtResource("11_elblm")]
-position = Vector2(61, -3)
-scale = Vector2(3, 3)
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("12_46my7")
@@ -107,6 +100,10 @@ polygon = PackedVector2Array(-81, -37, -69, -21, -68, -2, -56, -14, -45, -18, -4
 script = ExtResource("13_r7sot")
 collisionShape = NodePath("../../DraggableArea/CollisionPolygon2D")
 updateOn = "chopped"
+
+[node name="eye" parent="." instance=ExtResource("11_elblm")]
+position = Vector2(61, -3)
+scale = Vector2(3, 3)
 
 [node name="Label" type="Label" parent="."]
 offset_left = 87.0

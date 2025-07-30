@@ -5,8 +5,8 @@ signal sliced(line: PackedVector2Array)
 
 const sliceMaterial = preload("res://resources/subtract.material")
 
-const angle1 = 20 * PI/180
-const angle2 = 10 * PI/180
+const angle1 = 20 * PI / 180
+const angle2 = 10 * PI / 180
 const percent1 = 0.2
 const percent2 = 0.3
 
@@ -63,14 +63,19 @@ func _updateOrgans(line: PackedVector2Array) -> void:
 func _setGlobal(organ: Organ):
 	var newLine = []
 	var p = organ.position
+	var rotation = organ.global_rotation
 	for point in organ.polygon:
-		newLine.append(Vector2(point.x + p.x, point.y + p.y))
+		var np = Vector2(point.x + p.x, point.y + p.y)
+		np = np - organ.position
+		np = np.rotated(rotation)
+		np = np + organ.position
+		newLine.append(np)
 	return newLine
 	
 func _addNewSlice(line: PackedVector2Array):
 	var newSlice = Polygon2D.new()
 	newSlice.polygon = line
-	newSlice.color = Color(0,1,0,1)
+	newSlice.color = Color(0, 1, 0, 1)
 	newSlice.clip_children = true
 	newSlice.material = sliceMaterial
 	group.add_child(newSlice)
@@ -95,4 +100,4 @@ func _on_start_slice(p: Vector2):
 
 func _on_end_slice(p: Vector2):
 	slice([sliceStart, p])
-	sliceStart = Vector2(-1,-1)
+	sliceStart = Vector2(-1, -1)
