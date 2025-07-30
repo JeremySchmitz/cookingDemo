@@ -11,10 +11,8 @@ const RESULTS_SCENE = preload("res://Scenes/food/results.tscn")
 @onready var crew := CrewStatus.crew
 
 var curMode = Mode.CHOP
-var crewDict: Dictionary = {}
 
 func _ready() -> void:
-	_buildCrewDictionary()
 	for i in range(0, crew.size()):
 		_buildBowl(i)
 
@@ -54,29 +52,22 @@ func _on_slice_btn_pressed() -> void:
 
 
 func _on_dinner_bell_btn_pressed() -> void:
-	var crewBefore = crew.duplicate(true)
+	var crewBefore = CrewStatus.crew
 	var bowls = $Bowls.get_children()
-	
+
 	for bowl: Bowl in bowls:
-		var member = crewDict[bowl.getName()]
+		var i = crew.find_custom(func(x): return x.name == bowl.getName())
+		var member = crew[i]
 		if member:
 			(member as Crew).eat(bowl.nutrition, bowl.poison)
 		else: printerr("Could Not Find Crew Member: %s", name)
 		
-
 	var resultsAttrs: Array[GlobalEnums.CrewAttrs] = [
 		GlobalEnums.CrewAttrs.HEALTH,
 		GlobalEnums.CrewAttrs.HUNGER
 		]
 	SceneLoader.gotoResults(crewBefore, crew, resultsAttrs)
 	
-
-func _buildCrewDictionary():
-	var dict: Dictionary = {}
-	for i in range(0, crew.size()):
-		dict[crew[i].name] = crew[i]
-	crewDict = dict
-
 func buildResultsScn(crewBefore: Array[Crew], crewAfter: Array[Crew]):
 	var results = RESULTS_SCENE.instantiate()
 	results.crewBefore = crewBefore

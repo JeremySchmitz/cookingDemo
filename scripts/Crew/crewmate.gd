@@ -1,5 +1,7 @@
 class_name Crew
 
+const nutritionMultiplier = .01
+
 var role: GlobalEnums.Role
 var name: String
 var health: int
@@ -33,7 +35,7 @@ func promote():
 		strength *= 1.075
 
 func eat(nutrition: float, poison: float):
-	satiety = min(nutrition + satiety, maxSatiety)
+	satiety = min(nutrition * nutritionMultiplier + satiety, maxSatiety)
 	recievePoison(poison)
 
 func recievePoison(poison: float):
@@ -53,6 +55,12 @@ func fish(success: int, opposition: int) -> bool:
 func work(success: int, opposition: int) -> bool:
 	return _trial(strength * sanity, success, opposition)
 
+func dailyWork(low: float, high: float):
+	if low > 1: low = low / 100
+	if high > 1: high = high / 100
+	var fatigue = Utils.generateNormalDistribution(low, high)
+	satiety -= fatigue
+
 func resist(success: int, opposition: int):
 	var attr = float(sanity) * (float(satiety) / float(maxSatiety)) * 1.2
 	return _trial(attr, success, opposition)
@@ -69,3 +77,18 @@ func getWorkForSum() -> float:
 
 func getResistForSum() -> float:
 	return satiety / float(maxSatiety) * 1.2
+
+func duplicate() -> Crew:
+	var new = Crew.new()
+
+	new.role = role
+	new.name = name
+	new.health = health
+	new.constitution = constitution
+	new.maxSatiety = maxSatiety
+	new.satiety = satiety
+	new.strength = strength
+	new.fishing = fishing
+	new.sanity = sanity
+
+	return new

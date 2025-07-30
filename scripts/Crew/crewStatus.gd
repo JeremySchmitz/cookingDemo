@@ -6,11 +6,12 @@ const GENERATE_PATH = "res://scripts/Crew/generateCrew.gd"
 var boatPosition := Vector2(95, 357)
 var targetPosition := Vector2(0, 0)
 
+var _crew: Array[Crew]
 var crew: Array[Crew] = []:
 	get():
-		return crew.duplicate(true)
+		return _duplicate()
 	set(val):
-		crew = val.duplicate(true)
+		_crew = _duplicate(val)
 
 func killCrew(mate: Crew, newCrew := crew):
 	var i = newCrew.find(mate)
@@ -58,3 +59,16 @@ func getRole(role: GlobalEnums.Role, myCrew := crew) -> Crew:
 
 	push_error("Crew Has no member with role: ", role)
 	return null
+
+func workCrew(low: float, high: float):
+	for mate in _crew:
+		mate.dailyWork(low, high)
+
+
+func _duplicate(val: Array[Crew] = _crew) -> Array[Crew]:
+	var new: Array[Crew] = []
+
+	for mate: Crew in val:
+		new.append(mate.duplicate())
+
+	return new

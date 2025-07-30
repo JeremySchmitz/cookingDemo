@@ -46,8 +46,6 @@ func _getRole(crewOnly: bool, i: int) -> GlobalEnums.Role:
 
 func _buildCrewMember(role: GlobalEnums.Role) -> Crew:
 	var member := Crew.new()
-	print('generate crew member:', member)
-	print('generate has func:', member.has_method("getWorkForSum"))
 	member.role = role
 	member.name = _generateName()
 	member.health = floor(Utils.triangleDistribution(minHealth, maxHealth, meanHealth))

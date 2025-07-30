@@ -1,12 +1,6 @@
 extends Node2D
 class_name BoatTravel
 
-# This script manages the boat traveling, satiety exhaustion, encounters, and port docking.
-
-signal encounter_triggered(encounter_data)
-signal port_docked(port_data)
-signal satiety_changed(new_value)
-
 var crew_satiety: int = 100
 var dock_ports: Array = []
 var encounter_chance: float = 0.05 # %chance
@@ -44,9 +38,8 @@ func _process(delta):
 		updateTraveledPos(boat.position)
 
 
-func exhaust_satiety():
-	crew_satiety = max(0, crew_satiety - randi_range(3, 8))
-	emit_signal("satiety_changed", crew_satiety)
+func workCrew(low: float, high: float):
+	CrewStatus.workCrew(low, high)
 
 func check_for_encounter():
 	var chance = Utils.RNG.randf()
@@ -96,6 +89,8 @@ func _on_boat_char_moving(val: bool) -> void:
 func _dayEnd():
 	boat.isMoving = false
 	setTimers(false)
+	# todo base on distance traveled
+	workCrew(10, 25)
 	SceneLoader.goto_scene(Utils.KITCHEN_PATH)
 
 func _triggerEncounter():
