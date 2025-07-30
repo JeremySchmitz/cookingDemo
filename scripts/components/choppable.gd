@@ -141,17 +141,17 @@ func replaceOrgans(newOrgans: Dictionary):
 			for n in sibling.get_children():
 				sibling.remove_child(n)
 				n.queue_free()
-			if !organs: break
-			for organ in organs:
-				(organ as Node2D).reparent(sibling)
+
+			if organs:
+				for organ in organs: (organ as Node2D).reparent(sibling)
 				
 		elif sibling.name == "VisibleOrgans":
 			for n in sibling.get_children():
 				sibling.remove_child(n)
 				n.queue_free()
-			if !vOrgans: break
-			for organ in vOrgans:
-				(organ as Node2D).reparent(sibling)
+
+			if vOrgans:
+				for organ in vOrgans: (organ as Node2D).reparent(sibling)
 
 func updateOrgans(newPoly: PackedVector2Array):
 	var siblings = get_parent().get_children()

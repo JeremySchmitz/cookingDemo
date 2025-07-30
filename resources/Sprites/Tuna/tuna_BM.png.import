@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://dp11x65fi08sb"
+path="res://.godot/imported/tuna_BM.png-2afc3e927c0989cd7e005ee62282277f.res"
+
+[deps]
+
+source_file="res://resources/Sprites/Tuna/tuna_BM.png"
+dest_files=["res://.godot/imported/tuna_BM.png-2afc3e927c0989cd7e005ee62282277f.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

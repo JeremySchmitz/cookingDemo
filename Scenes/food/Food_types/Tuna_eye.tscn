@@ -1,0 +1,69 @@
+[gd_scene load_steps=11 format=3 uid="uid://by3nll5e0dpud"]
+
+[ext_resource type="Script" uid="uid://dg7r1dj7qqv6f" path="res://scripts/Food/organ.gd" id="1_13a1j"]
+[ext_resource type="Script" uid="uid://3qtest46ag4a" path="res://scripts/components/health.gd" id="2_cds1n"]
+[ext_resource type="Script" uid="uid://cx3k7xle3gw0c" path="res://scripts/components/nutrition.gd" id="3_fsyu2"]
+[ext_resource type="Script" uid="uid://c5ox7hexp2ty8" path="res://scripts/components/poison.gd" id="4_85qar"]
+[ext_resource type="Script" uid="uid://0l0lpkxtrjtx" path="res://scripts/components/choppable.gd" id="5_0whqp"]
+[ext_resource type="Shader" uid="uid://brchmr5hs31qg" path="res://resources/cook.gdshader" id="6_tltxi"]
+[ext_resource type="Texture2D" uid="uid://thqau3klg10e" path="res://resources/Sprites/Tuna/tuna_Eye.png" id="7_323p6"]
+[ext_resource type="Script" uid="uid://ip3nwschvvkb" path="res://scripts/components/dragable_area.gd" id="8_gvn80"]
+[ext_resource type="Script" uid="uid://dik22bwv6x5l5" path="res://scripts/components/hurtbox.gd" id="9_7bcvh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_snl8s"]
+shader = ExtResource("6_tltxi")
+shader_parameter/cookVal = 0.0
+shader_parameter/isBurnt = false
+
+[node name="Eye" type="Node2D" node_paths=PackedStringArray("collisionPoly", "sprite")]
+script = ExtResource("1_13a1j")
+collisionPoly = NodePath("DraggableArea/CollisionPolygon2D")
+sprite = NodePath("Choppable/Sprite2D")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_cds1n")
+medium = 25
+wellDone = 30
+burnt = 40
+metadata/_custom_type_script = "uid://3qtest46ag4a"
+
+[node name="Nutrition" type="Node" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("3_fsyu2")
+health = NodePath("../Health")
+nutrition = 0
+metadata/_custom_type_script = "uid://cx3k7xle3gw0c"
+
+[node name="Poison" type="Node" parent="."]
+script = ExtResource("4_85qar")
+maxPoison = 0
+metadata/_custom_type_script = "uid://c5ox7hexp2ty8"
+
+[node name="Choppable" type="CanvasGroup" parent="." node_paths=PackedStringArray("collisionArea", "collisionNode")]
+script = ExtResource("5_0whqp")
+collisionArea = NodePath("../DraggableArea")
+collisionNode = NodePath("../DraggableArea/CollisionPolygon2D")
+scenePath = "res://Scenes/food/organ.tscn"
+metadata/_custom_type_script = "uid://0l0lpkxtrjtx"
+
+[node name="Sprite2D" type="Sprite2D" parent="Choppable"]
+texture_filter = 3
+material = SubResource("ShaderMaterial_snl8s")
+position = Vector2(-22, 1)
+texture = ExtResource("7_323p6")
+
+[node name="DraggableArea" type="Area2D" parent="."]
+script = ExtResource("8_gvn80")
+metadata/_custom_type_script = "uid://ip3nwschvvkb"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DraggableArea"]
+polygon = PackedVector2Array(-1, -2, -1, -1, -2, -1, -2, 1, -1, 1, -1, 2, 1, 2, 1, 1, 2, 1, 2, -1, 1, -1, 1, -2)
+
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("9_7bcvh")
+health = NodePath("../Health")
+metadata/_custom_type_script = "uid://dik22bwv6x5l5"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox"]
+polygon = PackedVector2Array(-1, -2, -1, -1, -2, -1, -2, 1, -1, 1, -1, 2, 1, 2, 1, 1, 2, 1, 2, -1, 1, -1, 1, -2)
+
+[connection signal="dragging" from="DraggableArea" to="." method="_on_draggable_area_dragging"]

@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://du0o6emrx16br"
+path="res://.godot/imported/organ_test_BM.png-4c2829dd4502a3110d2113e2c4fa879c.res"
+
+[deps]
+
+source_file="res://resources/Sprites/PufferFish/organ_test_BM.png"
+dest_files=["res://.godot/imported/organ_test_BM.png-4c2829dd4502a3110d2113e2c4fa879c.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

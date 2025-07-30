@@ -20,17 +20,18 @@ shader = ExtResource("10_mwd75")
 shader_parameter/cookVal = 0.0
 shader_parameter/isBurnt = false
 
-[node name="food" type="Node2D" node_paths=PackedStringArray("collisionPoly", "sprite") groups=["food"]]
+[node name="Pufferfish" type="Node2D" node_paths=PackedStringArray("collisionPoly", "sprite") groups=["food"]]
 script = ExtResource("1_h4kkx")
-collisionPoly = NodePath("draggableArea/CollisionPolygon2D")
+collisionPoly = NodePath("DraggableArea/CollisionPolygon2D")
 sprite = NodePath("sliceGroup/sliceSprite")
+bitmapSrc = "res://resources/Sprites/PufferFish/PufferFish_BM.png"
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_d37wj")
 
 [node name="Sliceable" type="Node" parent="." node_paths=PackedStringArray("collisionArea", "group", "organs", "visibleOrgans")]
 script = ExtResource("7_t0fp1")
-collisionArea = NodePath("../draggableArea")
+collisionArea = NodePath("../DraggableArea")
 group = NodePath("../sliceGroup")
 organs = NodePath("../Organs")
 visibleOrgans = NodePath("../VisibleOrgans")
@@ -47,8 +48,8 @@ maxPoison = 10
 
 [node name="Choppable" type="CanvasGroup" parent="." node_paths=PackedStringArray("collisionArea", "collisionNode", "sliceGroup")]
 script = ExtResource("3_h4kkx")
-collisionArea = NodePath("../draggableArea")
-collisionNode = NodePath("../draggableArea/CollisionPolygon2D")
+collisionArea = NodePath("../DraggableArea")
+collisionNode = NodePath("../DraggableArea/CollisionPolygon2D")
 sliceGroup = NodePath("../sliceGroup")
 scenePath = "res://Scenes/food/food.tscn"
 
@@ -62,14 +63,12 @@ texture = ExtResource("8_1gaok")
 [node name="organ" parent="Organs" instance=ExtResource("7_mmhua")]
 position = Vector2(-41, 45)
 
-[node name="draggableArea" type="Area2D" parent="."]
+[node name="DraggableArea" type="Area2D" parent="."]
 script = ExtResource("1_fhto3")
 metadata/_custom_type_script = "uid://ip3nwschvvkb"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="draggableArea" groups=["food"]]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DraggableArea" groups=["food"]]
 polygon = PackedVector2Array(-90, 10, -88, 46, -76, 72, -53, 89, -9, 90, 28, 66, 56, 33, 78, -24, 80, -67, 73, -90, 59, -84, 47, -62, 24, -46, -17, -38, -40, -33, -76, -16)
-
-[node name="VisibleOrgans" type="Node2D" parent="."]
 
 [node name="sliceGroup" type="CanvasGroup" parent="."]
 texture_filter = 1
@@ -79,6 +78,8 @@ material = SubResource("ShaderMaterial_b4uh0")
 scale = Vector2(3, 3)
 texture = ExtResource("10_83vc0")
 
+[node name="VisibleOrgans" type="Node2D" parent="."]
+
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("5_4hb68")
 health = NodePath("../Health")
@@ -86,7 +87,7 @@ health = NodePath("../Health")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox" node_paths=PackedStringArray("collisionShape")]
 polygon = PackedVector2Array(-90, 10, -88, 46, -76, 72, -53, 89, -9, 90, 28, 66, 56, 33, 78, -24, 80, -67, 73, -90, 59, -84, 47, -62, 24, -46, -17, -38, -40, -33, -76, -16)
 script = ExtResource("6_t0fp1")
-collisionShape = NodePath("../../draggableArea/CollisionPolygon2D")
+collisionShape = NodePath("../../DraggableArea/CollisionPolygon2D")
 updateOn = "chopped"
 
 [node name="Label" type="Label" parent="."]

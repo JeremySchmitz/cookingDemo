@@ -19,6 +19,8 @@ shader_parameter/isBurnt = false
 script = ExtResource("1_0i6ut")
 collisionPoly = NodePath("DraggableArea/CollisionPolygon2D")
 sprite = NodePath("Choppable/Sprite2D")
+bitmapSrc = "res://resources/Sprites/PufferFish/organ_test_BM.png"
+spriteScale = 1.0
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_4nas8")
