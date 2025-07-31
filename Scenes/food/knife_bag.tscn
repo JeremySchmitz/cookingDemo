@@ -1,0 +1,159 @@
+[gd_scene load_steps=19 format=3 uid="uid://euo8cywo2d7e"]
+
+[ext_resource type="Texture2D" uid="uid://qu1in87ttbrr" path="res://resources/Sprites/Kitchen/knives/Knifebag_Bottom.png" id="1_25p53"]
+[ext_resource type="Script" uid="uid://cwt70wsv5ogeq" path="res://scripts/Food/knife_bag.gd" id="1_74eee"]
+[ext_resource type="Texture2D" uid="uid://3at5wmtrlu2r" path="res://resources/Sprites/Kitchen/knives/knife_chop.png" id="2_74eee"]
+[ext_resource type="Texture2D" uid="uid://ctb4y1xwha2l" path="res://resources/Sprites/Kitchen/knives/knife_slice.png" id="3_7fxgv"]
+[ext_resource type="Script" uid="uid://dn1hpsu10xgps" path="res://scripts/knives/knife_button.gd" id="3_74eee"]
+[ext_resource type="Texture2D" uid="uid://c3vwlkf6erksh" path="res://resources/Sprites/Kitchen/knives/Knifebag_Top.png" id="4_2p5wi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nou3v"]
+atlas = ExtResource("2_74eee")
+region = Rect2(0, 128, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2p5wi"]
+atlas = ExtResource("2_74eee")
+region = Rect2(64, 128, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ug422"]
+atlas = ExtResource("2_74eee")
+region = Rect2(0, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ke667"]
+atlas = ExtResource("2_74eee")
+region = Rect2(64, 0, 64, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ke667"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nou3v")
+}],
+"loop": true,
+"name": &"in_use",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2p5wi")
+}],
+"loop": true,
+"name": &"in_use_hover",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ug422")
+}],
+"loop": true,
+"name": &"ready",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ke667")
+}],
+"loop": true,
+"name": &"ready_hover",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x17ia"]
+size = Vector2(17, 123)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fxgv"]
+atlas = ExtResource("3_7fxgv")
+region = Rect2(0, 128, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_unoup"]
+atlas = ExtResource("3_7fxgv")
+region = Rect2(64, 128, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fooai"]
+atlas = ExtResource("3_7fxgv")
+region = Rect2(0, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x17ia"]
+atlas = ExtResource("3_7fxgv")
+region = Rect2(64, 0, 64, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1uj6a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7fxgv")
+}],
+"loop": true,
+"name": &"in_use",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_unoup")
+}],
+"loop": true,
+"name": &"in_use_hover",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fooai")
+}],
+"loop": true,
+"name": &"ready",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x17ia")
+}],
+"loop": true,
+"name": &"ready_hover",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kfwi8"]
+size = Vector2(19, 124)
+
+[node name="Knife_Bag" type="Node2D"]
+script = ExtResource("1_74eee")
+
+[node name="bottom" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_25p53")
+
+[node name="knife_chop_btn" type="Area2D" parent="."]
+position = Vector2(-5.00001, 64)
+rotation = -3.14159
+script = ExtResource("3_74eee")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="knife_chop_btn"]
+texture_filter = 1
+position = Vector2(7, 64)
+sprite_frames = SubResource("SpriteFrames_ke667")
+animation = &"ready"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="knife_chop_btn"]
+position = Vector2(9.5, 64.5)
+shape = SubResource("RectangleShape2D_x17ia")
+
+[node name="knife_slice_btn" type="Area2D" parent="."]
+rotation = 3.14159
+script = ExtResource("3_74eee")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="knife_slice_btn"]
+texture_filter = 1
+position = Vector2(-16, -1.43051e-06)
+sprite_frames = SubResource("SpriteFrames_1uj6a")
+animation = &"ready"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="knife_slice_btn"]
+position = Vector2(-12.5, -1)
+shape = SubResource("RectangleShape2D_kfwi8")
+
+[node name="top" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("4_2p5wi")
+
+[connection signal="valChange" from="knife_chop_btn" to="." method="_on_knife_chop_btn_val_change"]
+[connection signal="valChange" from="knife_slice_btn" to="." method="_on_knife_slice_btn_val_change"]

@@ -12,7 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://dd72dj4uhmmek" path="res://resources/Sprites/Kitchen/bell.png" id="10_i6vcq"]
 [ext_resource type="Script" uid="uid://duhqdxi6amymv" path="res://scripts/knives/knife_drag.gd" id="11_4clir"]
 [ext_resource type="BitMap" uid="uid://b3i0k8is4vlvh" path="res://resources/Sprites/Kitchen/bell_clickMask.png" id="11_bgcuo"]
-[ext_resource type="PackedScene" uid="uid://d33muh3gkkpu5" path="res://Scenes/food/bone.tscn" id="13_lkloo"]
+[ext_resource type="PackedScene" uid="uid://euo8cywo2d7e" path="res://Scenes/food/knife_bag.tscn" id="14_ykbxl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0fj1v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fo5ed"]
 size = Vector2(499, 293)
@@ -20,8 +22,6 @@ size = Vector2(499, 293)
 [sub_resource type="CircleShape2D" id="CircleShape2D_fo5ed"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5ukr8"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0fj1v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t5hpn"]
 size = Vector2(20, 400)
@@ -34,6 +34,27 @@ position = Vector2(593, 41)
 color = Color(0.703808, 0.703808, 0.703808, 1)
 polygon = PackedVector2Array(-608, -56, 2272, -40, 2278, 717, -608, 728)
 uv = PackedVector2Array(-608, -56, 584, -80, 576, 256, -584, 264)
+
+[node name="CameraMain" type="Camera2D" parent="."]
+anchor_mode = 0
+position_smoothing_enabled = true
+script = ExtResource("8_2l700")
+
+[node name="toRight" type="Area2D" parent="CameraMain" node_paths=PackedStringArray("camera")]
+script = ExtResource("9_r0dk1")
+locationRight = true
+camera = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraMain/toRight"]
+shape = SubResource("RectangleShape2D_0fj1v")
+
+[node name="toLeft" type="Area2D" parent="CameraMain" node_paths=PackedStringArray("camera")]
+script = ExtResource("9_r0dk1")
+camera = NodePath("..")
+metadata/_custom_type_script = "uid://blx703circky0"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraMain/toLeft"]
+shape = SubResource("RectangleShape2D_0fj1v")
 
 [node name="FryingPan" parent="." instance=ExtResource("10_2cl3g")]
 position = Vector2(729, 461)
@@ -51,33 +72,13 @@ position = Vector2(-118, -63)
 scale = Vector2(4.78125, 4.78125)
 texture = ExtResource("2_t5hpn")
 
+[node name="Bowls" type="Node" parent="."]
+
 [node name="food" parent="." instance=ExtResource("5_32235")]
 position = Vector2(392, 155)
 
 [node name="Tuna" parent="." instance=ExtResource("5_t5hpn")]
 position = Vector2(171, 246)
-
-[node name="chopBtn" type="Button" parent="."]
-offset_left = 891.0
-offset_top = 36.0
-offset_right = 1030.0
-offset_bottom = 115.0
-text = "Chop"
-
-[node name="sliceBtn" type="Button" parent="."]
-offset_left = 893.0
-offset_top = 223.0
-offset_right = 1022.0
-offset_bottom = 293.0
-text = "Slice"
-
-[node name="grabBtn" type="Button" parent="."]
-offset_left = 892.0
-offset_top = 128.0
-offset_right = 1026.0
-offset_bottom = 204.0
-toggle_mode = true
-text = "Grab"
 
 [node name="knifeChopper" type="Area2D" parent="." node_paths=PackedStringArray("boneParticles")]
 script = ExtResource("6_5ukof")
@@ -108,38 +109,6 @@ script = ExtResource("7_iw6an")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="knifeSlicer"]
 shape = SubResource("CircleShape2D_5ukr8")
 
-[node name="CameraMain" type="Camera2D" parent="."]
-anchor_mode = 0
-position_smoothing_enabled = true
-script = ExtResource("8_2l700")
-
-[node name="toRight" type="Area2D" parent="CameraMain" node_paths=PackedStringArray("camera")]
-script = ExtResource("9_r0dk1")
-locationRight = true
-camera = NodePath("..")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraMain/toRight"]
-shape = SubResource("RectangleShape2D_0fj1v")
-
-[node name="toLeft" type="Area2D" parent="CameraMain" node_paths=PackedStringArray("camera")]
-script = ExtResource("9_r0dk1")
-camera = NodePath("..")
-metadata/_custom_type_script = "uid://blx703circky0"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraMain/toLeft"]
-shape = SubResource("RectangleShape2D_0fj1v")
-
-[node name="dinnerBellBtn" type="TextureButton" parent="."]
-offset_left = 2074.0
-offset_top = 493.0
-offset_right = 2138.0
-offset_bottom = 557.0
-scale = Vector2(2, 2)
-texture_normal = ExtResource("10_i6vcq")
-texture_click_mask = ExtResource("11_bgcuo")
-
-[node name="Bowls" type="Node" parent="."]
-
 [node name="knifeDrag" type="Area2D" parent="."]
 script = ExtResource("11_4clir")
 
@@ -150,11 +119,18 @@ shape = SubResource("RectangleShape2D_t5hpn")
 color = Color(0.84482, 0.915166, 0.972368, 1)
 polygon = PackedVector2Array(-11, -202, 10, -203, 8, 198, -4, 198, -2, 336, -12, 334)
 
-[node name="Bone" parent="." instance=ExtResource("13_lkloo")]
-position = Vector2(201, 538)
-scale = Vector2(5, 5)
+[node name="dinnerBellBtn" type="TextureButton" parent="."]
+offset_left = 2074.0
+offset_top = 493.0
+offset_right = 2138.0
+offset_bottom = 557.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("10_i6vcq")
+texture_click_mask = ExtResource("11_bgcuo")
 
-[connection signal="pressed" from="chopBtn" to="." method="_on_chop_btn_pressed"]
-[connection signal="pressed" from="sliceBtn" to="." method="_on_slice_btn_pressed"]
-[connection signal="pressed" from="grabBtn" to="." method="_on_grab_btn_pressed"]
+[node name="Knife_Bag" parent="." instance=ExtResource("14_ykbxl")]
+position = Vector2(216, 492)
+rotation = -1.5708
+scale = Vector2(3, 3)
+
 [connection signal="pressed" from="dinnerBellBtn" to="." method="_on_dinner_bell_btn_pressed"]

@@ -1,7 +1,6 @@
 extends Node2D
 class_name Kitchen
 
-enum Mode {CHOP, SLICE, GRAB}
 
 const BOWL_SCENE = preload("res://Scenes/food/bowl.tscn")
 const RESULTS_SCENE = preload("res://Scenes/food/results.tscn")
@@ -10,7 +9,6 @@ const RESULTS_SCENE = preload("res://Scenes/food/results.tscn")
 
 @onready var crew := CrewStatus.crew
 
-var curMode = Mode.CHOP
 
 func _ready() -> void:
 	for i in range(0, crew.size()):
@@ -25,32 +23,6 @@ func _buildBowl(i: int):
 		get_viewport_rect().size.x + 200 + (300 * i),
 		 200)
 	
-
-func _on_chop_btn_pressed() -> void:
-	curMode = Mode.CHOP
-	$chopBtn.disabled = true
-	$sliceBtn.disabled = false
-	$grabBtn.disabled = false
-	Utils.modeChange.emit(curMode)
-	get_tree().get_root().set_input_as_handled()
-
-func _on_grab_btn_pressed() -> void:
-	curMode = Mode.GRAB
-	$chopBtn.disabled = false
-	$sliceBtn.disabled = false
-	$grabBtn.disabled = true
-	Utils.modeChange.emit(curMode)
-	get_tree().get_root().set_input_as_handled()
-
-func _on_slice_btn_pressed() -> void:
-	curMode = Mode.SLICE
-	$chopBtn.disabled = false
-	$sliceBtn.disabled = true
-	$grabBtn.disabled = false
-	Utils.modeChange.emit(curMode)
-	get_tree().get_root().set_input_as_handled()
-
-
 func _on_dinner_bell_btn_pressed() -> void:
 	var crewBefore = CrewStatus.crew
 	var bowls = $Bowls.get_children()
