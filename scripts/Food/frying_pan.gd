@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var burner: AnimatedSprite2D = $Burner
-@onready var hitbox: Hitbox = $Pan/hitbox
+@onready var hitbox: Hitbox = $Burner/hitbox
 @export var damage: Array[float] = [0, 3, 8, 20]
 
 var currentDialValue: int = 0
