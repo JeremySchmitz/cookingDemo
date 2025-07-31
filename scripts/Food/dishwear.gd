@@ -1,6 +1,16 @@
 extends Node2D
 
+@onready var prevPos = position
+var moving = false
+
+func _process(delta: float) -> void:
+	if prevPos != position: moving = true
+	else: moving = false
+	prevPos = position
+
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	if moving: return
+
 	var parent = area.get_parent()
 	if (parent is Food and
 		parent.get_parent().name != 'Organs' and

@@ -5,6 +5,13 @@ extends Node2D
 @export var damage: Array[float] = [0, 3, 8, 20]
 
 var currentDialValue: int = 0
+@onready var prevPosition = position
+var moving = false
+
+func _process(delta: float) -> void:
+	if prevPosition != position:
+		moving = false
+		prevPosition = position
 
 
 func _on_dial_val_set(val: int) -> void:

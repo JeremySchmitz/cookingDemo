@@ -85,9 +85,6 @@ metadata/_custom_type_script = "uid://blx703circky0"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraMain/toLeft"]
 shape = SubResource("RectangleShape2D_0fj1v")
 
-[node name="FryingPan" parent="." instance=ExtResource("10_2cl3g")]
-position = Vector2(729, 461)
-
 [node name="cuttingBoard" type="Area2D" parent="."]
 position = Vector2(400, 250)
 
@@ -100,6 +97,9 @@ texture_filter = 1
 position = Vector2(-118, -63)
 scale = Vector2(4.78125, 4.78125)
 texture = ExtResource("2_t5hpn")
+
+[node name="FryingPan" parent="." instance=ExtResource("10_2cl3g")]
+position = Vector2(729, 461)
 
 [node name="Bowls" type="Node" parent="."]
 
