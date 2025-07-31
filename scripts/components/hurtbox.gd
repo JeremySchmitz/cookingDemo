@@ -1,7 +1,7 @@
 class_name Hurtbox
 extends Area2D
 
-signal recievedDamage(damage: int)
+signal recievedDamage(damage: float)
 
 var timers: Dictionary = {}
 
@@ -50,7 +50,7 @@ func _buildTimer(hitbox: Hitbox):
 	timer.start()
 
 
-func _addDamage(damage: int):
+func _addDamage(damage: float):
 	health.cooked += damage
 	recievedDamage.emit(damage)
 

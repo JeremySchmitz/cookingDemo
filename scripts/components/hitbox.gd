@@ -4,7 +4,7 @@ extends Area2D
 signal damageChanged()
 signal frequencyChanged()
 
-@export var damage: float = 5:
+@export var damage: float = 5.0:
 	set(value):
 		damage = value
 		damageChanged.emit()

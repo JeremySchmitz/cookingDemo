@@ -6,7 +6,7 @@ signal cookedMedium()
 signal cookedWellDone()
 signal cookedBurnt()
 
-@export var cooked: int = 0 : set = setCooked
+@export var cooked: float = 0.0: set = setCooked
 @export var medium: int = 50
 @export var wellDone: int = 75
 @export var burnt: int = 100
@@ -15,7 +15,7 @@ var _isMedium: bool = false
 var _isWellDone: bool = false
 var _isBurnt: bool = false
 
-func setCooked(val: int):
+func setCooked(val: float):
 	if val != cooked:
 		if val >= medium && val < wellDone && !_isMedium:
 			_isMedium = true
@@ -32,4 +32,4 @@ func setCooked(val: int):
 			cookedBurnt.emit()
 		var dif = val - cooked
 		cooked = val
-		cookedChanged.emit(cooked)
+		cookedChanged.emit(dif)

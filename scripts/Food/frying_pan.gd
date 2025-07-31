@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var burner: AnimatedSprite2D = $Burner
 @onready var hitbox: Hitbox = $Burner/hitbox
-@export var damage: Array[float] = [0, 3, 8, 20]
+@export var damage: Array[float] = [0.0, 3.0, 8.0, 20.0]
 
 var currentDialValue: int = 0
 @onready var prevPosition = position

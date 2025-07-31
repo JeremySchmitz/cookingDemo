@@ -3,8 +3,8 @@ extends Node
 
 
 @export var health: Health
-@export var maxNutrition:= 100
-@export var nutrition:= 10 : set = _setNutrition
+@export var maxNutrition:= 100.0
+@export var nutrition:= 10.0 : set = _setNutrition
 @export var rentention: float = .99
 
 var cooked:= GlobalEnums.Cooked.RAW
@@ -32,7 +32,7 @@ func _on_health_cooked_burnt() -> void:
 	cooked = GlobalEnums.Cooked.BURNT
 	nutrition = 0.8 * maxNutrition
 
-func updateNutrition(diff: int):
+func updateNutrition(diff: float):
 	var strength
 	match cooked:
 		GlobalEnums.Cooked.RAW:
@@ -42,16 +42,16 @@ func updateNutrition(diff: int):
 		GlobalEnums.Cooked.WELL:
 			strength = 1
 		GlobalEnums.Cooked.BURNT:
-			strength = -.75
+			strength = -.2
 		_:
 			strength = 0
 			
-	nutrition = nutrition + (diff * strength)
+	nutrition += diff * strength	
 
 func updateNutritionAfterChop(percent: float):
 	var newMax = maxNutrition * percent * rentention
 	nutrition = nutrition * percent * rentention
 	maxNutrition = newMax
 
-func _setNutrition(val: int) -> void:
-	nutrition = min(val, maxNutrition)
+func _setNutrition(val: float) -> void:
+	nutrition = max(0, min(val, maxNutrition))
