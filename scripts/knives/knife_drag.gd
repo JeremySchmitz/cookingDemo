@@ -1,15 +1,20 @@
-extends Area2D
+extends Knife
 
-@onready var collision: CollisionShape2D = $CollisionShape2D
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-var movement := Vector2(0, 0)
-var velocity := Vector2(0, 0)
+
+var _active = false
+var _movement := Vector2(0, 0)
+var _velocity := Vector2(0, 0)
 
 func _ready():
+	super._ready()
 	monitoring = false
 	visible = false
 
 func _unhandled_input(event):
+	if !_active: return
+
 	if (event is InputEventMouseButton
 		and event.button_index == MOUSE_BUTTON_RIGHT
 		and event.pressed
@@ -22,15 +27,15 @@ func _unhandled_input(event):
 		visible = false
 		
 	if monitoring and event is InputEventMouseMotion:
-		movement = event.relative
-		velocity = event.velocity
+		_movement = event.relative
+		_velocity = event.velocity
 		_updatePosition()
 		_updateRotation()
 		get_viewport().set_input_as_handled()
 
 
 func _updateRotation():
-	rotation = velocity.angle()
+	rotation = _velocity.angle()
 
 func _updatePosition():
 	global_position = get_global_mouse_position()
@@ -41,4 +46,15 @@ func _updatePosition():
 			if (area is DraggableArea
 				&& area.get_parent() is Food
 				&& area.get_parent().get_parent().name != "Organs"):
-				area.get_parent().global_position += movement
+				area.get_parent().global_position += _movement
+
+func _on_mode_change(m: GlobalEnums.Mode):
+	match m:
+		GlobalEnums.Mode.SLICE:
+			_active = true
+			sprite.animation = "slice"
+		GlobalEnums.Mode.CHOP:
+			_active = true
+			sprite.animation = "chop"
+		_:
+			_active = false
