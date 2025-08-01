@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://caaqjxwo0secb"]
+
+[ext_resource type="Script" uid="uid://cmplyp156frdf" path="res://scripts/Bartering/card.gd" id="1_pc11x"]
+[ext_resource type="Texture2D" uid="uid://cdmc445maj30x" path="res://resources/Sprites/Bartering/card_blue_back.png" id="2_oqcsr"]
+[ext_resource type="Texture2D" uid="uid://cen4pf7cx383k" path="res://resources/Sprites/Bartering/card_blue_front.png" id="3_uutvs"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7tb6g"]
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Card" type="Node2D"]
+script = ExtResource("1_pc11x")
+
+[node name="Back" type="Node2D" parent="."]
+
+[node name="Sprite2D_back" type="Sprite2D" parent="Back"]
+texture_filter = 1
+texture = ExtResource("2_oqcsr")
+
+[node name="Front" type="Node2D" parent="."]
+visible = false
+
+[node name="Sprite2D_front" type="Sprite2D" parent="Front"]
+texture_filter = 1
+texture = ExtResource("3_uutvs")
+
+[node name="text_front" type="Label" parent="Front"]
+texture_filter = 1
+offset_left = -16.0
+offset_top = -26.0
+offset_right = 15.0
+offset_bottom = 26.0
+text = "1%"
+label_settings = SubResource("LabelSettings_7tb6g")
+horizontal_alignment = 1
+vertical_alignment = 1

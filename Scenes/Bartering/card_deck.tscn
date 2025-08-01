@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwoqnxv7jrl3f"]
+
+[ext_resource type="Script" uid="uid://de53dmv0j4twq" path="res://scripts/Bartering/card_deck.gd" id="1_e6jsn"]
+[ext_resource type="PackedScene" uid="uid://caaqjxwo0secb" path="res://Scenes/Bartering/card.tscn" id="2_lybbx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kadpc"]
+size = Vector2(38, 60)
+
+[node name="CardDeck" type="Node2D"]
+script = ExtResource("1_e6jsn")
+
+[node name="Card" parent="." instance=ExtResource("2_lybbx")]
+visible = false
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_kadpc")
+
+[node name="Cards" type="Node2D" parent="."]
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

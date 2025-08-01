@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8dpp11hgwnlg"]
+
+[ext_resource type="Script" uid="uid://cgksgcgxyr5q0" path="res://scripts/Bartering/barter.gd" id="1_s3kbv"]
+[ext_resource type="PackedScene" uid="uid://cwoqnxv7jrl3f" path="res://Scenes/Bartering/card_deck.tscn" id="1_wuqyt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_s3kbv"]
+font_size = 45
+
+[node name="Barter" type="Node2D"]
+script = ExtResource("1_s3kbv")
+
+[node name="Label_total" type="Label" parent="."]
+offset_left = 22.0
+offset_top = 472.0
+offset_right = 302.0
+offset_bottom = 603.0
+text = "Total: 0%"
+label_settings = SubResource("LabelSettings_s3kbv")
+vertical_alignment = 1
+
+[node name="CardDeck_pc" parent="." instance=ExtResource("1_wuqyt")]
+position = Vector2(600, 513)
+scale = Vector2(2, 2)
+
+[node name="CardDeck_npc" parent="." instance=ExtResource("1_wuqyt")]
+position = Vector2(600, 118)
+rotation = 3.14159
+scale = Vector2(2, 2)
+color = 1
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(186, 300)
+
+[connection signal="clicked" from="CardDeck_pc" to="." method="_on_card_deck_pc_clicked"]
+[connection signal="clicked" from="CardDeck_npc" to="." method="_on_card_deck_npc_clicked"]
