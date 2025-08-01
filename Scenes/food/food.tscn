@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ccw7uq7go4ivt"]
+[gd_scene load_steps=19 format=3 uid="uid://ccw7uq7go4ivt"]
 
 [ext_resource type="Script" uid="uid://ip3nwschvvkb" path="res://scripts/components/dragable_area.gd" id="1_fhto3"]
 [ext_resource type="Script" uid="uid://bunuku5x2rt24" path="res://scripts/Food/food.gd" id="1_h4kkx"]
@@ -11,8 +11,25 @@
 [ext_resource type="PackedScene" uid="uid://c1ixyyfmpabav" path="res://Scenes/food/organ.tscn" id="7_mmhua"]
 [ext_resource type="Script" uid="uid://w6ocrvw6sksd" path="res://scripts/components/sliceable.gd" id="7_t0fp1"]
 [ext_resource type="Texture2D" uid="uid://d2xppba4lg8o" path="res://resources/Sprites/PufferFish/PufferFish_Guts.png" id="8_1gaok"]
+[ext_resource type="Script" uid="uid://bkuh78a5kdr6w" path="res://resources/custom_resources/organ/organ.rsc.gd" id="9_ue4cl"]
 [ext_resource type="Texture2D" uid="uid://dfa6ipvesr0ga" path="res://resources/Sprites/PufferFish/PufferFish_Outline_02.png" id="10_83vc0"]
 [ext_resource type="Shader" uid="uid://brchmr5hs31qg" path="res://resources/cook.gdshader" id="10_mwd75"]
+[ext_resource type="Texture2D" uid="uid://d4cw104vbrgr" path="res://resources/Sprites/PufferFish/organ_test.png" id="10_yjw8s"]
+[ext_resource type="BitMap" uid="uid://du0o6emrx16br" path="res://resources/Sprites/PufferFish/organ_test_BM.png" id="11_yg25j"]
+
+[sub_resource type="Resource" id="Resource_ftejc"]
+script = ExtResource("9_ue4cl")
+sprite = ExtResource("10_yjw8s")
+medium = 50
+wellDone = 75
+burnt = 100
+maxNutrition = 100.0
+nutrition = 10.0
+nutritionRentention = 0.99
+poisonWhileRaw = 0
+maxPoison = 30
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b4uh0"]
 resource_local_to_scene = true
@@ -20,11 +37,8 @@ shader = ExtResource("10_mwd75")
 shader_parameter/cookVal = 0.0
 shader_parameter/isBurnt = false
 
-[node name="Pufferfish" type="Node2D" node_paths=PackedStringArray("collisionPoly", "sprite") groups=["food"]]
+[node name="Pufferfish" type="Node2D" groups=["food"]]
 script = ExtResource("1_h4kkx")
-collisionPoly = NodePath("DraggableArea/CollisionPolygon2D")
-sprite = NodePath("sliceGroup/sliceSprite")
-bitmapSrc = "res://resources/Sprites/PufferFish/PufferFish_BM.png"
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_d37wj")
@@ -62,6 +76,8 @@ texture = ExtResource("8_1gaok")
 
 [node name="organ" parent="Organs" instance=ExtResource("7_mmhua")]
 position = Vector2(-41, 45)
+stats = SubResource("Resource_ftejc")
+bitmap = ExtResource("11_yg25j")
 
 [node name="DraggableArea" type="Area2D" parent="."]
 script = ExtResource("1_fhto3")
@@ -95,3 +111,4 @@ offset_left = 87.0
 offset_top = -26.0
 offset_right = 208.0
 offset_bottom = 54.0
+text = "0.0"

@@ -1,25 +1,38 @@
-[gd_scene load_steps=11 format=3 uid="uid://c1ixyyfmpabav"]
+[gd_scene load_steps=13 format=3 uid="uid://c1ixyyfmpabav"]
 
 [ext_resource type="Script" uid="uid://dg7r1dj7qqv6f" path="res://scripts/Food/organ.gd" id="1_0i6ut"]
 [ext_resource type="Script" uid="uid://3qtest46ag4a" path="res://scripts/components/health.gd" id="2_4nas8"]
+[ext_resource type="Script" uid="uid://bkuh78a5kdr6w" path="res://resources/custom_resources/organ/organ.rsc.gd" id="2_snl8s"]
+[ext_resource type="Texture2D" uid="uid://d4cw104vbrgr" path="res://resources/Sprites/PufferFish/organ_test.png" id="3_1n0ni"]
 [ext_resource type="Script" uid="uid://0l0lpkxtrjtx" path="res://scripts/components/choppable.gd" id="3_jih0q"]
 [ext_resource type="Script" uid="uid://cx3k7xle3gw0c" path="res://scripts/components/nutrition.gd" id="3_nnpc6"]
-[ext_resource type="Texture2D" uid="uid://d4cw104vbrgr" path="res://resources/Sprites/PufferFish/organ_test.png" id="4_nnpc6"]
 [ext_resource type="Script" uid="uid://c5ox7hexp2ty8" path="res://scripts/components/poison.gd" id="4_snl8s"]
 [ext_resource type="Script" uid="uid://ip3nwschvvkb" path="res://scripts/components/dragable_area.gd" id="5_snl8s"]
 [ext_resource type="Script" uid="uid://dik22bwv6x5l5" path="res://scripts/components/hurtbox.gd" id="6_1n0ni"]
 [ext_resource type="Shader" uid="uid://brchmr5hs31qg" path="res://resources/cook.gdshader" id="6_nnpc6"]
+
+[sub_resource type="Resource" id="Resource_1utlc"]
+script = ExtResource("2_snl8s")
+sprite = ExtResource("3_1n0ni")
+medium = 50
+wellDone = 75
+burnt = 100
+maxNutrition = 100.0
+nutrition = 10.0
+nutritionRentention = 0.99
+poisonWhileRaw = 0
+maxPoison = 30
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_snl8s"]
 shader = ExtResource("6_nnpc6")
 shader_parameter/cookVal = 0.0
 shader_parameter/isBurnt = false
 
-[node name="Organ" type="Node2D" node_paths=PackedStringArray("collisionPoly", "sprite")]
+[node name="Organ" type="Node2D"]
 script = ExtResource("1_0i6ut")
-collisionPoly = NodePath("DraggableArea/CollisionPolygon2D")
-sprite = NodePath("Choppable/Sprite2D")
-bitmapSrc = "res://resources/Sprites/PufferFish/organ_test_BM.png"
+stats = SubResource("Resource_1utlc")
 spriteScale = 1.0
 
 [node name="Health" type="Node" parent="."]
@@ -51,14 +64,13 @@ metadata/_custom_type_script = "uid://0l0lpkxtrjtx"
 [node name="Sprite2D" type="Sprite2D" parent="Choppable"]
 texture_filter = 3
 material = SubResource("ShaderMaterial_snl8s")
-texture = ExtResource("4_nnpc6")
 
 [node name="DraggableArea" type="Area2D" parent="."]
 script = ExtResource("5_snl8s")
 metadata/_custom_type_script = "uid://ip3nwschvvkb"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DraggableArea"]
-polygon = PackedVector2Array(-12, -26, -18, -20, -21, -14, -23, -8, -24, -5, -25, -1, -25, 9, -24, 13, -27, 20, -27, 24, -25, 28, -22, 31, -12, 31, -1, 29, 7, 28, 12, 27, 15, 26, 23, 20, 27, 11, 27, 0, 25, -6, 23, -11, 18, -20, 12, -26, 10, -27, 5, -29, -6, -29)
+polygon = PackedVector2Array(1, 1, 1, 0, 0, 1)
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("6_1n0ni")
@@ -66,6 +78,6 @@ health = NodePath("../Health")
 metadata/_custom_type_script = "uid://dik22bwv6x5l5"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox"]
-polygon = PackedVector2Array(-12, -26, -18, -20, -21, -14, -23, -8, -24, -5, -25, -1, -25, 9, -24, 13, -27, 20, -27, 24, -25, 28, -22, 31, -12, 31, -1, 29, 7, 28, 12, 27, 15, 26, 23, 20, 27, 11, 27, 0, 25, -6, 23, -11, 18, -20, 12, -26, 10, -27, 5, -29, -6, -29)
+polygon = PackedVector2Array(1, 1, 1, 0, 0, 1)
 
 [connection signal="dragging" from="DraggableArea" to="." method="_on_draggable_area_dragging"]

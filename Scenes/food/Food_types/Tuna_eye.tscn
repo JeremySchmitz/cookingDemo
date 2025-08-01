@@ -15,10 +15,9 @@ shader = ExtResource("6_tltxi")
 shader_parameter/cookVal = 0.0
 shader_parameter/isBurnt = false
 
-[node name="Eye" type="Node2D" node_paths=PackedStringArray("collisionPoly", "sprite")]
+[node name="Eye" type="Node2D" node_paths=PackedStringArray("collisionPoly")]
 script = ExtResource("1_13a1j")
 collisionPoly = NodePath("DraggableArea/CollisionPolygon2D")
-sprite = NodePath("Choppable/Sprite2D")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_cds1n")

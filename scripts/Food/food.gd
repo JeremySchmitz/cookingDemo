@@ -1,18 +1,20 @@
 class_name Food
 extends Node2D
 
+
+
 #Should be the draggableArea's Collision Poly
-@export var collisionPoly: CollisionPolygon2D
+@onready var collisionPoly:= $DraggableArea/CollisionPolygon2D
 @onready var health = $Health
 @onready var hurtbox = $Hurtbox
+@onready var shaderSprite:= $sliceGroup/sliceSprite
 
-@export var sprite: Sprite2D
-@onready var shader_mat = sprite.material
-
-@export var bitmapSrc := ''
+@export_subgroup("Sprite")
+@export var bitmap: BitMap
 @export var spriteScale := 3.0
 
 	
+var shader_mat: ShaderMaterial
 var cooked := GlobalEnums.Cooked.RAW
 
 func _ready() -> void:
@@ -22,19 +24,23 @@ func _ready() -> void:
 	if has_node("Choppable") and $Choppable is Choppable:
 		$Choppable.chopped.connect(_on_choppable_choped)
 		
-	if bitmapSrc:
+	if bitmap:
 		_setCollisionFromBM()
+
+	if shaderSprite: shader_mat = shaderSprite.material
 		
 
 func _process(delta: float) -> void:
 	if find_child("Label"): find_child("Label").text = str(health.cooked)
 
 func _on_health_cooked_changed(val: int) -> void:
-	shader_mat.set_shader_parameter("cookVal", float(val))
+	if shader_mat:
+		shader_mat.set_shader_parameter("cookVal", float(val))
 
 func _on_health_cooked_burnt() -> void:
 	cooked = GlobalEnums.Cooked.BURNT
-	shader_mat.set_shader_parameter("isBurnt", true)
+	if shader_mat:
+		shader_mat.set_shader_parameter("isBurnt", true)
 
 func _on_choppable_choped(percent: float) -> void:
 	if has_node("Nutrition") and $Nutrition is Nutrition:
@@ -49,10 +55,9 @@ func _setCollisionFromBM():
 	collisionPoly = $Hurtbox/CollisionPolygon2D
 	
 func _buildCollisionFromBM() -> PackedVector2Array:
-	var bm: BitMap = load(bitmapSrc)
-	var size := bm.get_size() * spriteScale
-	bm.resize(size)
-	var poly := bm.opaque_to_polygons(Rect2(Vector2(), bm.get_size()))[0]
+	var size := bitmap.get_size() * spriteScale
+	bitmap.resize(size)
+	var poly := bitmap.opaque_to_polygons(Rect2(Vector2(), bitmap.get_size()))[0]
 
 	#center polygon
 	var colPoly = []

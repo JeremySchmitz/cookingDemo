@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dior7sydc3uif"]
+[gd_scene load_steps=20 format=3 uid="uid://dior7sydc3uif"]
 
 [ext_resource type="Script" uid="uid://bunuku5x2rt24" path="res://scripts/Food/food.gd" id="1_elblm"]
 [ext_resource type="Script" uid="uid://3qtest46ag4a" path="res://scripts/components/health.gd" id="2_6rgbf"]
@@ -11,9 +11,12 @@
 [ext_resource type="Script" uid="uid://ip3nwschvvkb" path="res://scripts/components/dragable_area.gd" id="9_ddhe2"]
 [ext_resource type="Shader" uid="uid://brchmr5hs31qg" path="res://resources/cook.gdshader" id="10_26fyx"]
 [ext_resource type="Texture2D" uid="uid://dh00iq0l367ma" path="res://resources/Sprites/Tuna/tuna_Skin.png" id="10_elblm"]
-[ext_resource type="PackedScene" uid="uid://by3nll5e0dpud" path="res://Scenes/food/Food_types/Tuna_eye.tscn" id="11_elblm"]
 [ext_resource type="Script" uid="uid://dik22bwv6x5l5" path="res://scripts/components/hurtbox.gd" id="12_46my7"]
 [ext_resource type="Script" uid="uid://det5k60wcmbbf" path="res://scripts/components/updateable_collider.gd" id="13_r7sot"]
+[ext_resource type="PackedScene" uid="uid://c1ixyyfmpabav" path="res://Scenes/food/organ.tscn" id="14_1ib3v"]
+[ext_resource type="Script" uid="uid://bkuh78a5kdr6w" path="res://resources/custom_resources/organ/organ.rsc.gd" id="15_a2log"]
+[ext_resource type="Texture2D" uid="uid://thqau3klg10e" path="res://resources/Sprites/Tuna/tuna_Eye.png" id="16_b0vwp"]
+[ext_resource type="BitMap" uid="uid://dakuueo5w6w12" path="res://resources/Sprites/Tuna/tuna_Eye_BM.png" id="17_ddhe2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lbb8q"]
 resource_local_to_scene = true
@@ -21,11 +24,23 @@ shader = ExtResource("10_26fyx")
 shader_parameter/cookVal = 0.0
 shader_parameter/isBurnt = false
 
-[node name="Tuna" type="Node2D" node_paths=PackedStringArray("collisionPoly", "sprite") groups=["food"]]
+[sub_resource type="Resource" id="Resource_1ib3v"]
+resource_name = "tunaEye"
+script = ExtResource("15_a2log")
+sprite = ExtResource("16_b0vwp")
+medium = 10
+wellDone = 15
+burnt = 20
+maxNutrition = 100.0
+nutrition = 90.0
+nutritionRentention = 0.99
+poisonWhileRaw = 0
+maxPoison = 0
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[node name="Tuna" type="Node2D" groups=["food"]]
 script = ExtResource("1_elblm")
-collisionPoly = NodePath("DraggableArea/CollisionPolygon2D")
-sprite = NodePath("sliceGroup/sliceSprite")
-bitmapSrc = "res://resources/Sprites/Tuna/tuna_BM.png"
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_6rgbf")
@@ -101,12 +116,14 @@ script = ExtResource("13_r7sot")
 collisionShape = NodePath("../../DraggableArea/CollisionPolygon2D")
 updateOn = "chopped"
 
-[node name="eye" parent="." instance=ExtResource("11_elblm")]
-position = Vector2(61, -3)
+[node name="eye" parent="." instance=ExtResource("14_1ib3v")]
 scale = Vector2(3, 3)
+stats = SubResource("Resource_1ib3v")
+bitmap = ExtResource("17_ddhe2")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 87.0
 offset_top = -26.0
 offset_right = 208.0
 offset_bottom = 54.0
+text = "0.0"
