@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://chwxkhjve4cec"
+path="res://.godot/imported/Crab_body_meat_06_BM.png-dcef515977f45af88af973dd458ef5bd.res"
+
+[deps]
+
+source_file="res://resources/Sprites/Crab/body_meat/Crab_body_meat_06_BM.png"
+dest_files=["res://.godot/imported/Crab_body_meat_06_BM.png-dcef515977f45af88af973dd458ef5bd.res"]
+
+[params]
+
+create_from=1
+threshold=0.5

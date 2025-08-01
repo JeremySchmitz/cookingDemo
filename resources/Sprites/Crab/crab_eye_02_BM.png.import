@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://c1w6m2yo0bc5b"
+path="res://.godot/imported/crab_eye_02_BM.png-e8bd5524bab57ff1da31e44d9cca0e18.res"
+
+[deps]
+
+source_file="res://resources/Sprites/Crab/crab_eye_02_BM.png"
+dest_files=["res://.godot/imported/crab_eye_02_BM.png-e8bd5524bab57ff1da31e44d9cca0e18.res"]
+
+[params]
+
+create_from=1
+threshold=0.5

@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://b7fc4ajeyypr1"
+path="res://.godot/imported/Crab_leg_meat_02_BM.png-f331c293f613b6c92bf9b2d3e8679b00.res"
+
+[deps]
+
+source_file="res://resources/Sprites/Crab/leg_meat/Crab_leg_meat_02_BM.png"
+dest_files=["res://.godot/imported/Crab_leg_meat_02_BM.png-f331c293f613b6c92bf9b2d3e8679b00.res"]
+
+[params]
+
+create_from=1
+threshold=0.5
