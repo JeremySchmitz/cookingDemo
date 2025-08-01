@@ -31,5 +31,16 @@ color = 1
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(186, 300)
 
+[node name="Label_Results" type="Label" parent="."]
+visible = false
+offset_left = 264.0
+offset_top = 153.0
+offset_right = 938.0
+offset_bottom = 461.0
+text = "YOU LOSE"
+label_settings = SubResource("LabelSettings_s3kbv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="clicked" from="CardDeck_pc" to="." method="_on_card_deck_pc_clicked"]
 [connection signal="clicked" from="CardDeck_npc" to="." method="_on_card_deck_npc_clicked"]

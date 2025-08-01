@@ -11,14 +11,13 @@ const gap := 0.5
 
 @export var color := DeckColor.BLUE
 
-var deckResouce: Array[CardResource] = []
+var deckResouce: Array[CardResource] = []:
+	set(val):
+		deckResouce = val
+		buildDeck()
+		setCardPos()
+
 @onready var cards = $Cards
-
-
-func _ready() -> void:
-	_buildDeck()
-	buildDeck()
-	setCardPos()
 
 func addCard(cardStat: CardResource):
 	var card: Card = cardScn.instantiate()
@@ -36,13 +35,6 @@ func buildDeck():
 	deckResouce.shuffle()
 	for card in deckResouce:
 		addCard(card)
-
-func _buildDeck():
-	var res: Resource = _getCardResource()
-	var deck: Array[CardResource] = []
-	for i in range(0, 10):
-		deck.append(res)
-	deckResouce = deck
 
 func _getCardResource():
 	match color:

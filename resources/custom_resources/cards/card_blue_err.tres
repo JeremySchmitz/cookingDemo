@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=4 format=3 uid="uid://be15dkx8xsq8i"]
+
+[ext_resource type="Script" uid="uid://dkv8222nkjkj8" path="res://resources/custom_resources/cards/card.rsc.gd" id="1_0nlk0"]
+[ext_resource type="Texture2D" uid="uid://cen4pf7cx383k" path="res://resources/Sprites/Bartering/card_blue_front.png" id="1_ct3ky"]
+[ext_resource type="Texture2D" uid="uid://b5usjxlomdobh" path="res://resources/Sprites/Bartering/card_blue_front_err.png" id="2_5cb75"]
+
+[resource]
+script = ExtResource("1_0nlk0")
+value = -1.0
+front = ExtResource("2_5cb75")
+back = ExtResource("1_ct3ky")
+metadata/_custom_type_script = "uid://dkv8222nkjkj8"
