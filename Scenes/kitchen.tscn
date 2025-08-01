@@ -23,8 +23,10 @@
 size = Vector2(499, 293)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fo5ed"]
+radius = 2.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5ukr8"]
+radius = 2.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iw6an"]
 atlas = ExtResource("11_32235")
@@ -105,12 +107,10 @@ position = Vector2(729, 461)
 [node name="Bowls" type="Node" parent="."]
 
 [node name="food" parent="." instance=ExtResource("5_32235")]
-visible = false
 position = Vector2(392, 155)
 
 [node name="Tuna" parent="." instance=ExtResource("5_t5hpn")]
-visible = false
-position = Vector2(171, 246)
+position = Vector2(739, 182)
 
 [node name="knifeChopper" type="Area2D" parent="."]
 script = ExtResource("6_5ukof")
@@ -153,7 +153,7 @@ rotation = -1.5708
 scale = Vector2(3, 3)
 
 [node name="Crab" parent="." instance=ExtResource("16_5ukof")]
-position = Vector2(199, 125)
+position = Vector2(255, 173)
 
 [node name="BoneParticles" type="CPUParticles2D" parent="."]
 emitting = false

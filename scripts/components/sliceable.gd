@@ -99,5 +99,6 @@ func _on_start_slice(p: Vector2):
 	sliceStart = p;
 
 func _on_end_slice(p: Vector2):
-	slice([sliceStart, p])
+	if p != Vector2(-1, -1):
+		slice([sliceStart, p])
 	sliceStart = Vector2(-1, -1)

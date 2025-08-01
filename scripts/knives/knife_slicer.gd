@@ -14,12 +14,9 @@ func _process(_delta):
 		if inCuttingBoard && Input.is_action_just_pressed("left_click"):
 			cutting = true
 			Utils.startSlice.emit(global_position)
-		elif inCuttingBoard && Input.is_action_just_released("left_click"):
+		elif cutting && inCuttingBoard && Input.is_action_just_released("left_click"):
 			cutting = false
-			if isInBone:
-				cutBone.emit(global_position)
-			else:
-				Utils.endSlice.emit(global_position)
+			Utils.endSlice.emit(global_position)
 
 	else:
 		global_position = Vector2(-10, -10)
@@ -33,10 +30,7 @@ func _on_mode_change(m: GlobalEnums.Mode):
 
 func _on_area_entered(body: Area2D):
 	super._on_area_entered(body)
-	if body is Bone && !(body as Bone).sliceable:
-		isInBone = true
-
-func _on_area_exited(body: Area2D):
-	super._on_area_exited(body)
-	if body is Bone && !(body as Bone).sliceable:
-		isInBone = false
+	if cutting && body is Bone && !(body as Bone).sliceable:
+		cutting = false
+		Utils.endSlice.emit(Vector2(-1, -1))
+		cutBone.emit(global_position)
