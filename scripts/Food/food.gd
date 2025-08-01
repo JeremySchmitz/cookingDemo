@@ -7,17 +7,20 @@ extends Node2D
 @onready var collisionPoly:= $DraggableArea/CollisionPolygon2D
 @onready var health = $Health
 @onready var hurtbox = $Hurtbox
-@onready var shaderSprite:= $sliceGroup/sliceSprite
+var shaderSprite: Sprite2D
 
 @export_subgroup("Sprite")
 @export var bitmap: BitMap
 @export var spriteScale := 3.0
-
+var spriteScaleSet = false
 	
 var shader_mat: ShaderMaterial
 var cooked := GlobalEnums.Cooked.RAW
 
 func _ready() -> void:
+	if(has_node("sliceGroup/sliceSprite")):
+		shaderSprite = 	get_node("sliceGroup/sliceSprite")
+	
 	if health:
 		health.cookedChanged.connect(_on_health_cooked_changed)
 		health.cookedBurnt.connect(_on_health_cooked_burnt)
@@ -49,10 +52,12 @@ func _on_choppable_choped(percent: float) -> void:
 		$Poison.updatePoisonAfterChop(percent)
 		
 func _setCollisionFromBM():
+	if spriteScaleSet: return
 	var poly = _buildCollisionFromBM()
 	$DraggableArea/CollisionPolygon2D.polygon = poly
 	$Hurtbox/CollisionPolygon2D.polygon = poly.duplicate()
 	collisionPoly = $Hurtbox/CollisionPolygon2D
+	spriteScaleSet = true
 	
 func _buildCollisionFromBM() -> PackedVector2Array:
 	var size := bitmap.get_size() * spriteScale

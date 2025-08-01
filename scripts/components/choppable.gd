@@ -22,7 +22,6 @@ var area: float
 var knifeEntered: Vector2
 var knifeExited: Vector2
 
-
 func _ready() -> void:
 	scene = load(scenePath)
 	collisionArea.area_entered.connect(_on_area_entered)
@@ -104,7 +103,7 @@ func _createChunk(chops: Array[PackedVector2Array], poly2: PackedVector2Array, n
 	
 
 func _updateChunk(chunk: Food, poly: PackedVector2Array, chops: Array[PackedVector2Array], newOrgans: Dictionary, pos: Vector2):
-	chunk.position = pos
+	chunk.spriteScaleSet = true
 	get_parent().add_sibling(chunk)
 	
 	if chunk.collisionPoly:
@@ -120,19 +119,24 @@ func _updateChunk(chunk: Food, poly: PackedVector2Array, chops: Array[PackedVect
 		if child is Choppable:
 			child._updateArea(poly)
 			for chop in chops:
-				child.addChops(chop)
+				if chop.size(): child.addChops(chop)
 			if "replaceOrgans" in child:
 				child.replaceOrgans.call_deferred(newOrgans)
-		
+	
+	chunk.position = pos
 
+		
 func replaceOrgans(newOrgans: Dictionary):
 	var organs
 	var vOrgans
-	
+	var bones
+
 	if "organs" in newOrgans:
 		organs = newOrgans.organs
 	if "vOrgans" in newOrgans:
 		vOrgans = newOrgans.vOrgans
+	if "bones" in newOrgans:
+		bones = newOrgans.bones
 		
 	var siblings = get_parent().get_children()
 	
@@ -152,16 +156,30 @@ func replaceOrgans(newOrgans: Dictionary):
 
 			if vOrgans:
 				for organ in vOrgans: (organ as Node2D).reparent(sibling)
+		
+		elif sibling.name == "Bones":
+			for n in sibling.get_children():
+				sibling.remove_child(n)
+				n.queue_free()
+
+			if bones:
+				for organ in bones:
+					(organ as Node2D).reparent(sibling)
+					(organ as Node2D).position = Vector2(0, 0)
 
 func updateOrgans(newPoly: PackedVector2Array):
 	var siblings = get_parent().get_children()
 	var organs
 	var vOrgans
+	var bones
 	var removeOrgans = []
 	var removeVOrgans = []
+	var removeBones = []
+
 	for child in siblings:
 		if child.name == "Organs": organs = child.get_children()
 		elif child.name == "VisibleOrgans": vOrgans = child.get_children()
+		elif child.name == "Bones": bones = child.get_children()
 	
 	var globalPoly = _getGlobalPoly(newPoly)
 	
@@ -178,8 +196,15 @@ func updateOrgans(newPoly: PackedVector2Array):
 			var organCenter = _getGobalCenter(organ.global_position, organ.polygon)
 			if !Geometry2D.is_point_in_polygon(organCenter, globalPoly):
 				removeVOrgans.append(organ)
+
+	if bones:
+		for bone in bones:
+			if bone is not Bone: break
+			var boneCenter = _getGobalCenter(bone.get_child(0).global_position, bone.get_child(0).polygon)
+			if !Geometry2D.is_point_in_polygon(boneCenter, globalPoly):
+				removeBones.append(bone)
 				
-	return {"organs": removeOrgans, "vOrgans": removeVOrgans}
+	return {"organs": removeOrgans, "vOrgans": removeVOrgans, "bones": removeBones}
 
 
 func _getGobalCenter(globalPos: Vector2, points: PackedVector2Array) -> Vector2:
@@ -187,7 +212,7 @@ func _getGobalCenter(globalPos: Vector2, points: PackedVector2Array) -> Vector2:
 	for p in points:
 		avg += p
 	avg /= points.size()
-	
+
 	return globalPos + avg
 	
 	

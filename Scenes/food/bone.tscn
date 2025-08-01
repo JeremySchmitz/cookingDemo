@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://d33muh3gkkpu5"]
 
-[ext_resource type="Script" path="res://scripts/Food/bone.gd" id="1_qnmy5"]
+[ext_resource type="Script" uid="uid://iwsfiwlbgqoe" path="res://scripts/Food/bone.gd" id="1_qnmy5"]
 [ext_resource type="Script" uid="uid://3qtest46ag4a" path="res://scripts/components/health.gd" id="2_eg7rq"]
 [ext_resource type="Script" uid="uid://cx3k7xle3gw0c" path="res://scripts/components/nutrition.gd" id="3_e3csk"]
 [ext_resource type="Script" uid="uid://c5ox7hexp2ty8" path="res://scripts/components/poison.gd" id="4_yy7fe"]
@@ -14,12 +14,7 @@ shader = ExtResource("6_xdy4a")
 shader_parameter/cookVal = 0.0
 shader_parameter/isBurnt = false
 
-[node name="Bone" type="Node2D" node_paths=PackedStringArray("collisionPoly", "sprite")]
-script = ExtResource("1_qnmy5")
-collisionPoly = NodePath("DraggableArea/CollisionPolygon2D")
-sprite = NodePath("Sprite2D")
-bitmapSrc = "res://resources/Sprites/Shared/LargeBone_BM.png"
-spriteScale = 1.0
+[node name="VisibleBone" type="Node2D"]
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_eg7rq")
@@ -59,6 +54,13 @@ health = NodePath("../Health")
 metadata/_custom_type_script = "uid://dik22bwv6x5l5"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox"]
+polygon = PackedVector2Array(-1, -16, -5, -14, -4, -8, -3, 2, -4, 11, -7, 13, -7, 16, -2, 16, 0, 15, 2, 10, 3, 6, 4, 3, 4, -7, 3, -9, 3, -11, 4, -13, 2, -16)
+
+[node name="Bone" type="Area2D" parent="."]
+script = ExtResource("1_qnmy5")
+metadata/_custom_type_script = "uid://iwsfiwlbgqoe"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bone"]
 polygon = PackedVector2Array(-1, -16, -5, -14, -4, -8, -3, 2, -4, 11, -7, 13, -7, 16, -2, 16, 0, 15, 2, 10, 3, 6, 4, 3, 4, -7, 3, -9, 3, -11, 4, -13, 2, -16)
 
 [connection signal="dragging" from="DraggableArea" to="." method="_on_draggable_area_dragging"]

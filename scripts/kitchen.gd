@@ -6,6 +6,7 @@ const BOWL_SCENE = preload("res://Scenes/food/bowl.tscn")
 const RESULTS_SCENE = preload("res://Scenes/food/results.tscn")
 
 @export var cameraMoveWait = .2;
+@onready var boneParticles: CPUParticles2D = $BoneParticles
 
 @onready var crew := CrewStatus.crew
 
@@ -49,3 +50,14 @@ func buildResultsScn(crewBefore: Array[Crew], crewAfter: Array[Crew]):
 	results.nextScene = "encounter"
 
 	return results
+
+
+func _on_knife_chopper_cut_bone(pos: Vector2) -> void:
+	_emitBoneParticles(pos)
+
+func _on_knife_slicer_cut_bone(pos: Vector2) -> void:
+	_emitBoneParticles(pos)
+	
+func _emitBoneParticles(pos: Vector2):
+	boneParticles.global_position = pos
+	boneParticles.emitting = true

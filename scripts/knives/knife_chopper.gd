@@ -1,14 +1,11 @@
 class_name KnifeChopper
 extends Knife
 
-@export var boneParticles: CPUParticles2D
+signal cutBone(pos: Vector2)
 
 var active: bool = false
 var cutting: bool = false
 
-
-func _ready():
-	super._ready()
 
 func _process(_delta):
 	if (active):
@@ -29,8 +26,8 @@ func _on_mode_change(m: GlobalEnums.Mode):
 
 func _on_area_entered(body: Area2D):
 	super._on_area_entered(body)
-	if cutting && body.get_parent() is Bone:
-		cutting = false
-		if boneParticles:
-			boneParticles.global_position = body.global_position
-			boneParticles.emitting = true
+	if cutting && body is Bone:
+		if !body.choppable:
+			cutting = false
+			cutBone.emit(body.global_position)
+		(body as Bone).chop()

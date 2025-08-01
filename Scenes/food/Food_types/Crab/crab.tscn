@@ -1,0 +1,649 @@
+[gd_scene load_steps=72 format=3 uid="uid://bfvipwuuj2khy"]
+
+[ext_resource type="Script" uid="uid://bunuku5x2rt24" path="res://scripts/Food/food.gd" id="1_b5dxw"]
+[ext_resource type="BitMap" uid="uid://c76ycfxc6ud7m" path="res://resources/Sprites/Crab/crab_body_BM.png" id="2_0q4yq"]
+[ext_resource type="Shader" uid="uid://brchmr5hs31qg" path="res://resources/cook.gdshader" id="2_60kmu"]
+[ext_resource type="Script" uid="uid://3qtest46ag4a" path="res://scripts/components/health.gd" id="2_leq4n"]
+[ext_resource type="Script" uid="uid://w6ocrvw6sksd" path="res://scripts/components/sliceable.gd" id="3_0q4yq"]
+[ext_resource type="Script" uid="uid://cx3k7xle3gw0c" path="res://scripts/components/nutrition.gd" id="4_ka2gr"]
+[ext_resource type="Script" uid="uid://c5ox7hexp2ty8" path="res://scripts/components/poison.gd" id="5_yuml1"]
+[ext_resource type="Script" uid="uid://0l0lpkxtrjtx" path="res://scripts/components/choppable.gd" id="6_rehdx"]
+[ext_resource type="Texture2D" uid="uid://clb0vvlyn471h" path="res://resources/Sprites/Crab/crab_body_under.png" id="7_dctrd"]
+[ext_resource type="Script" uid="uid://ip3nwschvvkb" path="res://scripts/components/dragable_area.gd" id="9_xurr8"]
+[ext_resource type="Texture2D" uid="uid://do8dh5yj5hekv" path="res://resources/Sprites/Crab/crab_body.png" id="11_leq4n"]
+[ext_resource type="Script" uid="uid://dik22bwv6x5l5" path="res://scripts/components/hurtbox.gd" id="12_lipgs"]
+[ext_resource type="Script" uid="uid://det5k60wcmbbf" path="res://scripts/components/updateable_collider.gd" id="13_1dyh4"]
+[ext_resource type="Script" uid="uid://iwsfiwlbgqoe" path="res://scripts/Food/bone.gd" id="14_leq4n"]
+[ext_resource type="PackedScene" uid="uid://c1ixyyfmpabav" path="res://Scenes/food/organ.tscn" id="15_bdwki"]
+[ext_resource type="Script" uid="uid://bkuh78a5kdr6w" path="res://resources/custom_resources/organ/organ.rsc.gd" id="16_xurr8"]
+[ext_resource type="Texture2D" uid="uid://bn4jo07g84klw" path="res://resources/Sprites/Crab/body_meat/Crab_body_meat_01.png" id="17_vbjj8"]
+[ext_resource type="BitMap" uid="uid://c3muidxntf5ls" path="res://resources/Sprites/Crab/body_meat/Crab_body_meat_01_BM.png" id="18_lipgs"]
+[ext_resource type="Texture2D" uid="uid://b7pd5tcmylmun" path="res://resources/Sprites/Crab/body_meat/Crab_body_meat_02.png" id="19_1dyh4"]
+[ext_resource type="BitMap" uid="uid://b3lpnju1pgquo" path="res://resources/Sprites/Crab/body_meat/Crab_body_meat_02_BM.png" id="20_gcoju"]
+[ext_resource type="Texture2D" uid="uid://b7c8a4kcpdpal" path="res://resources/Sprites/Crab/body_meat/Crab_body_meat_03.png" id="21_1dyh4"]
+[ext_resource type="BitMap" uid="uid://bm5mq1hrkc53u" path="res://resources/Sprites/Crab/body_meat/Crab_body_meat_03_BM.png" id="22_gcoju"]
+[ext_resource type="Texture2D" uid="uid://b5ksrmbns28s4" path="res://resources/Sprites/Crab/body_meat/Crab_body_meat_04.png" id="23_mlbyg"]
+[ext_resource type="BitMap" uid="uid://dexc6grxxeuro" path="res://resources/Sprites/Crab/body_meat/Crab_body_meat_04_BM.png" id="24_rqltn"]
+[ext_resource type="Texture2D" uid="uid://1d3rj4svds3x" path="res://resources/Sprites/Crab/body_meat/Crab_body_meat_05.png" id="25_bwt8d"]
+[ext_resource type="BitMap" uid="uid://b2ydqmych81dw" path="res://resources/Sprites/Crab/body_meat/Crab_body_meat_05_BM.png" id="26_htcqa"]
+[ext_resource type="Texture2D" uid="uid://bsq0ayuvjxlt4" path="res://resources/Sprites/Crab/body_meat/Crab_body_meat_06.png" id="27_3yrk6"]
+[ext_resource type="BitMap" uid="uid://chwxkhjve4cec" path="res://resources/Sprites/Crab/body_meat/Crab_body_meat_06_BM.png" id="28_nq1b2"]
+[ext_resource type="Texture2D" uid="uid://bcqeggpuflpkr" path="res://resources/Sprites/Crab/leg_meat/Crab_leg_meat_01.png" id="29_kjyge"]
+[ext_resource type="BitMap" uid="uid://c34qkydfn2xue" path="res://resources/Sprites/Crab/leg_meat/Crab_leg_meat_01_BM.png" id="30_qeqix"]
+[ext_resource type="Texture2D" uid="uid://de58l8uolb4de" path="res://resources/Sprites/Crab/leg_meat/Crab_leg_meat_02.png" id="31_i0fal"]
+[ext_resource type="BitMap" uid="uid://b7fc4ajeyypr1" path="res://resources/Sprites/Crab/leg_meat/Crab_leg_meat_02_BM.png" id="32_7qsr1"]
+[ext_resource type="Texture2D" uid="uid://bdkeiuq5ayu7k" path="res://resources/Sprites/Crab/leg_meat/Crab_leg_meat_03.png" id="33_rw2bn"]
+[ext_resource type="BitMap" uid="uid://bto5dwvbwfw67" path="res://resources/Sprites/Crab/leg_meat/Crab_leg_meat_03_BM.png" id="34_2swyc"]
+[ext_resource type="Texture2D" uid="uid://cj2jb5dx4y2tk" path="res://resources/Sprites/Crab/leg_meat/Crab_leg_meat_04.png" id="35_jy6lk"]
+[ext_resource type="BitMap" uid="uid://bqsup021tjtbv" path="res://resources/Sprites/Crab/leg_meat/Crab_leg_meat_04_BM.png" id="36_f5m1u"]
+[ext_resource type="Texture2D" uid="uid://c5baifrwckjsl" path="res://resources/Sprites/Crab/leg_meat/Crab_leg_meat_05.png" id="37_3doqg"]
+[ext_resource type="BitMap" uid="uid://d0wb2l5a7bttc" path="res://resources/Sprites/Crab/leg_meat/Crab_leg_meat_05_BM.png" id="38_a81ea"]
+[ext_resource type="Texture2D" uid="uid://bl5ahql3gd0jv" path="res://resources/Sprites/Crab/leg_meat/Crab_leg_meat_06.png" id="39_0u83b"]
+[ext_resource type="BitMap" uid="uid://dfo1d5n5ia1lc" path="res://resources/Sprites/Crab/leg_meat/Crab_leg_meat_06_BM.png" id="40_yw37k"]
+[ext_resource type="Texture2D" uid="uid://5imau4ekk7tk" path="res://resources/Sprites/Crab/leg_meat/Crab_leg_meat_07.png" id="41_f8mnj"]
+[ext_resource type="BitMap" uid="uid://cv53b12ndv14q" path="res://resources/Sprites/Crab/leg_meat/Crab_leg_meat_07_BM.png" id="42_7qent"]
+[ext_resource type="Texture2D" uid="uid://byktrk38eosob" path="res://resources/Sprites/Crab/leg_meat/Crab_leg_meat_08.png" id="43_n8a2a"]
+[ext_resource type="BitMap" uid="uid://wwpr5550h4wq" path="res://resources/Sprites/Crab/leg_meat/Crab_leg_meat_08_BM.png" id="44_xj7hs"]
+[ext_resource type="Texture2D" uid="uid://xak4td8lhwm0" path="res://resources/Sprites/Crab/leg_meat/Crab_leg_meat_09.png" id="45_eohhf"]
+[ext_resource type="Texture2D" uid="uid://b1dws7w6eq75d" path="res://resources/Sprites/Crab/crab_eye_02.png" id="45_n8a2a"]
+[ext_resource type="BitMap" uid="uid://ci2c360bk715h" path="res://resources/Sprites/Crab/leg_meat/Crab_leg_meat_09_BM.png" id="46_kgx3u"]
+[ext_resource type="BitMap" uid="uid://c1w6m2yo0bc5b" path="res://resources/Sprites/Crab/crab_eye_02_BM.png" id="46_xj7hs"]
+[ext_resource type="Texture2D" uid="uid://y280i1phhtrg" path="res://resources/Sprites/Crab/leg_meat/Crab_leg_meat_10.png" id="47_ihmtx"]
+[ext_resource type="BitMap" uid="uid://xrr4r864yi3o" path="res://resources/Sprites/Crab/leg_meat/Crab_leg_meat_10_BM.png" id="48_b7c65"]
+[ext_resource type="Texture2D" uid="uid://chc0tyg45m0xs" path="res://resources/Sprites/Crab/Crab_eye_01.png" id="50_n8a2a"]
+[ext_resource type="BitMap" uid="uid://cln24irtq6p7d" path="res://resources/Sprites/Crab/Crab_eye_01_BM.png" id="51_xj7hs"]
+
+[sub_resource type="Resource" id="Resource_mlbyg"]
+resource_name = "crabBodyMeat01"
+script = ExtResource("16_xurr8")
+sprite = ExtResource("17_vbjj8")
+spriteScale = Vector2(3, 3)
+medium = 50
+wellDone = 75
+burnt = 100
+maxNutrition = 100.0
+nutrition = 10.0
+nutritionRentention = 0.99
+poisonWhileRaw = 0
+maxPoison = 30
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[sub_resource type="Resource" id="Resource_rqltn"]
+script = ExtResource("16_xurr8")
+sprite = ExtResource("19_1dyh4")
+spriteScale = Vector2(3, 3)
+medium = 50
+wellDone = 75
+burnt = 100
+maxNutrition = 100.0
+nutrition = 10.0
+nutritionRentention = 0.99
+poisonWhileRaw = 0
+maxPoison = 30
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[sub_resource type="Resource" id="Resource_bwt8d"]
+script = ExtResource("16_xurr8")
+sprite = ExtResource("21_1dyh4")
+spriteScale = Vector2(3, 3)
+medium = 50
+wellDone = 75
+burnt = 100
+maxNutrition = 100.0
+nutrition = 10.0
+nutritionRentention = 0.99
+poisonWhileRaw = 0
+maxPoison = 30
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[sub_resource type="Resource" id="Resource_htcqa"]
+script = ExtResource("16_xurr8")
+sprite = ExtResource("23_mlbyg")
+spriteScale = Vector2(3, 3)
+medium = 50
+wellDone = 75
+burnt = 100
+maxNutrition = 100.0
+nutrition = 10.0
+nutritionRentention = 0.99
+poisonWhileRaw = 0
+maxPoison = 30
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[sub_resource type="Resource" id="Resource_ycuwx"]
+script = ExtResource("16_xurr8")
+sprite = ExtResource("25_bwt8d")
+spriteScale = Vector2(3, 3)
+medium = 50
+wellDone = 75
+burnt = 100
+maxNutrition = 100.0
+nutrition = 10.0
+nutritionRentention = 0.99
+poisonWhileRaw = 0
+maxPoison = 30
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[sub_resource type="Resource" id="Resource_4vlym"]
+script = ExtResource("16_xurr8")
+sprite = ExtResource("27_3yrk6")
+spriteScale = Vector2(3, 3)
+medium = 50
+wellDone = 75
+burnt = 100
+maxNutrition = 100.0
+nutrition = 10.0
+nutritionRentention = 0.99
+poisonWhileRaw = 0
+maxPoison = 30
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[sub_resource type="Resource" id="Resource_0u83b"]
+script = ExtResource("16_xurr8")
+sprite = ExtResource("29_kjyge")
+spriteScale = Vector2(3, 3)
+medium = 50
+wellDone = 75
+burnt = 100
+maxNutrition = 100.0
+nutrition = 10.0
+nutritionRentention = 0.99
+poisonWhileRaw = 0
+maxPoison = 30
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[sub_resource type="Resource" id="Resource_yw37k"]
+script = ExtResource("16_xurr8")
+sprite = ExtResource("31_i0fal")
+spriteScale = Vector2(3, 3)
+medium = 50
+wellDone = 75
+burnt = 100
+maxNutrition = 100.0
+nutrition = 10.0
+nutritionRentention = 0.99
+poisonWhileRaw = 0
+maxPoison = 30
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[sub_resource type="Resource" id="Resource_f8mnj"]
+script = ExtResource("16_xurr8")
+sprite = ExtResource("33_rw2bn")
+spriteScale = Vector2(3, 3)
+medium = 50
+wellDone = 75
+burnt = 100
+maxNutrition = 100.0
+nutrition = 10.0
+nutritionRentention = 0.99
+poisonWhileRaw = 0
+maxPoison = 30
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[sub_resource type="Resource" id="Resource_7qent"]
+script = ExtResource("16_xurr8")
+sprite = ExtResource("35_jy6lk")
+spriteScale = Vector2(3, 3)
+medium = 50
+wellDone = 75
+burnt = 100
+maxNutrition = 100.0
+nutrition = 10.0
+nutritionRentention = 0.99
+poisonWhileRaw = 0
+maxPoison = 30
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[sub_resource type="Resource" id="Resource_n8a2a"]
+script = ExtResource("16_xurr8")
+sprite = ExtResource("37_3doqg")
+spriteScale = Vector2(3, 3)
+medium = 50
+wellDone = 75
+burnt = 100
+maxNutrition = 100.0
+nutrition = 10.0
+nutritionRentention = 0.99
+poisonWhileRaw = 0
+maxPoison = 30
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[sub_resource type="Resource" id="Resource_2cjh5"]
+script = ExtResource("16_xurr8")
+sprite = ExtResource("39_0u83b")
+spriteScale = Vector2(3, 3)
+medium = 50
+wellDone = 75
+burnt = 100
+maxNutrition = 100.0
+nutrition = 10.0
+nutritionRentention = 0.99
+poisonWhileRaw = 0
+maxPoison = 30
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[sub_resource type="Resource" id="Resource_catfe"]
+script = ExtResource("16_xurr8")
+sprite = ExtResource("41_f8mnj")
+spriteScale = Vector2(3, 3)
+medium = 50
+wellDone = 75
+burnt = 100
+maxNutrition = 100.0
+nutrition = 10.0
+nutritionRentention = 0.99
+poisonWhileRaw = 0
+maxPoison = 30
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[sub_resource type="Resource" id="Resource_4dynl"]
+script = ExtResource("16_xurr8")
+sprite = ExtResource("43_n8a2a")
+spriteScale = Vector2(3, 3)
+medium = 50
+wellDone = 75
+burnt = 100
+maxNutrition = 100.0
+nutrition = 10.0
+nutritionRentention = 0.99
+poisonWhileRaw = 0
+maxPoison = 30
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[sub_resource type="Resource" id="Resource_5flrn"]
+script = ExtResource("16_xurr8")
+sprite = ExtResource("45_eohhf")
+spriteScale = Vector2(3, 3)
+medium = 50
+wellDone = 75
+burnt = 100
+maxNutrition = 100.0
+nutrition = 10.0
+nutritionRentention = 0.99
+poisonWhileRaw = 0
+maxPoison = 30
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[sub_resource type="Resource" id="Resource_1mdqh"]
+script = ExtResource("16_xurr8")
+sprite = ExtResource("47_ihmtx")
+spriteScale = Vector2(3, 3)
+medium = 50
+wellDone = 75
+burnt = 100
+maxNutrition = 100.0
+nutrition = 10.0
+nutritionRentention = 0.99
+poisonWhileRaw = 0
+maxPoison = 30
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[sub_resource type="Resource" id="Resource_xj7hs"]
+script = ExtResource("16_xurr8")
+sprite = ExtResource("50_n8a2a")
+spriteScale = Vector2(3, 3)
+medium = 50
+wellDone = 75
+burnt = 100
+maxNutrition = 100.0
+nutrition = 10.0
+nutritionRentention = 0.99
+poisonWhileRaw = 0
+maxPoison = 30
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[sub_resource type="Resource" id="Resource_eohhf"]
+script = ExtResource("16_xurr8")
+sprite = ExtResource("45_n8a2a")
+spriteScale = Vector2(3, 3)
+medium = 50
+wellDone = 75
+burnt = 100
+maxNutrition = 100.0
+nutrition = 10.0
+nutritionRentention = 0.99
+poisonWhileRaw = 0
+maxPoison = 30
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wbbgt"]
+resource_local_to_scene = true
+shader = ExtResource("2_60kmu")
+shader_parameter/cookVal = 0.0
+shader_parameter/isBurnt = false
+
+[node name="Crab" type="Node2D" groups=["food"]]
+script = ExtResource("1_b5dxw")
+bitmap = ExtResource("2_0q4yq")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_leq4n")
+
+[node name="Sliceable" type="Node" parent="." node_paths=PackedStringArray("collisionArea", "group", "organs", "visibleOrgans")]
+script = ExtResource("3_0q4yq")
+collisionArea = NodePath("../DraggableArea")
+group = NodePath("../sliceGroup")
+organs = NodePath("../Organs")
+visibleOrgans = NodePath("../VisibleOrgans")
+metadata/_custom_type_script = "uid://w6ocrvw6sksd"
+
+[node name="Nutrition" type="Node" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("4_ka2gr")
+health = NodePath("../Health")
+
+[node name="Poison" type="Node" parent="."]
+script = ExtResource("5_yuml1")
+poisonWhileRaw = 10
+maxPoison = 10
+
+[node name="Choppable" type="CanvasGroup" parent="." node_paths=PackedStringArray("collisionArea", "collisionNode", "sliceGroup")]
+script = ExtResource("6_rehdx")
+collisionArea = NodePath("../DraggableArea")
+collisionNode = NodePath("../DraggableArea/CollisionPolygon2D")
+sliceGroup = NodePath("../sliceGroup")
+scenePath = "res://Scenes/food/Food_types/Crab/crab.tscn"
+
+[node name="Sprite2D2" type="Sprite2D" parent="Choppable"]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("7_dctrd")
+
+[node name="Organs" type="Node2D" parent="."]
+
+[node name="Organ_b_01" parent="Organs" instance=ExtResource("15_bdwki")]
+stats = SubResource("Resource_mlbyg")
+bitmap = ExtResource("18_lipgs")
+spriteScale = 3.0
+
+[node name="Organ_b_02" parent="Organs" instance=ExtResource("15_bdwki")]
+stats = SubResource("Resource_rqltn")
+bitmap = ExtResource("20_gcoju")
+spriteScale = 3.0
+
+[node name="Organ_b_03" parent="Organs" instance=ExtResource("15_bdwki")]
+stats = SubResource("Resource_bwt8d")
+bitmap = ExtResource("22_gcoju")
+spriteScale = 3.0
+
+[node name="Organ_b_04" parent="Organs" instance=ExtResource("15_bdwki")]
+stats = SubResource("Resource_htcqa")
+bitmap = ExtResource("24_rqltn")
+spriteScale = 3.0
+
+[node name="Organ_b_05" parent="Organs" instance=ExtResource("15_bdwki")]
+stats = SubResource("Resource_ycuwx")
+bitmap = ExtResource("26_htcqa")
+spriteScale = 3.0
+
+[node name="Organ_b_06" parent="Organs" instance=ExtResource("15_bdwki")]
+stats = SubResource("Resource_4vlym")
+bitmap = ExtResource("28_nq1b2")
+spriteScale = 3.0
+
+[node name="Organ_l_01" parent="Organs" instance=ExtResource("15_bdwki")]
+stats = SubResource("Resource_0u83b")
+bitmap = ExtResource("30_qeqix")
+spriteScale = 3.0
+
+[node name="Organ_l_02" parent="Organs" instance=ExtResource("15_bdwki")]
+stats = SubResource("Resource_yw37k")
+bitmap = ExtResource("32_7qsr1")
+spriteScale = 3.0
+
+[node name="Organ_l_03" parent="Organs" instance=ExtResource("15_bdwki")]
+stats = SubResource("Resource_f8mnj")
+bitmap = ExtResource("34_2swyc")
+spriteScale = 3.0
+
+[node name="Organ_l_04" parent="Organs" instance=ExtResource("15_bdwki")]
+stats = SubResource("Resource_7qent")
+bitmap = ExtResource("36_f5m1u")
+spriteScale = 3.0
+
+[node name="Organ_l_05" parent="Organs" instance=ExtResource("15_bdwki")]
+stats = SubResource("Resource_n8a2a")
+bitmap = ExtResource("38_a81ea")
+spriteScale = 3.0
+
+[node name="Organ_l_06" parent="Organs" instance=ExtResource("15_bdwki")]
+stats = SubResource("Resource_2cjh5")
+bitmap = ExtResource("40_yw37k")
+spriteScale = 3.0
+
+[node name="Organ_l_07" parent="Organs" instance=ExtResource("15_bdwki")]
+stats = SubResource("Resource_catfe")
+bitmap = ExtResource("42_7qent")
+spriteScale = 3.0
+
+[node name="Organ_l_08" parent="Organs" instance=ExtResource("15_bdwki")]
+stats = SubResource("Resource_4dynl")
+bitmap = ExtResource("44_xj7hs")
+spriteScale = 3.0
+
+[node name="Organ_l_09" parent="Organs" instance=ExtResource("15_bdwki")]
+stats = SubResource("Resource_5flrn")
+bitmap = ExtResource("46_kgx3u")
+spriteScale = 3.0
+
+[node name="Organ_l_10" parent="Organs" instance=ExtResource("15_bdwki")]
+stats = SubResource("Resource_1mdqh")
+bitmap = ExtResource("48_b7c65")
+spriteScale = 3.0
+
+[node name="Organ_eye_01" parent="Organs" instance=ExtResource("15_bdwki")]
+stats = SubResource("Resource_xj7hs")
+bitmap = ExtResource("51_xj7hs")
+spriteScale = 3.0
+
+[node name="Organ_eye_02" parent="Organs" instance=ExtResource("15_bdwki")]
+stats = SubResource("Resource_eohhf")
+bitmap = ExtResource("46_xj7hs")
+spriteScale = 3.0
+
+[node name="DraggableArea" type="Area2D" parent="."]
+script = ExtResource("9_xurr8")
+metadata/_custom_type_script = "uid://ip3nwschvvkb"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DraggableArea" groups=["food"]]
+polygon = PackedVector2Array(3, -11, -6, -9, -1, 4)
+
+[node name="VisibleOrgans" type="Node2D" parent="."]
+
+[node name="sliceGroup" type="CanvasGroup" parent="."]
+texture_filter = 1
+
+[node name="sliceSprite" type="Sprite2D" parent="sliceGroup"]
+material = SubResource("ShaderMaterial_wbbgt")
+scale = Vector2(3, 3)
+texture = ExtResource("11_leq4n")
+
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("12_lipgs")
+health = NodePath("../Health")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox" node_paths=PackedStringArray("collisionShape")]
+polygon = PackedVector2Array(-3, -11, -11, 1, 6, 6)
+script = ExtResource("13_1dyh4")
+collisionShape = NodePath("../../DraggableArea/CollisionPolygon2D")
+updateOn = "chopped"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 87.0
+offset_top = -26.0
+offset_right = 208.0
+offset_bottom = 54.0
+text = "0.0"
+
+[node name="Bones" type="Node2D" parent="."]
+
+[node name="Bone_01" type="Area2D" parent="Bones"]
+script = ExtResource("14_leq4n")
+choppable = true
+breakable = true
+metadata/_custom_type_script = "uid://iwsfiwlbgqoe"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bones/Bone_01"]
+polygon = PackedVector2Array(-22, -27, -38, -19, -58, -4, -58, 9, -55, 17, -6, 15, -5, -27)
+
+[node name="Bone_02" type="Area2D" parent="Bones"]
+script = ExtResource("14_leq4n")
+choppable = true
+breakable = true
+metadata/_custom_type_script = "uid://iwsfiwlbgqoe"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bones/Bone_02"]
+polygon = PackedVector2Array(5, -28, 23, -28, 58, -4, 57, 12, 55, 15, 6, 15)
+
+[node name="Bone_03" type="Area2D" parent="Bones"]
+script = ExtResource("14_leq4n")
+choppable = true
+breakable = true
+metadata/_custom_type_script = "uid://iwsfiwlbgqoe"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bones/Bone_03"]
+polygon = PackedVector2Array(3, 60, 18, 60, 26, 53, 27, 45, 36, 44, 36, 36, 45, 36, 45, 24, 55, 21, 38, 22, 7, 23)
+
+[node name="Bone_04" type="Area2D" parent="Bones"]
+script = ExtResource("14_leq4n")
+choppable = true
+breakable = true
+metadata/_custom_type_script = "uid://iwsfiwlbgqoe"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bones/Bone_04"]
+polygon = PackedVector2Array(-52, 23, -7, 24, -3, 60, -18, 60, -27, 54, -27, 45, -36, 45, -36, 36, -45, 36, -45, 24)
+
+[node name="Bone_05" type="Area2D" parent="Bones"]
+script = ExtResource("14_leq4n")
+choppable = true
+breakable = true
+metadata/_custom_type_script = "uid://iwsfiwlbgqoe"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bones/Bone_05"]
+polygon = PackedVector2Array(-38, 45, -46, 48, -54, 55, -57, 63, -57, 84, -53, 84, -51, 81, -48, 75, -43, 66, -38.556, 60.0532, -27, 54, -27, 45)
+
+[node name="Bone_06" type="Area2D" parent="Bones"]
+script = ExtResource("14_leq4n")
+choppable = true
+breakable = true
+metadata/_custom_type_script = "uid://iwsfiwlbgqoe"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bones/Bone_06"]
+position = Vector2(-8, -15)
+polygon = PackedVector2Array(-28, 51, -52, 51, -62, 56, -67, 63, -67, 72, -61, 72, -58, 66, -42, 60, -31, 60, -28, 57)
+
+[node name="Bone_07" type="Area2D" parent="Bones"]
+script = ExtResource("14_leq4n")
+choppable = true
+breakable = true
+metadata/_custom_type_script = "uid://iwsfiwlbgqoe"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bones/Bone_07"]
+position = Vector2(-8, -15)
+polygon = PackedVector2Array(-36, 36, -60, 36, -70, 40, -76, 48, -76, 64, -73, 64, -70, 60, -66, 54, -61, 51, -55, 48, -37, 45)
+
+[node name="Bone_08" type="Area2D" parent="Bones"]
+script = ExtResource("14_leq4n")
+choppable = true
+breakable = true
+metadata/_custom_type_script = "uid://iwsfiwlbgqoe"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bones/Bone_08"]
+position = Vector2(-8, -15)
+polygon = PackedVector2Array(-85, 6, -85, 15, -70, 30, -63, 31, -62, 34, -46, 33, -49, 23, -57, 23, -58, 21, -67, 21, -67, 18, -82, 6)
+
+[node name="Bone_09" type="Area2D" parent="Bones"]
+script = ExtResource("14_leq4n")
+choppable = true
+breakable = true
+metadata/_custom_type_script = "uid://iwsfiwlbgqoe"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bones/Bone_09"]
+position = Vector2(-8, -15)
+polygon = PackedVector2Array(-64, -18, -55, -18, -34, 1, -43, 8, -60, -1, -64, -13)
+
+[node name="Bone_10" type="Area2D" parent="Bones"]
+script = ExtResource("14_leq4n")
+choppable = true
+breakable = true
+metadata/_custom_type_script = "uid://iwsfiwlbgqoe"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bones/Bone_10"]
+position = Vector2(-8, -15)
+polygon = PackedVector2Array(-69, -62, -52, -59, -45, -44, -46, -18, -67, -17, -75, -24, -75, -58)
+
+[node name="Bone_11" type="Area2D" parent="Bones"]
+script = ExtResource("14_leq4n")
+choppable = true
+breakable = true
+metadata/_custom_type_script = "uid://iwsfiwlbgqoe"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bones/Bone_11"]
+polygon = PackedVector2Array(37, 44, 27, 45, 26, 55, 31, 56, 38, 62, 44, 68, 46, 73, 50, 84, 58, 85, 58, 77, 59, 62, 52, 54, 45, 47)
+
+[node name="Bone_12" type="Area2D" parent="Bones"]
+script = ExtResource("14_leq4n")
+choppable = true
+breakable = true
+metadata/_custom_type_script = "uid://iwsfiwlbgqoe"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bones/Bone_12"]
+position = Vector2(-8, -15)
+polygon = PackedVector2Array(84, 72, 76, 73, 74, 67, 66, 63, 62, 61, 50, 61, 44, 57, 44, 51, 53, 51, 70, 51, 80, 57, 85, 64)
+
+[node name="Bone_13" type="Area2D" parent="Bones"]
+script = ExtResource("14_leq4n")
+choppable = true
+breakable = true
+metadata/_custom_type_script = "uid://iwsfiwlbgqoe"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bones/Bone_13"]
+position = Vector2(-8, -15)
+polygon = PackedVector2Array(74, 35, 62, 35, 52, 39, 53, 45, 65, 47, 71, 50, 79, 54, 85, 60, 88, 65, 96, 65, 96, 53, 94, 41, 83, 37)
+
+[node name="Bone_14" type="Area2D" parent="Bones"]
+script = ExtResource("14_leq4n")
+choppable = true
+breakable = true
+metadata/_custom_type_script = "uid://iwsfiwlbgqoe"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bones/Bone_14"]
+position = Vector2(-8, -15)
+polygon = PackedVector2Array(63, 23, 81, 18, 94, 4, 104, 4, 104, 16, 92, 32, 79, 34, 60, 35)
+
+[node name="Bone_15" type="Area2D" parent="Bones"]
+script = ExtResource("14_leq4n")
+choppable = true
+breakable = true
+metadata/_custom_type_script = "uid://iwsfiwlbgqoe"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bones/Bone_15"]
+position = Vector2(-8, -15)
+polygon = PackedVector2Array(50, -2, 50, 9, 61, 10, 71, 3, 82, -14, 81, -18, 70, -18, 64, -12, 58, -4)
+
+[node name="Bone_16" type="Area2D" parent="Bones"]
+script = ExtResource("14_leq4n")
+choppable = true
+breakable = true
+metadata/_custom_type_script = "uid://iwsfiwlbgqoe"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bones/Bone_16"]
+position = Vector2(-8, -15)
+polygon = PackedVector2Array(84, -18, 66, -18, 64, -24, 64, -49, 71, -56, 76, -61, 85, -60, 91, -50, 90, -23)

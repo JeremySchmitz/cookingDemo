@@ -14,6 +14,7 @@
 [sub_resource type="Resource" id="Resource_1utlc"]
 script = ExtResource("2_snl8s")
 sprite = ExtResource("3_1n0ni")
+spriteScale = Vector2(1, 1)
 medium = 50
 wellDone = 75
 burnt = 100

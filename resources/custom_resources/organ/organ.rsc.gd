@@ -2,6 +2,7 @@ extends Resource
 class_name OrganResource
 
 @export var sprite: Texture
+@export var spriteScale:= Vector2(1,1)
 
 @export_subgroup("Health")
 @export var medium: int = 50

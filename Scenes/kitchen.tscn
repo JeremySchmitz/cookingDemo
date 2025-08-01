@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cax40kgn23m3q"]
+[gd_scene load_steps=25 format=3 uid="uid://cax40kgn23m3q"]
 
 [ext_resource type="Script" uid="uid://bq6d71fqsv1h6" path="res://scripts/kitchen.gd" id="1_4clir"]
 [ext_resource type="Texture2D" uid="uid://roubacvs6dht" path="res://resources/Sprites/Kitchen/CuttingBoard.png" id="2_t5hpn"]
@@ -15,6 +15,7 @@
 [ext_resource type="BitMap" uid="uid://b3i0k8is4vlvh" path="res://resources/Sprites/Kitchen/bell_clickMask.png" id="11_bgcuo"]
 [ext_resource type="Texture2D" uid="uid://ctb4y1xwha2l" path="res://resources/Sprites/Kitchen/knives/knife_slice.png" id="12_5ukof"]
 [ext_resource type="PackedScene" uid="uid://euo8cywo2d7e" path="res://Scenes/food/knife_bag.tscn" id="14_ykbxl"]
+[ext_resource type="PackedScene" uid="uid://bfvipwuuj2khy" path="res://Scenes/food/Food_types/Crab/crab.tscn" id="16_5ukof"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0fj1v"]
 
@@ -104,33 +105,18 @@ position = Vector2(729, 461)
 [node name="Bowls" type="Node" parent="."]
 
 [node name="food" parent="." instance=ExtResource("5_32235")]
+visible = false
 position = Vector2(392, 155)
 
 [node name="Tuna" parent="." instance=ExtResource("5_t5hpn")]
+visible = false
 position = Vector2(171, 246)
 
-[node name="knifeChopper" type="Area2D" parent="." node_paths=PackedStringArray("boneParticles")]
+[node name="knifeChopper" type="Area2D" parent="."]
 script = ExtResource("6_5ukof")
-boneParticles = NodePath("BoneParticles")
 
 [node name="knifeCollider" type="CollisionShape2D" parent="knifeChopper"]
 shape = SubResource("CircleShape2D_fo5ed")
-
-[node name="BoneParticles" type="CPUParticles2D" parent="knifeChopper"]
-emitting = false
-amount = 20
-lifetime = 0.2
-one_shot = true
-explosiveness = 1.0
-randomness = 0.5
-lifetime_randomness = 0.5
-direction = Vector2(0, 0)
-spread = 120.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 300.0
-initial_velocity_max = 500.0
-scale_amount_min = 2.0
-scale_amount_max = 5.0
 
 [node name="knifeSlicer" type="Area2D" parent="."]
 script = ExtResource("7_iw6an")
@@ -166,4 +152,25 @@ position = Vector2(216, 492)
 rotation = -1.5708
 scale = Vector2(3, 3)
 
+[node name="Crab" parent="." instance=ExtResource("16_5ukof")]
+position = Vector2(199, 125)
+
+[node name="BoneParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 20
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+randomness = 0.5
+lifetime_randomness = 0.5
+direction = Vector2(0, 0)
+spread = 120.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 300.0
+initial_velocity_max = 500.0
+scale_amount_min = 2.0
+scale_amount_max = 5.0
+
+[connection signal="cutBone" from="knifeChopper" to="." method="_on_knife_chopper_cut_bone"]
+[connection signal="cutBone" from="knifeSlicer" to="." method="_on_knife_slicer_cut_bone"]
 [connection signal="pressed" from="dinnerBellBtn" to="." method="_on_dinner_bell_btn_pressed"]

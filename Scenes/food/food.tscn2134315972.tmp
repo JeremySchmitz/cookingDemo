@@ -1,8 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://ccw7uq7go4ivt"]
+[gd_scene load_steps=19 format=3 uid="uid://ccw7uq7go4ivt"]
 
 [ext_resource type="Script" uid="uid://ip3nwschvvkb" path="res://scripts/components/dragable_area.gd" id="1_fhto3"]
 [ext_resource type="Script" uid="uid://bunuku5x2rt24" path="res://scripts/Food/food.gd" id="1_h4kkx"]
-[ext_resource type="BitMap" uid="uid://ccul8rhwq3w2b" path="res://resources/Sprites/PufferFish/PufferFish_BM.png" id="2_yjw8s"]
 [ext_resource type="Script" uid="uid://0l0lpkxtrjtx" path="res://scripts/components/choppable.gd" id="3_h4kkx"]
 [ext_resource type="Script" uid="uid://c5ox7hexp2ty8" path="res://scripts/components/poison.gd" id="4_83vc0"]
 [ext_resource type="Script" uid="uid://3qtest46ag4a" path="res://scripts/components/health.gd" id="4_d37wj"]
@@ -21,7 +20,6 @@
 [sub_resource type="Resource" id="Resource_ftejc"]
 script = ExtResource("9_ue4cl")
 sprite = ExtResource("10_yjw8s")
-spriteScale = Vector2(1, 1)
 medium = 50
 wellDone = 75
 burnt = 100
@@ -41,7 +39,6 @@ shader_parameter/isBurnt = false
 
 [node name="Pufferfish" type="Node2D" groups=["food"]]
 script = ExtResource("1_h4kkx")
-bitmap = ExtResource("2_yjw8s")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_d37wj")
