@@ -1,13 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8dpp11hgwnlg"]
+[gd_scene load_steps=6 format=3 uid="uid://b8dpp11hgwnlg"]
 
 [ext_resource type="Script" uid="uid://cgksgcgxyr5q0" path="res://scripts/Bartering/barter.gd" id="1_s3kbv"]
 [ext_resource type="PackedScene" uid="uid://cwoqnxv7jrl3f" path="res://Scenes/Bartering/card_deck.tscn" id="1_wuqyt"]
+[ext_resource type="Resource" uid="uid://cdvj6i2ugd7rw" path="res://resources/custom_resources/shopKeepers/shopkeeper_timid.tres" id="2_vyuch"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_s3kbv"]
 font_size = 45
 
+[sub_resource type="LabelSettings" id="LabelSettings_vyuch"]
+font_size = 40
+font_color = Color(0, 0, 0, 1)
+
 [node name="Barter" type="Node2D"]
 script = ExtResource("1_s3kbv")
+keeper = ExtResource("2_vyuch")
 
 [node name="Label_total" type="Label" parent="."]
 offset_left = 22.0
@@ -31,16 +37,117 @@ color = 1
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(186, 300)
 
-[node name="Label_Results" type="Label" parent="."]
+[node name="Offer" type="Node2D" parent="."]
 visible = false
-offset_left = 264.0
+
+[node name="Polygon2D" type="Polygon2D" parent="Offer"]
+polygon = PackedVector2Array(180, 144, 175, 435, 980, 435, 982, 144)
+
+[node name="Label_Results" type="Label" parent="Offer"]
+offset_left = 181.0
 offset_top = 153.0
-offset_right = 938.0
-offset_bottom = 461.0
-text = "YOU LOSE"
-label_settings = SubResource("LabelSettings_s3kbv")
+offset_right = 982.0
+offset_bottom = 240.0
+text = "The shopkeeper wants to settle:"
+label_settings = SubResource("LabelSettings_vyuch")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Offer_reject" type="Button" parent="Offer"]
+offset_left = 338.0
+offset_top = 270.0
+offset_right = 399.0
+offset_bottom = 301.0
+scale = Vector2(2, 2)
+text = " REJECT "
+
+[node name="Offer_accept" type="Button" parent="Offer"]
+offset_left = 680.0
+offset_top = 270.0
+offset_right = 747.0
+offset_bottom = 301.0
+scale = Vector2(2, 2)
+text = " ACCEPT "
+
+[node name="Offer_results" type="Node2D" parent="."]
+visible = false
+
+[node name="Polygon2D" type="Polygon2D" parent="Offer_results"]
+polygon = PackedVector2Array(180, 144, 175, 435, 980, 435, 982, 144)
+
+[node name="Label_Results_offer" type="Label" parent="Offer_results"]
+offset_left = 181.0
+offset_top = 204.0
+offset_right = 982.0
+offset_bottom = 291.0
+text = "The shopkeeper declined your offer"
+label_settings = SubResource("LabelSettings_vyuch")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="continue" type="Button" parent="Offer_results"]
+offset_left = 482.0
+offset_top = 319.0
+offset_right = 569.0
+offset_bottom = 350.0
+scale = Vector2(2, 2)
+text = " Continue "
+
+[node name="Results" type="Node2D" parent="."]
+visible = false
+
+[node name="Polygon2D" type="Polygon2D" parent="Results"]
+polygon = PackedVector2Array(180, 144, 175, 435, 980, 435, 982, 144)
+
+[node name="Label_message" type="Label" parent="Results"]
+offset_left = 181.0
+offset_top = 153.0
+offset_right = 982.0
+offset_bottom = 304.0
+text = "YOU LOSE"
+label_settings = SubResource("LabelSettings_vyuch")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label_total" type="Label" parent="Results"]
+offset_left = 181.0
+offset_top = 318.0
+offset_right = 982.0
+offset_bottom = 414.0
+text = "Total:"
+label_settings = SubResource("LabelSettings_vyuch")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="extend_offer" type="Button" parent="."]
+offset_left = 663.0
+offset_top = 545.0
+offset_right = 778.0
+offset_bottom = 576.0
+scale = Vector2(2, 2)
+text = " Extend Offer "
+
+[node name="extend_hardOffer" type="Button" parent="."]
+offset_left = 912.0
+offset_top = 546.0
+offset_right = 1010.0
+offset_bottom = 577.0
+scale = Vector2(2, 2)
+text = " Final Offer "
+
+[node name="Results_hide" type="Button" parent="."]
+visible = false
+offset_left = 187.0
+offset_top = 148.0
+offset_right = 255.0
+offset_bottom = 180.0
+text = "HIDE"
+
 [connection signal="clicked" from="CardDeck_pc" to="." method="_on_card_deck_pc_clicked"]
 [connection signal="clicked" from="CardDeck_npc" to="." method="_on_card_deck_npc_clicked"]
+[connection signal="pressed" from="Offer/Offer_reject" to="." method="_on_offer_reject_pressed"]
+[connection signal="pressed" from="Offer/Offer_accept" to="." method="_on_offer_accept_pressed"]
+[connection signal="pressed" from="Offer_results/continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="extend_offer" to="." method="_on_extend_offer_pressed"]
+[connection signal="pressed" from="extend_hardOffer" to="." method="_on_extend_hard_offer_pressed"]
+[connection signal="pressed" from="Results_hide" to="." method="_on_button_pressed"]

@@ -39,10 +39,8 @@ func buildDeck():
 func _getCardResource():
 	match color:
 		DeckColor.BLUE:
-			print('blue')
 			return load("res://resources/custom_resources/cards/card_blue.tres")
 		DeckColor.GREY:
-			print('grey')
 			return load("res://resources/custom_resources/cards/card_grey.tres")
 
 

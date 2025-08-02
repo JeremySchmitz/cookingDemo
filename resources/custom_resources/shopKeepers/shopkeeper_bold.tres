@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ShopKeepResource" load_steps=2 format=3 uid="uid://c1y17a1ikmff3"]
+
+[ext_resource type="Script" uid="uid://dau08y8sa6se" path="res://resources/custom_resources/shopKeepers/shopkeeper.rsc.gd" id="1_mfuvk"]
+
+[resource]
+script = ExtResource("1_mfuvk")
+boldness = 0.32
+agreableness = 3.0
+target = 25.0
+finalChance = 60.0
+finalTarget = -25.0
+metadata/_custom_type_script = "uid://dau08y8sa6se"

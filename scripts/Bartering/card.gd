@@ -20,7 +20,6 @@ func _ready() -> void:
 
 func flip():
 	if faceFront:
-		print('face front')
 		back.visible = true
 		front.visible = false
 	else:
