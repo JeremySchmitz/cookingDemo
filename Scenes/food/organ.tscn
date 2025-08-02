@@ -22,7 +22,7 @@ maxNutrition = 100.0
 nutrition = 10.0
 nutritionRentention = 0.99
 poisonWhileRaw = 0
-maxPoison = 30
+maxPoison = 0
 poisonRentention = 1.0
 metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
 
@@ -51,8 +51,7 @@ metadata/_custom_type_script = "uid://cx3k7xle3gw0c"
 
 [node name="Poison" type="Node" parent="."]
 script = ExtResource("4_snl8s")
-poisonWhileRaw = 50
-maxPoison = 50
+poisonWhileRaw = 30.0
 metadata/_custom_type_script = "uid://c5ox7hexp2ty8"
 
 [node name="Choppable" type="CanvasGroup" parent="." node_paths=PackedStringArray("collisionArea", "collisionNode")]

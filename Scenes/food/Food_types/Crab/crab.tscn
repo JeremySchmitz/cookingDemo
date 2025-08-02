@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://bfvipwuuj2khy"]
+[gd_scene load_steps=80 format=3 uid="uid://bfvipwuuj2khy"]
 
 [ext_resource type="Script" uid="uid://bunuku5x2rt24" path="res://scripts/Food/food.gd" id="1_b5dxw"]
 [ext_resource type="BitMap" uid="uid://c76ycfxc6ud7m" path="res://resources/Sprites/Crab/crab_body_BM.png" id="2_0q4yq"]
@@ -10,10 +10,15 @@
 [ext_resource type="Script" uid="uid://0l0lpkxtrjtx" path="res://scripts/components/choppable.gd" id="6_rehdx"]
 [ext_resource type="Texture2D" uid="uid://clb0vvlyn471h" path="res://resources/Sprites/Crab/crab_body_under.png" id="7_dctrd"]
 [ext_resource type="Script" uid="uid://ip3nwschvvkb" path="res://scripts/components/dragable_area.gd" id="9_xurr8"]
+[ext_resource type="Texture2D" uid="uid://r27e6l25ti3u" path="res://resources/Sprites/Crab/eggs/Crab_eggs_01.png" id="11_eohhf"]
 [ext_resource type="Texture2D" uid="uid://do8dh5yj5hekv" path="res://resources/Sprites/Crab/crab_body.png" id="11_leq4n"]
+[ext_resource type="BitMap" uid="uid://5hrqgoh8hmsx" path="res://resources/Sprites/Crab/eggs/Crab_eggs_01_BM.png" id="12_kgx3u"]
 [ext_resource type="Script" uid="uid://dik22bwv6x5l5" path="res://scripts/components/hurtbox.gd" id="12_lipgs"]
 [ext_resource type="Script" uid="uid://det5k60wcmbbf" path="res://scripts/components/updateable_collider.gd" id="13_1dyh4"]
+[ext_resource type="Texture2D" uid="uid://c4tjd0tmdec4j" path="res://resources/Sprites/Crab/eggs/Crab_eggs_02.png" id="13_ihmtx"]
+[ext_resource type="BitMap" uid="uid://r4y8805qgqir" path="res://resources/Sprites/Crab/eggs/Crab_eggs_02_BM.png" id="14_b7c65"]
 [ext_resource type="Script" uid="uid://iwsfiwlbgqoe" path="res://scripts/Food/bone.gd" id="14_leq4n"]
+[ext_resource type="Texture2D" uid="uid://h4xt3h24kobt" path="res://resources/Sprites/Crab/eggs/Crab_eggs_03.png" id="15_b7c65"]
 [ext_resource type="PackedScene" uid="uid://c1ixyyfmpabav" path="res://Scenes/food/organ.tscn" id="15_bdwki"]
 [ext_resource type="Script" uid="uid://bkuh78a5kdr6w" path="res://resources/custom_resources/organ/organ.rsc.gd" id="16_xurr8"]
 [ext_resource type="Texture2D" uid="uid://bn4jo07g84klw" path="res://resources/Sprites/Crab/body_meat/Crab_body_meat_01.png" id="17_vbjj8"]
@@ -53,6 +58,51 @@
 [ext_resource type="Texture2D" uid="uid://chc0tyg45m0xs" path="res://resources/Sprites/Crab/Crab_eye_01.png" id="50_n8a2a"]
 [ext_resource type="BitMap" uid="uid://cln24irtq6p7d" path="res://resources/Sprites/Crab/Crab_eye_01_BM.png" id="51_xj7hs"]
 
+[sub_resource type="Resource" id="Resource_ihmtx"]
+script = ExtResource("16_xurr8")
+sprite = ExtResource("11_eohhf")
+spriteScale = Vector2(3, 3)
+medium = 1
+wellDone = 2
+burnt = 5
+maxNutrition = 200.0
+nutrition = 200.0
+nutritionRentention = 0.25
+poisonWhileRaw = 0
+maxPoison = 0
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[sub_resource type="Resource" id="Resource_2d0y6"]
+script = ExtResource("16_xurr8")
+sprite = ExtResource("13_ihmtx")
+spriteScale = Vector2(3, 3)
+medium = 1
+wellDone = 2
+burnt = 10
+maxNutrition = 200.0
+nutrition = 200.0
+nutritionRentention = 0.25
+poisonWhileRaw = 0
+maxPoison = 0
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[sub_resource type="Resource" id="Resource_crmek"]
+script = ExtResource("16_xurr8")
+sprite = ExtResource("15_b7c65")
+spriteScale = Vector2(3, 3)
+medium = 1
+wellDone = 2
+burnt = 10
+maxNutrition = 200.0
+nutrition = 200.0
+nutritionRentention = 0.25
+poisonWhileRaw = 0
+maxPoison = 0
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
 [sub_resource type="Resource" id="Resource_mlbyg"]
 resource_name = "crabBodyMeat01"
 script = ExtResource("16_xurr8")
@@ -65,7 +115,7 @@ maxNutrition = 100.0
 nutrition = 10.0
 nutritionRentention = 0.99
 poisonWhileRaw = 0
-maxPoison = 30
+maxPoison = 0
 poisonRentention = 1.0
 metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
 
@@ -80,7 +130,7 @@ maxNutrition = 100.0
 nutrition = 10.0
 nutritionRentention = 0.99
 poisonWhileRaw = 0
-maxPoison = 30
+maxPoison = 0
 poisonRentention = 1.0
 metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
 
@@ -95,7 +145,7 @@ maxNutrition = 100.0
 nutrition = 10.0
 nutritionRentention = 0.99
 poisonWhileRaw = 0
-maxPoison = 30
+maxPoison = 0
 poisonRentention = 1.0
 metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
 
@@ -110,7 +160,7 @@ maxNutrition = 100.0
 nutrition = 10.0
 nutritionRentention = 0.99
 poisonWhileRaw = 0
-maxPoison = 30
+maxPoison = 0
 poisonRentention = 1.0
 metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
 
@@ -125,7 +175,7 @@ maxNutrition = 100.0
 nutrition = 10.0
 nutritionRentention = 0.99
 poisonWhileRaw = 0
-maxPoison = 30
+maxPoison = 0
 poisonRentention = 1.0
 metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
 
@@ -140,7 +190,7 @@ maxNutrition = 100.0
 nutrition = 10.0
 nutritionRentention = 0.99
 poisonWhileRaw = 0
-maxPoison = 30
+maxPoison = 0
 poisonRentention = 1.0
 metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
 
@@ -155,7 +205,7 @@ maxNutrition = 100.0
 nutrition = 10.0
 nutritionRentention = 0.99
 poisonWhileRaw = 0
-maxPoison = 30
+maxPoison = 0
 poisonRentention = 1.0
 metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
 
@@ -170,7 +220,7 @@ maxNutrition = 100.0
 nutrition = 10.0
 nutritionRentention = 0.99
 poisonWhileRaw = 0
-maxPoison = 30
+maxPoison = 0
 poisonRentention = 1.0
 metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
 
@@ -185,7 +235,7 @@ maxNutrition = 100.0
 nutrition = 10.0
 nutritionRentention = 0.99
 poisonWhileRaw = 0
-maxPoison = 30
+maxPoison = 0
 poisonRentention = 1.0
 metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
 
@@ -200,7 +250,7 @@ maxNutrition = 100.0
 nutrition = 10.0
 nutritionRentention = 0.99
 poisonWhileRaw = 0
-maxPoison = 30
+maxPoison = 0
 poisonRentention = 1.0
 metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
 
@@ -215,7 +265,7 @@ maxNutrition = 100.0
 nutrition = 10.0
 nutritionRentention = 0.99
 poisonWhileRaw = 0
-maxPoison = 30
+maxPoison = 0
 poisonRentention = 1.0
 metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
 
@@ -230,7 +280,7 @@ maxNutrition = 100.0
 nutrition = 10.0
 nutritionRentention = 0.99
 poisonWhileRaw = 0
-maxPoison = 30
+maxPoison = 0
 poisonRentention = 1.0
 metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
 
@@ -245,7 +295,7 @@ maxNutrition = 100.0
 nutrition = 10.0
 nutritionRentention = 0.99
 poisonWhileRaw = 0
-maxPoison = 30
+maxPoison = 0
 poisonRentention = 1.0
 metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
 
@@ -260,7 +310,7 @@ maxNutrition = 100.0
 nutrition = 10.0
 nutritionRentention = 0.99
 poisonWhileRaw = 0
-maxPoison = 30
+maxPoison = 0
 poisonRentention = 1.0
 metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
 
@@ -275,7 +325,7 @@ maxNutrition = 100.0
 nutrition = 10.0
 nutritionRentention = 0.99
 poisonWhileRaw = 0
-maxPoison = 30
+maxPoison = 0
 poisonRentention = 1.0
 metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
 
@@ -290,7 +340,7 @@ maxNutrition = 100.0
 nutrition = 10.0
 nutritionRentention = 0.99
 poisonWhileRaw = 0
-maxPoison = 30
+maxPoison = 0
 poisonRentention = 1.0
 metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
 
@@ -305,7 +355,7 @@ maxNutrition = 100.0
 nutrition = 10.0
 nutritionRentention = 0.99
 poisonWhileRaw = 0
-maxPoison = 30
+maxPoison = 0
 poisonRentention = 1.0
 metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
 
@@ -320,7 +370,7 @@ maxNutrition = 100.0
 nutrition = 10.0
 nutritionRentention = 0.99
 poisonWhileRaw = 0
-maxPoison = 30
+maxPoison = 0
 poisonRentention = 1.0
 metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
 
@@ -351,8 +401,6 @@ health = NodePath("../Health")
 
 [node name="Poison" type="Node" parent="."]
 script = ExtResource("5_yuml1")
-poisonWhileRaw = 10
-maxPoison = 10
 
 [node name="Choppable" type="CanvasGroup" parent="." node_paths=PackedStringArray("collisionArea", "collisionNode", "sliceGroup")]
 script = ExtResource("6_rehdx")
@@ -367,6 +415,21 @@ scale = Vector2(3, 3)
 texture = ExtResource("7_dctrd")
 
 [node name="Organs" type="Node2D" parent="."]
+
+[node name="Organ_eggs_01" parent="Organs" instance=ExtResource("15_bdwki")]
+stats = SubResource("Resource_ihmtx")
+bitmap = ExtResource("12_kgx3u")
+spriteScale = 3.0
+
+[node name="Organ_eggs_02" parent="Organs" instance=ExtResource("15_bdwki")]
+stats = SubResource("Resource_2d0y6")
+bitmap = ExtResource("14_b7c65")
+spriteScale = 3.0
+
+[node name="Organ_eggs_03" parent="Organs" instance=ExtResource("15_bdwki")]
+stats = SubResource("Resource_crmek")
+bitmap = ExtResource("12_kgx3u")
+spriteScale = 3.0
 
 [node name="Organ_b_01" parent="Organs" instance=ExtResource("15_bdwki")]
 stats = SubResource("Resource_mlbyg")

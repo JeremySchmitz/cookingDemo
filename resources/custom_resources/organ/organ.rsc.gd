@@ -16,5 +16,5 @@ class_name OrganResource
 
 @export_subgroup("Poison")
 @export var poisonWhileRaw := 0
-@export var maxPoison := 30
+@export var maxPoison := 0
 @export var poisonRentention: float = 1

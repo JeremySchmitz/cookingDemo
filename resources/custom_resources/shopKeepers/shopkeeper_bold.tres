@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_mfuvk")
 boldness = 0.3
-agreeableness = 5.0
+agreeableness = 0.0
 target = 10.0
 finalChance = 50.0
 negTarget = -25.0

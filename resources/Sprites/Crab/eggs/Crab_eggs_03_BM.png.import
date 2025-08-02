@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://b3mcochgfiy2i"
+path="res://.godot/imported/Crab_eggs_03_BM.png-e8b113cf257d4516d9904237c0e176a2.res"
+
+[deps]
+
+source_file="res://resources/Sprites/Crab/eggs/Crab_eggs_03_BM.png"
+dest_files=["res://.godot/imported/Crab_eggs_03_BM.png-e8b113cf257d4516d9904237c0e176a2.res"]
+
+[params]
+
+create_from=1
+threshold=0.5

@@ -25,19 +25,19 @@ func _ready() -> void:
 	nutrition = 0
 	poison = 0
 	
-func _on_food_entered(area: Area2D) -> void:
-	_update(area, false)
+func _on_food_entered(node: Area2D) -> void:
+	if node is DraggableArea: _update(node, false)
 
 	
-func _on_food_exit(area: Area2D) -> void:
-	_update(area, true)
+func _on_food_exit(node: Area2D) -> void:
+	if node is DraggableArea: _update(node, true)
 		
-func _update(area: Area2D, subtract = false):
-	var poisonNode: Poison = _getSibling(Poison, area)
+func _update(node: Area2D, subtract = false):
+	var poisonNode: Poison = _getSibling(Poison, node)
 	if poisonNode:
 		_updatePoison(poisonNode, subtract)
 
-	var nutritionNode: Nutrition = _getSibling(Nutrition, area)
+	var nutritionNode: Nutrition = _getSibling(Nutrition, node)
 	if nutritionNode:
 		_updateNutrition(nutritionNode, subtract)
 
@@ -56,9 +56,9 @@ func _getSibling(className: Variant, node: Node2D):
 			return child
 	return null
 	
-func setNameTag(name: String, role: GlobalEnums.Role):
-	crewName = name
-	$Namecard.text = "{0} ({1})".format([name, GlobalEnums.Role.keys()[role]])
+func setNameTag(tagName: String, role: GlobalEnums.Role):
+	crewName = tagName
+	$Namecard.text = "{0} ({1})".format([tagName, GlobalEnums.Role.keys()[role]])
 	
 func getName() -> String:
 	return crewName

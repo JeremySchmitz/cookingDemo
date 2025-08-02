@@ -61,7 +61,6 @@ rentention = 0.95
 
 [node name="Poison" type="Node" parent="."]
 script = ExtResource("5_b8nc2")
-poisonWhileRaw = 30
 
 [node name="Choppable" type="CanvasGroup" parent="." node_paths=PackedStringArray("collisionArea", "collisionNode", "sliceGroup")]
 script = ExtResource("6_1ib3v")

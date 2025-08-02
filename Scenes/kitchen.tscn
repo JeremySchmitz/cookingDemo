@@ -107,7 +107,7 @@ position = Vector2(729, 461)
 [node name="Bowls" type="Node" parent="."]
 
 [node name="food" parent="." instance=ExtResource("5_32235")]
-position = Vector2(392, 155)
+position = Vector2(437, 142)
 
 [node name="Tuna" parent="." instance=ExtResource("5_t5hpn")]
 position = Vector2(739, 182)
@@ -153,7 +153,7 @@ rotation = -1.5708
 scale = Vector2(3, 3)
 
 [node name="Crab" parent="." instance=ExtResource("16_5ukof")]
-position = Vector2(255, 173)
+position = Vector2(182, 187)
 
 [node name="BoneParticles" type="CPUParticles2D" parent="."]
 emitting = false

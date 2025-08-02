@@ -32,8 +32,6 @@ metadata/_custom_type_script = "uid://cx3k7xle3gw0c"
 
 [node name="Poison" type="Node" parent="."]
 script = ExtResource("4_yy7fe")
-poisonWhileRaw = 10
-maxPoison = 20
 metadata/_custom_type_script = "uid://c5ox7hexp2ty8"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
