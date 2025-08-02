@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cgksgcgxyr5q0" path="res://scripts/Bartering/barter.gd" id="1_s3kbv"]
 [ext_resource type="PackedScene" uid="uid://cwoqnxv7jrl3f" path="res://Scenes/Bartering/card_deck.tscn" id="1_wuqyt"]
-[ext_resource type="Resource" uid="uid://cdvj6i2ugd7rw" path="res://resources/custom_resources/shopKeepers/shopkeeper_timid.tres" id="2_vyuch"]
+[ext_resource type="Resource" uid="uid://c67qapdhiyk6f" path="res://resources/custom_resources/shopKeepers/shopkeeper_mid.tres" id="2_vyuch"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_s3kbv"]
 font_size = 45
@@ -13,6 +13,7 @@ font_color = Color(0, 0, 0, 1)
 
 [node name="Barter" type="Node2D"]
 script = ExtResource("1_s3kbv")
+maxRow = 18
 keeper = ExtResource("2_vyuch")
 
 [node name="Label_total" type="Label" parent="."]
@@ -25,17 +26,17 @@ label_settings = SubResource("LabelSettings_s3kbv")
 vertical_alignment = 1
 
 [node name="CardDeck_pc" parent="." instance=ExtResource("1_wuqyt")]
-position = Vector2(600, 513)
+position = Vector2(600, 555)
 scale = Vector2(2, 2)
 
 [node name="CardDeck_npc" parent="." instance=ExtResource("1_wuqyt")]
-position = Vector2(600, 118)
+position = Vector2(600, 74)
 rotation = 3.14159
 scale = Vector2(2, 2)
 color = 1
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(186, 300)
+position = Vector2(102, 226)
 
 [node name="Offer" type="Node2D" parent="."]
 visible = false
@@ -52,6 +53,7 @@ text = "The shopkeeper wants to settle:"
 label_settings = SubResource("LabelSettings_vyuch")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="Offer_reject" type="Button" parent="Offer"]
 offset_left = 338.0
@@ -84,6 +86,7 @@ text = "The shopkeeper declined your offer"
 label_settings = SubResource("LabelSettings_vyuch")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="continue" type="Button" parent="Offer_results"]
 offset_left = 482.0
@@ -108,6 +111,7 @@ text = "YOU LOSE"
 label_settings = SubResource("LabelSettings_vyuch")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="Label_total" type="Label" parent="Results"]
 offset_left = 181.0
@@ -135,6 +139,14 @@ offset_bottom = 577.0
 scale = Vector2(2, 2)
 text = " Final Offer "
 
+[node name="Offer_hide" type="Button" parent="."]
+visible = false
+offset_left = 187.0
+offset_top = 148.0
+offset_right = 257.0
+offset_bottom = 179.0
+text = "HIDE "
+
 [node name="Results_hide" type="Button" parent="."]
 visible = false
 offset_left = 187.0
@@ -150,4 +162,5 @@ text = "HIDE"
 [connection signal="pressed" from="Offer_results/continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="extend_offer" to="." method="_on_extend_offer_pressed"]
 [connection signal="pressed" from="extend_hardOffer" to="." method="_on_extend_hard_offer_pressed"]
-[connection signal="pressed" from="Results_hide" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Offer_hide" to="." method="_on_offer_hide_pressed"]
+[connection signal="pressed" from="Results_hide" to="." method="_on_results_hide_pressed"]

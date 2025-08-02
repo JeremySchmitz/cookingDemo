@@ -11,7 +11,7 @@
       "project": "${workspaceFolder}",
       "address": "127.0.0.1",
       "port": 6007,
-      "scene": "main",
+      "scene": "pinned",
       "editor_path": "D:Godot/Godot_v4.4-stable_win64.exe",
       // engine command line flags
       "profiling": false,

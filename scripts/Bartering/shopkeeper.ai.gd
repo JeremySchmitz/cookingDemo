@@ -5,37 +5,51 @@ var boldness
 var agreableness
 var target
 var finalChance
-var finalTarget
+var negTarget
 
 func _init(rsc: ShopKeepResource) -> void:
 	boldness = rsc.boldness
 	agreableness = rsc.agreableness
 	target = rsc.target
 	finalChance = rsc.finalChance
-	finalTarget = rsc.finalTarget
+	negTarget = rsc.negTarget
 
 func evaluateTurn(state: BarterState):
+	#  Continue drawing if there is no chance of failing
 	if !state.error:
 		print('no error - CONTINUE')
 		return Decision.CONTINUE
 
-	if state.total >= target || state.total + state.stopPenalty >= target:
-		print('total > target - OFFER')
-		return Decision.OFFER
-
-	if state.total - state.stopPenalty <= finalTarget:
-		print('final target - STOP')
-		return Decision.STOP
-
 	var errorChance = _checkErrorChance(state)
-	print('errorChance: ', errorChance)
-	if errorChance > finalChance:
-		print('errorChance > finalChance - OFFER')
-		return Decision.OFFER
-	elif errorChance > boldness:
-		print('errorChance > boldness - STOP')
-		return Decision.STOP
+	# Dont offer if it offered last turn
+	if !state.offeredLastTurn:
+		# If its reached its target goal offer
+		if state.total >= target:
+			print('total >= target - OFFER')
+			return Decision.OFFER
 
+		# If it drawing an error would put it ovver its neg target offer
+		if state.total - state.errorPenalty <= negTarget:
+			print('final target - OFFER')
+			return Decision.OFFER
+
+		# If chance of error is to high offer
+		if errorChance > boldness:
+			print('errorChance > boldness - OFFER')
+			return Decision.OFFER
+	
+	# If reached target even with penalty stop
+	if state.total - state.stopPenalty >= target:
+			print('total - penalty > target - OFFER')
+			return Decision.STOP
+
+
+	# If chance of error is to high stop
+	if errorChance > finalChance:
+			print('errorChance > finalChance - STOP')
+			return Decision.STOP
+
+	# otherwise draw
 	print('end CONTINUE')
 	return Decision.CONTINUE
 

@@ -5,4 +5,4 @@ class_name ShopKeepResource
 @export var agreableness: float
 @export var target: float
 @export var finalChance: float
-@export var finalTarget: float
+@export var negTarget: float

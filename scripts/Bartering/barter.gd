@@ -25,6 +25,7 @@ var state: BarterState
 @export var gapV := 90
 @export var maxRow := 13
 @export var stopPenalty := 5
+@export var errorPenalty := 10
 
 @export var keeper: ShopKeepResource
 
@@ -38,10 +39,11 @@ var state: BarterState
 
 var ai: ShopKeeperAI
 
-
+var turn := 0
+var pcOfferTurn := -1
+var npcOfferTurn := -1
 var curTurn := Turns.PC
 var gameEnd = false
-var offerExtended = false
 var total = 0:
 	set(val):
 		total = val
@@ -54,22 +56,23 @@ var errNPC = false
 func _ready() -> void:
 	state = BarterState.new()
 	state.stopPenalty = stopPenalty
+	state.errorPenalty = errorPenalty
 	
 	buildDecks()
 	ai = ShopKeeperAI.new(keeper)
 
 	
 func _on_card_deck_pc_clicked(card: Card, size: int) -> void:
-	if curTurn == Turns.NPC || gameEnd: return
+	if curTurn == Turns.NPC: return
 	_evaluateCard(card.value)
 	_moveCard(card, size)
-	_endTurn()
+	if !gameEnd: _endTurn()
 
 func _on_card_deck_npc_clicked(card: Card, size: int) -> void:
-	if curTurn == Turns.PC || gameEnd: return
-	_evaluateCard(card.value)
+	if curTurn == Turns.PC: return
 	_moveCard(card, size)
-	_endTurn()
+	_evaluateCard(card.value)
+	if !gameEnd: _endTurn()
 
 
 func _evaluateCard(value: float):
@@ -78,7 +81,10 @@ func _evaluateCard(value: float):
 			var playerText
 			if curTurn == Turns.PC:
 				playerText = "You angered the shopkeeper. He raised the price"
-			else: playerText = "The shopkeeper is embarrased. He offers you a great discount"
+				total += errorPenalty
+			else:
+				playerText = "The shopkeeper is embarrased. He offers you a great discount"
+				total -= errorPenalty
 			_endGame(playerText)
 		else: errors[curTurn] = true
 
@@ -111,15 +117,26 @@ func _moveCard(card: Card, size):
 
 
 func _startTurn():
+	turn += 1
 	if empty[curTurn]:
 		_endGame("You are both tired and stopped bartering")
 		return
+	else:
+		if curTurn == Turns.NPC:
+			_evaluateTurnNPC()
+			if npcOfferTurn == turn - 2:
+				npcOfferTurn = -1
+				state.offeredLastTurn = false
+		elif pcOfferTurn == turn - 2:
+			pcOfferTurn = -1
 
-	if curTurn == Turns.NPC:
-		_evaluateTurnNPC()
-
+	
 func _endTurn():
-	curTurn = Turns.PC if curTurn == Turns.NPC else Turns.NPC
+	if curTurn == Turns.NPC:
+		curTurn = Turns.PC
+	else:
+		curTurn = Turns.NPC
+
 	_startTurn()
 
 func _hardStop():
@@ -138,7 +155,8 @@ func _endGame(message: String):
 	gameEnd = true
 	
 	resultsLabel.text = message
-	totalResultsLabel.text = "Final offer {0}".format([total])
+	var detail = "off" if total <= 0 else "added"
+	totalResultsLabel.text = "Final deal: {0}% {1}".format([total, detail])
 	results.visible = true
 	$Results_hide.visible = true
 
@@ -174,12 +192,16 @@ func _clickNPCDeck():
 
 func _offerNPC():
 	offer.visible = true
+	$Offer_hide.visible = true
+	npcOfferTurn = turn
+	state.offeredLastTurn = true
 
 
 func _hardStopNPC():
 	_hardStop()
 
 func _extendOffer():
+	pcOfferTurn = turn
 	var response = ai.evaluateOffer(total)
 	var action
 	match response:
@@ -221,9 +243,13 @@ func _buildDeck(color: DeckColor):
 		var newRes = res.duplicate()
 		newRes.value = 1
 		deck.append(newRes)
-	for i in range(0, 10):
+	for i in range(0, 6):
 		var newRes = res.duplicate()
 		newRes.value = 2
+		deck.append(newRes)
+	for i in range(0, 4):
+		var newRes = res.duplicate()
+		newRes.value = 3
 		deck.append(newRes)
 	for i in range(0, 2):
 		var newRes = res.duplicate()
@@ -252,16 +278,14 @@ func _getCardResource(color: DeckColor, err = false):
 
 
 func _on_offer_reject_pressed() -> void:
-	if offerExtended:
-		offer.visible = false
-
+	offer.visible = false
 	_executeAIAction(_clickNPCDeck)
-
+	$Offer_hide.visible = false
 
 func _on_offer_accept_pressed() -> void:
-	if offerExtended:
-		offer.visible = false
-		_endGame("You have accepted the shopkeepers offer")
+	offer.visible = false
+	$Offer_hide.visible = false
+	_endGame("You have accepted the shopkeepers offer")
 
 
 func _on_extend_offer_pressed() -> void:
@@ -276,5 +300,9 @@ func _on_continue_pressed() -> void:
 	offerResults.visible = false
 
 
-func _on_button_pressed() -> void:
+func _on_results_hide_pressed() -> void:
 	results.visible = !results.visible
+
+
+func _on_offer_hide_pressed() -> void:
+	offer.visible = !offer.visible

@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_gnqyl")
-boldness = 0.18
-agreableness = 7.0
-target = 17.0
+boldness = 0.12
+agreableness = 8.0
+target = 7.0
 finalChance = 25.0
-finalTarget = -25.0
+negTarget = -15.0
 metadata/_custom_type_script = "uid://dau08y8sa6se"

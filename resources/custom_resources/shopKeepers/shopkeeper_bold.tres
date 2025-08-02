@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_mfuvk")
-boldness = 0.32
-agreableness = 3.0
-target = 25.0
-finalChance = 60.0
-finalTarget = -25.0
+boldness = 0.3
+agreableness = 5.0
+target = 10.0
+finalChance = 50.0
+negTarget = -25.0
 metadata/_custom_type_script = "uid://dau08y8sa6se"
