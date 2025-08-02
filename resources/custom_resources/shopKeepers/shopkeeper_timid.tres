@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_llorw")
 boldness = 0.1
-agreableness = 8.0
+agreeableness = 8.0
 target = 5.0
 finalChance = 15.0
 negTarget = -10.0

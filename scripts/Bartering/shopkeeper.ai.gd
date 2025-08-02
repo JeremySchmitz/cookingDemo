@@ -2,14 +2,14 @@ class_name ShopKeeperAI
 
 var Decision = GlobalEnums.Decision
 var boldness
-var agreableness
+var agreeableness
 var target
 var finalChance
 var negTarget
 
 func _init(rsc: ShopKeepResource) -> void:
 	boldness = rsc.boldness
-	agreableness = rsc.agreableness
+	agreeableness = rsc.agreeableness
 	target = rsc.target
 	finalChance = rsc.finalChance
 	negTarget = rsc.negTarget
@@ -55,7 +55,7 @@ func evaluateTurn(state: BarterState):
 
 
 func evaluateOffer(offer: float) -> GlobalEnums.Decision:
-	if abs(target - offer) < agreableness:
+	if abs(target - offer) < agreeableness:
 		return Decision.AGREE
 	else: return Decision.DECLINE
 

@@ -36,18 +36,17 @@ scale = Vector2(2, 2)
 color = 1
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(102, 226)
+position = Vector2(67, 226)
 
 [node name="Offer" type="Node2D" parent="."]
-visible = false
 
 [node name="Polygon2D" type="Polygon2D" parent="Offer"]
 polygon = PackedVector2Array(180, 144, 175, 435, 980, 435, 982, 144)
 
 [node name="Label_Results" type="Label" parent="Offer"]
-offset_left = 181.0
+offset_left = 203.0
 offset_top = 153.0
-offset_right = 982.0
+offset_right = 960.0
 offset_bottom = 240.0
 text = "The shopkeeper wants to settle:"
 label_settings = SubResource("LabelSettings_vyuch")
@@ -78,9 +77,9 @@ visible = false
 polygon = PackedVector2Array(180, 144, 175, 435, 980, 435, 982, 144)
 
 [node name="Label_Results_offer" type="Label" parent="Offer_results"]
-offset_left = 181.0
+offset_left = 209.0
 offset_top = 204.0
-offset_right = 982.0
+offset_right = 954.0
 offset_bottom = 291.0
 text = "The shopkeeper declined your offer"
 label_settings = SubResource("LabelSettings_vyuch")
@@ -103,9 +102,9 @@ visible = false
 polygon = PackedVector2Array(180, 144, 175, 435, 980, 435, 982, 144)
 
 [node name="Label_message" type="Label" parent="Results"]
-offset_left = 181.0
+offset_left = 206.0
 offset_top = 153.0
-offset_right = 982.0
+offset_right = 957.0
 offset_bottom = 304.0
 text = "YOU LOSE"
 label_settings = SubResource("LabelSettings_vyuch")
@@ -114,9 +113,9 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="Label_total" type="Label" parent="Results"]
-offset_left = 181.0
+offset_left = 205.0
 offset_top = 318.0
-offset_right = 982.0
+offset_right = 958.0
 offset_bottom = 414.0
 text = "Total:"
 label_settings = SubResource("LabelSettings_vyuch")

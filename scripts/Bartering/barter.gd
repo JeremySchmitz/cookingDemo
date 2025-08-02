@@ -61,7 +61,8 @@ func _ready() -> void:
 	buildDecks()
 	ai = ShopKeeperAI.new(keeper)
 
-	
+
+# Listeners - Decks
 func _on_card_deck_pc_clicked(card: Card, size: int) -> void:
 	if curTurn == Turns.NPC: return
 	_evaluateCard(card.value)
@@ -74,7 +75,67 @@ func _on_card_deck_npc_clicked(card: Card, size: int) -> void:
 	_evaluateCard(card.value)
 	if !gameEnd: _endTurn()
 
+# Listeners - buttons
+func _on_offer_reject_pressed() -> void:
+	offer.visible = false
+	_executeAIAction(_clickNPCDeck)
+	$Offer_hide.visible = false
 
+func _on_offer_accept_pressed() -> void:
+	offer.visible = false
+	$Offer_hide.visible = false
+	_endGame("You have accepted the shopkeepers offer")
+
+func _on_extend_offer_pressed() -> void:
+	_extendOffer()
+
+func _on_extend_hard_offer_pressed() -> void:
+	_hardStop()
+
+func _on_continue_pressed() -> void:
+	offerResults.visible = false
+
+func _on_results_hide_pressed() -> void:
+	results.visible = !results.visible
+
+func _on_offer_hide_pressed() -> void:
+	offer.visible = !offer.visible
+
+
+# Bartering - Turns
+func _startTurn():
+	turn += 1
+	if empty[curTurn]:
+		_endGame("You are both tired and stopped bartering")
+		return
+	else:
+		if curTurn == Turns.NPC:
+			_evaluateTurnNPC()
+			if npcOfferTurn == turn - 2:
+				npcOfferTurn = -1
+				state.offeredLastTurn = false
+		elif pcOfferTurn == turn - 2:
+			pcOfferTurn = -1
+
+	
+func _endTurn():
+	if curTurn == Turns.NPC:
+		curTurn = Turns.PC
+	else:
+		curTurn = Turns.NPC
+
+	_startTurn()
+
+func _endGame(message: String):
+	gameEnd = true
+	
+	resultsLabel.text = message
+	var detail = "off" if total <= 0 else "added"
+	totalResultsLabel.text = "Final deal: {0}% {1}".format([total, detail])
+	results.visible = true
+	$Results_hide.visible = true
+
+# Barting - Actions
 func _evaluateCard(value: float):
 	if value == -1:
 		if errors[curTurn]:
@@ -99,46 +160,6 @@ func _evaluateCard(value: float):
 		score[curTurn].append(value)
 
 
-func _moveCard(card: Card, size):
-	card.flip()
-	card.reparent($Marker2D)
-	var count := $Marker2D.get_child_count()
-	var row = count / maxRow
-	var x = count % maxRow * gapH + (row % 2 * 0.5 * gapH)
-	var y = row * gapV
-	card.position = Vector2(x, y)
-
-	if curTurn == Turns.NPC:
-		card.rotation += PI
-
-	if size == 1:
-		empty[curTurn] = true
-	pass
-
-
-func _startTurn():
-	turn += 1
-	if empty[curTurn]:
-		_endGame("You are both tired and stopped bartering")
-		return
-	else:
-		if curTurn == Turns.NPC:
-			_evaluateTurnNPC()
-			if npcOfferTurn == turn - 2:
-				npcOfferTurn = -1
-				state.offeredLastTurn = false
-		elif pcOfferTurn == turn - 2:
-			pcOfferTurn = -1
-
-	
-func _endTurn():
-	if curTurn == Turns.NPC:
-		curTurn = Turns.PC
-	else:
-		curTurn = Turns.NPC
-
-	_startTurn()
-
 func _hardStop():
 	var playerText = ""
 	if curTurn == Turns.PC:
@@ -151,16 +172,7 @@ func _hardStop():
 	var text = "{0} stopped the bartering".format([playerText])
 	_endGame(text)
 
-func _endGame(message: String):
-	gameEnd = true
-	
-	resultsLabel.text = message
-	var detail = "off" if total <= 0 else "added"
-	totalResultsLabel.text = "Final deal: {0}% {1}".format([total, detail])
-	results.visible = true
-	$Results_hide.visible = true
-
-
+# Bartering - NPC
 func _evaluateTurnNPC():
 	var response = ai.evaluateTurn(state)
 
@@ -200,6 +212,7 @@ func _offerNPC():
 func _hardStopNPC():
 	_hardStop()
 
+# Bartering - PC
 func _extendOffer():
 	pcOfferTurn = turn
 	var response = ai.evaluateOffer(total)
@@ -225,6 +238,22 @@ func _setStateDeck(resources: Array[CardResource]):
 		newDeck.append(rs.value)
 	state.deck = newDeck
 
+# MISC Utils
+func _moveCard(card: Card, size):
+	card.flip()
+	card.reparent($Marker2D)
+	var count := $Marker2D.get_child_count()
+	var row = count / maxRow
+	var x = count % maxRow * gapH + (row % 2 * 0.5 * gapH)
+	var y = row * gapV
+	card.position = Vector2(x, y)
+
+	if curTurn == Turns.NPC:
+		card.rotation += PI
+
+	if size == 1:
+		empty[curTurn] = true
+	pass
 
 # FOR TESTING
 enum DeckColor {BLUE, GREY}
@@ -275,34 +304,3 @@ func _getCardResource(color: DeckColor, err = false):
 				return load("res://resources/custom_resources/cards/card_grey.tres")
 
 # FOR TESTING END
-
-
-func _on_offer_reject_pressed() -> void:
-	offer.visible = false
-	_executeAIAction(_clickNPCDeck)
-	$Offer_hide.visible = false
-
-func _on_offer_accept_pressed() -> void:
-	offer.visible = false
-	$Offer_hide.visible = false
-	_endGame("You have accepted the shopkeepers offer")
-
-
-func _on_extend_offer_pressed() -> void:
-	_extendOffer()
-
-
-func _on_extend_hard_offer_pressed() -> void:
-	_hardStop()
-
-
-func _on_continue_pressed() -> void:
-	offerResults.visible = false
-
-
-func _on_results_hide_pressed() -> void:
-	results.visible = !results.visible
-
-
-func _on_offer_hide_pressed() -> void:
-	offer.visible = !offer.visible
