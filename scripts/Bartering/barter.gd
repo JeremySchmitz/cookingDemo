@@ -110,7 +110,13 @@ func _endGame(loser: Variant):
 
 
 func _evaluateNPC():
-	_clickNPCDeck()
+	var time = Timer.new()
+	time.wait_time = 1
+	time.one_shot = true
+	time.timeout.connect(_clickNPCDeck)
+	add_child(time)
+	time.start()
+	# _clickNPCDeck()
 
 func _clickNPCDeck():
 	var event = InputEventMouseButton.new()
@@ -128,12 +134,18 @@ func buildDecks():
 	$CardDeck_pc.deckResouce = _buildDeck(DeckColor.BLUE)
 
 func _buildDeck(color: DeckColor):
-	var res: Resource = _getCardResource(color)
+	var res: CardResource = _getCardResource(color)
 
 	var resEr: Resource = _getCardResource(color, true)
 	var deck: Array[CardResource] = []
-	for i in range(0, 10):
-		deck.append(res)
+	for i in range(0, 7):
+		var newRes = res.duplicate()
+		newRes.value = 1
+		deck.append(newRes)
+	for i in range(0, 3):
+		var newRes = res.duplicate()
+		newRes.value = 2
+		deck.append(newRes)
 	for i in range(0, 3):
 		deck.append(resEr)
 
