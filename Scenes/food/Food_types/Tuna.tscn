@@ -34,12 +34,14 @@ burnt = 20
 maxNutrition = 100.0
 nutrition = 90.0
 nutritionRentention = 0.99
+nutritiousWhileParented = true
 poisonWhileRaw = 0
 maxPoison = 0
 poisonRentention = 1.0
 metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
 
 [node name="Tuna" type="Node2D" groups=["food"]]
+z_index = 1
 script = ExtResource("1_elblm")
 
 [node name="Health" type="Node" parent="."]
@@ -56,7 +58,6 @@ metadata/_custom_type_script = "uid://w6ocrvw6sksd"
 [node name="Nutrition" type="Node" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("4_sahc0")
 health = NodePath("../Health")
-maxNutrition = 200
 rentention = 0.95
 
 [node name="Poison" type="Node" parent="."]

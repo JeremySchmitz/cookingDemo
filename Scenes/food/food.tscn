@@ -28,6 +28,7 @@ burnt = 100
 maxNutrition = 100.0
 nutrition = 10.0
 nutritionRentention = 0.99
+nutritiousWhileParented = true
 poisonWhileRaw = 30
 maxPoison = 30
 poisonRentention = 1.0
@@ -40,6 +41,7 @@ shader_parameter/cookVal = 0.0
 shader_parameter/isBurnt = false
 
 [node name="Pufferfish" type="Node2D" groups=["food"]]
+z_index = 1
 script = ExtResource("1_h4kkx")
 bitmap = ExtResource("2_yjw8s")
 

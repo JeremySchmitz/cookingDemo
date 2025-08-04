@@ -26,8 +26,6 @@ metadata/_custom_type_script = "uid://3qtest46ag4a"
 [node name="Nutrition" type="Node" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("3_e3csk")
 health = NodePath("../Health")
-maxNutrition = 10
-nutrition = 0
 metadata/_custom_type_script = "uid://cx3k7xle3gw0c"
 
 [node name="Poison" type="Node" parent="."]

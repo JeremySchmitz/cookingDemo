@@ -23,12 +23,13 @@ func _ready() -> void:
 		$Nutrition.maxNutrition = stats.maxNutrition
 		$Nutrition.nutrition = stats.nutrition
 		$Nutrition.rentention = stats.nutritionRentention
+		$Nutrition.nutritiousWhileParented = stats.nutritiousWhileParented
 		
 		$Poison.poisonWhileRaw = stats.poisonWhileRaw
 		$Poison.maxPoison = stats.maxPoison
 		$Poison.rentention = stats.poisonRentention
 		
-		shaderSprite = 	get_node("Choppable/Sprite2D")
+		shaderSprite = get_node("Choppable/Sprite2D")
 
 func _on_draggable_area_dragging() -> void:
 	if Engine.is_editor_hint(): return
@@ -37,3 +38,4 @@ func _on_draggable_area_dragging() -> void:
 #	TODO This needs to be made more surefire 
 	reparent(get_parent().get_parent().get_parent())
 	parented = false
+	$Nutrition.parented = false

@@ -21,6 +21,7 @@ burnt = 100
 maxNutrition = 100.0
 nutrition = 10.0
 nutritionRentention = 0.99
+nutritiousWhileParented = true
 poisonWhileRaw = 0
 maxPoison = 0
 poisonRentention = 1.0
@@ -46,7 +47,6 @@ metadata/_custom_type_script = "uid://3qtest46ag4a"
 [node name="Nutrition" type="Node" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("3_nnpc6")
 health = NodePath("../Health")
-nutrition = 0
 metadata/_custom_type_script = "uid://cx3k7xle3gw0c"
 
 [node name="Poison" type="Node" parent="."]

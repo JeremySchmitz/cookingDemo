@@ -3,11 +3,13 @@ extends Node
 
 
 @export var health: Health
-@export var maxNutrition:= 100.0
-@export var nutrition:= 10.0 : set = _setNutrition
+@export var maxNutrition := 100.0
+@export var nutrition := 10.0: set = _setNutrition, get = _getNutrition
 @export var rentention: float = .99
+@export var nutritiousWhileParented := true
 
-var cooked:= GlobalEnums.Cooked.RAW
+var cooked := GlobalEnums.Cooked.RAW
+var parented := true
 
 func _ready() -> void:
 	if health:
@@ -46,7 +48,7 @@ func updateNutrition(diff: float):
 		_:
 			strength = 0
 			
-	nutrition += diff * strength	
+	nutrition += diff * strength
 
 func updateNutritionAfterChop(percent: float):
 	var newMax = maxNutrition * percent * rentention
@@ -55,3 +57,9 @@ func updateNutritionAfterChop(percent: float):
 
 func _setNutrition(val: float) -> void:
 	nutrition = max(0, min(val, maxNutrition))
+
+func _getNutrition() -> float:
+	if nutritiousWhileParented:
+		return nutrition
+	else:
+		return 0.0 if parented else nutrition
