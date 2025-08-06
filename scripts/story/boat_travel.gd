@@ -11,15 +11,16 @@ var dayTimer := Timer.new()
 var encounterTimer := Timer.new()
 
 @onready var boat: BoatChar = $BoatChar
+@onready var ports: Array[Node] = $Ports.get_children()
 
 var boat_position_index: int = 0
 var traveled_path: Array = []
 
-var boatMoving = false;
+var boatMoving = false
 
 # FIX, Day currently resets if switch scenes to an encounter. 
 func _ready():
-	Utils.dockSelected.connect(_setTargetPos)
+	Utils.portSelected.connect(_setTargetPos)
 	set_process(true)
 
 	dayTimer.wait_time = dayLength
@@ -32,6 +33,13 @@ func _ready():
 
 	boat.position = CrewStatus.boatPosition
 	_setTargetPos(CrewStatus.targetPosition)
+
+	var timer = Timer.new()
+	timer.wait_time = 0.1
+	timer.one_shot = true
+	timer.connect("timeout", updatePortDistances)
+	add_child(timer)
+	timer.start()
 
 func _process(delta):
 	if boatMoving:
@@ -85,6 +93,7 @@ func _on_boat_char_moving(val: bool) -> void:
 	if !val:
 		setTimers(false)
 		if boat: CrewStatus.boatPosition = boat.position
+		call_deferred("updatePortDistances")
 
 func _dayEnd():
 	boat.isMoving = false
@@ -106,3 +115,14 @@ func setTimers(val: bool):
 	else:
 		dayTimer.stop()
 		encounterTimer.stop()
+
+func updatePortDistances():
+	var map = $NavigationRegion2D.get_navigation_map()
+	# TODO this doesnt find the exact same path as the navigation agent. Find a better way
+	for port: Port in ports:
+		var path = NavigationServer2D.map_get_path(map, boat.global_position, port.global_position, false)
+		var distance = 0
+		for i in range(0, path.size() - 1):
+			distance += path[i].distance_to(path[i + 1])
+		distance = ceil(distance / boat.speed)
+		port.distance = distance

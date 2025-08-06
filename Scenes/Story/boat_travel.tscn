@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cctbjqxvenq0r" path="res://resources/Sprites/Travel/map_test_01.png" id="2_duiqf"]
 [ext_resource type="Script" uid="uid://bpi0q3ti505ih" path="res://scripts/story/boat_char.gd" id="3_blhhb"]
 [ext_resource type="Texture2D" uid="uid://caywa3w0b7r7h" path="res://resources/Sprites/Travel/hurricane.png" id="4_5yjvc"]
-[ext_resource type="PackedScene" uid="uid://cuyyebhwjhd2v" path="res://Scenes/Story/dock.tscn" id="5_7ds11"]
+[ext_resource type="PackedScene" uid="uid://cuyyebhwjhd2v" path="res://Scenes/Story/port.tscn" id="5_7ds11"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_otj04"]
 vertices = PackedVector2Array(852.867, 177.727, 905.773, 175.32, 932.477, 180.977, 931.469, 197.172, 878.219, 193.82, 970.609, 204.633, 924.023, 229.203, 885.93, 204.391, 636.398, 354.844, 1063.92, 301.172, 1162.02, 311.961, 887.617, 529.281, 851.18, 527.688, 630.531, 408.852, 834.398, 542.172, 837.711, 563.617, 830.367, 572.406, 871.938, 154.547, 870.523, 148.891, 830.133, 152.813, 834.008, 158.867, 326.773, 252, 357.359, 240.813, 361.797, 263, 303.789, 473.641, 974.188, 188.844, 994.102, 204.898, 1038.74, 220.094, 1050.51, 245.32, 913.57, 270.57, 928.781, 255.367, 891.719, 235.656, 872.156, 228, 900.578, 555.117, 1162.97, 650.953, 894.578, 565.148, 893.938, 543.508, 756.492, 541.008, 720.602, 530.461, 680.313, 545.711, 604.133, 432.852, 650.383, 558.172, 565.633, 445.313, 757.25, 169.633, 759.781, 189.844, 441.961, 224.039, 224.047, 191, 220.688, 157.352, 643.117, 121.828, 821.344, 180, 785.563, 201.297, 790.781, 172.633, 811.102, 129.781, 835.563, 203.703, -5.89063, 358.398, -2.10156, -7.11719, 137, -8.9375, 165.859, 19.0703, 179.078, 80.0703, 90.5078, 362.383, 315.352, 223.438, 299.969, 586.172, 268.047, 579.953, 270.188, 562.25, 297.453, 552.156, 648.609, 588.367, 167.242, 406.141, 92.5234, 400.672, 436.727, 258.039, 858.547, 225.727, 889.344, 261.773, 566.281, 302.742, 776.672, 158.531, 435.039, 101.977, 616.391, 99.0625, 346.906, 119.008, 235.93, 117.969, 199.938, 128.313, 200.906, 419.359, 185.469, 154.359, 218.219, 468.422, 192.797, 191, 242.93, 229.93, 853.273, 199.359, 388.922, 232.203, 261.859, 211, 529.883, 438.391, 606.047, 318.648, 279.203, 252, 394.594, 263, 487.57, 341.844, 514.859, 309.602, 492.156, 381.93, 502.297, 418.008, 355.008, 647.008, 315.898, 621.227, 673.477, 599.25, 718.406, 593.898, 759.797, 587, 811.398, 587)
@@ -46,7 +46,7 @@ texture = ExtResource("4_5yjvc")
 [node name="BoatChar" type="CharacterBody2D" parent="."]
 position = Vector2(404, 325)
 script = ExtResource("3_blhhb")
-speed = 40.0
+speed = 80.0
 
 [node name="Polygon2D" type="Polygon2D" parent="BoatChar"]
 scale = Vector2(0.645, 0.645)
@@ -62,41 +62,41 @@ debug_enabled = true
 position = Vector2(0, 9)
 shape = SubResource("RectangleShape2D_duiqf")
 
-[node name="Docks" type="Node" parent="."]
+[node name="Ports" type="Node" parent="."]
 
-[node name="Dock - Iguanna" parent="Docks" instance=ExtResource("5_7ds11")]
+[node name="Port - Iguanna" parent="Ports" instance=ExtResource("5_7ds11")]
 position = Vector2(95, 357)
 labelName = "Iguanna City"
 
-[node name="Dock -  Xatle" parent="Docks" instance=ExtResource("5_7ds11")]
+[node name="Port -  Xatle" parent="Ports" instance=ExtResource("5_7ds11")]
 position = Vector2(432, 94)
 labelName = "Xatle"
 
-[node name="Dock - Kualpe" parent="Docks" instance=ExtResource("5_7ds11")]
+[node name="Port - Kualpe" parent="Ports" instance=ExtResource("5_7ds11")]
 position = Vector2(890, 259)
 labelName = "Kualpe"
 
-[node name="Dock - Waternon" parent="Docks" instance=ExtResource("5_7ds11")]
+[node name="Port - Waternon" parent="Ports" instance=ExtResource("5_7ds11")]
 position = Vector2(725, 532)
 labelName = "Waternon"
 
-[node name="Dock - Platelipse" parent="Docks" instance=ExtResource("5_7ds11")]
+[node name="Port - Platelipse" parent="Ports" instance=ExtResource("5_7ds11")]
 position = Vector2(874, 560)
 labelName = "Platelipse"
 
-[node name="Dock - Jalpe" parent="Docks" instance=ExtResource("5_7ds11")]
+[node name="Port - Jalpe" parent="Ports" instance=ExtResource("5_7ds11")]
 position = Vector2(408, 226)
 labelName = "Jalpe"
 
-[node name="Dock -  Huan" parent="Docks" instance=ExtResource("5_7ds11")]
+[node name="Port -  Huan" parent="Ports" instance=ExtResource("5_7ds11")]
 position = Vector2(268, 576)
 labelName = "Huan"
 
-[node name="Dock -  Opelt" parent="Docks" instance=ExtResource("5_7ds11")]
-position = Vector2(162, 0)
+[node name="Port -  Opelt" parent="Ports" instance=ExtResource("5_7ds11")]
+position = Vector2(178, 27)
 labelName = "Opelt"
 
-[node name="Dock - Drossmon" parent="Docks" instance=ExtResource("5_7ds11")]
+[node name="Port - Drossmon" parent="Ports" instance=ExtResource("5_7ds11")]
 position = Vector2(770, 169)
 labelName = "Drossmon"
 

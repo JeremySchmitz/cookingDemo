@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cuyyebhwjhd2v"]
+[gd_scene load_steps=7 format=3 uid="uid://cuyyebhwjhd2v"]
 
-[ext_resource type="Script" uid="uid://1vwfjs36vo78" path="res://scripts/story/dock.gd" id="1_l53du"]
-[ext_resource type="Texture2D" uid="uid://2hn02kil733j" path="res://resources/Sprites/Travel/dock.png" id="2_om226"]
+[ext_resource type="Script" uid="uid://1vwfjs36vo78" path="res://scripts/story/port.gd" id="1_80e8t"]
+[ext_resource type="Texture2D" uid="uid://2hn02kil733j" path="res://resources/Sprites/Travel/dock.png" id="2_6cpgg"]
+[ext_resource type="PackedScene" uid="uid://cs2oksdda7cor" path="res://Scenes/Story/info.tscn" id="3_6cpgg"]
 
 [sub_resource type="Gradient" id="Gradient_833t5"]
 offsets = PackedFloat32Array(0.593301, 0.601, 0.675, 0.676)
@@ -17,8 +18,8 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="CircleShape2D" id="CircleShape2D_l53du"]
 radius = 22.0
 
-[node name="Dock" type="Area2D"]
-script = ExtResource("1_l53du")
+[node name="Port" type="Area2D"]
+script = ExtResource("1_80e8t")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -28,7 +29,7 @@ texture = SubResource("GradientTexture2D_b4lvh")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -33)
-texture = ExtResource("2_om226")
+texture = ExtResource("2_6cpgg")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 position = Vector2(0, -33)
@@ -36,6 +37,7 @@ color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-6, 22, 0, 33, 6, 22)
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = -45.0
 offset_top = -75.0
 offset_right = 45.0
@@ -46,3 +48,16 @@ horizontal_alignment = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -33)
 shape = SubResource("CircleShape2D_l53du")
+
+[node name="Info" parent="." instance=ExtResource("3_6cpgg")]
+visible = false
+position = Vector2(0, -58)
+
+[node name="Travel_BTN" type="Button" parent="Info"]
+offset_left = -33.0
+offset_top = 62.0
+offset_right = 33.0
+offset_bottom = 93.0
+text = "TRAVEL"
+
+[connection signal="pressed" from="Info/Travel_BTN" to="." method="_on_travel_btn_pressed"]

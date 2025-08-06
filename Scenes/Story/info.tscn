@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cs2oksdda7cor"]
+
+[ext_resource type="Script" uid="uid://6wsanmmu2mlm" path="res://scripts/story/info.gd" id="1_l5qnm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gr47a"]
+line_spacing = -5.0
+
+[node name="Info" type="Node2D"]
+script = ExtResource("1_l5qnm")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+scale = Vector2(1.81481, 1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-54, -76, 54, -76, 54, -10, 0, 0, -54, -10)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -96.0
+offset_top = -74.0
+offset_right = 96.0
+offset_bottom = -9.0
+text = "Port: Gertle
+3 day(s)"
+label_settings = SubResource("LabelSettings_gr47a")
+horizontal_alignment = 1
+autowrap_mode = 2

@@ -16,7 +16,8 @@ signal modeChange(m: GlobalEnums.Mode)
 signal cameraMove()
 signal cameraStop()
 
-signal dockSelected(p: Vector2)
+signal portSelected(p: Vector2)
+signal portClicked(n: String)
 
 var RNG = RandomNumberGenerator.new()
 
