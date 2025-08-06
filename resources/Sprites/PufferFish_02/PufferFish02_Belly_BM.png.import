@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://dgk2ciqt58dsv"
+path="res://.godot/imported/PufferFish02_Belly_BM.png-5a1dc59888173a4980023fdfdc9151e9.res"
+
+[deps]
+
+source_file="res://resources/Sprites/PufferFish_02/PufferFish02_Belly_BM.png"
+dest_files=["res://.godot/imported/PufferFish02_Belly_BM.png-5a1dc59888173a4980023fdfdc9151e9.res"]
+
+[params]
+
+create_from=1
+threshold=0.5

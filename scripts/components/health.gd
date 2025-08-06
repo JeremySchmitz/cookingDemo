@@ -1,35 +1,20 @@
 class_name Health
 extends Node
 
-signal cookedChanged(diff: int)
-signal cookedMedium()
-signal cookedWellDone()
-signal cookedBurnt()
+signal healthChanged(diff: int)
+signal healthZero()
 
-@export var cooked: float = 0.0: set = setCooked
-@export var medium: int = 50
-@export var wellDone: int = 75
-@export var burnt: int = 100
+@export var health: float = 0.0: set = setHealth
+@export var min := 0.0
+@export var max := 100.0
+@export var healthBar: HealthBar
 
-var _isMedium: bool = false
-var _isWellDone: bool = false
-var _isBurnt: bool = false
-
-func setCooked(val: float):
-	if val != cooked:
-		if val >= medium && val < wellDone && !_isMedium:
-			_isMedium = true
-			cookedMedium.emit()
-		if val >= wellDone && val < burnt && !_isWellDone:
-			_isMedium = false
-			_isWellDone = true
-			cookedWellDone.emit()
-		elif val >= burnt && !_isBurnt:
-			val = burnt
-			_isMedium = false
-			_isWellDone = false
-			_isBurnt = true
-			cookedBurnt.emit()
-		var dif = val - cooked
-		cooked = val
-		cookedChanged.emit(dif)
+func setHealth(val: float):
+	if val != health:
+		var newHealth = max(0, min(max, val))
+		var dif = abs(val - newHealth)
+		health = newHealth
+		healthChanged.emit(dif)
+		
+		if health == 0: healthZero.emit()
+		if healthBar: healthBar.value = health

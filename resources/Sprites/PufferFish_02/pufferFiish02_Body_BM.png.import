@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://c3h1w3uk5lm3n"
+path="res://.godot/imported/pufferFiish02_Body_BM.png-da17bd5e130d8978d5d743ab3e4210bb.res"
+
+[deps]
+
+source_file="res://resources/Sprites/PufferFish_02/pufferFiish02_Body_BM.png"
+dest_files=["res://.godot/imported/pufferFiish02_Body_BM.png-da17bd5e130d8978d5d743ab3e4210bb.res"]
+
+[params]
+
+create_from=1
+threshold=0.5

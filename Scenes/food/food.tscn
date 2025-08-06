@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://bunuku5x2rt24" path="res://scripts/Food/food.gd" id="1_h4kkx"]
 [ext_resource type="BitMap" uid="uid://ccul8rhwq3w2b" path="res://resources/Sprites/PufferFish/PufferFish_BM.png" id="2_yjw8s"]
 [ext_resource type="Script" uid="uid://0l0lpkxtrjtx" path="res://scripts/components/choppable.gd" id="3_h4kkx"]
+[ext_resource type="Script" uid="uid://c4wtk3o8jrujm" path="res://scripts/components/health_food.gd" id="3_yjw8s"]
 [ext_resource type="Script" uid="uid://c5ox7hexp2ty8" path="res://scripts/components/poison.gd" id="4_83vc0"]
-[ext_resource type="Script" uid="uid://3qtest46ag4a" path="res://scripts/components/health.gd" id="4_d37wj"]
 [ext_resource type="Script" uid="uid://cx3k7xle3gw0c" path="res://scripts/components/nutrition.gd" id="4_rqftv"]
 [ext_resource type="Script" uid="uid://dik22bwv6x5l5" path="res://scripts/components/hurtbox.gd" id="5_4hb68"]
 [ext_resource type="Script" uid="uid://det5k60wcmbbf" path="res://scripts/components/updateable_collider.gd" id="6_t0fp1"]
@@ -46,7 +46,8 @@ script = ExtResource("1_h4kkx")
 bitmap = ExtResource("2_yjw8s")
 
 [node name="Health" type="Node" parent="."]
-script = ExtResource("4_d37wj")
+script = ExtResource("3_yjw8s")
+metadata/_custom_type_script = "uid://c4wtk3o8jrujm"
 
 [node name="Sliceable" type="Node" parent="." node_paths=PackedStringArray("collisionArea", "group", "organs", "visibleOrgans")]
 script = ExtResource("7_t0fp1")
@@ -60,8 +61,9 @@ metadata/_custom_type_script = "uid://w6ocrvw6sksd"
 script = ExtResource("4_rqftv")
 health = NodePath("../Health")
 
-[node name="Poison" type="Node" parent="."]
+[node name="Poison" type="Node" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("4_83vc0")
+health = NodePath("../Health")
 
 [node name="Choppable" type="CanvasGroup" parent="." node_paths=PackedStringArray("collisionArea", "collisionNode", "sliceGroup")]
 script = ExtResource("3_h4kkx")
@@ -99,9 +101,8 @@ material = SubResource("ShaderMaterial_b4uh0")
 scale = Vector2(3, 3)
 texture = ExtResource("10_83vc0")
 
-[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+[node name="Hurtbox" type="Area2D" parent="."]
 script = ExtResource("5_4hb68")
-health = NodePath("../Health")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox" node_paths=PackedStringArray("collisionShape")]
 polygon = PackedVector2Array(-90, 10, -88, 46, -76, 72, -53, 89, -9, 90, 28, 66, 56, 33, 78, -24, 80, -67, 73, -90, 59, -84, 47, -62, 24, -46, -17, -38, -40, -33, -76, -16)

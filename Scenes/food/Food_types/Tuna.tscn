@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://dior7sydc3uif"]
 
 [ext_resource type="Script" uid="uid://bunuku5x2rt24" path="res://scripts/Food/food.gd" id="1_elblm"]
-[ext_resource type="Script" uid="uid://3qtest46ag4a" path="res://scripts/components/health.gd" id="2_6rgbf"]
+[ext_resource type="Script" uid="uid://c4wtk3o8jrujm" path="res://scripts/components/health_food.gd" id="2_sahc0"]
 [ext_resource type="Script" uid="uid://w6ocrvw6sksd" path="res://scripts/components/sliceable.gd" id="3_myaff"]
 [ext_resource type="Script" uid="uid://cx3k7xle3gw0c" path="res://scripts/components/nutrition.gd" id="4_sahc0"]
 [ext_resource type="Script" uid="uid://c5ox7hexp2ty8" path="res://scripts/components/poison.gd" id="5_b8nc2"]
@@ -45,7 +45,8 @@ z_index = 1
 script = ExtResource("1_elblm")
 
 [node name="Health" type="Node" parent="."]
-script = ExtResource("2_6rgbf")
+script = ExtResource("2_sahc0")
+metadata/_custom_type_script = "uid://c4wtk3o8jrujm"
 
 [node name="Sliceable" type="Node" parent="." node_paths=PackedStringArray("collisionArea", "group", "organs", "visibleOrgans")]
 script = ExtResource("3_myaff")
@@ -60,8 +61,9 @@ script = ExtResource("4_sahc0")
 health = NodePath("../Health")
 rentention = 0.95
 
-[node name="Poison" type="Node" parent="."]
+[node name="Poison" type="Node" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("5_b8nc2")
+health = NodePath("../Health")
 
 [node name="Choppable" type="CanvasGroup" parent="." node_paths=PackedStringArray("collisionArea", "collisionNode", "sliceGroup")]
 script = ExtResource("6_1ib3v")
@@ -94,9 +96,8 @@ material = SubResource("ShaderMaterial_lbb8q")
 scale = Vector2(3, 3)
 texture = ExtResource("10_elblm")
 
-[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+[node name="Hurtbox" type="Area2D" parent="."]
 script = ExtResource("12_46my7")
-health = NodePath("../Health")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox" node_paths=PackedStringArray("collisionShape")]
 polygon = PackedVector2Array(-81, -37, -69, -21, -68, -2, -56, -14, -45, -18, -48, -22, -48, -31, -41, -28, -38, -18, -35, -21, 33, -21, 57, -17, 81, -8, 82, 2, 72, 9, 60, 15, 45, 18, 12, 21, -23, 21, -29, 18, -33, 24, -39, 24, -37, 19, -58, 15, -68, 6, -68, 19, -82, 33, -94, 32, -86, 24, -81, 7, -74, 0, -75, -17, -82, -28, -88, -35)

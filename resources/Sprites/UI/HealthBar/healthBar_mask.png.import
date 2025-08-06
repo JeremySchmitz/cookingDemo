@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://cidg60ojjdlyf"
+path="res://.godot/imported/healthBar_mask.png-6fa6a2f317609223aa2f389c03ffeeb6.res"
+
+[deps]
+
+source_file="res://resources/Sprites/UI/HealthBar/healthBar_mask.png"
+dest_files=["res://.godot/imported/healthBar_mask.png-6fa6a2f317609223aa2f389c03ffeeb6.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

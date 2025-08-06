@@ -1,11 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://cax40kgn23m3q"]
+[gd_scene load_steps=30 format=3 uid="uid://cax40kgn23m3q"]
 
 [ext_resource type="Script" uid="uid://bq6d71fqsv1h6" path="res://scripts/kitchen.gd" id="1_4clir"]
 [ext_resource type="Texture2D" uid="uid://roubacvs6dht" path="res://resources/Sprites/Kitchen/CuttingBoard.png" id="2_t5hpn"]
+[ext_resource type="PackedScene" uid="uid://m483g8c2ihkp" path="res://Scenes/UI/health_bar.tscn" id="4_i6vcq"]
 [ext_resource type="PackedScene" uid="uid://ccw7uq7go4ivt" path="res://Scenes/food/food.tscn" id="5_32235"]
 [ext_resource type="PackedScene" uid="uid://dior7sydc3uif" path="res://Scenes/food/Food_types/Tuna.tscn" id="5_t5hpn"]
 [ext_resource type="Script" uid="uid://cplwxfa5c4wal" path="res://scripts/knives/knife_chopper.gd" id="6_5ukof"]
-[ext_resource type="PackedScene" uid="uid://cs2oksdda7cor" path="res://Scenes/Story/info.tscn" id="7_2l700"]
 [ext_resource type="Script" uid="uid://cepynjnto0btg" path="res://scripts/knives/knife_slicer.gd" id="7_iw6an"]
 [ext_resource type="Script" uid="uid://c2pkk8qcndtku" path="res://scripts/Utils/camera_main.gd" id="8_2l700"]
 [ext_resource type="Script" uid="uid://blx703circky0" path="res://scripts/Utils/viewportEdgeArea.gd" id="9_r0dk1"]
@@ -17,6 +17,9 @@
 [ext_resource type="Texture2D" uid="uid://ctb4y1xwha2l" path="res://resources/Sprites/Kitchen/knives/knife_slice.png" id="12_5ukof"]
 [ext_resource type="PackedScene" uid="uid://euo8cywo2d7e" path="res://Scenes/food/knife_bag.tscn" id="14_ykbxl"]
 [ext_resource type="PackedScene" uid="uid://bfvipwuuj2khy" path="res://Scenes/food/Food_types/Crab/crab.tscn" id="16_5ukof"]
+[ext_resource type="PackedScene" uid="uid://ykut86xvitu3" path="res://Scenes/food/Food_types/Puffer_Fish/pufferfish.tscn" id="17_iw6an"]
+[ext_resource type="Script" uid="uid://c2w2t0wc0srsr" path="res://scripts/hand.gd" id="18_2l700"]
+[ext_resource type="Script" uid="uid://3qtest46ag4a" path="res://scripts/components/health.gd" id="19_r0dk1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0fj1v"]
 
@@ -59,16 +62,20 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t5hpn"]
 size = Vector2(18, 229)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_r0dk1"]
+radius = 6.0
+
 [node name="Kitchen" type="Node2D"]
 script = ExtResource("1_4clir")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
+[node name="BG" type="Polygon2D" parent="."]
 position = Vector2(593, 41)
 color = Color(0.703808, 0.703808, 0.703808, 1)
 polygon = PackedVector2Array(-608, -56, 2272, -40, 2278, 717, -608, 728)
 uv = PackedVector2Array(-608, -56, 584, -80, 576, 256, -584, 264)
 
 [node name="CameraMain" type="Camera2D" parent="."]
+z_index = 10
 anchor_mode = 0
 position_smoothing_enabled = true
 script = ExtResource("8_2l700")
@@ -110,10 +117,14 @@ position = Vector2(729, 461)
 [node name="food" parent="." instance=ExtResource("5_32235")]
 position = Vector2(437, 142)
 
-[node name="Info" parent="food" instance=ExtResource("7_2l700")]
-
 [node name="Tuna" parent="." instance=ExtResource("5_t5hpn")]
 position = Vector2(739, 182)
+
+[node name="Crab" parent="." instance=ExtResource("16_5ukof")]
+position = Vector2(182, 187)
+
+[node name="Pufferfish" parent="." instance=ExtResource("17_iw6an")]
+position = Vector2(490, 299)
 
 [node name="knifeChopper" type="Area2D" parent="."]
 script = ExtResource("6_5ukof")
@@ -155,9 +166,6 @@ position = Vector2(216, 492)
 rotation = -1.5708
 scale = Vector2(3, 3)
 
-[node name="Crab" parent="." instance=ExtResource("16_5ukof")]
-position = Vector2(182, 187)
-
 [node name="BoneParticles" type="CPUParticles2D" parent="."]
 emitting = false
 amount = 20
@@ -173,6 +181,26 @@ initial_velocity_min = 300.0
 initial_velocity_max = 500.0
 scale_amount_min = 2.0
 scale_amount_max = 5.0
+
+[node name="Hand" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_mask = 2
+script = ExtResource("18_2l700")
+health = NodePath("Health")
+subtractDamage = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hand"]
+shape = SubResource("CircleShape2D_r0dk1")
+
+[node name="Health" type="Node" parent="Hand" node_paths=PackedStringArray("healthBar")]
+script = ExtResource("19_r0dk1")
+health = 100.0
+healthBar = NodePath("../../HUD/HealthBar")
+metadata/_custom_type_script = "uid://3qtest46ag4a"
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" parent="HUD" instance=ExtResource("4_i6vcq")]
+position = Vector2(18, 11)
 
 [connection signal="cutBone" from="knifeChopper" to="." method="_on_knife_chopper_cut_bone"]
 [connection signal="cutBone" from="knifeSlicer" to="." method="_on_knife_slicer_cut_bone"]

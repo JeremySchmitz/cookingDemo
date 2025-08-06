@@ -6,6 +6,7 @@ signal recievedDamage(damage: float)
 var timers: Dictionary = {}
 
 @export var health: Health
+@export var subtractDamage = false
 
 func _ready():
 	connect("area_entered", _on_area_entered)
@@ -29,6 +30,7 @@ func _on_area_entered(body: Area2D):
 
 func _on_area_exited(body: Area2D):
 	if body is Hitbox:
+		if !timers.has(body.name): return
 		var timer: Timer = timers[body.name]
 		if timer != null:
 			timer.stop()
@@ -44,6 +46,7 @@ func _on_area_exited(body: Area2D):
 func _buildTimer(hitbox: Hitbox):
 	var timer = Timer.new()
 	timer.wait_time = hitbox.frequency
+	if hitbox.frequency == 0.0: timer.one_shot = true
 	timer.connect("timeout", _addDamage.bind(hitbox.damage))
 	timers[hitbox.name] = timer
 	add_child(timer)
@@ -51,13 +54,15 @@ func _buildTimer(hitbox: Hitbox):
 
 
 func _addDamage(damage: float):
-	health.cooked += damage
+	if subtractDamage: health.health -= damage
+	else: health.health += damage
 	recievedDamage.emit(damage)
 
 func _updateTimer(hitbox: Hitbox):
 	if hitbox.name in timers:
 		var timer: Timer = timers[hitbox.name]
 		timer.wait_time = hitbox.frequency
+		if hitbox.frequency == 0.0: timer.one_shot = true
 		timer.start()
 		
 		if timer.is_connected("timeout", _addDamage):

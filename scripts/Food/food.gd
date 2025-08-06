@@ -2,10 +2,9 @@ class_name Food
 extends Node2D
 
 
-
 #Should be the draggableArea's Collision Poly
-@onready var collisionPoly:= $DraggableArea/CollisionPolygon2D
-@onready var health = $Health
+@onready var collisionPoly := $DraggableArea/CollisionPolygon2D
+@onready var health: HealthFood = $Health
 @onready var hurtbox = $Hurtbox
 var shaderSprite: Sprite2D
 
@@ -18,11 +17,11 @@ var shader_mat: ShaderMaterial
 var cooked := GlobalEnums.Cooked.RAW
 
 func _ready() -> void:
-	if(has_node("sliceGroup/sliceSprite")):
-		shaderSprite = 	get_node("sliceGroup/sliceSprite")
+	if (has_node("sliceGroup/sliceSprite")):
+		shaderSprite = get_node("sliceGroup/sliceSprite")
 	
 	if health:
-		health.cookedChanged.connect(_on_health_cooked_changed)
+		health.healthChanged.connect(_on_health_cooked_changed)
 		health.cookedBurnt.connect(_on_health_cooked_burnt)
 	if has_node("Choppable") and $Choppable is Choppable:
 		$Choppable.chopped.connect(_on_choppable_choped)
@@ -34,7 +33,7 @@ func _ready() -> void:
 		
 
 func _process(delta: float) -> void:
-	if find_child("Label"): find_child("Label").text = str(health.cooked)
+	if find_child("Label"): find_child("Label").text = str(health.health)
 
 func _on_health_cooked_changed(val: int) -> void:
 	if shader_mat:

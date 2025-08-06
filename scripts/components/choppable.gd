@@ -113,7 +113,7 @@ func _updateChunk(chunk: Food, poly: PackedVector2Array, chops: Array[PackedVect
 		chunk.parented = get_parent().parented
 		
 	if "health" in chunk:
-		(chunk.health as Health).cooked = (get_parent() as Food).health.cooked
+		(chunk.health as Health).health = (get_parent() as Food).health.cooked
 
 	for child in chunk.get_children():
 		if child is Choppable:

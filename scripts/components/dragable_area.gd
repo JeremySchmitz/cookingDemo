@@ -12,6 +12,7 @@ signal dragging()
 
 func _ready():
 	Utils.modeChange.connect(_on_mode_change)
+	Utils.stopDrag.connect(_drop)
 	Utils.cameraMove.connect(_on_camera_move)
 	Utils.cameraStop.connect(_on_camera_stop)
 	
@@ -73,3 +74,6 @@ func _dragging(t: bool) -> void:
 	for sibling in parent.get_children():
 		if sibling is Nutrition:
 			sibling.parented = false
+
+func _drop():
+	lifted = false

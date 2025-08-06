@@ -1,0 +1,408 @@
+[gd_scene load_steps=42 format=3 uid="uid://ykut86xvitu3"]
+
+[ext_resource type="Script" uid="uid://bunuku5x2rt24" path="res://scripts/Food/food.gd" id="1_3agy5"]
+[ext_resource type="BitMap" uid="uid://c3h1w3uk5lm3n" path="res://resources/Sprites/PufferFish_02/pufferFiish02_Body_BM.png" id="2_3agy5"]
+[ext_resource type="Shader" uid="uid://brchmr5hs31qg" path="res://resources/cook.gdshader" id="2_cxmjn"]
+[ext_resource type="Script" uid="uid://c4wtk3o8jrujm" path="res://scripts/components/health_food.gd" id="3_ea0t4"]
+[ext_resource type="Script" uid="uid://w6ocrvw6sksd" path="res://scripts/components/sliceable.gd" id="4_it4mh"]
+[ext_resource type="Script" uid="uid://cx3k7xle3gw0c" path="res://scripts/components/nutrition.gd" id="5_ns5ct"]
+[ext_resource type="Script" uid="uid://c5ox7hexp2ty8" path="res://scripts/components/poison.gd" id="6_0mwig"]
+[ext_resource type="Script" uid="uid://0l0lpkxtrjtx" path="res://scripts/components/choppable.gd" id="7_bveyg"]
+[ext_resource type="Texture2D" uid="uid://djuni4xmd1twx" path="res://resources/Sprites/PufferFish_02/PufferFish02_Belly.png" id="8_joshd"]
+[ext_resource type="PackedScene" uid="uid://c1ixyyfmpabav" path="res://Scenes/food/organ.tscn" id="9_46n4k"]
+[ext_resource type="Script" uid="uid://bkuh78a5kdr6w" path="res://resources/custom_resources/organ/organ.rsc.gd" id="10_fh1hb"]
+[ext_resource type="Texture2D" uid="uid://b6r4i6nroyism" path="res://resources/Sprites/PufferFish_02/pufferFiish02_Eye.png" id="11_6mqvy"]
+[ext_resource type="BitMap" uid="uid://br5j45t1r8x0l" path="res://resources/Sprites/PufferFish_02/pufferFiish02_Eye_BM.png" id="12_it4mh"]
+[ext_resource type="Script" uid="uid://ip3nwschvvkb" path="res://scripts/components/dragable_area.gd" id="13_dp40m"]
+[ext_resource type="Texture2D" uid="uid://cteec7c7pkf00" path="res://resources/Sprites/PufferFish_02/pufferFiish02_Body.png" id="15_ns5ct"]
+[ext_resource type="Script" uid="uid://dik22bwv6x5l5" path="res://scripts/components/hurtbox.gd" id="16_ea0t4"]
+[ext_resource type="Texture2D" uid="uid://ce7ft5sof5pew" path="res://resources/Sprites/PufferFish_02/pufferFiish02_Fin.png" id="16_ns5ct"]
+[ext_resource type="BitMap" uid="uid://cqe35jf5m4pif" path="res://resources/Sprites/PufferFish_02/pufferFiish02_Fin_BM.png" id="17_0mwig"]
+[ext_resource type="Script" uid="uid://det5k60wcmbbf" path="res://scripts/components/updateable_collider.gd" id="17_ytvow"]
+[ext_resource type="Texture2D" uid="uid://db57ojjrlctkd" path="res://resources/Sprites/PufferFish_02/pufferFiish02_Tail.png" id="18_bveyg"]
+[ext_resource type="BitMap" uid="uid://dquo0wpkpt4p4" path="res://resources/Sprites/PufferFish_02/pufferFiish02_Tail_BM.png" id="19_p1mkj"]
+[ext_resource type="Texture2D" uid="uid://dor8dhmmc3y4u" path="res://resources/Sprites/PufferFish_02/pufferFiish02_Spike_01.png" id="23_uaxqq"]
+[ext_resource type="Script" uid="uid://jgkb3k3cebao" path="res://scripts/components/hitbox.gd" id="24_mfhaf"]
+[ext_resource type="Texture2D" uid="uid://3sayhnxjstr5" path="res://resources/Sprites/PufferFish_02/pufferFiish02_Spike_02.png" id="25_dvme2"]
+[ext_resource type="Texture2D" uid="uid://co7vceidqnhgc" path="res://resources/Sprites/PufferFish_02/pufferFiish02_Spike_03.png" id="26_d0wah"]
+[ext_resource type="Texture2D" uid="uid://b2lrexdykkcnn" path="res://resources/Sprites/PufferFish_02/pufferFiish02_Spike_04.png" id="27_vdelw"]
+[ext_resource type="Texture2D" uid="uid://dlq824rx3svt8" path="res://resources/Sprites/PufferFish_02/pufferFiish02_Spike_05.png" id="28_0e0qx"]
+[ext_resource type="Texture2D" uid="uid://5ttrpf3guhky" path="res://resources/Sprites/PufferFish_02/pufferFiish02_Spike_06.png" id="29_o0560"]
+[ext_resource type="Texture2D" uid="uid://3f56sqibyhxv" path="res://resources/Sprites/PufferFish_02/pufferFiish02_Spike_07.png" id="30_0wbql"]
+[ext_resource type="Texture2D" uid="uid://xbfig7g1qxqb" path="res://resources/Sprites/PufferFish_02/pufferFiish02_Spike_08.png" id="31_r3cya"]
+[ext_resource type="Texture2D" uid="uid://c2yxlyaqtujbs" path="res://resources/Sprites/PufferFish_02/pufferFiish02_Spike_09.png" id="32_71dv2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5hgne"]
+resource_local_to_scene = true
+shader = ExtResource("2_cxmjn")
+shader_parameter/cookVal = 0.0
+shader_parameter/isBurnt = false
+
+[sub_resource type="Resource" id="Resource_46n4k"]
+script = ExtResource("10_fh1hb")
+sprite = ExtResource("16_ns5ct")
+spriteScale = Vector2(3, 3)
+medium = 50
+wellDone = 75
+burnt = 100
+maxNutrition = 100.0
+nutrition = 10.0
+nutritionRentention = 0.99
+nutritiousWhileParented = true
+poisonWhileRaw = 0
+maxPoison = 0
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[sub_resource type="Resource" id="Resource_fh1hb"]
+script = ExtResource("10_fh1hb")
+sprite = ExtResource("18_bveyg")
+spriteScale = Vector2(3, 3)
+medium = 50
+wellDone = 75
+burnt = 100
+maxNutrition = 100.0
+nutrition = 10.0
+nutritionRentention = 0.99
+nutritiousWhileParented = true
+poisonWhileRaw = 0
+maxPoison = 0
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[sub_resource type="Resource" id="Resource_0mwig"]
+script = ExtResource("10_fh1hb")
+sprite = ExtResource("11_6mqvy")
+spriteScale = Vector2(3, 3)
+medium = 50
+wellDone = 75
+burnt = 100
+maxNutrition = 100.0
+nutrition = 10.0
+nutritionRentention = 0.99
+nutritiousWhileParented = true
+poisonWhileRaw = 0
+maxPoison = 0
+poisonRentention = 1.0
+metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kemvk"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uea0i"]
+radius = 6.08276
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g78rq"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ux03x"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r1ojg"]
+radius = 6.08276
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n6v2b"]
+radius = 4.12311
+
+[node name="Pufferfish" type="Node2D" groups=["food"]]
+z_index = 1
+script = ExtResource("1_3agy5")
+bitmap = ExtResource("2_3agy5")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_ea0t4")
+metadata/_custom_type_script = "uid://c4wtk3o8jrujm"
+
+[node name="Sliceable" type="Node" parent="." node_paths=PackedStringArray("collisionArea", "group", "organs", "visibleOrgans")]
+script = ExtResource("4_it4mh")
+collisionArea = NodePath("../DraggableArea")
+group = NodePath("../sliceGroup")
+organs = NodePath("../Organs")
+visibleOrgans = NodePath("../VisibleOrgans")
+metadata/_custom_type_script = "uid://w6ocrvw6sksd"
+
+[node name="Nutrition" type="Node" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("5_ns5ct")
+health = NodePath("../Health")
+
+[node name="Poison" type="Node" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("6_0mwig")
+health = NodePath("../Health")
+
+[node name="Choppable" type="CanvasGroup" parent="." node_paths=PackedStringArray("collisionArea", "collisionNode", "sliceGroup")]
+script = ExtResource("7_bveyg")
+collisionArea = NodePath("../DraggableArea")
+collisionNode = NodePath("../DraggableArea/CollisionPolygon2D")
+sliceGroup = NodePath("../sliceGroup")
+scenePath = "res://Scenes/food/food.tscn"
+
+[node name="Sprite2D2" type="Sprite2D" parent="Choppable"]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("8_joshd")
+
+[node name="Organs" type="Node2D" parent="."]
+
+[node name="DraggableArea" type="Area2D" parent="."]
+script = ExtResource("13_dp40m")
+metadata/_custom_type_script = "uid://ip3nwschvvkb"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DraggableArea" groups=["food"]]
+polygon = PackedVector2Array(-11, 12, 8, 12, 24, -46)
+
+[node name="VisibleOrgans" type="Node2D" parent="."]
+
+[node name="sliceGroup" type="CanvasGroup" parent="."]
+texture_filter = 1
+
+[node name="sliceSprite" type="Sprite2D" parent="sliceGroup"]
+material = SubResource("ShaderMaterial_5hgne")
+scale = Vector2(3, 3)
+texture = ExtResource("15_ns5ct")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+script = ExtResource("16_ea0t4")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox" node_paths=PackedStringArray("collisionShape")]
+polygon = PackedVector2Array(-11, 12, 8, 12, 24, -46)
+script = ExtResource("17_ytvow")
+collisionShape = NodePath("../../DraggableArea/CollisionPolygon2D")
+updateOn = "chopped"
+
+[node name="Fin" parent="." instance=ExtResource("9_46n4k")]
+stats = SubResource("Resource_46n4k")
+bitmap = ExtResource("17_0mwig")
+spriteScale = 3.0
+
+[node name="Tail" parent="." instance=ExtResource("9_46n4k")]
+stats = SubResource("Resource_fh1hb")
+bitmap = ExtResource("19_p1mkj")
+spriteScale = 3.0
+
+[node name="Eye" parent="." instance=ExtResource("9_46n4k")]
+stats = SubResource("Resource_0mwig")
+bitmap = ExtResource("12_it4mh")
+spriteScale = 3.0
+
+[node name="Label" type="Label" parent="."]
+offset_left = 87.0
+offset_top = -26.0
+offset_right = 208.0
+offset_bottom = 54.0
+text = "0.0"
+
+[node name="Spike_01" type="Node2D" parent="."]
+
+[node name="DraggableArea" type="Area2D" parent="Spike_01"]
+script = ExtResource("13_dp40m")
+metadata/_custom_type_script = "uid://ip3nwschvvkb"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Spike_01/DraggableArea"]
+polygon = PackedVector2Array(-57, -37, -66, -26, -82, -80)
+
+[node name="Sprite2D" type="Sprite2D" parent="Spike_01"]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("23_uaxqq")
+
+[node name="Hitbox" type="Area2D" parent="Spike_01"]
+collision_layer = 2
+script = ExtResource("24_mfhaf")
+frequency = 0.0
+metadata/_custom_type_script = "uid://jgkb3k3cebao"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike_01/Hitbox"]
+position = Vector2(-79, -75)
+shape = SubResource("CircleShape2D_kemvk")
+
+[node name="Spike_02" type="Node2D" parent="."]
+
+[node name="DraggableArea" type="Area2D" parent="Spike_02"]
+script = ExtResource("13_dp40m")
+metadata/_custom_type_script = "uid://ip3nwschvvkb"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Spike_02/DraggableArea"]
+polygon = PackedVector2Array(-4, -43, 6, -32, 22, -82)
+
+[node name="Sprite2D" type="Sprite2D" parent="Spike_02"]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("25_dvme2")
+
+[node name="Hitbox" type="Area2D" parent="Spike_02"]
+collision_layer = 2
+script = ExtResource("24_mfhaf")
+frequency = 0.0
+metadata/_custom_type_script = "uid://jgkb3k3cebao"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike_02/Hitbox"]
+position = Vector2(19, -79)
+shape = SubResource("CircleShape2D_kemvk")
+
+[node name="Spike_03" type="Node2D" parent="."]
+
+[node name="DraggableArea" type="Area2D" parent="Spike_03"]
+script = ExtResource("13_dp40m")
+metadata/_custom_type_script = "uid://ip3nwschvvkb"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Spike_03/DraggableArea"]
+polygon = PackedVector2Array(32, 53, 54, 77, 53, 80, 49, 81, 28, 58)
+
+[node name="Sprite2D" type="Sprite2D" parent="Spike_03"]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("26_d0wah")
+
+[node name="Hitbox" type="Area2D" parent="Spike_03"]
+collision_layer = 2
+script = ExtResource("24_mfhaf")
+frequency = 0.0
+metadata/_custom_type_script = "uid://jgkb3k3cebao"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike_03/Hitbox"]
+position = Vector2(50, 76)
+shape = SubResource("CircleShape2D_uea0i")
+
+[node name="Spike_04" type="Node2D" parent="."]
+
+[node name="DraggableArea" type="Area2D" parent="Spike_04"]
+script = ExtResource("13_dp40m")
+metadata/_custom_type_script = "uid://ip3nwschvvkb"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Spike_04/DraggableArea"]
+polygon = PackedVector2Array(-53, 26, -94, 46, -49, 37)
+
+[node name="Sprite2D" type="Sprite2D" parent="Spike_04"]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("27_vdelw")
+
+[node name="Hitbox" type="Area2D" parent="Spike_04"]
+collision_layer = 2
+script = ExtResource("24_mfhaf")
+frequency = 0.0
+metadata/_custom_type_script = "uid://jgkb3k3cebao"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike_04/Hitbox"]
+position = Vector2(-88, 46)
+shape = SubResource("CircleShape2D_g78rq")
+
+[node name="Spike_05" type="Node2D" parent="."]
+
+[node name="DraggableArea" type="Area2D" parent="Spike_05"]
+script = ExtResource("13_dp40m")
+metadata/_custom_type_script = "uid://ip3nwschvvkb"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Spike_05/DraggableArea"]
+polygon = PackedVector2Array(4, 22, 36, 37, -1, 29)
+
+[node name="Sprite2D" type="Sprite2D" parent="Spike_05"]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("28_0e0qx")
+
+[node name="Hitbox" type="Area2D" parent="Spike_05"]
+collision_layer = 2
+script = ExtResource("24_mfhaf")
+frequency = 0.0
+metadata/_custom_type_script = "uid://jgkb3k3cebao"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike_05/Hitbox"]
+position = Vector2(31, 37)
+shape = SubResource("CircleShape2D_ux03x")
+
+[node name="Spike_06" type="Node2D" parent="."]
+
+[node name="DraggableArea" type="Area2D" parent="Spike_06"]
+script = ExtResource("13_dp40m")
+metadata/_custom_type_script = "uid://ip3nwschvvkb"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Spike_06/DraggableArea"]
+polygon = PackedVector2Array(-18, -16, -25, -63, -30, -17)
+
+[node name="Sprite2D" type="Sprite2D" parent="Spike_06"]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("29_o0560")
+
+[node name="Hitbox" type="Area2D" parent="Spike_06"]
+collision_layer = 2
+script = ExtResource("24_mfhaf")
+frequency = 0.0
+metadata/_custom_type_script = "uid://jgkb3k3cebao"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike_06/Hitbox"]
+position = Vector2(-25, -59)
+shape = SubResource("CircleShape2D_r1ojg")
+
+[node name="Spike_07" type="Node2D" parent="."]
+
+[node name="DraggableArea" type="Area2D" parent="Spike_07"]
+script = ExtResource("13_dp40m")
+metadata/_custom_type_script = "uid://ip3nwschvvkb"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Spike_07/DraggableArea"]
+polygon = PackedVector2Array(-23, 57, -1, 90, -17, 53)
+
+[node name="Sprite2D" type="Sprite2D" parent="Spike_07"]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("30_0wbql")
+
+[node name="Hitbox" type="Area2D" parent="Spike_07"]
+collision_layer = 2
+script = ExtResource("24_mfhaf")
+frequency = 0.0
+metadata/_custom_type_script = "uid://jgkb3k3cebao"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike_07/Hitbox"]
+position = Vector2(-3, 87)
+shape = SubResource("CircleShape2D_n6v2b")
+
+[node name="Spike_08" type="Node2D" parent="."]
+
+[node name="DraggableArea" type="Area2D" parent="Spike_08"]
+script = ExtResource("13_dp40m")
+metadata/_custom_type_script = "uid://ip3nwschvvkb"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Spike_08/DraggableArea"]
+polygon = PackedVector2Array(-65, 66, -90, 92, -57, 73)
+
+[node name="Sprite2D" type="Sprite2D" parent="Spike_08"]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("31_r3cya")
+
+[node name="Hitbox" type="Area2D" parent="Spike_08"]
+collision_layer = 2
+script = ExtResource("24_mfhaf")
+frequency = 0.0
+metadata/_custom_type_script = "uid://jgkb3k3cebao"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike_08/Hitbox"]
+position = Vector2(-89, 92)
+shape = SubResource("CircleShape2D_n6v2b")
+
+[node name="Spike_09" type="Node2D" parent="."]
+
+[node name="DraggableArea" type="Area2D" parent="Spike_09"]
+script = ExtResource("13_dp40m")
+metadata/_custom_type_script = "uid://ip3nwschvvkb"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Spike_09/DraggableArea"]
+polygon = PackedVector2Array(35, -7, 79, 21, 29, -1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Spike_09"]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("32_71dv2")
+
+[node name="Hitbox" type="Area2D" parent="Spike_09"]
+collision_layer = 2
+script = ExtResource("24_mfhaf")
+frequency = 0.0
+metadata/_custom_type_script = "uid://jgkb3k3cebao"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike_09/Hitbox"]
+position = Vector2(75, 19)
+shape = SubResource("CircleShape2D_n6v2b")

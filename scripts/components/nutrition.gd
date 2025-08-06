@@ -2,7 +2,7 @@ class_name Nutrition
 extends Node
 
 
-@export var health: Health
+@export var health: HealthFood
 @export var maxNutrition := 100.0
 @export var nutrition := 10.0: set = _setNutrition, get = _getNutrition
 @export var rentention: float = .99
@@ -13,7 +13,7 @@ var parented := true
 
 func _ready() -> void:
 	if health:
-		health.cookedChanged.connect(_on_health_cooked_changed)
+		health.healthChanged.connect(_on_health_cooked_changed)
 		health.cookedMedium.connect(_on_health_cooked_medium)
 		health.cookedWellDone.connect(_on_health_cooked_well)
 		health.cookedBurnt.connect(_on_health_cooked_burnt)

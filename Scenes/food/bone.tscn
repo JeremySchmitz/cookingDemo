@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://d33muh3gkkpu5"]
 
+[ext_resource type="Script" uid="uid://c4wtk3o8jrujm" path="res://scripts/components/health_food.gd" id="1_33bg0"]
 [ext_resource type="Script" uid="uid://iwsfiwlbgqoe" path="res://scripts/Food/bone.gd" id="1_qnmy5"]
-[ext_resource type="Script" uid="uid://3qtest46ag4a" path="res://scripts/components/health.gd" id="2_eg7rq"]
 [ext_resource type="Script" uid="uid://cx3k7xle3gw0c" path="res://scripts/components/nutrition.gd" id="3_e3csk"]
 [ext_resource type="Script" uid="uid://c5ox7hexp2ty8" path="res://scripts/components/poison.gd" id="4_yy7fe"]
 [ext_resource type="Texture2D" uid="uid://cgv43n2ynjgwt" path="res://resources/Sprites/Shared/LargeBone.png" id="6_33bg0"]
@@ -17,15 +17,12 @@ shader_parameter/isBurnt = false
 [node name="VisibleBone" type="Node2D"]
 
 [node name="Health" type="Node" parent="."]
-script = ExtResource("2_eg7rq")
-medium = 60
-wellDone = 70
-burnt = 80
-metadata/_custom_type_script = "uid://3qtest46ag4a"
+script = ExtResource("1_33bg0")
+metadata/_custom_type_script = "uid://c4wtk3o8jrujm"
 
 [node name="Nutrition" type="Node" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("3_e3csk")
-health = NodePath("../Health")
+health = NodePath("")
 metadata/_custom_type_script = "uid://cx3k7xle3gw0c"
 
 [node name="Poison" type="Node" parent="."]
@@ -46,7 +43,7 @@ polygon = PackedVector2Array(-1, -16, -5, -14, -4, -8, -3, 2, -4, 11, -7, 13, -7
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("9_kh3l2")
-health = NodePath("../Health")
+health = NodePath("")
 metadata/_custom_type_script = "uid://dik22bwv6x5l5"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox"]
