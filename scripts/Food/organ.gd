@@ -6,8 +6,6 @@ extends Food
 
 @export var stats: OrganResource
 
-var parented = true;
-
 func _ready() -> void:
 	if !stats: return
 	if stats.sprite:
@@ -30,12 +28,3 @@ func _ready() -> void:
 		$Poison.rentention = stats.poisonRentention
 		
 		shaderSprite = get_node("Choppable/Sprite2D")
-
-func _on_draggable_area_dragging() -> void:
-	if Engine.is_editor_hint(): return
-	if !parented:
-		return
-#	TODO This needs to be made more surefire 
-	reparent(get_parent().get_parent().get_parent())
-	parented = false
-	$Nutrition.parented = false

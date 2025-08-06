@@ -7,6 +7,7 @@ var lifted = false
 var mouse_over = false
 var offset := Vector2(0, 0)
 var camMoving = false
+var parented = true;
 signal dragging()
 
 func _ready():
@@ -16,6 +17,7 @@ func _ready():
 	
 	connect("mouse_entered", _mouse_over.bind(true))
 	connect("mouse_exited", _mouse_over.bind(false))
+	connect("dragging", _dragging.bind(false))
 
 	set_process_unhandled_input(true)
 	
@@ -60,3 +62,14 @@ func _on_camera_move():
 
 func _on_camera_stop():
 	camMoving = false
+
+func _dragging(t: bool) -> void:
+	if Engine.is_editor_hint() || !parented: return
+	var kitchen = get_node("/root/Kitchen")
+	get_parent().reparent(kitchen)
+	parented = false
+
+	var parent = get_parent()
+	for sibling in parent.get_children():
+		if sibling is Nutrition:
+			sibling.parented = false
