@@ -84,15 +84,15 @@ func _addNewSlice(line: PackedVector2Array):
 func _on_area_entered(body: Area2D):
 	if body is KnifeSlicer && body.active:
 		knifeInside = true
-		Utils.startSlice.connect(_on_start_slice)
-		Utils.endSlice.connect(_on_end_slice)
+		SignalBus.startSlice.connect(_on_start_slice)
+		SignalBus.endSlice.connect(_on_end_slice)
 
 
 func _on_area_exited(body: Area2D):
 	if body is KnifeSlicer && body.active:
 		knifeInside = false
-		Utils.startSlice.disconnect(_on_start_slice)
-		Utils.endSlice.disconnect(_on_end_slice)
+		SignalBus.startSlice.disconnect(_on_start_slice)
+		SignalBus.endSlice.disconnect(_on_end_slice)
 
 
 func _on_start_slice(p: Vector2):

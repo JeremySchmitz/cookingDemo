@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cax40kgn23m3q"]
+[gd_scene load_steps=31 format=3 uid="uid://cax40kgn23m3q"]
 
 [ext_resource type="Script" uid="uid://bq6d71fqsv1h6" path="res://scripts/kitchen.gd" id="1_4clir"]
 [ext_resource type="Texture2D" uid="uid://roubacvs6dht" path="res://resources/Sprites/Kitchen/CuttingBoard.png" id="2_t5hpn"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://ykut86xvitu3" path="res://Scenes/food/Food_types/Puffer_Fish/pufferfish.tscn" id="17_iw6an"]
 [ext_resource type="Script" uid="uid://c2w2t0wc0srsr" path="res://scripts/hand.gd" id="18_2l700"]
 [ext_resource type="Script" uid="uid://3qtest46ag4a" path="res://scripts/components/health.gd" id="19_r0dk1"]
+[ext_resource type="PackedScene" uid="uid://dpjoi167t6yho" path="res://Scenes/UI/stamina_bar.tscn" id="21_bgcuo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0fj1v"]
 
@@ -219,6 +220,12 @@ metadata/_custom_type_script = "uid://3qtest46ag4a"
 [node name="HealthBar" parent="HUD" instance=ExtResource("4_i6vcq")]
 position = Vector2(18, 11)
 
+[node name="StaminaBar" parent="HUD" instance=ExtResource("21_bgcuo")]
+visible = false
+position = Vector2(215, 11)
+type = 1
+
 [connection signal="cutBone" from="knifeChopper" to="." method="_on_knife_chopper_cut_bone"]
 [connection signal="cutBone" from="knifeSlicer" to="." method="_on_knife_slicer_cut_bone"]
 [connection signal="pressed" from="dinnerBellBtn" to="." method="_on_dinner_bell_btn_pressed"]
+[connection signal="valueChange" from="HUD/HealthBar" to="." method="_on_health_bar_value_change"]

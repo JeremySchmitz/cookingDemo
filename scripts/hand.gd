@@ -15,8 +15,8 @@ func _damage(damage):
 	_bleed()
 
 func _drop():
-	Utils.cameraShake.emit()
-	Utils.stopDrag.emit()
+	SignalBus.cameraShake.emit()
+	SignalBus.stopDrag.emit()
 	
 func _bleed():
 	particles.global_position = global_position

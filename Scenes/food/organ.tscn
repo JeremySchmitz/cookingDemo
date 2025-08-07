@@ -41,9 +41,8 @@ spriteScale = 1.0
 script = ExtResource("4_1n0ni")
 metadata/_custom_type_script = "uid://c4wtk3o8jrujm"
 
-[node name="Nutrition" type="Node" parent="." node_paths=PackedStringArray("health")]
+[node name="Nutrition" type="Node" parent="."]
 script = ExtResource("3_nnpc6")
-health = NodePath("")
 metadata/_custom_type_script = "uid://cx3k7xle3gw0c"
 
 [node name="Poison" type="Node" parent="."]
@@ -69,12 +68,9 @@ metadata/_custom_type_script = "uid://ip3nwschvvkb"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DraggableArea"]
 polygon = PackedVector2Array(1, 1, 1, 0, 0, 1)
 
-[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+[node name="Hurtbox" type="Area2D" parent="."]
 script = ExtResource("6_1n0ni")
-health = NodePath("")
 metadata/_custom_type_script = "uid://dik22bwv6x5l5"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox"]
 polygon = PackedVector2Array(1, 1, 1, 0, 0, 1)
-
-[connection signal="dragging" from="DraggableArea" to="." method="_on_draggable_area_dragging"]

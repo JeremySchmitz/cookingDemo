@@ -20,7 +20,7 @@ var boatMoving = false
 
 # FIX, Day currently resets if switch scenes to an encounter. 
 func _ready():
-	Utils.portSelected.connect(_setTargetPos)
+	SignalBus.portSelected.connect(_setTargetPos)
 	set_process(true)
 
 	dayTimer.wait_time = dayLength

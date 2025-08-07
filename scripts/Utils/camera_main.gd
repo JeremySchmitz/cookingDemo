@@ -28,10 +28,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var curPos = cam.get_screen_center_position()
 	if !moving && curPos != lastPos:
-		Utils.cameraMove.emit()
+		SignalBus.cameraMove.emit()
 		moving = true
 	elif moving && curPos == lastPos:
-		Utils.cameraStop.emit()
+		SignalBus.cameraStop.emit()
 		moving = false
 	
 	lastPos = curPos
@@ -45,7 +45,7 @@ func _connectListeners():
 	toLeft.mouse_entered.connect(_on_to_left_area_mouse_entered)
 	toLeft.mouse_exited.connect(_on_to_left_area_mouse_exited)
 
-	Utils.cameraShake.connect(_applyShake)
+	SignalBus.cameraShake.connect(_applyShake)
 
 func _on_to_right_area_mouse_entered() -> void:
 	if curCam == CameraMode.PREP && !holdCam:

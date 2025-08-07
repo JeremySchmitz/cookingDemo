@@ -3,6 +3,7 @@ class_name GlobalEnums
 # Scenes
 enum Scenes {Kitchen, Results, Encounter, BoatTravel}
 
+enum ProgressTypes {HEALTH, STAMINA}
 
 #Cooking
 enum Mode {CHOP, SLICE, GRAB}

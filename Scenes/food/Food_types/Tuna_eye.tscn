@@ -24,12 +24,13 @@ metadata/_custom_type_script = "uid://c4wtk3o8jrujm"
 
 [node name="Nutrition" type="Node" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("3_fsyu2")
-health = NodePath("")
+health = NodePath("../Health")
 nutrition = 0
 metadata/_custom_type_script = "uid://cx3k7xle3gw0c"
 
-[node name="Poison" type="Node" parent="."]
+[node name="Poison" type="Node" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("4_85qar")
+health = NodePath("../Health")
 maxPoison = 0
 metadata/_custom_type_script = "uid://c5ox7hexp2ty8"
 
@@ -53,12 +54,9 @@ metadata/_custom_type_script = "uid://ip3nwschvvkb"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DraggableArea"]
 polygon = PackedVector2Array(-1, -2, -1, -1, -2, -1, -2, 1, -1, 1, -1, 2, 1, 2, 1, 1, 2, 1, 2, -1, 1, -1, 1, -2)
 
-[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+[node name="Hurtbox" type="Area2D" parent="."]
 script = ExtResource("9_7bcvh")
-health = NodePath("")
 metadata/_custom_type_script = "uid://dik22bwv6x5l5"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox"]
 polygon = PackedVector2Array(-1, -2, -1, -1, -2, -1, -2, 1, -1, 1, -1, 2, 1, 2, 1, 1, 2, 1, 2, -1, 1, -1, 1, -2)
-
-[connection signal="dragging" from="DraggableArea" to="." method="_on_draggable_area_dragging"]

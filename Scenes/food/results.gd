@@ -54,9 +54,9 @@ func _loadKitchen():
 	var kitchenScn := load(Utils.KITCHEN_PATH)
 
 	var prepInstance = kitchenScn.instantiate()
-	Utils.switchScene.emit(prepInstance)
+	SignalBus.switchScene.emit(prepInstance)
 
 func _loadEncounter():
 	var encounterScn := load(Utils.ENCOUNTER_PATH)
 	var prepInstance = encounterScn.instantiate()
-	Utils.switchScene.emit(prepInstance)
+	SignalBus.switchScene.emit(prepInstance)

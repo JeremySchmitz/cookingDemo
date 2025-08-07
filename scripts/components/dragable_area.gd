@@ -8,20 +8,19 @@ var mouse_over = false
 var offset := Vector2(0, 0)
 var camMoving = false
 var parented = true;
-signal dragging()
+
+@export var weight := 1.0
 
 func _ready():
-	Utils.modeChange.connect(_on_mode_change)
-	Utils.stopDrag.connect(_drop)
-	Utils.cameraMove.connect(_on_camera_move)
-	Utils.cameraStop.connect(_on_camera_stop)
+	SignalBus.modeChange.connect(_on_mode_change)
+	SignalBus.stopDrag.connect(_drop)
+	SignalBus.cameraMove.connect(_on_camera_move)
+	SignalBus.cameraStop.connect(_on_camera_stop)
 	
 	connect("mouse_entered", _mouse_over.bind(true))
 	connect("mouse_exited", _mouse_over.bind(false))
-	connect("dragging", _dragging.bind(false))
 
-	set_process_unhandled_input(true)
-	
+
 func _process(delta: float) -> void:
 	if camMoving and lifted:
 		_set_position()
@@ -38,6 +37,7 @@ func _unhandled_input(event):
 			
 		if event is InputEventMouseButton and not event.pressed:
 			lifted = false
+			SignalBus.drop.emit()
 			
 		if lifted and event is InputEventMouseMotion:
 			_set_position()
@@ -46,7 +46,8 @@ func _unhandled_input(event):
 func _set_position():
 	get_parent().global_position = get_global_mouse_position() - offset
 	get_local_mouse_position()
-	dragging.emit()
+	_dragging()
+	SignalBus.dragging.emit(weight)
 	
 func _mouse_over(value):
 	mouse_over = value
@@ -64,7 +65,7 @@ func _on_camera_move():
 func _on_camera_stop():
 	camMoving = false
 
-func _dragging(t: bool) -> void:
+func _dragging() -> void:
 	if Engine.is_editor_hint() || !parented: return
 	var kitchen = get_node("/root/Kitchen")
 	get_parent().reparent(kitchen)
@@ -77,3 +78,4 @@ func _dragging(t: bool) -> void:
 
 func _drop():
 	lifted = false
+	SignalBus.drop.emit()

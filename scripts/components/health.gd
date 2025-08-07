@@ -7,7 +7,7 @@ signal healthZero()
 @export var health: float = 0.0: set = setHealth
 @export var min := 0.0
 @export var max := 100.0
-@export var healthBar: HealthBar
+@export var healthBar: CustomProgressBar
 
 func setHealth(val: float):
 	if val != health:

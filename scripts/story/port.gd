@@ -25,14 +25,14 @@ func _ready() -> void:
 	
 	connect("mouse_entered", _mouse_over.bind(true))
 	connect("mouse_exited", _mouse_over.bind(false))
-	Utils.portClicked.connect(on_port_selected)
+	SignalBus.portClicked.connect(on_port_selected)
 
 func _unhandled_input(event: InputEvent):
 	if (event is InputEventMouseButton and
 		mouse_over and
 		event.pressed):
 			info.visible = !info.visible
-			Utils.portClicked.emit(name)
+			SignalBus.portClicked.emit(name)
 
 
 func _mouse_over(value):
@@ -40,7 +40,7 @@ func _mouse_over(value):
 
 
 func _on_travel_btn_pressed() -> void:
-	Utils.portSelected.emit(global_position)
+	SignalBus.portSelected.emit(global_position)
 	info.visible = false
 
 func on_port_selected(portName: String):
