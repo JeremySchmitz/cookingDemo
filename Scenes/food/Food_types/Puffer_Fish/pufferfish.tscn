@@ -87,22 +87,22 @@ poisonRentention = 1.0
 metadata/_custom_type_script = "uid://bkuh78a5kdr6w"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kemvk"]
-radius = 6.0
+radius = 8.06226
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uea0i"]
-radius = 6.08276
+radius = 9.05539
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g78rq"]
-radius = 6.0
+radius = 9.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ux03x"]
-radius = 5.0
+radius = 9.05539
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r1ojg"]
-radius = 6.08276
+radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n6v2b"]
-radius = 4.12311
+radius = 8.06226
 
 [node name="Pufferfish" type="Node2D" groups=["food"]]
 z_index = 1

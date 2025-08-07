@@ -8,10 +8,14 @@ var timers: Dictionary = {}
 @export var health: Health
 @export var subtractDamage = false
 
+@export var iTime := 1.0
+var iTimer: Timer
+var invinsible := false;
+
 func _ready():
+	_initializeTimer()
 	connect("area_entered", _on_area_entered)
 	connect("area_exited", _on_area_exited)
-
 
 func _on_area_entered(body: Area2D):
 	if body is Hitbox:
@@ -54,9 +58,11 @@ func _buildTimer(hitbox: Hitbox):
 
 
 func _addDamage(damage: float):
+	if invinsible: return
 	if subtractDamage: health.health -= damage
 	else: health.health += damage
 	recievedDamage.emit(damage)
+	_setInvinsibility(true)
 
 func _updateTimer(hitbox: Hitbox):
 	if hitbox.name in timers:
@@ -68,3 +74,14 @@ func _updateTimer(hitbox: Hitbox):
 		if timer.is_connected("timeout", _addDamage):
 			timer.disconnect("timeout", _addDamage)
 			timer.connect("timeout", _addDamage.bind(hitbox.damage))
+
+func _initializeTimer():
+	iTimer = Timer.new()
+	iTimer.one_shot = true
+	iTimer.wait_time = iTime
+	iTimer.connect("timeout", _setInvinsibility.bind(false))
+	add_child(iTimer)
+
+func _setInvinsibility(val: bool):
+	invinsible = val
+	if val: iTimer.start()
