@@ -96,19 +96,22 @@ material = SubResource("ShaderMaterial_lbb8q")
 scale = Vector2(3, 3)
 texture = ExtResource("10_elblm")
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="TopOrgans" type="Node2D" parent="."]
+
+[node name="eye" parent="TopOrgans" instance=ExtResource("14_1ib3v")]
+scale = Vector2(3, 3)
+stats = SubResource("Resource_1ib3v")
+bitmap = ExtResource("17_ddhe2")
+
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("12_46my7")
+health = NodePath("../Health")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox" node_paths=PackedStringArray("collisionShape")]
 polygon = PackedVector2Array(-81, -37, -69, -21, -68, -2, -56, -14, -45, -18, -48, -22, -48, -31, -41, -28, -38, -18, -35, -21, 33, -21, 57, -17, 81, -8, 82, 2, 72, 9, 60, 15, 45, 18, 12, 21, -23, 21, -29, 18, -33, 24, -39, 24, -37, 19, -58, 15, -68, 6, -68, 19, -82, 33, -94, 32, -86, 24, -81, 7, -74, 0, -75, -17, -82, -28, -88, -35)
 script = ExtResource("13_r7sot")
 collisionShape = NodePath("../../DraggableArea/CollisionPolygon2D")
 updateOn = "chopped"
-
-[node name="eye" parent="." instance=ExtResource("14_1ib3v")]
-scale = Vector2(3, 3)
-stats = SubResource("Resource_1ib3v")
-bitmap = ExtResource("17_ddhe2")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 87.0

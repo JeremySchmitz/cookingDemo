@@ -55,7 +55,6 @@ func _setCollisionFromBM():
 	var poly = _buildCollisionFromBM()
 	$DraggableArea/CollisionPolygon2D.polygon = poly
 	$Hurtbox/CollisionPolygon2D.polygon = poly.duplicate()
-	collisionPoly = $Hurtbox/CollisionPolygon2D
 	spriteScaleSet = true
 	
 func _buildCollisionFromBM() -> PackedVector2Array:

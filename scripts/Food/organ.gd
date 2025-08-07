@@ -2,8 +2,6 @@
 class_name Organ
 extends Food
 
-@onready var polygon: PackedVector2Array = collisionPoly.polygon
-
 @export var stats: OrganResource
 
 func _ready() -> void:

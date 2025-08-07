@@ -116,16 +116,16 @@ position = Vector2(729, 461)
 [node name="Bowls" type="Node" parent="."]
 
 [node name="food" parent="." instance=ExtResource("5_32235")]
-position = Vector2(437, 142)
+position = Vector2(544, 464)
 
 [node name="Tuna" parent="." instance=ExtResource("5_t5hpn")]
-position = Vector2(739, 182)
+position = Vector2(691, 182)
 
 [node name="Crab" parent="." instance=ExtResource("16_5ukof")]
-position = Vector2(182, 187)
+position = Vector2(942, 164)
 
 [node name="Pufferfish" parent="." instance=ExtResource("17_iw6an")]
-position = Vector2(490, 299)
+position = Vector2(419, 171)
 
 [node name="knifeChopper" type="Area2D" parent="."]
 script = ExtResource("6_5ukof")

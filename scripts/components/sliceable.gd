@@ -64,7 +64,7 @@ func _setGlobal(organ: Organ):
 	var newLine = []
 	var p = organ.position
 	var rotation = organ.global_rotation
-	for point in organ.polygon:
+	for point in organ.collisionPoly:
 		var np = Vector2(point.x + p.x, point.y + p.y)
 		np = np - organ.position
 		np = np.rotated(rotation)

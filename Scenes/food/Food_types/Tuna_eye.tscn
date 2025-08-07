@@ -38,7 +38,7 @@ metadata/_custom_type_script = "uid://c5ox7hexp2ty8"
 script = ExtResource("5_0whqp")
 collisionArea = NodePath("../DraggableArea")
 collisionNode = NodePath("../DraggableArea/CollisionPolygon2D")
-scenePath = "res://Scenes/food/organ.tscn"
+scenePath = "res://Scenes/food/Food_types/Tuna_eye.tscn"
 metadata/_custom_type_script = "uid://0l0lpkxtrjtx"
 
 [node name="Sprite2D" type="Sprite2D" parent="Choppable"]
@@ -54,8 +54,9 @@ metadata/_custom_type_script = "uid://ip3nwschvvkb"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DraggableArea"]
 polygon = PackedVector2Array(-1, -2, -1, -1, -2, -1, -2, 1, -1, 1, -1, 2, 1, 2, 1, 1, 2, 1, 2, -1, 1, -1, 1, -2)
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("9_7bcvh")
+health = NodePath("../Health")
 metadata/_custom_type_script = "uid://dik22bwv6x5l5"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox"]

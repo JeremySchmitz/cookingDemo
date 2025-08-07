@@ -20,9 +20,8 @@ shader_parameter/isBurnt = false
 script = ExtResource("1_33bg0")
 metadata/_custom_type_script = "uid://c4wtk3o8jrujm"
 
-[node name="Nutrition" type="Node" parent="." node_paths=PackedStringArray("health")]
+[node name="Nutrition" type="Node" parent="."]
 script = ExtResource("3_e3csk")
-health = NodePath("")
 metadata/_custom_type_script = "uid://cx3k7xle3gw0c"
 
 [node name="Poison" type="Node" parent="."]
@@ -41,9 +40,8 @@ metadata/_custom_type_script = "uid://ip3nwschvvkb"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DraggableArea"]
 polygon = PackedVector2Array(-1, -16, -5, -14, -4, -8, -3, 2, -4, 11, -7, 13, -7, 16, -2, 16, 0, 15, 2, 10, 3, 6, 4, 3, 4, -7, 3, -9, 3, -11, 4, -13, 2, -16)
 
-[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+[node name="Hurtbox" type="Area2D" parent="."]
 script = ExtResource("9_kh3l2")
-health = NodePath("")
 metadata/_custom_type_script = "uid://dik22bwv6x5l5"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox"]
@@ -55,5 +53,3 @@ metadata/_custom_type_script = "uid://iwsfiwlbgqoe"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bone"]
 polygon = PackedVector2Array(-1, -16, -5, -14, -4, -8, -3, 2, -4, 11, -7, 13, -7, 16, -2, 16, 0, 15, 2, 10, 3, 6, 4, 3, 4, -7, 3, -9, 3, -11, 4, -13, 2, -16)
-
-[connection signal="dragging" from="DraggableArea" to="." method="_on_draggable_area_dragging"]

@@ -41,12 +41,14 @@ spriteScale = 1.0
 script = ExtResource("4_1n0ni")
 metadata/_custom_type_script = "uid://c4wtk3o8jrujm"
 
-[node name="Nutrition" type="Node" parent="."]
+[node name="Nutrition" type="Node" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("3_nnpc6")
+health = NodePath("../Health")
 metadata/_custom_type_script = "uid://cx3k7xle3gw0c"
 
-[node name="Poison" type="Node" parent="."]
+[node name="Poison" type="Node" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("4_snl8s")
+health = NodePath("../Health")
 poisonWhileRaw = 30.0
 metadata/_custom_type_script = "uid://c5ox7hexp2ty8"
 
@@ -68,8 +70,9 @@ metadata/_custom_type_script = "uid://ip3nwschvvkb"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DraggableArea"]
 polygon = PackedVector2Array(1, 1, 1, 0, 0, 1)
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("6_1n0ni")
+health = NodePath("../Health")
 metadata/_custom_type_script = "uid://dik22bwv6x5l5"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox"]
