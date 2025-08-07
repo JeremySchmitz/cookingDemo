@@ -125,7 +125,7 @@ func _rest():
 	timer.connect("timeout", (
 		func():
 			timer.queue_free()
-			_startTimer(staminaRestPeriod, false)
+			_startTimer(recoverSpeed, false)
 			)
 	)
 
