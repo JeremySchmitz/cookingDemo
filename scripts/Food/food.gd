@@ -1,6 +1,7 @@
 class_name Food
 extends Node2D
 
+const minArea = 100
 
 #Should be the draggableArea's Collision Poly
 @onready var collisionPoly := $DraggableArea/CollisionPolygon2D
@@ -45,6 +46,10 @@ func _on_health_cooked_burnt() -> void:
 		shader_mat.set_shader_parameter("isBurnt", true)
 
 func _on_choppable_choped(percent: float) -> void:
+	if $Choppable.area < minArea:
+		queue_free()
+		return
+
 	if has_node("Nutrition") and $Nutrition is Nutrition:
 		$Nutrition.updateNutritionAfterChop(percent)
 	if has_node("Poison") and $Poison is Poison:

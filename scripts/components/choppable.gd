@@ -59,6 +59,7 @@ func _toRelativePositon(p1: Vector2):
 func _chop(line: PackedVector2Array, polygon: PackedVector2Array):
 	var thiccLine = g.offset_polyline(line, lineExpansion)[0]
 	var clip = g.clip_polygons(polygon, thiccLine)
+	if clip.size() < 2: return
 	
 	var poly1: PackedVector2Array = g.offset_polygon(clip[0], lineExpansion)[0]
 	var poly2: PackedVector2Array = g.offset_polygon(clip[1], lineExpansion)[0]
@@ -305,6 +306,7 @@ func _updateArea(ps: PackedVector2Array):
 	var newArea = _getAreaOfPolygon(ps)
 	var percent = newArea / area
 	area = newArea
+	print('area:', area)
 	chopped.emit(percent)
 	
 func _getAreaOfPolygon(ps: PackedVector2Array) -> float:
