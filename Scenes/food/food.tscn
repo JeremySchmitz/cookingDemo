@@ -22,6 +22,7 @@
 script = ExtResource("9_ue4cl")
 sprite = ExtResource("10_yjw8s")
 spriteScale = Vector2(1, 1)
+disabledTillCut = false
 medium = 50
 wellDone = 75
 burnt = 100

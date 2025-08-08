@@ -12,6 +12,8 @@ func _ready() -> void:
 	
 	if !Engine.is_editor_hint():
 		super._ready()
+		$DraggableArea.disabledTillCut = stats.disabledTillCut
+
 		$Health.medium = stats.medium
 		$Health.wellDone = stats.wellDone
 		$Health.burnt = stats.burnt
@@ -26,3 +28,7 @@ func _ready() -> void:
 		$Poison.rentention = stats.poisonRentention
 		
 		shaderSprite = get_node("Choppable/Sprite2D")
+
+
+func _on_choppable_chopped(percentage: float) -> void:
+	$DraggableArea.chopped()

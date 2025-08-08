@@ -3,6 +3,7 @@ class_name OrganResource
 
 @export var sprite: Texture
 @export var spriteScale := Vector2(1, 1)
+@export var disabledTillCut = false
 
 @export_subgroup("Health")
 @export var medium: int = 50

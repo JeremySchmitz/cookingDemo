@@ -98,6 +98,8 @@ func _createChunk(chops: Array[PackedVector2Array], poly2: PackedVector2Array, n
 	if !chops.size() || !chops[0].size():
 		return
 	var chunk: Food = scene.instantiate()
+	if chunk is Organ:
+		chunk.stats = get_parent().stats
 	_updateChunk.call_deferred(chunk, poly2, chops, newOrgans, pos)
 	
 
@@ -306,7 +308,6 @@ func _updateArea(ps: PackedVector2Array):
 	var newArea = _getAreaOfPolygon(ps)
 	var percent = newArea / area
 	area = newArea
-	print('area:', area)
 	chopped.emit(percent)
 	
 func _getAreaOfPolygon(ps: PackedVector2Array) -> float:

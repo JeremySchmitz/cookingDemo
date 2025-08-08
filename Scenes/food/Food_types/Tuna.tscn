@@ -28,6 +28,7 @@ resource_name = "tunaEye"
 script = ExtResource("15_a2log")
 sprite = ExtResource("16_b0vwp")
 spriteScale = Vector2(1, 1)
+disabledTillCut = false
 medium = 10
 wellDone = 15
 burnt = 20

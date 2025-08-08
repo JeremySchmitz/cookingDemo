@@ -10,8 +10,13 @@ var camMoving = false
 var parented = true;
 
 @export var weight := 1.0
+@export var disabledTillCut = false
+var hasBeenCut = false
 
 func _ready():
+	if disabledTillCut:
+		$CollisionPolygon2D.disabled = true
+
 	SignalBus.modeChange.connect(_on_mode_change)
 	SignalBus.stopDrag.connect(_drop)
 	SignalBus.cameraMove.connect(_on_camera_move)
@@ -25,8 +30,15 @@ func _process(delta: float) -> void:
 	if camMoving and lifted:
 		_set_position()
 
+func chopped():
+	if !hasBeenCut: hasBeenCut = true
+
 func _unhandled_input(event):
+	# we stop listening cause if we disable the collider we cant cut
+	if disabledTillCut and !hasBeenCut: return
+
 	if draggable:
+		var handled = false
 		if (mouse_over
 			and event is InputEventMouseButton
 			and event.button_index == MOUSE_BUTTON_LEFT
@@ -34,14 +46,19 @@ func _unhandled_input(event):
 		):
 			lifted = true
 			offset = get_global_mouse_position() - get_parent().global_position
+			handled = true
 			
 		if event is InputEventMouseButton and not event.pressed:
 			lifted = false
 			SignalBus.drop.emit()
+			handled = true
+			get_viewport().set_input_as_handled()
 			
 		if lifted and event is InputEventMouseMotion:
 			_set_position()
-			get_viewport().set_input_as_handled()
+			handled = true
+			
+		if handled: get_viewport().set_input_as_handled()
 
 func _set_position():
 	get_parent().global_position = get_global_mouse_position() - offset
