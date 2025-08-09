@@ -62,7 +62,7 @@ debug_enabled = true
 position = Vector2(0, 9)
 shape = SubResource("RectangleShape2D_duiqf")
 
-[node name="Ports" type="Node" parent="."]
+[node name="Ports" type="Node2D" parent="."]
 
 [node name="Port - Iguanna" parent="Ports" instance=ExtResource("5_7ds11")]
 position = Vector2(95, 357)
