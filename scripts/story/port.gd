@@ -20,6 +20,7 @@ var ignoreSelected = false
 # TODO Flip if not visible
 
 func _ready() -> void:
+	if Engine.is_editor_hint(): return
 	label.text = labelName
 	info.text = labelName
 	

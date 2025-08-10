@@ -3,11 +3,22 @@ extends Node2D
 
 
 @export_tool_button('Generate') var generate = _generate
+@export_tool_button('Generate Land') var generateLand = _generateLand
+@export_tool_button('Generate Ports') var generatePorts = _generatePorts
 @export_tool_button('Clear') var clear = _clear
 
 @export var width := 256
 @export var height := 256
 
+@export_group('Ports')
+@export var numPorts := 10
+@export var firstPortPos := Vector2(128, 128)
+@export var portAtlasCords := Vector2i(0, 0)
+@export var searchRadius := 50
+@export var wanderDistance := 100
+@export var minDistance := 50
+@export var portSeed = 1
+@export var randSeed = false;
 
 @export_group('Noise')
 @export var noiseValues: Array[GenerativeNoise]
@@ -27,13 +38,112 @@ var rng = RandomNumberGenerator.new()
 func _ready() -> void:
 	_generate()
 
+
 func _clear():
 	tileMap.clear()
 
 func _generate():
 	_clear()
 	_setTileValues()
+	# _generatePorts()
+	# _generateLand()
+	# call_deferred("_generatePorts")
+	
 
+func _setTileValues():
+	tileValues = tiles.map(func(t): return Vector2(t.min, t.max))
+
+
+func _generatePorts():
+	var rng = RandomNumberGenerator.new()
+	if randSeed:
+		portSeed = rng.randi()
+	rng.seed = portSeed
+	var ports = []
+	var startPoint = firstPortPos
+	var distance = minDistance * minDistance
+
+	var maxChecks = 200
+	var check = 0
+
+	while ports.size() < numPorts && check < maxChecks:
+		var pos: Array[Vector2] = search_circle(startPoint, searchRadius)
+		if pos.size() == 1:
+			var tooClose = false
+			for port in ports:
+				tooClose = port.distance_squared_to(pos[0]) < distance
+				if tooClose: break
+			if !tooClose: ports.append(pos[0])
+
+		startPoint = wander(startPoint, rng)
+		check += 1
+
+	print('ports:', ports.size())
+
+	# var portScene = preload("res://Scenes/Story/port.tscn")
+
+
+	var portsNode
+	if has_node("PortsNode"):
+		portsNode = get_node("PortsNode")
+		for child in portsNode.get_children():
+			portsNode.remove_child(child)
+	else:
+		portsNode = Node2D.new()
+		portsNode.name = "PortsNode"
+		add_child(portsNode)
+		portsNode.owner = self
+
+	for p in ports:
+		var label1 = Label.new()
+		label1.name = 'Label'
+		var label2 = Label.new()
+		label2.name = 'Label'
+		var info = Info.new()
+		info.add_child(label2)
+		info.name = 'Info'
+		var sprite1 = Sprite2D.new()
+		sprite1.texture = load("res://resources/Sprites/Travel/circle_bg.tres")
+		var sprite2 = Sprite2D.new()
+		sprite2.texture = load("res://resources/Sprites/Travel/dock.png")
+		var port = Port.new()
+		port.add_child(label1)
+		port.add_child(info)
+		port.add_child(sprite1)
+		port.add_child(sprite2)
+		port.scale = Vector2(2, 2)
+		port.name = "port_01"
+		portsNode.add_child(port)
+
+		
+		label1.owner = port
+		label2.owner = info
+		port.owner = self
+		port.position = p * 8
+
+
+func wander(pos: Vector2, rng: RandomNumberGenerator):
+	var angle = rng.randf_range(0, PI * 2)
+	var offsetAngle = Vector2(1, 0).rotated(angle).normalized()
+	var newPos = round(pos + (offsetAngle * wanderDistance))
+
+	if newPos.x > width || newPos.x < 0 || newPos.y > height || newPos.y < 0:
+		newPos = Vector2(rng.randi_range(0, width), rng.randi_range(0, height))
+
+	return newPos
+
+func search_circle(center: Vector2, radius: int) -> Array[Vector2]:
+	var results: Array[Vector2] = []
+	for i in range(-radius, radius + 1):
+		for j in range(-radius, radius + 1):
+			var pos = center + Vector2(i, j)
+			var tile = tileMap.get_cell_atlas_coords(pos)
+			if tile == portAtlasCords:
+				return [pos]
+			else: results.append(pos)
+	return results
+
+func _generateLand():
 	for n in noiseValues:
 		if n.ranSeed: n.seed = rng.randi()
 		n.noise.seed = n.seed
@@ -48,9 +158,6 @@ func _generate():
 					var tile = tiles[i].tile
 					tileMap.set_cell(Vector2(x, y), tile.source_id, tile.atlas_coordinates)
 					break
-
-func _setTileValues():
-	tileValues = tiles.map(func(t): return Vector2(t.min, t.max))
 
 
 func _addNoiseValues(x: int, y: int):

@@ -9,6 +9,7 @@ var text: String: set = _setText
 # TODO Flip if not visible
 
 func _ready() -> void:
+	if Engine.is_editor_hint(): return
 	text = "This \n test text"
 
 func _setText(val: String) -> void:
