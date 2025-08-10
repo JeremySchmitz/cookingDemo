@@ -3,9 +3,10 @@ extends Node2D
 
 
 @export_tool_button('Generate') var generate = _generate
+@export_tool_button('Clear') var clear = _clear
 
-@export var width := 16
-@export var height := 16
+@export var width := 256
+@export var height := 256
 
 
 @export_group('Noise')
@@ -24,11 +25,14 @@ var tileValues: Array
 var rng = RandomNumberGenerator.new()
 
 func _ready() -> void:
-	tileValues = tiles.map(func(t): return Vector2(t.min, t.max))
 	_generate()
 
-func _generate():
+func _clear():
 	tileMap.clear()
+
+func _generate():
+	_clear()
+	_setTileValues()
 
 	for n in noiseValues:
 		if n.ranSeed: n.seed = rng.randi()
@@ -45,12 +49,15 @@ func _generate():
 					tileMap.set_cell(Vector2(x, y), tile.source_id, tile.atlas_coordinates)
 					break
 
+func _setTileValues():
+	tileValues = tiles.map(func(t): return Vector2(t.min, t.max))
+
 
 func _addNoiseValues(x: int, y: int):
-	var value: float = _getNoiseValue(0, x, y)
-	for i in range(1, noiseValues.size()):
-		if noiseValues[i].disable: break
-		value = _getNoiseValue(i, x, y, value)
+	var value: float = 1.0
+	for i in range(noiseValues.size()):
+		if !noiseValues[i].disable:
+			value = _getNoiseValue(i, x, y, value)
 
 	return value
 
@@ -59,6 +66,7 @@ func _getNoiseValue(i: int, x: int, y: int, prev := 1.0) -> float:
 	var value: float = n.noise.get_noise_2d(x, y)
 
 	value = remap(value, -0.5, 0.5, -1, 1)
+	value += n.gain
 	if n.invert: value *= -1
 	value = _blend(prev, value, n.blendMode)
 
@@ -80,8 +88,7 @@ func _blend(prev: float, new: float, mode: GlobalEnums.BlendMode):
 			value = blend_screen(prev, new)
 		GlobalEnums.BlendMode.COLOR_BURN:
 			value = blend_color_burn(prev, new)
-
-	return max(-1, min(value, 1))
+	return clamp(value, -1, 1)
 # Blend Modes
 # Multiply
 func blend_multiply(base: float, blend: float) -> float:

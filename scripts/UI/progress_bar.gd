@@ -19,7 +19,7 @@ func _ready() -> void:
 	progressBar.step = step
 
 func _setValue(val: float):
-	value = max(minVal, min(maxVal, val))
+	value = clamp(val, minVal, maxVal)
 	progressBar.value = value
 
 	if value >= maxVal: SignalBus.progressBarFull.emit(type)

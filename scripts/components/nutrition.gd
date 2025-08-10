@@ -56,7 +56,7 @@ func updateNutritionAfterChop(percent: float):
 	maxNutrition = newMax
 
 func _setNutrition(val: float) -> void:
-	nutrition = max(0, min(val, maxNutrition))
+	nutrition = clamp(val, 0, maxNutrition)
 
 func _getNutrition() -> float:
 	if nutritiousWhileParented:

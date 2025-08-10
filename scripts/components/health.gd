@@ -11,7 +11,7 @@ signal healthZero()
 
 func setHealth(val: float):
 	if val != health:
-		var newHealth = max(0, min(max, val))
+		var newHealth = clamp(val, min, max)
 		var dif = abs(val - newHealth)
 		health = newHealth
 		healthChanged.emit(dif)
