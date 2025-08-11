@@ -20,6 +20,11 @@ var boatMoving = false
 
 # FIX, Day currently resets if switch scenes to an encounter. 
 func _ready():
+	$Camera2D.limitRight = $Camera2D.get_window().size.x - $world_gen.width
+	$Camera2D.limitDown = $Camera2D.get_window().size.y - $world_gen.height
+
+	print('Limits:', $Camera2D.limitRight, ', ', $Camera2D.limitDown)
+
 	SignalBus.portSelected.connect(_setTargetPos)
 	set_process(true)
 
@@ -31,8 +36,7 @@ func _ready():
 	encounterTimer.connect("timeout", check_for_encounter)
 	add_child(encounterTimer)
 
-	boat.position = CrewStatus.boatPosition
-	_setTargetPos(CrewStatus.targetPosition)
+	_setBoatPosition()
 
 	var timer = Timer.new()
 	timer.wait_time = 0.1
@@ -126,3 +130,15 @@ func setTimers(val: bool):
 # 			distance += path[i].distance_to(path[i + 1])
 # 		distance = ceil(distance / boat.speed)
 # 		port.distance = distance
+
+
+func _setBoatPosition():
+	var pos: Vector2
+	if CrewStatus.boatPosition != Vector2(0, 0):
+		pos = CrewStatus.boatPosition
+	else:
+		var ports = $world_gen.portPositions
+		pos = ports[0]
+
+	boat.position = pos
+	_setTargetPos(pos)

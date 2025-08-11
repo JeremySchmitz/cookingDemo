@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://djeobadgn1dv6"]
+[gd_scene load_steps=6 format=3 uid="uid://djeobadgn1dv6"]
 
 [ext_resource type="Script" uid="uid://bq6s6xn4lyojp" path="res://scripts/story/boat_travel.gd" id="1_otj04"]
+[ext_resource type="Script" uid="uid://beam0fqixwxq8" path="res://scripts/Utils/camera_drag.gd" id="2_5yjvc"]
 [ext_resource type="Script" uid="uid://bpi0q3ti505ih" path="res://scripts/story/boat_char.gd" id="3_blhhb"]
 [ext_resource type="PackedScene" uid="uid://xs4x3iduyd8g" path="res://Scenes/Story/world_gen.tscn" id="6_y142x"]
 
@@ -12,7 +13,16 @@ script = ExtResource("1_otj04")
 dayLength = 100.0
 encounterSpeed = 2.5
 
+[node name="Camera2D" type="Camera2D" parent="."]
+z_index = 10
+anchor_mode = 0
+script = ExtResource("2_5yjvc")
+
 [node name="world_gen" parent="." instance=ExtResource("6_y142x")]
+width = 480
+height = 270
+randSeed = false
+seed = 3140313529
 portSeed = 42867721
 
 [node name="BoatChar" type="CharacterBody2D" parent="."]
@@ -21,6 +31,7 @@ script = ExtResource("3_blhhb")
 speed = 80.0
 
 [node name="Polygon2D" type="Polygon2D" parent="BoatChar"]
+position = Vector2(0, -11.765)
 scale = Vector2(0.645, 0.645)
 color = Color(1, 0, 0.133333, 1)
 offset = Vector2(-249, -600)
@@ -28,10 +39,13 @@ polygon = PackedVector2Array(216, 600, 168, 600, 176, 624, 224, 632, 272, 632, 3
 uv = PackedVector2Array(-336, 16, -384, 16, -376, 40, -328, 48, -280, 48, -232, 40, -224, 16, -288, 16, -296, -40, -312, -32, -304, -24, -296, -16, -296, 16)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="BoatChar"]
+path_postprocessing = 2
+simplify_path = true
+simplify_epsilon = 10.0
 debug_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BoatChar"]
-position = Vector2(0, 9)
+position = Vector2(0, -1.825)
 shape = SubResource("RectangleShape2D_duiqf")
 
 [connection signal="moving" from="BoatChar" to="." method="_on_boat_char_moving"]

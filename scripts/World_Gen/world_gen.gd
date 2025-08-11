@@ -1,6 +1,7 @@
 @tool
 extends Node2D
 
+const maxWanders = 1000
 
 @export_tool_button('Generate') var generate = _generate
 @export_tool_button('Generate Land') var generateLand = _generateLand
@@ -11,6 +12,9 @@ extends Node2D
 @export var width := 256
 @export var height := 256
 
+@export var randSeed = false;
+@export var seed = 0
+
 @export_group('Ports')
 @export var numPorts := 10
 @export var firstPortPos := Vector2(128, 128)
@@ -19,7 +23,7 @@ extends Node2D
 @export var wanderDistance := 100
 @export var minDistance := 50
 @export var portSeed = 1
-@export var randSeed = false;
+@export var randPortSeed = false;
 
 @export_group('Noise')
 @export var noiseValues: Array[GenerativeNoise]
@@ -34,11 +38,19 @@ extends Node2D
 var source_id: int = 0
 var tileValues: Array
 
-var rng = RandomNumberGenerator.new()
+var rng: RandomNumberGenerator
+var portPositions: Array
 
 
 func _ready() -> void:
-	_generate()
+	_setTileValues()
+	if !Engine.is_editor_hint():
+		rng = Utils.RNG
+		_generate()
+	else:
+		rng = RandomNumberGenerator.new()
+		if randSeed: seed = randi()
+		rng.seed = seed
 
 
 func _clear():
@@ -51,12 +63,8 @@ func _clearPorts():
 			portsNode.remove_child(child)
 
 func _generate():
-	_setTileValues()
-	if !Engine.is_editor_hint():
-		_generateLand()
-		_generatePorts()
-	else:
-		_clear()
+	_generateLand()
+	_generatePorts()
 
 	
 func _setTileValues():
@@ -64,18 +72,15 @@ func _setTileValues():
 
 
 func _generatePorts():
-	var rng = RandomNumberGenerator.new()
-	if randSeed:
+	if randSeed || randPortSeed:
 		portSeed = rng.randi()
 	rng.seed = portSeed
 	var ports: Array[Vector2] = []
 	var startPoint = firstPortPos
 	var distance = minDistance * minDistance
 
-	var maxChecks = 200
 	var check = 0
-
-	while ports.size() < numPorts && check < maxChecks:
+	while ports.size() < numPorts && check < maxWanders:
 		var pos: Array[Vector2] = search_circle(startPoint, searchRadius)
 		if pos.size() == 1:
 			var tooClose = false
@@ -84,7 +89,7 @@ func _generatePorts():
 				if tooClose: break
 			if !tooClose: ports.append(pos[0])
 
-		startPoint = wander(startPoint, rng)
+		startPoint = wander(startPoint)
 		check += 1
 
 	var portsNode = _getPortsParent()
@@ -93,6 +98,8 @@ func _generatePorts():
 		_buildToolPorts(ports, portsNode)
 	else:
 		_buildScenePorts(ports, portsNode)
+
+	portPositions = ports.map(func(m): return Vector2(m.x * tileMap.tile_set.tile_size.x, m.y * tileMap.tile_set.tile_size.y) / 2) as Array[Vector2]
 
 func _getPortsParent():
 	var portsNode
@@ -153,7 +160,7 @@ func _buildToolPorts(ports: Array[Vector2], parent: Node2D):
 		port.position = Vector2(p.x * tileMap.tile_set.tile_size.x, p.y * tileMap.tile_set.tile_size.y) / 2
 
 
-func wander(pos: Vector2, rng: RandomNumberGenerator):
+func wander(pos: Vector2):
 	var angle = rng.randf_range(0, PI * 2)
 	var offsetAngle = Vector2(1, 0).rotated(angle).normalized()
 	var newPos = round(pos + (offsetAngle * wanderDistance))
@@ -176,7 +183,7 @@ func search_circle(center: Vector2, radius: int) -> Array[Vector2]:
 
 func _generateLand():
 	for n in noiseValues:
-		if n.ranSeed: n.seed = rng.randi()
+		if randSeed || n.ranSeed: n.seed = rng.randi()
 		n.noise.seed = n.seed
 
 	for x in range(width):

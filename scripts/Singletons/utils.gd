@@ -8,7 +8,7 @@ const RESULTS_PATH = "res://Scenes/food/results.tscn"
 
 var _encounters = []
 
-var RNG = RandomNumberGenerator.new()
+var RNG: RandomNumberGenerator = RandomNumberGenerator.new()
 
 func setEncounters(val):
 	_encounters = val
@@ -16,11 +16,11 @@ func setEncounters(val):
 func getEncounter(difficulty := GlobalEnums.Difficulty.RAN):
 	var i
 	if difficulty == GlobalEnums.Difficulty.RAN:
-		i = RNG.randi() % (GlobalEnums.Difficulty.size() - 1)
+		i = RNG.randi_range(0, GlobalEnums.Difficulty.size() - 2)
 	else:
 		i = GlobalEnums.Difficulty.get(difficulty)
-	
-	var j = RNG.randi() % _encounters[i].size()
+
+	var j = RNG.randi_range(0, _encounters[i].size() - 1)
 	return _encounters[i][j]
 
 func generateIntInRange(minimum: int, maximum: int) -> int:
