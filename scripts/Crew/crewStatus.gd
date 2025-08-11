@@ -3,7 +3,7 @@ extends Node
 const GENERATE_PATH = "res://scripts/Crew/generateCrew.gd"
 
 
-var boatPosition := Vector2(95, 357)
+var boatPosition := Vector2(400, 357)
 var targetPosition := Vector2(0, 0)
 
 var _crew: Array[Crew]

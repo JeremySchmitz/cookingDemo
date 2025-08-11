@@ -5,15 +5,19 @@ class_name Port
 @onready var label: Label = $Label
 @onready var info: Info = $Info
 
-@export var labelName := ''
+@export var labelName := '':
+	set(val):
+		labelName = val
+		label.text = labelName
+		info.text = labelName
+		_setLabel()
 
 var mouse_over
 var select := false
 var distance := 0.0:
 	set(val):
 		distance = val
-		# TODO is this way till can find more accurate calc
-		info.text = "Port {0} \nLess than {1} day(s) travel".format([labelName, int(val)])
+		_setLabel()
 
 var ignoreSelected = false
 			
@@ -47,3 +51,7 @@ func _on_travel_btn_pressed() -> void:
 func on_port_selected(portName: String):
 	if name != portName:
 		info.visible = false
+
+func _setLabel():
+	# TODO is this way till can find more accurate calc
+	info.text = "Port {0} \nLess than {1} day(s) travel".format([labelName, int(distance)])

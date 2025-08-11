@@ -6,6 +6,7 @@ extends Node2D
 @export_tool_button('Generate Land') var generateLand = _generateLand
 @export_tool_button('Generate Ports') var generatePorts = _generatePorts
 @export_tool_button('Clear') var clear = _clear
+@export_tool_button('Clear Ports') var clearPorts = _clearPorts
 
 @export var width := 256
 @export var height := 256
@@ -35,6 +36,7 @@ var tileValues: Array
 
 var rng = RandomNumberGenerator.new()
 
+
 func _ready() -> void:
 	_generate()
 
@@ -42,14 +44,21 @@ func _ready() -> void:
 func _clear():
 	tileMap.clear()
 
-func _generate():
-	_clear()
-	_setTileValues()
-	# _generatePorts()
-	# _generateLand()
-	# call_deferred("_generatePorts")
-	
+func _clearPorts():
+	if has_node("PortsNode"):
+		var portsNode = get_node("PortsNode")
+		for child in portsNode.get_children():
+			portsNode.remove_child(child)
 
+func _generate():
+	_setTileValues()
+	if !Engine.is_editor_hint():
+		_generateLand()
+		_generatePorts()
+	else:
+		_clear()
+
+	
 func _setTileValues():
 	tileValues = tiles.map(func(t): return Vector2(t.min, t.max))
 
@@ -59,7 +68,7 @@ func _generatePorts():
 	if randSeed:
 		portSeed = rng.randi()
 	rng.seed = portSeed
-	var ports = []
+	var ports: Array[Vector2] = []
 	var startPoint = firstPortPos
 	var distance = minDistance * minDistance
 
@@ -78,11 +87,14 @@ func _generatePorts():
 		startPoint = wander(startPoint, rng)
 		check += 1
 
-	print('ports:', ports.size())
+	var portsNode = _getPortsParent()
 
-	# var portScene = preload("res://Scenes/Story/port.tscn")
+	if Engine.is_editor_hint():
+		_buildToolPorts(ports, portsNode)
+	else:
+		_buildScenePorts(ports, portsNode)
 
-
+func _getPortsParent():
 	var portsNode
 	if has_node("PortsNode"):
 		portsNode = get_node("PortsNode")
@@ -94,6 +106,25 @@ func _generatePorts():
 		add_child(portsNode)
 		portsNode.owner = self
 
+	return portsNode
+
+func _buildScenePorts(ports: Array[Vector2], parent: Node2D):
+	var portScene = preload("res://Scenes/Story/port.tscn")
+
+	for p in ports:
+		var port = portScene.instantiate()
+		parent.add_child(port)
+		port.position = Vector2(p.x * tileMap.tile_set.tile_size.x, p.y * tileMap.tile_set.tile_size.y) / 2
+
+		# TODO Update
+		var name = ""
+		for i in 3:
+			var letter = char("A".unicode_at(0) + randi() % 26)
+			name += letter
+		port.labelName = name
+
+
+func _buildToolPorts(ports: Array[Vector2], parent: Node2D):
 	for p in ports:
 		var label1 = Label.new()
 		label1.name = 'Label'
@@ -113,13 +144,13 @@ func _generatePorts():
 		port.add_child(sprite2)
 		port.scale = Vector2(2, 2)
 		port.name = "port_01"
-		portsNode.add_child(port)
+		parent.add_child(port)
 
 		
 		label1.owner = port
 		label2.owner = info
 		port.owner = self
-		port.position = p * 8
+		port.position = Vector2(p.x * tileMap.tile_set.tile_size.x, p.y * tileMap.tile_set.tile_size.y) / 2
 
 
 func wander(pos: Vector2, rng: RandomNumberGenerator):
