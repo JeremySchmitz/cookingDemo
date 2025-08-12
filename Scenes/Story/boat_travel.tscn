@@ -32,9 +32,10 @@ motion_mode = 1
 script = ExtResource("3_blhhb")
 speed = 150.0
 
-[node name="Sprite2D" type="Sprite2D" parent="BoatChar"]
-texture = ExtResource("5_7ds11")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BoatChar"]
 position = Vector2(0, 0.174988)
 shape = SubResource("CapsuleShape2D_7ds11")
+
+[node name="Sprite2D" type="Sprite2D" parent="BoatChar"]
+texture_filter = 1
+texture = ExtResource("5_7ds11")
