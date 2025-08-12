@@ -20,36 +20,19 @@ var isMoving = false:
 func _ready() -> void:
 	isMoving = false
 
+@export var friction = 0.01
+@export var acceleration = 0.1
 
-func _physics_process(delta: float) -> void:
-	if isMoving and !targetReachedBool:
-		var direction = (navigation.get_next_path_position() - global_position).normalized()
-		translate(direction * delta * speed)
-		checkNexPathPos()
+
+func _input(event: InputEvent) -> void:
+	Input.get_vector('left', 'right', 'up', 'down')
+	velocity = Input.get_vector('left', 'right', 'up', 'down') * speed
+
+func _physics_process(delta):
+	look_at(global_position + velocity.rotated(-PI / 2))
+	move_and_slide()
 
 func setTargetPos(pos: Vector2):
 	navigation.target_position = pos
 	targetReachedBool = false
 	isMoving = true
-	_getPathDistance()
-	call_deferred("_getPathDistance")
-	nextPosition.emit(global_position)
-
-func _on_navigation_agent_2d_target_reached() -> void:
-	targetReachedBool = true;
-	isMoving = false
-
-
-func checkNexPathPos():
-	var pos := navigation.get_next_path_position()
-	if nextPathPos != pos:
-		nextPosition.emit(nextPathPos)
-		nextPathPos = pos
-
-func _getPathDistance():
-	var path = navigation.get_current_navigation_path()
-	var dist = 0
-	for i in range(0, path.size() - 1):
-		dist += path[i].distance_to(path[i + 1])
-
-	navPathDist = dist
