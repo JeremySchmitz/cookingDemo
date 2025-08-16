@@ -34,3 +34,4 @@ enum BlendMode {NONE, MULTIPLY, DARKEN, OVERLAY, SCREEN, COLOR_BURN}
 
 #Inventory
 enum ItemResource {WOOD, METAL, CLOTH, BOOTY}
+enum ItemType {PLAYER, SHOP, CART}

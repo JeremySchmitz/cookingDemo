@@ -10,4 +10,5 @@ name = "Wood"
 count = 4
 sprite = ExtResource("2_67ow7")
 description = "A simple material with many uses"
+type = 0
 metadata/_custom_type_script = "uid://drwwte2xllcv7"

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Inventory" load_steps=7 format=3 uid="uid://db0ok6l38qj05"]
+
+[ext_resource type="Script" uid="uid://b7sudjpcc7xtc" path="res://resources/custom_resources/inventory/inv_food.gd" id="1_1e16y"]
+[ext_resource type="Script" uid="uid://drwwte2xllcv7" path="res://resources/custom_resources/inventory/inv_resource.gd" id="2_5tkyi"]
+[ext_resource type="Resource" uid="uid://np3ugoqrg0eb" path="res://resources/custom_resources/inventory/Test/test_food_01.tres" id="2_06jpk"]
+[ext_resource type="Script" uid="uid://bbxis0e5mu55p" path="res://resources/custom_resources/inventory/inventory.gd" id="3_5monv"]
+[ext_resource type="Resource" uid="uid://bwsngxxxr4cpx" path="res://resources/custom_resources/inventory/Test/test_food_02.tres" id="3_8owgl"]
+[ext_resource type="Resource" uid="uid://knyhaf1kauvg" path="res://resources/custom_resources/inventory/Test/test_resource.tres" id="5_afxju"]
+
+[resource]
+script = ExtResource("3_5monv")
+name = "Klifton Clerryman"
+money = 356
+food = Array[ExtResource("1_1e16y")]([ExtResource("2_06jpk"), ExtResource("3_8owgl")])
+resources = Array[ExtResource("2_5tkyi")]([ExtResource("5_afxju")])
+metadata/_custom_type_script = "uid://bbxis0e5mu55p"
