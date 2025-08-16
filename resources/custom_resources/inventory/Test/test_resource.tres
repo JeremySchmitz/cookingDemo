@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="InvResource" load_steps=3 format=3 uid="uid://knyhaf1kauvg"]
+
+[ext_resource type="Script" uid="uid://drwwte2xllcv7" path="res://resources/custom_resources/inventory/inv_resource.gd" id="1_gg0ic"]
+[ext_resource type="Texture2D" uid="uid://chfrb3of5ahsp" path="res://resources/Sprites/Travel/Ship.png" id="2_67ow7"]
+
+[resource]
+script = ExtResource("1_gg0ic")
+type = 0
+name = "Wood"
+count = 4
+sprite = ExtResource("2_67ow7")
+description = "A simple material with many uses"
+metadata/_custom_type_script = "uid://drwwte2xllcv7"

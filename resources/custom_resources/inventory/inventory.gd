@@ -2,6 +2,7 @@ extends Resource
 
 class_name Inventory
 
-var gold := 0
-var food: Array[InvFood] = [] as Array[InvFood]
-var resources: Array[InvResource] = [] as Array[InvResource]
+@export var name: String
+@export var money := 0
+@export var food: Array[InvFood] 
+@export var resources: Array[InvResource]

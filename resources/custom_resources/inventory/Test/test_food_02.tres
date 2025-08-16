@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="InvFood" load_steps=3 format=3 uid="uid://bwsngxxxr4cpx"]
+
+[ext_resource type="Script" uid="uid://b7sudjpcc7xtc" path="res://resources/custom_resources/inventory/inv_food.gd" id="1_3ixvr"]
+[ext_resource type="Texture2D" uid="uid://do8dh5yj5hekv" path="res://resources/Sprites/Crab/crab_body.png" id="2_hvjee"]
+
+[resource]
+script = ExtResource("1_3ixvr")
+scenePath = ""
+name = "Crab"
+count = 5
+sprite = ExtResource("2_hvjee")
+description = "A Delicious delcacy if you can get to the meat"
+metadata/_custom_type_script = "uid://b7sudjpcc7xtc"

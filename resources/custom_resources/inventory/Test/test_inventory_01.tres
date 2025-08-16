@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Inventory" load_steps=7 format=3 uid="uid://bnuvdnc3ep10k"]
+
+[ext_resource type="Script" uid="uid://b7sudjpcc7xtc" path="res://resources/custom_resources/inventory/inv_food.gd" id="1_jlsce"]
+[ext_resource type="Script" uid="uid://bbxis0e5mu55p" path="res://resources/custom_resources/inventory/inventory.gd" id="1_qg3kp"]
+[ext_resource type="Resource" uid="uid://np3ugoqrg0eb" path="res://resources/custom_resources/inventory/Test/test_food.tres" id="2_0ori5"]
+[ext_resource type="Script" uid="uid://drwwte2xllcv7" path="res://resources/custom_resources/inventory/inv_resource.gd" id="2_lxqe5"]
+[ext_resource type="Resource" uid="uid://bwsngxxxr4cpx" path="res://resources/custom_resources/inventory/Test/test_food_02.tres" id="3_wor8i"]
+[ext_resource type="Resource" uid="uid://knyhaf1kauvg" path="res://resources/custom_resources/inventory/Test/test_resource.tres" id="5_xgvq1"]
+
+[resource]
+script = ExtResource("1_qg3kp")
+name = "Billy Boid"
+money = 256
+food = Array[ExtResource("1_jlsce")]([ExtResource("2_0ori5"), ExtResource("2_0ori5"), ExtResource("3_wor8i"), ExtResource("3_wor8i"), ExtResource("3_wor8i"), ExtResource("3_wor8i"), ExtResource("3_wor8i"), ExtResource("3_wor8i"), ExtResource("3_wor8i"), ExtResource("3_wor8i"), ExtResource("3_wor8i"), ExtResource("3_wor8i"), ExtResource("3_wor8i")])
+resources = Array[ExtResource("2_lxqe5")]([ExtResource("5_xgvq1"), ExtResource("5_xgvq1"), ExtResource("5_xgvq1"), ExtResource("5_xgvq1"), ExtResource("5_xgvq1"), ExtResource("5_xgvq1")])
+metadata/_custom_type_script = "uid://bbxis0e5mu55p"

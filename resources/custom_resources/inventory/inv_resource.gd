@@ -1,4 +1,4 @@
-extends Item
+extends InvItem
 
 class_name InvResource
 
