@@ -30,3 +30,7 @@ enum Decision {CONTINUE, OFFER, STOP, AGREE, DECLINE}
 
 
 enum BlendMode {NONE, MULTIPLY, DARKEN, OVERLAY, SCREEN, COLOR_BURN}
+
+
+#Inventory
+enum ItemResource {WOOD, METAL, CLOTH, BOOTY}

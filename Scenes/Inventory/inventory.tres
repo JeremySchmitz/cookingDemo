@@ -1,0 +1,38 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dsqkvlfj0no1g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ac5ch"]
+bg_color = Color(0.131195, 0.198869, 0.194168, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v1m54"]
+bg_color = Color(0.355048, 0.470339, 0.562074, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.577328, 0.721536, 0.895137, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+shadow_size = 15
+
+[resource]
+DescriptionMargin/base_type = &"MarginContainer"
+DescriptionMargin/constants/margin_left = 0
+DescriptionMargin/constants/margin_right = 0
+DescriptionMargin/constants/margin_top = 10
+ItemList/constants/h_separation = 20
+ItemList/constants/v_separation = 12
+ItemList/styles/panel = SubResource("StyleBoxFlat_ac5ch")
+Label/font_sizes/font_size = 20
+MarginContainer/constants/margin_bottom = 5
+MarginContainer/constants/margin_left = 10
+MarginContainer/constants/margin_right = 10
+MarginContainer/constants/margin_top = 5
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_v1m54")
+RichTextLabel/constants/line_separation = 3
