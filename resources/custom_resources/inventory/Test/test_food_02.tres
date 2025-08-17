@@ -10,4 +10,5 @@ name = "Crab"
 count = 5
 sprite = ExtResource("2_hvjee")
 description = "A Delicious delcacy if you can get to the meat"
+cost = 80
 metadata/_custom_type_script = "uid://b7sudjpcc7xtc"

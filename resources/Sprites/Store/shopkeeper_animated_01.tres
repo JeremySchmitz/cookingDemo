@@ -1,0 +1,54 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://bt8mxtjypr6tx"]
+
+[ext_resource type="Texture2D" uid="uid://b4op6pbf0iosj" path="res://resources/Sprites/Store/storekeeper.png" id="1_t5qyk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a60g7"]
+atlas = ExtResource("1_t5qyk")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8r4t5"]
+atlas = ExtResource("1_t5qyk")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qwlw"]
+atlas = ExtResource("1_t5qyk")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rfgnh"]
+atlas = ExtResource("1_t5qyk")
+region = Rect2(96, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a60g7")
+}],
+"loop": true,
+"name": &"Angry",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8r4t5")
+}],
+"loop": true,
+"name": &"Happy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6qwlw")
+}],
+"loop": true,
+"name": &"Neutral",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rfgnh")
+}],
+"loop": true,
+"name": &"Suprised",
+"speed": 5.0
+}]

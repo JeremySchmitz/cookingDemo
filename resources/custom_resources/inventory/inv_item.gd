@@ -6,3 +6,4 @@ class_name InvItem
 @export var count := 0
 @export var sprite: Texture2D
 @export var description: String
+@export var cost := 0

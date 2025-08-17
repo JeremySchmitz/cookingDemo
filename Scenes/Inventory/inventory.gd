@@ -1,6 +1,7 @@
 extends CenterContainer
 class_name InventoryScn
 enum InventoryMode {STORE, PLAYER}
+
 @export var inventory: Inventory
 @export var shopInventory: Inventory
 @export var mode: InventoryMode = InventoryMode.PLAYER
@@ -29,6 +30,10 @@ enum InventoryMode {STORE, PLAYER}
 @onready var nodePanelSecondaryList := %PanelSecondaryList
 @onready var nodeLabelSecondaryList := %LabelSecondaryList
 @onready var nodeListSecondary := %ListSecondary
+# Buttons
+@onready var nodeButtonBuy := %ButtonBuy
+@onready var nodeButtonBarter := %ButtonBarter
+@onready var nodeButtonLeave := %ButtonLeave
 
 
 var listMain: Array = []
@@ -39,10 +44,12 @@ var selectedNodeList: ItemList
 var selectedItem: InvItem: set = _setSelectedItem
 
 var cart: Array[InvItem] = []
+var discount := 2
+
+var bartered = false
 
 func _ready() -> void:
 	nodeMoneyCount.text = str(inventory.money)
-
 	if mode == InventoryMode.PLAYER:
 		nodeCharacterName.text = inventory.name
 
@@ -127,17 +134,23 @@ func _setSelectedItem(val: InvItem):
 func _on_button_add_pressed() -> void:
 	_updateList(cart, nodeListCart)
 	_updateList(listMain, nodeListMain, true)
+
 	nodeSubtractButton.disabled = false
+
+	_updateCartLabel()
+	_updateButtons()
 
 func _on_button_subtract_pressed() -> void:
 	_updateList(cart, nodeListCart, true)
 	_updateList(listMain, nodeListMain)
+	
+	nodeSubtractButton.disabled = _selectedItemInList(cart) == -1
 
-	var i = _selectedItemInList(cart)
-	nodeSubtractButton.disabled = i == -1
+	_updateCartLabel()
+	_updateButtons()
 
 func _getItemText(item: InvItem):
-	return '{1} ({0})'.format([item.count, item.name])
+	return '{0} ${1} ({2})'.format([item.name, item.cost, item.count])
 
 func _selectedItemInList(list: Array) -> int:
 	return list.find_custom(func(item): return item.name == selectedItem.name)
@@ -181,3 +194,22 @@ func _delectItem():
 	selectedList = []
 	selectedNodeList.deselect_all()
 	selectedNodeList = null
+
+func _updateCartLabel():
+	var cost = 0
+	for item in cart:
+		cost += item.cost * item.count
+	var discountText = ''
+	if discount:
+		var d = (100 - discount) / 100.0
+		cost = round(cost * d)
+		discountText = ' - {0}% Off'.format([discount])
+	nodeLabelCart.text = 'Cart: ${0}{1}'.format([cost, discountText])
+
+func _updateButtons():
+	nodeButtonBuy.disabled = cart.size() == 0
+	nodeButtonBarter.disabled = bartered || cart.size() == 0
+
+
+func _on_button_leave_pressed() -> void:
+	visible = false

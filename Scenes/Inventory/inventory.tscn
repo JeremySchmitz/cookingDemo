@@ -12,6 +12,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource("1_de3ro")
 script = ExtResource("2_0dubb")
 inventory = ExtResource("3_evvmy")
@@ -30,42 +32,42 @@ layout_mode = 2
 [node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3"]
+[node name="HBoxContainer1" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3"]
 layout_direction = 2
 layout_mode = 2
 
-[node name="CharacterName" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2"]
+[node name="CharacterName" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer1"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "My Test Label"
 
-[node name="MoneyTexture" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2"]
+[node name="MoneyTexture" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer1"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("2_de3ro")
 
-[node name="MoneyCount" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2"]
+[node name="MoneyCount" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer1"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "999999"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PanelCart" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer2"]
+[node name="PanelCart" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer2/PanelCart"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer2/PanelCart"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -73,25 +75,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LabelCart" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer2/PanelCart/VBoxContainer"]
+[node name="LabelCart" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer2/PanelCart/VBoxContainer"]
 unique_name_in_owner = true
+clip_contents = false
 layout_mode = 2
-text = "Cart"
+text = "Cart: $0"
+fit_content = true
+scroll_active = false
 horizontal_alignment = 1
 
-[node name="ListCart" type="ItemList" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer2/PanelCart/VBoxContainer"]
+[node name="ListCart" type="ItemList" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer2/PanelCart/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 fixed_icon_size = Vector2i(40, 40)
 
-[node name="PanelMainList" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer2"]
+[node name="PanelMainList" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer2/PanelMainList"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer2/PanelMainList"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -100,31 +105,31 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 
-[node name="LabelMainList" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer2/PanelMainList/VBoxContainer"]
+[node name="LabelMainList" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer2/PanelMainList/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Test Label"
 horizontal_alignment = 1
 
-[node name="ListMain" type="ItemList" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer2/PanelMainList/VBoxContainer"]
+[node name="ListMain" type="ItemList" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer2/PanelMainList/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 fixed_icon_size = Vector2i(40, 40)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PanelSelection" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer"]
+[node name="PanelSelection" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer/PanelSelection"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer/PanelSelection"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -132,64 +137,64 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer/PanelSelection/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer/PanelSelection/MarginContainer"]
 custom_minimum_size = Vector2(250, 150)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="SelectedTexture" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="SelectedTexture" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 expand_mode = 1
 
-[node name="SelectedName" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="SelectedName" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_type_variation = &"DescriptionMargin"
 
-[node name="SelectedDescription" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+[node name="SelectedDescription" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PanelAddButtons" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer"]
+[node name="PanelAddButtons" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_direction = 3
 layout_mode = 2
 
-[node name="ButtonAdd" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer/PanelAddButtons"]
+[node name="ButtonAdd" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer/PanelAddButtons"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 text = "+"
 
-[node name="ButtonSubtract" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer/PanelAddButtons"]
+[node name="ButtonSubtract" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer/PanelAddButtons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 disabled = true
 text = "-"
 
-[node name="PanelSecondaryList" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer"]
+[node name="PanelSecondaryList" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer/PanelSecondaryList"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer/PanelSecondaryList"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -197,13 +202,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LabelSecondaryList" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer/PanelSecondaryList/VBoxContainer"]
+[node name="LabelSecondaryList" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer/PanelSecondaryList/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Test Label"
 horizontal_alignment = 1
 
-[node name="ListSecondary" type="ItemList" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer/PanelSecondaryList/VBoxContainer"]
+[node name="ListSecondary" type="ItemList" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer/PanelSecondaryList/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -211,8 +216,33 @@ size_flags_vertical = 3
 allow_search = false
 fixed_icon_size = Vector2i(40, 40)
 
-[connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer2/PanelCart/VBoxContainer/ListCart" to="." method="_on_list_cart_item_selected"]
-[connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer2/PanelMainList/VBoxContainer/ListMain" to="." method="_on_list_main_item_selected"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer/PanelAddButtons/ButtonAdd" to="." method="_on_button_add_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer/PanelAddButtons/ButtonSubtract" to="." method="_on_button_subtract_pressed"]
-[connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer/VBoxContainer/PanelSecondaryList/VBoxContainer/ListSecondary" to="." method="_on_list_secondary_item_selected"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer3"]
+layout_direction = 3
+layout_mode = 2
+
+[node name="ButtonBuy" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+disabled = true
+text = "Buy"
+
+[node name="ButtonBarter" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+disabled = true
+text = "Barter"
+
+[node name="ButtonLeave" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+text = "Leave"
+
+[connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer2/PanelCart/VBoxContainer/ListCart" to="." method="_on_list_cart_item_selected"]
+[connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer2/PanelMainList/VBoxContainer/ListMain" to="." method="_on_list_main_item_selected"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer/PanelAddButtons/ButtonAdd" to="." method="_on_button_add_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer/PanelAddButtons/ButtonSubtract" to="." method="_on_button_subtract_pressed"]
+[connection signal="item_selected" from="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer/PanelSecondaryList/VBoxContainer/ListSecondary" to="." method="_on_list_secondary_item_selected"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer3/HBoxContainer3/ButtonLeave" to="." method="_on_button_leave_pressed"]

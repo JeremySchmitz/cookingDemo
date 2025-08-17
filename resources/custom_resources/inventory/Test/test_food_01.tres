@@ -1,13 +1,14 @@
 [gd_resource type="Resource" script_class="InvFood" load_steps=3 format=3 uid="uid://np3ugoqrg0eb"]
 
-[ext_resource type="Script" uid="uid://b7sudjpcc7xtc" path="res://resources/custom_resources/inventory/inv_food.gd" id="1_3isc6"]
-[ext_resource type="Texture2D" uid="uid://cteec7c7pkf00" path="res://resources/Sprites/PufferFish_02/pufferFiish02_Body.png" id="2_jn0gp"]
+[ext_resource type="Script" uid="uid://b7sudjpcc7xtc" path="res://resources/custom_resources/inventory/inv_food.gd" id="1_y3ymy"]
+[ext_resource type="Texture2D" uid="uid://cteec7c7pkf00" path="res://resources/Sprites/PufferFish_02/pufferFiish02_Body.png" id="2_1tcg6"]
 
 [resource]
-script = ExtResource("1_3isc6")
+script = ExtResource("1_y3ymy")
 scenePath = ""
 name = "Puffer Fish"
 count = 5
-sprite = ExtResource("2_jn0gp")
+sprite = ExtResource("2_1tcg6")
 description = "This is a puffer fish. Be careful cause they can be poisonous if not handled properly."
+cost = 100
 metadata/_custom_type_script = "uid://b7sudjpcc7xtc"
