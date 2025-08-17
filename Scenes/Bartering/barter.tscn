@@ -4,162 +4,340 @@
 [ext_resource type="PackedScene" uid="uid://cwoqnxv7jrl3f" path="res://Scenes/Bartering/card_deck.tscn" id="1_wuqyt"]
 [ext_resource type="Resource" uid="uid://c67qapdhiyk6f" path="res://resources/custom_resources/shopKeepers/shopkeeper_mid.tres" id="2_vyuch"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_vyuch"]
+font_size = 32
+
 [sub_resource type="LabelSettings" id="LabelSettings_s3kbv"]
 font_size = 45
 
-[sub_resource type="LabelSettings" id="LabelSettings_vyuch"]
-font_size = 40
-font_color = Color(0, 0, 0, 1)
-
-[node name="Barter" type="Node2D"]
+[node name="Barter" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_s3kbv")
+gapH = 62
 maxRow = 18
 keeper = ExtResource("2_vyuch")
 
-[node name="Label_total" type="Label" parent="."]
-offset_left = 22.0
-offset_top = 472.0
-offset_right = 302.0
-offset_bottom = 603.0
-text = "Total: 0%"
-label_settings = SubResource("LabelSettings_s3kbv")
-vertical_alignment = 1
-
 [node name="CardDeck_pc" parent="." instance=ExtResource("1_wuqyt")]
-position = Vector2(600, 555)
-scale = Vector2(2, 2)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -185.0
+offset_right = 32.0
+offset_bottom = -55.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="CardDeck_npc" parent="." instance=ExtResource("1_wuqyt")]
-position = Vector2(600, 74)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 62.0
+offset_top = 170.0
+offset_right = 152.0
+offset_bottom = 300.0
+grow_horizontal = 2
 rotation = 3.14159
-scale = Vector2(2, 2)
 color = 1
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(67, 226)
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
-[node name="Offer" type="Node2D" parent="."]
+[node name="Cards" type="Control" parent="CenterContainer"]
+layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Offer"]
-polygon = PackedVector2Array(180, 144, 175, 435, 980, 435, 982, 144)
+[node name="CardContainer" type="FlowContainer" parent="CenterContainer/Cards"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -507.0
+offset_top = -161.0
+offset_right = 509.0
+offset_bottom = 165.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = -25
+theme_override_constants/v_separation = -35
 
-[node name="Label_Results" type="Label" parent="Offer"]
-offset_left = 203.0
-offset_top = 153.0
-offset_right = 960.0
-offset_bottom = 240.0
+[node name="Offer" type="Panel" parent="CenterContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(600, 300)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Offer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control2" type="Control" parent="CenterContainer/Offer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label_Results" type="Label" parent="CenterContainer/Offer/MarginContainer/Control2"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -98.0
+offset_right = 300.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "The shopkeeper wants to settle:"
 label_settings = SubResource("LabelSettings_vyuch")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Offer_reject" type="Button" parent="Offer"]
-offset_left = 338.0
-offset_top = 270.0
-offset_right = 399.0
-offset_bottom = 301.0
+[node name="Control" type="Control" parent="CenterContainer/Offer/MarginContainer/Control2"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Offer_reject" type="Button" parent="CenterContainer/Offer/MarginContainer/Control2/Control"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 62.0
+offset_right = 131.0
+offset_bottom = 31.0
 scale = Vector2(2, 2)
 text = " REJECT "
 
-[node name="Offer_accept" type="Button" parent="Offer"]
-offset_left = 680.0
-offset_top = 270.0
-offset_right = 747.0
-offset_bottom = 301.0
+[node name="Offer_accept" type="Button" parent="CenterContainer/Offer/MarginContainer/Control2/Control"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 404.0
+offset_right = 480.0
+offset_bottom = 31.0
 scale = Vector2(2, 2)
 text = " ACCEPT "
 
-[node name="Offer_results" type="Node2D" parent="."]
+[node name="Results" type="Panel" parent="CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(600, 300)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Results"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control2" type="Control" parent="CenterContainer/Results/MarginContainer"]
+layout_mode = 2
+
+[node name="Label_message" type="Label" parent="CenterContainer/Results/MarginContainer/Control2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 125)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -209.0
+offset_top = 15.0
+offset_right = 209.0
+offset_bottom = 140.0
+grow_horizontal = 2
+text = "YOU LOSE"
+label_settings = SubResource("LabelSettings_vyuch")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label_total_results" type="Label" parent="CenterContainer/Results/MarginContainer/Control2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 150)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -272.0
+offset_top = -152.0
+offset_right = 272.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Total:"
+label_settings = SubResource("LabelSettings_vyuch")
+horizontal_alignment = 1
+
+[node name="Offer_results" type="Panel" parent="CenterContainer"]
+unique_name_in_owner = true
 visible = false
+custom_minimum_size = Vector2(600, 300)
+layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Offer_results"]
-polygon = PackedVector2Array(180, 144, 175, 435, 980, 435, 982, 144)
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Offer_results"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Label_Results_offer" type="Label" parent="Offer_results"]
-offset_left = 209.0
-offset_top = 204.0
-offset_right = 954.0
-offset_bottom = 291.0
+[node name="Control2" type="Control" parent="CenterContainer/Offer_results/MarginContainer"]
+layout_mode = 2
+
+[node name="Label_Results_offer" type="Label" parent="CenterContainer/Offer_results/MarginContainer/Control2"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 41.0
+offset_right = -41.0
+offset_bottom = 200.0
+grow_horizontal = 2
 text = "The shopkeeper declined your offer"
 label_settings = SubResource("LabelSettings_vyuch")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="continue" type="Button" parent="Offer_results"]
-offset_left = 482.0
-offset_top = 319.0
-offset_right = 569.0
-offset_bottom = 350.0
-scale = Vector2(2, 2)
+[node name="continue" type="Button" parent="CenterContainer/Offer_results/MarginContainer/Control2"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
 text = " Continue "
 
-[node name="Results" type="Node2D" parent="."]
-visible = false
+[node name="HBoxContainer" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -100.0
+offset_right = 576.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+mouse_filter = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Results"]
-polygon = PackedVector2Array(180, 144, 175, 435, 980, 435, 982, 144)
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -100.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
 
-[node name="Label_message" type="Label" parent="Results"]
-offset_left = 206.0
-offset_top = 153.0
-offset_right = 957.0
-offset_bottom = 304.0
-text = "YOU LOSE"
-label_settings = SubResource("LabelSettings_vyuch")
-horizontal_alignment = 1
+[node name="Control" type="Control" parent="HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label_total" type="Label" parent="HBoxContainer/MarginContainer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -37.5
+offset_right = 198.0
+offset_bottom = 25.5
+grow_vertical = 2
+text = "Total: 0%"
+label_settings = SubResource("LabelSettings_s3kbv")
 vertical_alignment = 1
-autowrap_mode = 2
 
-[node name="Label_total" type="Label" parent="Results"]
-offset_left = 205.0
-offset_top = 318.0
-offset_right = 958.0
-offset_bottom = 414.0
-text = "Total:"
-label_settings = SubResource("LabelSettings_vyuch")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -217.0
+offset_top = -31.5
+offset_bottom = 31.5
+grow_horizontal = 0
+grow_vertical = 2
 
-[node name="extend_offer" type="Button" parent="."]
-offset_left = 663.0
-offset_top = 545.0
-offset_right = 778.0
-offset_bottom = 576.0
-scale = Vector2(2, 2)
+[node name="extend_offer" type="Button" parent="HBoxContainer/MarginContainer/Control/HBoxContainer"]
+layout_mode = 2
 text = " Extend Offer "
 
-[node name="extend_hardOffer" type="Button" parent="."]
-offset_left = 912.0
-offset_top = 546.0
-offset_right = 1010.0
-offset_bottom = 577.0
-scale = Vector2(2, 2)
+[node name="extend_hardOffer" type="Button" parent="HBoxContainer/MarginContainer/Control/HBoxContainer"]
+layout_mode = 2
 text = " Final Offer "
 
-[node name="Offer_hide" type="Button" parent="."]
-visible = false
-offset_left = 187.0
-offset_top = 148.0
-offset_right = 257.0
-offset_bottom = 179.0
-text = "HIDE "
-
 [node name="Results_hide" type="Button" parent="."]
+unique_name_in_owner = true
 visible = false
-offset_left = 187.0
-offset_top = 148.0
-offset_right = 255.0
-offset_bottom = 180.0
+layout_mode = 0
+offset_left = 286.0
+offset_top = 184.0
+offset_right = 354.0
+offset_bottom = 216.0
 text = "HIDE"
+
+[node name="Offer_hide" type="Button" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+offset_left = 286.0
+offset_top = 184.0
+offset_right = 336.0
+offset_bottom = 215.0
+text = "HIDE "
 
 [connection signal="clicked" from="CardDeck_pc" to="." method="_on_card_deck_pc_clicked"]
 [connection signal="clicked" from="CardDeck_npc" to="." method="_on_card_deck_npc_clicked"]
-[connection signal="pressed" from="Offer/Offer_reject" to="." method="_on_offer_reject_pressed"]
-[connection signal="pressed" from="Offer/Offer_accept" to="." method="_on_offer_accept_pressed"]
-[connection signal="pressed" from="Offer_results/continue" to="." method="_on_continue_pressed"]
-[connection signal="pressed" from="extend_offer" to="." method="_on_extend_offer_pressed"]
-[connection signal="pressed" from="extend_hardOffer" to="." method="_on_extend_hard_offer_pressed"]
-[connection signal="pressed" from="Offer_hide" to="." method="_on_offer_hide_pressed"]
+[connection signal="pressed" from="CenterContainer/Offer/MarginContainer/Control2/Control/Offer_reject" to="." method="_on_offer_reject_pressed"]
+[connection signal="pressed" from="CenterContainer/Offer/MarginContainer/Control2/Control/Offer_accept" to="." method="_on_offer_accept_pressed"]
+[connection signal="pressed" from="CenterContainer/Offer_results/MarginContainer/Control2/continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer/Control/HBoxContainer/extend_offer" to="." method="_on_extend_offer_pressed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer/Control/HBoxContainer/extend_hardOffer" to="." method="_on_extend_hard_offer_pressed"]
 [connection signal="pressed" from="Results_hide" to="." method="_on_results_hide_pressed"]
+[connection signal="pressed" from="Offer_hide" to="." method="_on_offer_hide_pressed"]

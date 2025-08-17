@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 const ShopKeeperAI = preload("res://scripts/Bartering/shopkeeper.ai.gd")
 enum Turns {PC, NPC}
@@ -29,13 +29,13 @@ var state: BarterState
 
 @export var keeper: ShopKeepResource
 
-@onready var offer = $Offer
-@onready var results = $Results
-@onready var totalResultsLabel: Label = $Results/Label_total
-@onready var totalLabel: Label = $Label_total
-@onready var resultsLabel = $Results/Label_message
-@onready var offerResults = $Offer_results
-@onready var npcDeck = $CardDeck_npc
+@onready var offer = %Offer
+@onready var results = %Results
+@onready var totalResultsLabel: Label = %Label_total_results
+@onready var totalLabel: Label = %Label_total
+@onready var resultsLabel = %Label_message
+@onready var offerResults = %Offer_results
+@onready var npcDeck: CardDeck = $CardDeck_npc
 
 var ai: ShopKeeperAI
 
@@ -79,11 +79,11 @@ func _on_card_deck_npc_clicked(card: Card, size: int) -> void:
 func _on_offer_reject_pressed() -> void:
 	offer.visible = false
 	_executeAIAction(_clickNPCDeck)
-	$Offer_hide.visible = false
+	%Offer_hide.visible = false
 
 func _on_offer_accept_pressed() -> void:
 	offer.visible = false
-	$Offer_hide.visible = false
+	%Offer_hide.visible = false
 	_endGame("You have accepted the shopkeepers offer")
 
 func _on_extend_offer_pressed() -> void:
@@ -133,7 +133,7 @@ func _endGame(message: String):
 	var detail = "off" if total <= 0 else "added"
 	totalResultsLabel.text = "Final deal: {0}% {1}".format([total, detail])
 	results.visible = true
-	$Results_hide.visible = true
+	%Results_hide.visible = true
 
 # Barting - Actions
 func _evaluateCard(value: float):
@@ -196,15 +196,11 @@ func _executeAIAction(action):
 	time.start()
 
 func _clickNPCDeck():
-	var event = InputEventMouseButton.new()
-	event.button_index = MOUSE_BUTTON_LEFT
-	event.pressed = true
-	event.position = npcDeck.position # Set the position where the click should occur
-	get_viewport().push_input(event)
+	npcDeck.flipCard()
 
 func _offerNPC():
 	offer.visible = true
-	$Offer_hide.visible = true
+	%Offer_hide.visible = true
 	npcOfferTurn = turn
 	state.offeredLastTurn = true
 
@@ -241,19 +237,13 @@ func _setStateDeck(resources: Array[CardResource]):
 # MISC Utils
 func _moveCard(card: Card, size):
 	card.flip()
-	card.reparent($Marker2D)
-	var count := $Marker2D.get_child_count()
-	var row = count / maxRow
-	var x = count % maxRow * gapH + (row % 2 * 0.5 * gapH)
-	var y = row * gapV
-	card.position = Vector2(x, y)
+	card.reparent(%CardContainer)
 
 	if curTurn == Turns.NPC:
 		card.rotation += PI
 
 	if size == 1:
 		empty[curTurn] = true
-	pass
 
 # FOR TESTING
 enum DeckColor {BLUE, GREY}

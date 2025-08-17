@@ -1,5 +1,5 @@
-extends Node2D
-class_name CardHand
+extends Control
+class_name CardDeck
 
 enum DeckColor {BLUE, GREY}
 
@@ -17,7 +17,7 @@ var deckResouce: Array[CardResource] = []:
 		buildDeck()
 		setCardPos()
 
-@onready var cards = $Cards
+@onready var cards = %Cards
 
 func addCard(cardStat: CardResource):
 	var card: Card = cardScn.instantiate()
@@ -43,13 +43,11 @@ func _getCardResource():
 		DeckColor.GREY:
 			return load("res://resources/custom_resources/cards/card_grey.tres")
 
-
-func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if (event is InputEventMouseButton
-			and event.button_index == MOUSE_BUTTON_LEFT
-			and event.pressed
-		):
-			var children = cards.get_children()
-			if children.size():
-				var card = children[0]
-				clicked.emit(card, children.size())
+func _on_texture_button_pressed() -> void:
+	flipCard()
+		
+func flipCard():
+	var children = cards.get_children()
+	if children.size():
+		var card = children[0]
+		clicked.emit(card, children.size())
