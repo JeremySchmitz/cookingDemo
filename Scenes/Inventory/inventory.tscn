@@ -254,5 +254,6 @@ text = "Leave"
 [connection signal="pressed" from="NodeWrapper/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer/PanelAddButtons/ButtonAdd" to="." method="_on_button_add_pressed"]
 [connection signal="pressed" from="NodeWrapper/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer/PanelAddButtons/ButtonSubtract" to="." method="_on_button_subtract_pressed"]
 [connection signal="item_selected" from="NodeWrapper/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer/PanelSecondaryList/VBoxContainer/ListSecondary" to="." method="_on_list_secondary_item_selected"]
+[connection signal="pressed" from="NodeWrapper/MarginContainer/VBoxContainer3/HBoxContainer3/ButtonBuy" to="." method="_on_button_buy_pressed"]
 [connection signal="pressed" from="NodeWrapper/MarginContainer/VBoxContainer3/HBoxContainer3/ButtonBarter" to="." method="_on_button_barter_pressed"]
 [connection signal="pressed" from="NodeWrapper/MarginContainer/VBoxContainer3/HBoxContainer3/ButtonLeave" to="." method="_on_button_leave_pressed"]

@@ -17,7 +17,7 @@ func _init(rsc: ShopKeepResource) -> void:
 func evaluateTurn(state: BarterState):
 	#  Continue drawing if there is no chance of failing
 	if !state.error:
-		print('no error - CONTINUE')
+		# print('no error - CONTINUE')
 		return Decision.CONTINUE
 
 	var errorChance = _checkErrorChance(state)
@@ -25,32 +25,32 @@ func evaluateTurn(state: BarterState):
 	if !state.offeredLastTurn:
 		# If its reached its target goal offer
 		if state.total >= target:
-			print('total >= target - OFFER')
+			# print('total >= target - OFFER')
 			return Decision.OFFER
 
 		# If it drawing an error would put it ovver its neg target offer
 		if state.total - state.errorPenalty <= negTarget:
-			print('final target - OFFER')
+			# print('final target - OFFER')
 			return Decision.OFFER
 
 		# If chance of error is to high offer
 		if errorChance > boldness:
-			print('errorChance > boldness - OFFER')
+			# print('errorChance > boldness - OFFER')
 			return Decision.OFFER
 	
 	# If reached target even with penalty stop
 	if state.total - state.stopPenalty >= target:
-			print('total - penalty > target - OFFER')
+			# print('total - penalty > target - OFFER')
 			return Decision.STOP
 
 
 	# If chance of error is to high stop
 	if errorChance > finalChance:
-			print('errorChance > finalChance - STOP')
+			# print('errorChance > finalChance - STOP')
 			return Decision.STOP
 
 	# otherwise draw
-	print('end CONTINUE')
+	# print('end CONTINUE')
 	return Decision.CONTINUE
 
 

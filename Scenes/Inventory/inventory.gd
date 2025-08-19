@@ -4,6 +4,7 @@ class_name InventoryScn
 enum InventoryMode {STORE, PLAYER}
 
 signal barter()
+signal buy()
 
 @export var inventory: Inventory
 @export var shopInventory: Inventory
@@ -47,6 +48,7 @@ var selectedNodeList: ItemList
 var selectedItem: InvItem: set = _setSelectedItem
 
 var cart: Array[InvItem] = []
+var cost := 0
 var discount := 0:
 	set(val):
 		discount = val
@@ -205,7 +207,7 @@ func _delectItem():
 	selectedNodeList = null
 
 func _updateCartLabel():
-	var cost = 0
+	cost = 0
 	for item in cart:
 		cost += item.cost * item.count
 	var discountText = ''
@@ -217,7 +219,7 @@ func _updateCartLabel():
 	nodeLabelCart.text = 'Cart: ${0}{1}'.format([cost, discountText])
 
 func _updateButtons():
-	nodeButtonBuy.disabled = cart.size() == 0
+	nodeButtonBuy.disabled = cart.size() == 0 || cost > inventory.money
 	nodeButtonBarter.disabled = bartered || cart.size() == 0
 
 func _on_button_leave_pressed() -> void:
@@ -226,3 +228,10 @@ func _on_button_leave_pressed() -> void:
 func _on_button_barter_pressed() -> void:
 	bartered = true
 	barter.emit()
+
+func _on_button_buy_pressed() -> void:
+	inventory.addItems(cart)
+	inventory.money -= cost
+	shopInventory.removeItems(cart)
+	shopInventory.money += cost
+	buy.emit()

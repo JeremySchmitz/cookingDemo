@@ -2,7 +2,7 @@ extends Node
 
 const GENERATE_PATH = "res://scripts/Crew/generateCrew.gd"
 
-
+var inventory := Inventory.new()
 var boatPosition := Vector2(0, 0)
 var targetPosition := Vector2(0, 0)
 
