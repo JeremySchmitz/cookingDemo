@@ -30,6 +30,8 @@ var state: BarterState
 @export var errorPenalty := 10
 
 @export var keeper: ShopKeepResource
+@export var moodBoundHigh = 3
+@export var moodBoundLow = -3
 
 @onready var offer = %Offer
 @onready var results = %Results
@@ -80,11 +82,13 @@ func _on_card_deck_npc_clicked(card: Card, size: int) -> void:
 
 # Listeners - buttons
 func _on_offer_reject_pressed() -> void:
+	_updateKeeper(GlobalEnums.Mood.EMBARRASSED)
 	offer.visible = false
 	_executeAIAction(_clickNPCDeck)
 	%Offer_hide.visible = false
 
 func _on_offer_accept_pressed() -> void:
+	_updateKeeper(GlobalEnums.Mood.HAPPY)
 	offer.visible = false
 	%Offer_hide.visible = false
 	_endGame("You have accepted the shopkeepers offer")
@@ -149,19 +153,31 @@ func _evaluateCard(value: float):
 			if curTurn == Turns.PC:
 				playerText = "You angered the shopkeeper. He raised the price"
 				total += errorPenalty
+				_updateKeeper(GlobalEnums.Mood.ANGRY)
 			else:
 				playerText = "The shopkeeper is embarrased. He offers you a great discount"
 				total -= errorPenalty
+				_updateKeeper(GlobalEnums.Mood.EMBARRASSED)
 			_endGame(playerText)
 		else: errors[curTurn] = true
 
-		if curTurn == Turns.NPC: state.error = true
+		if curTurn == Turns.NPC:
+			state.error = true
+			_updateKeeper(GlobalEnums.Mood.SUPRISED)
 	else:
 		if curTurn == Turns.PC:
 			total -= value
 		else:
 			total += value
 			state.usedCards.append(value)
+
+		if total >= moodBoundHigh:
+			_updateKeeper(GlobalEnums.Mood.ANGRY)
+		elif total <= moodBoundLow:
+			_updateKeeper(GlobalEnums.Mood.HAPPY)
+		else:
+			_updateKeeper(GlobalEnums.Mood.NEUTRAL)
+
 
 		score[curTurn].append(value)
 
@@ -171,9 +187,11 @@ func _hardStop():
 	if curTurn == Turns.PC:
 		total += stopPenalty
 		playerText = "You"
+		_updateKeeper(GlobalEnums.Mood.SUPRISED)
 	else:
 		total -= stopPenalty
 		playerText = "The shopkeeper"
+		_updateKeeper(GlobalEnums.Mood.ANGRY)
 
 	var text = "{0} stopped the bartering".format([playerText])
 	_endGame(text)
@@ -307,3 +325,18 @@ func _on_game_end_continue_pressed() -> void:
 func _updateTurnLabel() -> void:
 	var player = 'Player' if curTurn == Turns.PC else 'Shop Keeper'
 	%Label_turn.text = 'Turn: {0}'.format([player])
+
+func _updateKeeper(mood: GlobalEnums.Mood):
+	var animation
+	match mood:
+		GlobalEnums.Mood.HAPPY:
+			animation = 'Happy'
+		GlobalEnums.Mood.NEUTRAL:
+			animation = 'Neutral'
+		GlobalEnums.Mood.SUPRISED:
+			animation = 'Suprised'
+		GlobalEnums.Mood.ANGRY:
+			animation = 'Angry'
+		GlobalEnums.Mood.EMBARRASSED:
+			animation = 'Embarrassed'
+	%keeperSprite.animation = animation
