@@ -1,6 +1,9 @@
-extends CenterContainer
+extends Control
 class_name InventoryScn
+
 enum InventoryMode {STORE, PLAYER}
+
+signal barter()
 
 @export var inventory: Inventory
 @export var shopInventory: Inventory
@@ -44,9 +47,15 @@ var selectedNodeList: ItemList
 var selectedItem: InvItem: set = _setSelectedItem
 
 var cart: Array[InvItem] = []
-var discount := 2
+var discount := 0:
+	set(val):
+		discount = val
+		_updateCartLabel()
 
-var bartered = false
+var bartered = false:
+	set(val):
+		bartered = val
+		_updateButtons()
 
 func _ready() -> void:
 	nodeMoneyCount.text = str(inventory.money)
@@ -203,13 +212,17 @@ func _updateCartLabel():
 	if discount:
 		var d = (100 - discount) / 100.0
 		cost = round(cost * d)
-		discountText = ' - {0}% Off'.format([discount])
+		var add = 'Off ' if discount > 0 else 'Added'
+		discountText = ' - {0}% {1}'.format([abs(discount), add])
 	nodeLabelCart.text = 'Cart: ${0}{1}'.format([cost, discountText])
 
 func _updateButtons():
 	nodeButtonBuy.disabled = cart.size() == 0
 	nodeButtonBarter.disabled = bartered || cart.size() == 0
 
-
 func _on_button_leave_pressed() -> void:
 	visible = false
+
+func _on_button_barter_pressed() -> void:
+	bartered = true
+	barter.emit()

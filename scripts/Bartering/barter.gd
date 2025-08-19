@@ -1,7 +1,9 @@
 extends Control
+class_name BarterScn
 
 const ShopKeeperAI = preload("res://scripts/Bartering/shopkeeper.ai.gd")
 enum Turns {PC, NPC}
+signal endGame(discount: int)
 
 var errors: Dictionary = {
 	Turns.PC: false,
@@ -61,6 +63,7 @@ func _ready() -> void:
 	buildDecks()
 	ai = ShopKeeperAI.new(keeper)
 
+	_updateTurnLabel()
 
 # Listeners - Decks
 func _on_card_deck_pc_clicked(card: Card, size: int) -> void:
@@ -105,6 +108,7 @@ func _on_offer_hide_pressed() -> void:
 # Bartering - Turns
 func _startTurn():
 	turn += 1
+	_updateTurnLabel()
 	if empty[curTurn]:
 		_endGame("You are both tired and stopped bartering")
 		return
@@ -134,6 +138,8 @@ func _endGame(message: String):
 	totalResultsLabel.text = "Final deal: {0}% {1}".format([total, detail])
 	results.visible = true
 	%Results_hide.visible = true
+	%extend_offer.hide()
+	%extend_hardOffer.hide()
 
 # Barting - Actions
 func _evaluateCard(value: float):
@@ -294,3 +300,10 @@ func _getCardResource(color: DeckColor, err = false):
 				return load("res://resources/custom_resources/cards/card_grey.tres")
 
 # FOR TESTING END
+
+func _on_game_end_continue_pressed() -> void:
+	endGame.emit(-total)
+
+func _updateTurnLabel() -> void:
+	var player = 'Player' if curTurn == Turns.PC else 'Shop Keeper'
+	%Label_turn.text = 'Turn: {0}'.format([player])

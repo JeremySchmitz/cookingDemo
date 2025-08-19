@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://chbyuh2lokphr"]
+[gd_scene load_steps=11 format=3 uid="uid://chbyuh2lokphr"]
 
 [ext_resource type="Texture2D" uid="uid://b3kg4655516jc" path="res://resources/Sprites/Store/portriatBackground.png" id="1_7xlre"]
 [ext_resource type="Texture2D" uid="uid://dc1s1j1cgr08r" path="res://resources/Sprites/Store/woodBG.png" id="1_geli4"]
 [ext_resource type="Script" uid="uid://bx5immxd4a01e" path="res://scripts/Bartering/store.gd" id="1_hmjmj"]
 [ext_resource type="SpriteFrames" uid="uid://bt8mxtjypr6tx" path="res://resources/Sprites/Store/shopkeeper_animated_01.tres" id="2_geli4"]
+[ext_resource type="Texture2D" uid="uid://cecalpuabm0s4" path="res://resources/Sprites/Store/Shop.png" id="3_n4i6b"]
 [ext_resource type="Resource" uid="uid://bnuvdnc3ep10k" path="res://resources/custom_resources/inventory/Test/test_inventory_01.tres" id="5_0fr88"]
 [ext_resource type="Texture2D" uid="uid://cteec7c7pkf00" path="res://resources/Sprites/PufferFish_02/pufferFiish02_Body.png" id="6_vbrci"]
 [ext_resource type="Texture2D" uid="uid://do8dh5yj5hekv" path="res://resources/Sprites/Crab/crab_body.png" id="7_gr674"]
@@ -36,39 +37,64 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_geli4")
+texture = ExtResource("3_n4i6b")
 
-[node name="Sprite2D" type="Sprite2D" parent="ControlBG"]
+[node name="BG_Barter" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="BG_Barter"]
 texture_filter = 1
-position = Vector2(40, 40)
-scale = Vector2(5, 5)
-texture = ExtResource("1_7xlre")
-centered = false
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ControlBG/Sprite2D"]
-texture_filter = 1
-sprite_frames = ExtResource("2_geli4")
-animation = &"Neutral"
-centered = false
-
-[node name="Panel" type="Panel" parent="ControlBG"]
-layout_mode = 0
-offset_left = 225.0
-offset_top = 50.0
-offset_right = 761.0
-offset_bottom = 125.0
-
-[node name="Label" type="Label" parent="ControlBG/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Heres what I have for sale"
+texture = ExtResource("1_geli4")
+
+[node name="Sprite2D" type="Sprite2D" parent="BG_Barter"]
+texture_filter = 1
+position = Vector2(40, 40)
+scale = Vector2(5, 5)
+texture = ExtResource("1_7xlre")
+centered = false
+
+[node name="keeperSprite" type="AnimatedSprite2D" parent="BG_Barter/Sprite2D"]
+texture_filter = 1
+sprite_frames = ExtResource("2_geli4")
+animation = &"Neutral"
+centered = false
+
+[node name="Panel" type="Panel" parent="BG_Barter"]
+layout_mode = 0
+offset_left = 225.0
+offset_top = 50.0
+offset_right = 530.0
+offset_bottom = 125.0
+
+[node name="Label" type="Label" parent="BG_Barter/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "My prices are pretty firm."
 label_settings = SubResource("LabelSettings_gr674")
 
 [node name="ControlMG" type="Control" parent="."]
+visible = false
 custom_minimum_size = Vector2(1152, 648)
 layout_mode = 3
 anchors_preset = 0

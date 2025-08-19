@@ -8,7 +8,7 @@
 font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_s3kbv"]
-font_size = 45
+font_size = 32
 
 [node name="Barter" type="Control"]
 layout_mode = 3
@@ -145,6 +145,7 @@ text = " ACCEPT "
 
 [node name="Results" type="Panel" parent="CenterContainer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(600, 300)
 layout_mode = 2
 
@@ -194,6 +195,22 @@ grow_vertical = 0
 text = "Total:"
 label_settings = SubResource("LabelSettings_vyuch")
 horizontal_alignment = 1
+
+[node name="game_end_continue" type="Button" parent="CenterContainer/Results/MarginContainer/Control2"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -39.5
+offset_top = -50.0
+offset_right = 39.5
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Continue"
 
 [node name="Offer_results" type="Panel" parent="CenterContainer"]
 unique_name_in_owner = true
@@ -277,17 +294,26 @@ custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label_total" type="Label" parent="HBoxContainer/MarginContainer/Control"]
-unique_name_in_owner = true
+[node name="HBoxContainer2" type="VBoxContainer" parent="HBoxContainer/MarginContainer/Control"]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -37.5
-offset_right = 198.0
-offset_bottom = 25.5
-grow_vertical = 2
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -94.0
+offset_right = 218.0
+grow_vertical = 0
+
+[node name="Label_total" type="Label" parent="HBoxContainer/MarginContainer/Control/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
 text = "Total: 0%"
+label_settings = SubResource("LabelSettings_s3kbv")
+vertical_alignment = 1
+
+[node name="Label_turn" type="Label" parent="HBoxContainer/MarginContainer/Control/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Turn"
 label_settings = SubResource("LabelSettings_s3kbv")
 vertical_alignment = 1
 
@@ -305,10 +331,12 @@ grow_horizontal = 0
 grow_vertical = 2
 
 [node name="extend_offer" type="Button" parent="HBoxContainer/MarginContainer/Control/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = " Extend Offer "
 
 [node name="extend_hardOffer" type="Button" parent="HBoxContainer/MarginContainer/Control/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = " Final Offer "
 
@@ -336,6 +364,7 @@ text = "HIDE "
 [connection signal="clicked" from="CardDeck_npc" to="." method="_on_card_deck_npc_clicked"]
 [connection signal="pressed" from="CenterContainer/Offer/MarginContainer/Control2/Control/Offer_reject" to="." method="_on_offer_reject_pressed"]
 [connection signal="pressed" from="CenterContainer/Offer/MarginContainer/Control2/Control/Offer_accept" to="." method="_on_offer_accept_pressed"]
+[connection signal="pressed" from="CenterContainer/Results/MarginContainer/Control2/game_end_continue" to="." method="_on_game_end_continue_pressed"]
 [connection signal="pressed" from="CenterContainer/Offer_results/MarginContainer/Control2/continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer/Control/HBoxContainer/extend_offer" to="." method="_on_extend_offer_pressed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer/Control/HBoxContainer/extend_hardOffer" to="." method="_on_extend_hard_offer_pressed"]
