@@ -3,5 +3,11 @@
 [ext_resource type="Script" uid="uid://drwwte2xllcv7" path="res://resources/custom_resources/inventory/inv_resource.gd" id="1_j3mar"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_j3mar")
+type = 0
+name = ""
+count = 0
+description = ""
+cost = 0
 metadata/_custom_type_script = "uid://drwwte2xllcv7"

@@ -4,13 +4,16 @@ var inventoryRsc = preload("res://Scenes/Inventory/inventory.tscn")
 var barterRsc = preload("res://Scenes/Bartering/barter.tscn")
 
 @export var inventory: Inventory
+@export var shopInventory: Inventory
 var nodeInventory: InventoryScn
 var nodeBarter: BarterScn
 
 func _ready() -> void:
 	nodeInventory = inventoryRsc.instantiate()
 	nodeInventory.inventory = inventory
+	nodeInventory.shopInventory = shopInventory
 	nodeInventory.barter.connect(_on_barter)
+	nodeInventory.leave.connect(_on_leave)
 	$ControlFG.add_child(nodeInventory)
 
 func _on_inventory_pressed() -> void:
@@ -29,3 +32,6 @@ func _on_barter_end(discount: int) -> void:
 	%BG_Barter.hide()
 	$ControlFG.remove_child(nodeBarter)
 	nodeBarter.queue_free()
+
+func _on_leave():
+	SceneLoader.goto_scene(Utils.TRAVEL_PATH)

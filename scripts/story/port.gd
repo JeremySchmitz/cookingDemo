@@ -55,3 +55,11 @@ func on_port_selected(portName: String):
 func _setLabel():
 	# TODO is this way till can find more accurate calc
 	info.text = "Port {0} \nLess than {1} day(s) travel".format([labelName, int(distance)])
+
+func _on_dock_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("boats"):
+		SignalBus.canDock.emit(true)
+
+func _on_dock_area_body_exited(body: Node2D) -> void:
+	if body.is_in_group("boats"):
+		SignalBus.canDock.emit(false)

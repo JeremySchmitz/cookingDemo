@@ -1,16 +1,28 @@
-[gd_resource type="Resource" script_class="Inventory" load_steps=7 format=3 uid="uid://bnuvdnc3ep10k"]
+[gd_resource type="Resource" script_class="Inventory" load_steps=8 format=3 uid="uid://bnuvdnc3ep10k"]
 
 [ext_resource type="Script" uid="uid://b7sudjpcc7xtc" path="res://resources/custom_resources/inventory/inv_food.gd" id="1_jlsce"]
 [ext_resource type="Script" uid="uid://bbxis0e5mu55p" path="res://resources/custom_resources/inventory/inventory.gd" id="1_qg3kp"]
-[ext_resource type="Resource" uid="uid://np3ugoqrg0eb" path="res://resources/custom_resources/inventory/Test/test_food_01.tres" id="2_0ori5"]
 [ext_resource type="Script" uid="uid://drwwte2xllcv7" path="res://resources/custom_resources/inventory/inv_resource.gd" id="2_lxqe5"]
+[ext_resource type="Texture2D" uid="uid://cteec7c7pkf00" path="res://resources/Sprites/PufferFish_02/pufferFiish02_Body.png" id="2_wor8i"]
 [ext_resource type="Resource" uid="uid://bwsngxxxr4cpx" path="res://resources/custom_resources/inventory/Test/test_food_02.tres" id="3_wor8i"]
 [ext_resource type="Resource" uid="uid://knyhaf1kauvg" path="res://resources/custom_resources/inventory/Test/test_resource.tres" id="5_xgvq1"]
 
+[sub_resource type="Resource" id="Resource_xgvq1"]
+resource_local_to_scene = true
+script = ExtResource("1_jlsce")
+scenePath = ""
+name = "Puffer Fish"
+count = 5
+sprite = ExtResource("2_wor8i")
+description = "This is a puffer fish. Be careful cause they can be poisonous if not handled properly."
+cost = 100
+metadata/_custom_type_script = "uid://b7sudjpcc7xtc"
+
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_qg3kp")
 name = "Billy Boid"
-money = 256
-food = Array[ExtResource("1_jlsce")]([ExtResource("2_0ori5"), ExtResource("3_wor8i")])
+money = 300.0
+food = Array[ExtResource("1_jlsce")]([SubResource("Resource_xgvq1"), ExtResource("3_wor8i")])
 resources = Array[ExtResource("2_lxqe5")]([ExtResource("5_xgvq1")])
 metadata/_custom_type_script = "uid://bbxis0e5mu55p"

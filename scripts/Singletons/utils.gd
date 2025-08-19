@@ -4,7 +4,7 @@ const KITCHEN_PATH = "res://Scenes/kitchen.tscn"
 const TRAVEL_PATH = "res://Scenes/Story/boat_travel.tscn"
 const ENCOUNTER_PATH = "res://Scenes/Encounters/encounter.tscn"
 const RESULTS_PATH = "res://Scenes/food/results.tscn"
-
+const STORE_PATH = "res://Scenes/Bartering/store.tscn"
 
 var _encounters = []
 

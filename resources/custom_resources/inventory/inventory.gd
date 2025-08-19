@@ -21,8 +21,10 @@ func addItem(item: InvItem) -> void:
 
 func _addItem(item: InvItem, array: Array):
 	var i := array.find_custom(func(it): return item.name == it.name)
-	if array[i]: (array[i] as InvItem).count += item.count
-	else: array.append(item)
+	if array[i]:
+		(array[i] as InvItem).count += item.count
+	else:
+		array.append(item.duplicate(true))
 
 func removeItems(items: Array[InvItem]) -> void:
 	for item in items:

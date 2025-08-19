@@ -4,7 +4,7 @@ class_name InventoryScn
 enum InventoryMode {STORE, PLAYER}
 
 signal barter()
-signal buy()
+signal leave()
 
 @export var inventory: Inventory
 @export var shopInventory: Inventory
@@ -18,7 +18,7 @@ signal buy()
 # Cart
 @onready var nodePanelCart := %PanelCart
 @onready var nodeLabelCart := %LabelCart
-@onready var nodeListCart := %ListCart
+@onready var nodeListCart: ItemList = %ListCart
 # Selection
 @onready var nodePanelSelection := %PanelSelection
 @onready var nodeSelectedTexture := %SelectedTexture
@@ -29,11 +29,11 @@ signal buy()
 # Main List
 @onready var nodePanelMainList := %PanelMainList
 @onready var nodeLabelMainList := %LabelMainList
-@onready var nodeListMain := %ListMain
+@onready var nodeListMain: ItemList = %ListMain
 # Secondary List
 @onready var nodePanelSecondaryList := %PanelSecondaryList
 @onready var nodeLabelSecondaryList := %LabelSecondaryList
-@onready var nodeListSecondary := %ListSecondary
+@onready var nodeListSecondary: ItemList = %ListSecondary
 # Buttons
 @onready var nodeButtonBuy := %ButtonBuy
 @onready var nodeButtonBarter := %ButtonBarter
@@ -60,6 +60,8 @@ var bartered = false:
 		_updateButtons()
 
 func _ready() -> void:
+	generateTestArrays()
+
 	nodeMoneyCount.text = str(inventory.money)
 	if mode == InventoryMode.PLAYER:
 		nodeCharacterName.text = inventory.name
@@ -80,26 +82,12 @@ func _ready() -> void:
 	else:
 		nodeCharacterName.text = shopInventory.name
 		nodeLabelMainList.text = 'Wares'
-
-		if shopInventory.food:
-			listMain.append_array(shopInventory.food)
-			_addItemsToList(shopInventory.food, nodeListMain)
-		if shopInventory.resources:
-			listMain.append_array(shopInventory.resources)
-			_addItemsToList(shopInventory.resources, nodeListMain)
-
-		
-		nodeLabelSecondaryList.text = 'Inventory'
-		if inventory.food:
-			listSecondary.append_array(inventory.food)
-			_addItemsToList(inventory.food, nodeListSecondary)
-		if inventory.resources:
-			listSecondary.append_array(inventory.resources)
-			_addItemsToList(inventory.resources, nodeListSecondary)
+		_setUpShopLists()
 
 		
 func _addItemsToList(list: Array, nodeList: ItemList):
 	for item: InvItem in list:
+		print('addItemToList:', item.name, item.count)
 		nodeList.add_item(_getItemText(item), item.sprite)
 
 func _on_list_main_item_selected(index: int) -> void:
@@ -223,7 +211,7 @@ func _updateButtons():
 	nodeButtonBarter.disabled = bartered || cart.size() == 0
 
 func _on_button_leave_pressed() -> void:
-	visible = false
+	leave.emit()
 
 func _on_button_barter_pressed() -> void:
 	bartered = true
@@ -232,6 +220,70 @@ func _on_button_barter_pressed() -> void:
 func _on_button_buy_pressed() -> void:
 	inventory.addItems(cart)
 	inventory.money -= cost
-	shopInventory.removeItems(cart)
+
 	shopInventory.money += cost
-	buy.emit()
+	cart.clear()
+	nodeListCart.clear()
+	nodeListMain.clear()
+	nodeListSecondary.clear()
+
+	_setUpShopLists()
+		
+	nodeMoneyCount.text = str(inventory.money)
+	_updateButtons()
+	_updateCartLabel()
+
+
+func _setUpShopLists():
+	listMain = []
+	listSecondary = []
+	if shopInventory.food:
+		listMain.append_array(shopInventory.food)
+		_addItemsToList(shopInventory.food, nodeListMain)
+	if shopInventory.resources:
+		listMain.append_array(shopInventory.resources)
+		_addItemsToList(shopInventory.resources, nodeListMain)
+
+	
+	nodeLabelSecondaryList.text = 'Inventory'
+	if inventory.food:
+		listSecondary.append_array(inventory.food)
+		_addItemsToList(inventory.food, nodeListSecondary)
+	if inventory.resources:
+		listSecondary.append_array(inventory.resources)
+		_addItemsToList(inventory.resources, nodeListSecondary)
+
+
+# FOR TEST
+func generateTestArrays():
+	var food01 = InvFood.new()
+	food01.sprite = load("res://resources/Sprites/Crab/crab_body.png")
+	food01.count = 3
+	food01.cost = 30
+	var food02 = InvFood.new()
+	food02.sprite = load("res://resources/Sprites/PufferFish_02/pufferFiish02_Body.png")
+	food02.count = 2
+	food02.cost = 100
+	var resource01 = InvResource.new()
+	resource01.sprite = load("res://resources/Sprites/Travel/dock.png")
+	resource01.count = 20
+	resource01.cost = 12
+	
+	inventory.food = [food01, food02]
+	inventory.resources = [resource01]
+	
+	var food03 = InvFood.new()
+	food03.sprite = load("res://resources/Sprites/Crab/crab_body.png")
+	food03.count = 6
+	food03.cost = 80
+	var food04 = InvFood.new()
+	food04.sprite = load("res://resources/Sprites/PufferFish_02/pufferFiish02_Body.png")
+	food04.cost = 96
+	food04.count = 7
+	var resource02 = InvResource.new()
+	resource02.sprite = load("res://resources/Sprites/Travel/dock.png")
+	resource02.count = 50
+	resource02.cost = 20
+
+	shopInventory.food = [food03, food04]
+	shopInventory.resources = [resource02]

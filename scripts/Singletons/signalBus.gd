@@ -19,3 +19,5 @@ signal drop()
 
 signal progressBarEmpty()
 signal progressBarFull()
+
+signal canDock(canDock: bool)

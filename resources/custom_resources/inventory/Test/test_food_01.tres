@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cteec7c7pkf00" path="res://resources/Sprites/PufferFish_02/pufferFiish02_Body.png" id="2_1tcg6"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_y3ymy")
 scenePath = ""
 name = "Puffer Fish"

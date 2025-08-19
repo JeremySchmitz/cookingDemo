@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cuyyebhwjhd2v"]
+[gd_scene load_steps=7 format=3 uid="uid://cuyyebhwjhd2v"]
 
 [ext_resource type="Script" uid="uid://1vwfjs36vo78" path="res://scripts/story/port.gd" id="1_80e8t"]
 [ext_resource type="Texture2D" uid="uid://2hn02kil733j" path="res://resources/Sprites/Travel/dock.png" id="2_6cpgg"]
@@ -7,6 +7,9 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l53du"]
 radius = 22.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yncia"]
+radius = 40.0
 
 [node name="Port" type="Area2D"]
 script = ExtResource("1_80e8t")
@@ -50,4 +53,11 @@ offset_right = 33.0
 offset_bottom = 93.0
 text = "TRAVEL"
 
+[node name="DockArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DockArea"]
+shape = SubResource("CircleShape2D_yncia")
+
 [connection signal="pressed" from="Info/Travel_BTN" to="." method="_on_travel_btn_pressed"]
+[connection signal="body_entered" from="DockArea" to="." method="_on_dock_area_body_entered"]
+[connection signal="body_exited" from="DockArea" to="." method="_on_dock_area_body_exited"]

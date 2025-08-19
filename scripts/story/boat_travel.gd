@@ -15,6 +15,7 @@ var encounterTimer := Timer.new()
 
 # FIX, Day currently resets if switch scenes to an encounter. 
 func _ready():
+	SignalBus.canDock.connect(_on_can_dock)
 	# TODO run simple day timer
 	$Camera2D.limitRight = $Camera2D.get_window().size.x - $world_gen.width
 	$Camera2D.limitDown = $Camera2D.get_window().size.y - $world_gen.height
@@ -76,3 +77,11 @@ func _setBoatPosition():
 		pos = ports[0]
 
 	boat.position = pos
+
+func _on_can_dock(canDock: bool):
+	if has_node("CanvasLayer/Control/DockButton"):
+		$CanvasLayer/Control/DockButton.visible = canDock
+
+func _on_dock_button_pressed() -> void:
+	CrewStatus.boatPosition = boat.position
+	SceneLoader.goto_scene(Utils.STORE_PATH)

@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://chfrb3of5ahsp" path="res://resources/Sprites/Travel/Ship.png" id="2_67ow7"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_gg0ic")
 type = 0
 name = "Wood"

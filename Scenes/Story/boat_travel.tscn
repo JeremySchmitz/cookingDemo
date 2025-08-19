@@ -26,7 +26,7 @@ randSeed = false
 seed = 3140313529
 portSeed = 42867721
 
-[node name="BoatChar" type="CharacterBody2D" parent="."]
+[node name="BoatChar" type="CharacterBody2D" parent="." groups=["boats"]]
 position = Vector2(555, 442)
 motion_mode = 1
 script = ExtResource("3_blhhb")
@@ -39,3 +39,31 @@ shape = SubResource("CapsuleShape2D_7ds11")
 [node name="Sprite2D" type="Sprite2D" parent="BoatChar"]
 texture_filter = 1
 texture = ExtResource("5_7ds11")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DockButton" type="Button" parent="CanvasLayer/Control"]
+custom_minimum_size = Vector2(75, 40)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -95.0
+offset_top = -60.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Dock"
+
+[connection signal="pressed" from="CanvasLayer/Control/DockButton" to="." method="_on_dock_button_pressed"]
