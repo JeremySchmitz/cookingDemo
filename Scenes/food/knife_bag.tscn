@@ -145,7 +145,7 @@ script = ExtResource("3_74eee")
 texture_filter = 1
 position = Vector2(-16, -1.43051e-06)
 sprite_frames = SubResource("SpriteFrames_1uj6a")
-animation = &"ready"
+animation = &"in_use"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="knife_slice_btn"]
 position = Vector2(-12.5, -1)

@@ -5,23 +5,28 @@
 [ext_resource type="Texture2D" uid="uid://c0ug1qilfo8vb" path="res://resources/Sprites/UI/HealthBar/healthBar_top.png" id="4_ah7g7"]
 [ext_resource type="Texture2D" uid="uid://cqtta3k4hl76o" path="res://resources/Sprites/UI/HealthBar/healthBar_progress.png" id="5_ah7g7"]
 
-[node name="HealthBar" type="Node2D"]
+[node name="HealthBar" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 195.0
+offset_bottom = 50.0
 script = ExtResource("1_4c3qa")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(96, 24)
-scale = Vector2(3, 3)
-texture = ExtResource("4_ah7g7")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
 texture_filter = 1
+layout_mode = 1
 offset_left = 42.0
 offset_top = 18.0
 offset_right = 90.0
-offset_bottom = 58.0
+offset_bottom = 23.0
 scale = Vector2(3, 3)
 step = 0.5
 value = 100.0
 texture_under = ExtResource("3_mfw7x")
 texture_progress = ExtResource("5_ah7g7")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 64.0
+offset_bottom = 16.0
+scale = Vector2(3, 3)
+texture = ExtResource("4_ah7g7")

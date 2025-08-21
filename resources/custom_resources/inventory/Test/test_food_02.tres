@@ -4,9 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://do8dh5yj5hekv" path="res://resources/Sprites/Crab/crab_body.png" id="2_hvjee"]
 
 [resource]
-resource_local_to_scene = true
 script = ExtResource("1_3ixvr")
-scenePath = ""
+scenePath = "res://Scenes/food/Food_types/Crab/crab.tscn"
 name = "Crab"
 count = 5
 sprite = ExtResource("2_hvjee")

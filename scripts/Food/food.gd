@@ -66,6 +66,7 @@ func _buildCollisionFromBM() -> PackedVector2Array:
 	var size := bitmap.get_size() * spriteScale
 	bitmap.resize(size)
 	var poly := bitmap.opaque_to_polygons(Rect2(Vector2(), bitmap.get_size()))[0]
+	bitmap.resize(bitmap.get_size() / spriteScale)
 
 	#center polygon
 	var colPoly = []

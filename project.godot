@@ -23,6 +23,8 @@ SignalBus="*res://scripts/Singletons/signalBus.gd"
 
 [display]
 
+window/size/viewport_width=1440
+window/size/viewport_height=810
 window/size/always_on_top=true
 window/size/transparent=true
 window/stretch/mode="canvas_items"

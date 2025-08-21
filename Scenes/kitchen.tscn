@@ -1,6 +1,7 @@
-[gd_scene load_steps=31 format=3 uid="uid://cax40kgn23m3q"]
+[gd_scene load_steps=32 format=3 uid="uid://cax40kgn23m3q"]
 
 [ext_resource type="Script" uid="uid://bq6d71fqsv1h6" path="res://scripts/kitchen.gd" id="1_4clir"]
+[ext_resource type="Resource" uid="uid://bnuvdnc3ep10k" path="res://resources/custom_resources/inventory/Test/test_inventory_01.tres" id="2_m1yx5"]
 [ext_resource type="Texture2D" uid="uid://roubacvs6dht" path="res://resources/Sprites/Kitchen/CuttingBoard.png" id="2_t5hpn"]
 [ext_resource type="PackedScene" uid="uid://m483g8c2ihkp" path="res://Scenes/UI/health_bar.tscn" id="4_i6vcq"]
 [ext_resource type="PackedScene" uid="uid://ccw7uq7go4ivt" path="res://Scenes/food/food.tscn" id="5_32235"]
@@ -68,11 +69,12 @@ radius = 6.0
 
 [node name="Kitchen" type="Node2D"]
 script = ExtResource("1_4clir")
+inventory = ExtResource("2_m1yx5")
 
 [node name="BG" type="Polygon2D" parent="."]
 position = Vector2(593, 41)
 color = Color(0.703808, 0.703808, 0.703808, 1)
-polygon = PackedVector2Array(-608, -56, 2272, -40, 2278, 717, -608, 728)
+polygon = PackedVector2Array(-608, -56, 2272, -40, 2282, 933, -622, 877)
 uv = PackedVector2Array(-608, -56, 584, -80, 576, 256, -584, 264)
 
 [node name="CameraMain" type="Camera2D" parent="."]
@@ -111,12 +113,12 @@ scale = Vector2(4.78125, 4.78125)
 texture = ExtResource("2_t5hpn")
 
 [node name="FryingPan" parent="." instance=ExtResource("10_2cl3g")]
-position = Vector2(729, 461)
+position = Vector2(1066, 518)
 
 [node name="Bowls" type="Node" parent="."]
 
 [node name="food" parent="." instance=ExtResource("5_32235")]
-position = Vector2(544, 464)
+position = Vector2(353, 389)
 
 [node name="Tuna" parent="." instance=ExtResource("5_t5hpn")]
 position = Vector2(691, 182)
@@ -162,11 +164,6 @@ scale = Vector2(2, 2)
 texture_normal = ExtResource("10_i6vcq")
 texture_click_mask = ExtResource("11_bgcuo")
 
-[node name="Knife_Bag" parent="." instance=ExtResource("14_ykbxl")]
-position = Vector2(216, 492)
-rotation = -1.5708
-scale = Vector2(3, 3)
-
 [node name="BoneParticles" type="CPUParticles2D" parent="."]
 emitting = false
 amount = 20
@@ -198,7 +195,13 @@ scale_amount_min = 2.0
 scale_amount_max = 5.0
 color = Color(0.84, 0, 0, 1)
 
+[node name="Knife_Bag" parent="." instance=ExtResource("14_ykbxl")]
+position = Vector2(215, 634)
+rotation = -1.5708
+scale = Vector2(3, 3)
+
 [node name="Hand" type="Area2D" parent="." node_paths=PackedStringArray("particles", "health")]
+visible = false
 collision_mask = 2
 script = ExtResource("18_2l700")
 particles = NodePath("../BloodParticles")
@@ -212,20 +215,56 @@ shape = SubResource("CircleShape2D_r0dk1")
 [node name="Health" type="Node" parent="Hand" node_paths=PackedStringArray("healthBar")]
 script = ExtResource("19_r0dk1")
 health = 100.0
-healthBar = NodePath("../../HUD/HealthBar")
+healthBar = NodePath("../../HUD/HUD/TopPanel/HealthBar")
 metadata/_custom_type_script = "uid://3qtest46ag4a"
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="HealthBar" parent="HUD" instance=ExtResource("4_i6vcq")]
-position = Vector2(18, 11)
+[node name="HUD" type="Control" parent="HUD"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
 
-[node name="StaminaBar" parent="HUD" instance=ExtResource("21_bgcuo")]
-visible = false
-position = Vector2(215, 11)
+[node name="TopPanel" type="HBoxContainer" parent="HUD/HUD"]
+layout_mode = 1
+offset_top = 10.0
+offset_right = 1152.0
+offset_bottom = 85.0
+
+[node name="HealthBar" parent="HUD/HUD/TopPanel" instance=ExtResource("4_i6vcq")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(195, 50)
+layout_mode = 2
+
+[node name="StaminaBar" parent="HUD/HUD/TopPanel" instance=ExtResource("21_bgcuo")]
+unique_name_in_owner = true
+layout_mode = 2
 type = 1
+
+[node name="FoodBarrelWrapper" type="HBoxContainer" parent="HUD/HUD"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1000, 80)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -95.0
+offset_right = 500.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
 
 [connection signal="cutBone" from="knifeChopper" to="." method="_on_knife_chopper_cut_bone"]
 [connection signal="cutBone" from="knifeSlicer" to="." method="_on_knife_slicer_cut_bone"]
 [connection signal="pressed" from="dinnerBellBtn" to="." method="_on_dinner_bell_btn_pressed"]
-[connection signal="valueChange" from="HUD/HealthBar" to="." method="_on_health_bar_value_change"]
+[connection signal="valueChange" from="HUD/HUD/TopPanel/HealthBar" to="." method="_on_health_bar_value_change"]

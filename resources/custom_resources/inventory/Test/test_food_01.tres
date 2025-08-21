@@ -6,7 +6,7 @@
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_y3ymy")
-scenePath = ""
+scenePath = "res://Scenes/food/Food_types/Puffer_Fish/pufferfish.tscn"
 name = "Puffer Fish"
 count = 5
 sprite = ExtResource("2_1tcg6")

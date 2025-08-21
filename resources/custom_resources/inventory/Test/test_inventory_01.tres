@@ -8,9 +8,8 @@
 [ext_resource type="Resource" uid="uid://knyhaf1kauvg" path="res://resources/custom_resources/inventory/Test/test_resource.tres" id="5_xgvq1"]
 
 [sub_resource type="Resource" id="Resource_xgvq1"]
-resource_local_to_scene = true
 script = ExtResource("1_jlsce")
-scenePath = ""
+scenePath = "res://Scenes/food/Food_types/Puffer_Fish/pufferfish.tscn"
 name = "Puffer Fish"
 count = 5
 sprite = ExtResource("2_wor8i")
@@ -19,7 +18,6 @@ cost = 100
 metadata/_custom_type_script = "uid://b7sudjpcc7xtc"
 
 [resource]
-resource_local_to_scene = true
 script = ExtResource("1_qg3kp")
 name = "Billy Boid"
 money = 300.0

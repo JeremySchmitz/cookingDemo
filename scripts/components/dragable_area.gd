@@ -50,6 +50,7 @@ func _unhandled_input(event):
 			
 		if event is InputEventMouseButton and not event.pressed:
 			lifted = false
+			_stopDragging()
 			SignalBus.drop.emit()
 			handled = true
 			get_viewport().set_input_as_handled()
@@ -57,13 +58,12 @@ func _unhandled_input(event):
 		if lifted and event is InputEventMouseMotion:
 			_set_position()
 			handled = true
-			
+
 		if handled: get_viewport().set_input_as_handled()
 
 func _set_position():
 	get_parent().global_position = get_global_mouse_position() - offset
 	get_local_mouse_position()
-	_dragging()
 	SignalBus.dragging.emit(weight)
 	
 func _mouse_over(value):
@@ -82,7 +82,7 @@ func _on_camera_move():
 func _on_camera_stop():
 	camMoving = false
 
-func _dragging() -> void:
+func _stopDragging():
 	if Engine.is_editor_hint() || !parented: return
 	var kitchen = get_node("/root/Kitchen")
 	get_parent().reparent(kitchen)
@@ -94,5 +94,7 @@ func _dragging() -> void:
 			sibling.parented = false
 
 func _drop():
+	if !lifted: return
+	_stopDragging()
 	lifted = false
 	SignalBus.drop.emit()

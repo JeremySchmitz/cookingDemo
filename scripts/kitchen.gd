@@ -4,13 +4,15 @@ class_name Kitchen
 
 const BOWL_SCENE = preload("res://Scenes/food/bowl.tscn")
 const RESULTS_SCENE = preload("res://Scenes/food/results.tscn")
+const FOODBARREL_SCENE = preload("res://Scenes/food/food_barrel.tscn")
 
 @export var cameraMoveWait = .2;
 @onready var boneParticles: CPUParticles2D = $BoneParticles
 
 @onready var crew := CrewStatus.crew
-@onready var staminaBar: CustomProgressBar = $HUD/StaminaBar
-@onready var healthBar: CustomProgressBar = $HUD/HealthBar
+@onready var staminaBar: CustomProgressBar = %StaminaBar
+@onready var healthBar: CustomProgressBar = %HealthBar
+@export var inventory: Inventory = CrewStatus.inventory
 
 @export var staminaPeriod := 0.3
 @export var staminaRestPeriod := 2
@@ -20,6 +22,12 @@ var recovering = false
 
 
 func _ready() -> void:
+	for food in inventory.food:
+		var foodScene: PackedScene = load(food.scenePath) as PackedScene
+		var barrel: FoodBarrel = FOODBARREL_SCENE.instantiate()
+		%FoodBarrelWrapper.add_child(barrel)
+		barrel.initialize(foodScene, food.name, food.count)
+
 	for i in range(0, crew.size()):
 		_buildBowl(i)
 
@@ -84,7 +92,7 @@ func _initializeTimer():
 
 func _setStamina(weight: float, subtract = true):
 	if subtract: weight *= -5
-	$HUD/StaminaBar.value += weight
+	%StaminaBar.value += weight
 
 func _startTimer(weight: float, subtract = true):
 	staminaBar.visible = true

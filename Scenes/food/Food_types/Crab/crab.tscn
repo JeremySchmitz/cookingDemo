@@ -585,8 +585,9 @@ material = SubResource("ShaderMaterial_wbbgt")
 scale = Vector2(3, 3)
 texture = ExtResource("11_leq4n")
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("12_lipgs")
+health = NodePath("../Health")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox" node_paths=PackedStringArray("collisionShape")]
 polygon = PackedVector2Array(-3, -11, -11, 1, 6, 6)
@@ -602,6 +603,7 @@ offset_bottom = 54.0
 text = "0.0"
 
 [node name="Bones" type="Node2D" parent="."]
+visible = false
 
 [node name="Bone_01" type="Area2D" parent="Bones"]
 script = ExtResource("14_leq4n")
