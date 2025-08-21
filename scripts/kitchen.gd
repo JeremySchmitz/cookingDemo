@@ -20,8 +20,16 @@ const FOODBARREL_SCENE = preload("res://Scenes/food/food_barrel.tscn")
 var sTimer: Timer
 var recovering = false
 
+@onready var foodStorage: Panel = %FoodStorage
+var showFoodStorage = true
+@onready var bowlStorage: Panel = %BowlStorage
+var showBowlStorage = true
+
 
 func _ready() -> void:
+	_hideFoodStorage()
+	_hideBowlStorage()
+
 	for food in inventory.food:
 		var foodScene: PackedScene = load(food.scenePath) as PackedScene
 		var barrel: FoodBarrel = FOODBARREL_SCENE.instantiate()
@@ -41,12 +49,10 @@ func _ready() -> void:
 func _buildBowl(i: int):
 	var scene: Bowl = BOWL_SCENE.instantiate()
 	scene.setNameTag(crew[i].name, crew[i].role)
-	$Bowls.add_child(scene)
-	scene.scale *= 2
-	scene.position = Vector2(
-		get_viewport_rect().size.x + 200 + (300 * i),
-		 200)
-	
+	%BowlWrapper.add_child(scene)
+	# TODO Fix sizing
+	scene.scale = Vector2(3, 3)
+
 func _on_dinner_bell_btn_pressed() -> void:
 	var crewBefore = CrewStatus.crew
 	var bowls = $Bowls.get_children()
@@ -142,3 +148,28 @@ func _rest():
 
 func _on_health_bar_value_change(v: float) -> void:
 	staminaBar.maxVal = v
+
+
+func _on_food_storage_button_pressed() -> void:
+	if showFoodStorage: _hideFoodStorage()
+	else: _showFoodStorage()
+		
+func _showFoodStorage():
+	foodStorage.position.y -= foodStorage.size.y
+	showFoodStorage = true
+
+func _hideFoodStorage():
+	foodStorage.position.y += foodStorage.size.y
+	showFoodStorage = false
+
+func _on_bowl_storage_button_pressed() -> void:
+	if showBowlStorage: _hideBowlStorage()
+	else: _showBowlStorage()
+		
+func _showBowlStorage():
+	bowlStorage.position.y += bowlStorage.size.y
+	showBowlStorage = true
+
+func _hideBowlStorage():
+	bowlStorage.position.y -= bowlStorage.size.y
+	showBowlStorage = false

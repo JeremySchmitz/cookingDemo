@@ -85,7 +85,7 @@ func _on_camera_stop():
 func _stopDragging():
 	if Engine.is_editor_hint() || !parented: return
 	var kitchen = get_node("/root/Kitchen")
-	get_parent().reparent(kitchen)
+	get_parent().reparent.call_deferred(kitchen)
 	parented = false
 
 	var parent = get_parent()

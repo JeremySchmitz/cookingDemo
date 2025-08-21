@@ -1,5 +1,5 @@
 class_name Bowl
-extends Node2D
+extends Control
 
 @export var area: Area2D
 
@@ -25,6 +25,7 @@ func _ready() -> void:
 	nutrition = 0
 	poison = 0
 	
+# TODO Parent Food to bowl on drop
 func _on_food_entered(node: Area2D) -> void:
 	if node is DraggableArea: _update(node, false)
 
