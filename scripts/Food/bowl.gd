@@ -27,11 +27,14 @@ func _ready() -> void:
 	
 # TODO Parent Food to bowl on drop
 func _on_food_entered(node: Area2D) -> void:
-	if node is DraggableArea: _update(node, false)
-
+	if node is DraggableArea && is_instance_of(node.get_parent(), Food):
+		_update(node, false)
+		node.reparentOnDrop(%FoodParent)
 	
 func _on_food_exit(node: Area2D) -> void:
-	if node is DraggableArea: _update(node, true)
+	if node is DraggableArea && is_instance_of(node.get_parent(), Food):
+		_update(node, true)
+		node.reparentOnDrop()
 		
 func _update(node: Area2D, subtract = false):
 	var poisonNode: Poison = _getSibling(Poison, node)
