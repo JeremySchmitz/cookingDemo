@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dior7sydc3uif"]
+[gd_scene load_steps=19 format=3 uid="uid://dfla850nsg8il"]
 
 [ext_resource type="Script" uid="uid://bunuku5x2rt24" path="res://scripts/Food/food.gd" id="1_elblm"]
 [ext_resource type="Script" uid="uid://c4wtk3o8jrujm" path="res://scripts/components/health_food.gd" id="2_sahc0"]
@@ -71,7 +71,7 @@ script = ExtResource("6_1ib3v")
 collisionArea = NodePath("../DraggableArea")
 collisionNode = NodePath("../DraggableArea/CollisionPolygon2D")
 sliceGroup = NodePath("../sliceGroup")
-scenePath = "res://Scenes/food/Food_types/Tuna.tscn"
+scenePath = "res://Scenes/food/Food_types/Tuna/Tuna.tscn"
 
 [node name="Sprite2D2" type="Sprite2D" parent="Choppable"]
 texture_filter = 1

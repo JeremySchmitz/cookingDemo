@@ -22,6 +22,7 @@ var recovering = false
 
 @onready var storage: Control = %StoragePanel
 @onready var storageButton: Button = %ShowStorageButton
+@onready var storageButtonPanel = %StorageButtonPanel
 var showStorage = true
 
 
@@ -148,13 +149,15 @@ func _on_health_bar_value_change(v: float) -> void:
 
 func _hideStorage():
 	storage.position.y += storage.size.y
-	storageButton.position.y -= storageButton.size.y
+	storageButtonPanel.position.y -= storageButtonPanel.size.y / 2
 	showStorage = false
+	storageButton.text = '^'
 
 func _showStorage():
 	storage.position.y -= storage.size.y
-	storageButton.position.y += storageButton.size.y
+	storageButtonPanel.position.y += storageButtonPanel.size.y / 2
 	showStorage = true
+	storageButton.text = 'v'
 
 
 func _on_show_pannel_button_pressed() -> void:

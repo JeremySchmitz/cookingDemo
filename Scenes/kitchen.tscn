@@ -1,20 +1,18 @@
-[gd_scene load_steps=34 format=3 uid="uid://cax40kgn23m3q"]
+[gd_scene load_steps=31 format=3 uid="uid://cax40kgn23m3q"]
 
 [ext_resource type="Script" uid="uid://bq6d71fqsv1h6" path="res://scripts/kitchen.gd" id="1_4clir"]
 [ext_resource type="Resource" uid="uid://bnuvdnc3ep10k" path="res://resources/custom_resources/inventory/Test/test_inventory_01.tres" id="2_m1yx5"]
 [ext_resource type="Texture2D" uid="uid://roubacvs6dht" path="res://resources/Sprites/Kitchen/CuttingBoard.png" id="2_t5hpn"]
 [ext_resource type="PackedScene" uid="uid://m483g8c2ihkp" path="res://Scenes/UI/health_bar.tscn" id="4_i6vcq"]
 [ext_resource type="PackedScene" uid="uid://ccw7uq7go4ivt" path="res://Scenes/food/food.tscn" id="5_32235"]
-[ext_resource type="PackedScene" uid="uid://dior7sydc3uif" path="res://Scenes/food/Food_types/Tuna.tscn" id="5_t5hpn"]
+[ext_resource type="PackedScene" uid="uid://dfla850nsg8il" path="res://Scenes/food/Food_types/Tuna/Tuna.tscn" id="5_t5hpn"]
 [ext_resource type="Script" uid="uid://cplwxfa5c4wal" path="res://scripts/knives/knife_chopper.gd" id="6_5ukof"]
 [ext_resource type="Script" uid="uid://cepynjnto0btg" path="res://scripts/knives/knife_slicer.gd" id="7_iw6an"]
 [ext_resource type="Script" uid="uid://c2pkk8qcndtku" path="res://scripts/Utils/camera_main.gd" id="8_2l700"]
-[ext_resource type="Script" uid="uid://blx703circky0" path="res://scripts/Utils/viewportEdgeArea.gd" id="9_r0dk1"]
 [ext_resource type="PackedScene" uid="uid://dulgslr8ylt6a" path="res://Scenes/food/frying_pan.tscn" id="10_2cl3g"]
 [ext_resource type="Texture2D" uid="uid://dd72dj4uhmmek" path="res://resources/Sprites/Kitchen/bell.png" id="10_i6vcq"]
 [ext_resource type="Script" uid="uid://duhqdxi6amymv" path="res://scripts/knives/knife_drag.gd" id="11_4clir"]
 [ext_resource type="Texture2D" uid="uid://3at5wmtrlu2r" path="res://resources/Sprites/Kitchen/knives/knife_chop.png" id="11_32235"]
-[ext_resource type="BitMap" uid="uid://b3i0k8is4vlvh" path="res://resources/Sprites/Kitchen/bell_clickMask.png" id="11_bgcuo"]
 [ext_resource type="Texture2D" uid="uid://ctb4y1xwha2l" path="res://resources/Sprites/Kitchen/knives/knife_slice.png" id="12_5ukof"]
 [ext_resource type="PackedScene" uid="uid://euo8cywo2d7e" path="res://Scenes/food/knife_bag.tscn" id="14_ykbxl"]
 [ext_resource type="PackedScene" uid="uid://bfvipwuuj2khy" path="res://Scenes/food/Food_types/Crab/crab.tscn" id="16_5ukof"]
@@ -24,8 +22,6 @@
 [ext_resource type="PackedScene" uid="uid://dpjoi167t6yho" path="res://Scenes/UI/stamina_bar.tscn" id="21_bgcuo"]
 [ext_resource type="PackedScene" uid="uid://bs6vnlh5eb2mf" path="res://Scenes/food/food_barrel.tscn" id="23_hc3lq"]
 [ext_resource type="PackedScene" uid="uid://cpp0ybo4g536c" path="res://Scenes/food/bowl.tscn" id="24_1i8y3"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0fj1v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fo5ed"]
 size = Vector2(499, 293)
@@ -85,22 +81,6 @@ anchor_mode = 0
 position_smoothing_enabled = true
 script = ExtResource("8_2l700")
 
-[node name="toRight" type="Area2D" parent="CameraMain" node_paths=PackedStringArray("camera")]
-script = ExtResource("9_r0dk1")
-locationRight = true
-camera = NodePath("..")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraMain/toRight"]
-shape = SubResource("RectangleShape2D_0fj1v")
-
-[node name="toLeft" type="Area2D" parent="CameraMain" node_paths=PackedStringArray("camera")]
-script = ExtResource("9_r0dk1")
-camera = NodePath("..")
-metadata/_custom_type_script = "uid://blx703circky0"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraMain/toLeft"]
-shape = SubResource("RectangleShape2D_0fj1v")
-
 [node name="cuttingBoard" type="Area2D" parent="."]
 position = Vector2(400, 250)
 
@@ -120,13 +100,13 @@ position = Vector2(1066, 518)
 [node name="Bowls" type="Node" parent="."]
 
 [node name="food" parent="." instance=ExtResource("5_32235")]
-position = Vector2(353, 389)
+position = Vector2(161, 181)
 
 [node name="Tuna" parent="." instance=ExtResource("5_t5hpn")]
-position = Vector2(691, 182)
+position = Vector2(164, 348)
 
 [node name="Crab" parent="." instance=ExtResource("16_5ukof")]
-position = Vector2(942, 164)
+position = Vector2(375, 365)
 
 [node name="Pufferfish" parent="." instance=ExtResource("17_iw6an")]
 position = Vector2(419, 171)
@@ -157,16 +137,9 @@ animation = &"chop"
 position = Vector2(22, -144.5)
 shape = SubResource("RectangleShape2D_t5hpn")
 
-[node name="dinnerBellBtn" type="TextureButton" parent="."]
-offset_left = 2074.0
-offset_top = 493.0
-offset_right = 2138.0
-offset_bottom = 557.0
-scale = Vector2(2, 2)
-texture_normal = ExtResource("10_i6vcq")
-texture_click_mask = ExtResource("11_bgcuo")
-
 [node name="BoneParticles" type="CPUParticles2D" parent="."]
+z_index = 10
+y_sort_enabled = true
 emitting = false
 amount = 20
 lifetime = 0.2
@@ -183,6 +156,8 @@ scale_amount_min = 2.0
 scale_amount_max = 5.0
 
 [node name="BloodParticles" type="CPUParticles2D" parent="."]
+z_index = 10
+y_sort_enabled = true
 position = Vector2(-149, 3)
 emitting = false
 lifetime = 0.3
@@ -268,10 +243,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 1
+current_tab = 0
 
 [node name="Bowls" type="Control" parent="HUD/HUD/StoragePanel/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -310,6 +284,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Storage" type="Control" parent="HUD/HUD/StoragePanel/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -328,19 +303,46 @@ alignment = 1
 [node name="FoodBarrel" parent="HUD/HUD/StoragePanel/TabContainer/Storage/FoodBarrelWrapper" instance=ExtResource("23_hc3lq")]
 layout_mode = 2
 
-[node name="ShowStorageButton" type="Button" parent="HUD/HUD/StoragePanel"]
+[node name="StorageButtonPanel" type="HBoxContainer" parent="HUD/HUD/StoragePanel"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
+anchors_preset = 10
 anchor_right = 1.0
-offset_left = -50.0
-offset_bottom = 31.0
-grow_horizontal = 0
+offset_top = -30.0
+offset_bottom = 30.0
+grow_horizontal = 2
+pivot_offset = Vector2(0, 60)
+alignment = 2
+
+[node name="dinnerBellBtn" type="Button" parent="HUD/HUD/StoragePanel/StorageButtonPanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "^"
+
+[node name="CenterContainer" type="CenterContainer" parent="HUD/HUD/StoragePanel/StorageButtonPanel/dinnerBellBtn"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/HUD/StoragePanel/StorageButtonPanel/dinnerBellBtn/CenterContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture = ExtResource("10_i6vcq")
+expand_mode = 1
+
+[node name="ShowStorageButton" type="Button" parent="HUD/HUD/StoragePanel/StorageButtonPanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
 text = "^"
 
 [connection signal="cutBone" from="knifeChopper" to="." method="_on_knife_chopper_cut_bone"]
 [connection signal="cutBone" from="knifeSlicer" to="." method="_on_knife_slicer_cut_bone"]
-[connection signal="pressed" from="dinnerBellBtn" to="." method="_on_dinner_bell_btn_pressed"]
 [connection signal="valueChange" from="HUD/HUD/TopPanel/HealthBar" to="." method="_on_health_bar_value_change"]
-[connection signal="pressed" from="HUD/HUD/StoragePanel/ShowStorageButton" to="." method="_on_show_pannel_button_pressed"]
+[connection signal="pressed" from="HUD/HUD/StoragePanel/StorageButtonPanel/dinnerBellBtn" to="." method="_on_dinner_bell_btn_pressed"]
+[connection signal="pressed" from="HUD/HUD/StoragePanel/StorageButtonPanel/ShowStorageButton" to="." method="_on_show_pannel_button_pressed"]

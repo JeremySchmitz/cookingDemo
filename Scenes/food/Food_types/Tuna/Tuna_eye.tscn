@@ -38,7 +38,7 @@ metadata/_custom_type_script = "uid://c5ox7hexp2ty8"
 script = ExtResource("5_0whqp")
 collisionArea = NodePath("../DraggableArea")
 collisionNode = NodePath("../DraggableArea/CollisionPolygon2D")
-scenePath = "res://Scenes/food/Food_types/Tuna_eye.tscn"
+scenePath = "res://Scenes/food/Food_types/Tuna/Tuna_eye.tscn"
 metadata/_custom_type_script = "uid://0l0lpkxtrjtx"
 
 [node name="Sprite2D" type="Sprite2D" parent="Choppable"]
