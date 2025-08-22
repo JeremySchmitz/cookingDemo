@@ -38,10 +38,6 @@ offset_bottom = -52.0
 text = "TEST"
 horizontal_alignment = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -33)
-shape = SubResource("CircleShape2D_l53du")
-
 [node name="Info" parent="." instance=ExtResource("3_6cpgg")]
 visible = false
 position = Vector2(0, -58)
@@ -53,11 +49,11 @@ offset_right = 33.0
 offset_bottom = 93.0
 text = "TRAVEL"
 
-[node name="DockArea" type="Area2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -33)
+shape = SubResource("CircleShape2D_l53du")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DockArea"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_yncia")
 
 [connection signal="pressed" from="Info/Travel_BTN" to="." method="_on_travel_btn_pressed"]
-[connection signal="body_entered" from="DockArea" to="." method="_on_dock_area_body_entered"]
-[connection signal="body_exited" from="DockArea" to="." method="_on_dock_area_body_exited"]

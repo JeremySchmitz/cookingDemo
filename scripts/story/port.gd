@@ -1,7 +1,7 @@
 extends Node2D
 class_name Port
 
-
+@onready var resource: PortResource: set = _setPortResource
 @onready var label: Label = $Label
 @onready var info: Info = $Info
 
@@ -30,12 +30,20 @@ func _ready() -> void:
 	
 	connect("mouse_entered", _mouse_over.bind(true))
 	connect("mouse_exited", _mouse_over.bind(false))
+	connect("body_entered", _on_body_entered)
+	connect("body_exited", _on_body_exited)
 	SignalBus.portClicked.connect(on_port_selected)
 
+func _setPortResource(val: PortResource):
+	resource = val
+	position = val.position
+	labelName = val.name
+
 func _unhandled_input(event: InputEvent):
-	if (event is InputEventMouseButton and
-		mouse_over and
-		event.pressed):
+	if (event is InputEventMouseButton
+		and mouse_over
+		and event.button_index == MOUSE_BUTTON_LEFT
+		and event.pressed):
 			info.visible = !info.visible
 			SignalBus.portClicked.emit(name)
 
@@ -54,12 +62,24 @@ func on_port_selected(portName: String):
 
 func _setLabel():
 	# TODO is this way till can find more accurate calc
-	info.text = "Port {0} \nLess than {1} day(s) travel".format([labelName, int(distance)])
+	# var text = "Port {0} \nLess than {1} day(s) travel".format([labelName, int(distance)])
+	if resource:
+		var newText = '
+		priceBonus: {0}
+		pricePenalty: {1}
+		difficulty: {2}
+		'.format(
+			[resource.priceBonus,
+			resource.pricePenalty,
+			GlobalEnums.Difficulty.find_key(resource.difficulty)]
+		)
 
-func _on_dock_area_body_entered(body: Node2D) -> void:
+		info.text = newText
+
+func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("boats"):
 		SignalBus.canDock.emit(true)
 
-func _on_dock_area_body_exited(body: Node2D) -> void:
+func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("boats"):
 		SignalBus.canDock.emit(false)

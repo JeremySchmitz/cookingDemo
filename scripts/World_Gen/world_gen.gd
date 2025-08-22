@@ -98,7 +98,7 @@ func _generatePorts():
 		_buildToolPorts(ports, portsNode)
 	else:
 		_buildScenePorts(ports, portsNode)
-
+		_buildPortResources(portsNode)
 	portPositions = ports.map(func(m): return Vector2(m.x * tileMap.tile_set.tile_size.x, m.y * tileMap.tile_set.tile_size.y) / 2) as Array[Vector2]
 
 func _getPortsParent():
@@ -124,11 +124,27 @@ func _buildScenePorts(ports: Array[Vector2], parent: Node2D):
 		port.position = Vector2(p.x * tileMap.tile_set.tile_size.x, p.y * tileMap.tile_set.tile_size.y) / 2
 
 		# TODO Update
-		var name = ""
+		var portName = ""
 		for i in 3:
 			var letter = char("A".unicode_at(0) + randi() % 26)
-			name += letter
-		port.labelName = name
+			portName += letter
+		port.labelName = portName
+
+func _buildPortResources(portsNode: Node2D):
+	print('_buildPortResources: ', portsNode.get_child_count())
+	var ports = portsNode.get_children().filter(func(p): return is_instance_of(p, Port))
+	if !ports.size(): return
+	print('ports:', ports.size())
+
+	var maxDistance = Vector2(0, 0).distance_to(Vector2(width, height))
+	for port: Port in ports:
+		var dist = port.position.distance_to(ports[0].position)
+		var rsc = PortResource.new(dist, maxDistance)
+		rsc.name = port.labelName
+		rsc.position = port.position
+
+		port.resource = rsc
+		# rsc.print()
 
 
 func _buildToolPorts(ports: Array[Vector2], parent: Node2D):

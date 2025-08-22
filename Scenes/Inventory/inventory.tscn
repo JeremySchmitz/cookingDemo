@@ -1,10 +1,68 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2naldp06yot"]
+[gd_scene load_steps=15 format=3 uid="uid://d2naldp06yot"]
 
 [ext_resource type="Theme" uid="uid://dsqkvlfj0no1g" path="res://Scenes/Inventory/inventory.tres" id="1_de3ro"]
 [ext_resource type="Script" uid="uid://bwqasnp4ng4m5" path="res://Scenes/Inventory/inventory.gd" id="2_0dubb"]
 [ext_resource type="Texture2D" uid="uid://caywa3w0b7r7h" path="res://resources/Sprites/Travel/hurricane.png" id="2_de3ro"]
 [ext_resource type="Resource" uid="uid://bnuvdnc3ep10k" path="res://resources/custom_resources/inventory/Test/test_inventory_01.tres" id="3_evvmy"]
 [ext_resource type="Resource" uid="uid://db0ok6l38qj05" path="res://resources/custom_resources/inventory/Test/test_inventory_02.tres" id="4_evvmy"]
+[ext_resource type="Texture2D" uid="uid://dv47c881eiswm" path="res://resources/Sprites/UI/Coin.png" id="5_s8uyb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8uyb"]
+atlas = ExtResource("5_s8uyb")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nffyk"]
+atlas = ExtResource("5_s8uyb")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_levpl"]
+atlas = ExtResource("5_s8uyb")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47018"]
+atlas = ExtResource("5_s8uyb")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o4jeo"]
+atlas = ExtResource("5_s8uyb")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ubet6"]
+atlas = ExtResource("5_s8uyb")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1gkd"]
+atlas = ExtResource("5_s8uyb")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uuft3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s8uyb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nffyk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_levpl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47018")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o4jeo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ubet6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n1gkd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
 
 [node name="Inventory" type="Control"]
 layout_mode = 3
@@ -54,8 +112,21 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "My Test Label"
 
+[node name="Control" type="Control" parent="NodeWrapper/MarginContainer/VBoxContainer3/HBoxContainer1"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="NodeWrapper/MarginContainer/VBoxContainer3/HBoxContainer1/Control"]
+position = Vector2(16, 16)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_uuft3")
+autoplay = "default"
+frame = 2
+frame_progress = 0.231144
+
 [node name="MoneyTexture" type="TextureRect" parent="NodeWrapper/MarginContainer/VBoxContainer3/HBoxContainer1"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 texture = ExtResource("2_de3ro")
 

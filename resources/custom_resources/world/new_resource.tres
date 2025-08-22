@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PortResource" load_steps=2 format=3 uid="uid://bub5l7cc373qo"]
+
+[ext_resource type="Script" uid="uid://2byg7u3xwcw" path="res://resources/custom_resources/world/port.rsc.gd" id="1_xp408"]
+
+[resource]
+script = ExtResource("1_xp408")
+name = ""
+position = Vector2(0, 0)
+type = 0
+_subTypeFood = 0
+_subTypeResource = 0
+priceBonus = 0.0
+pricePenalty = 0.0
+metadata/_custom_type_script = "uid://2byg7u3xwcw"
