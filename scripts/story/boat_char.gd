@@ -1,8 +1,29 @@
 extends CharacterBody2D
 class_name BoatChar
 
-@export var speed := 100.0
+signal moving(moving: bool)
 
+@export var speed := 100.0
+@export var radius := 50.0:
+	set(val):
+		radius = val
+		queue_redraw()
+
+@export var color: Color
+
+var isMoving = false
+var prevPos = position
+
+func _process(delta: float) -> void:
+	if prevPos != position and !isMoving:
+		isMoving = true
+		moving.emit(true)
+	elif prevPos == position and isMoving:
+		moving.emit(false)
+		isMoving = false
+
+	prevPos = position
+		
 
 func _input(event: InputEvent) -> void:
 	Input.get_vector('left', 'right', 'up', 'down')
@@ -11,3 +32,9 @@ func _input(event: InputEvent) -> void:
 func _physics_process(delta):
 	look_at(global_position + velocity.rotated(-PI / 2))
 	move_and_slide()
+
+func _draw() -> void:
+	draw_circle(Vector2(0, 0), radius, color, false, 2)
+
+func updateRange(time: float):
+	radius = speed * time

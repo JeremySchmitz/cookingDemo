@@ -17,6 +17,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if started:
 		time += delta * timeScale
+		timeLeft = duration - time
 		_updateAnimation()
 		if time >= duration: _done()
 

@@ -11,6 +11,7 @@ var dayTimer := Timer.new()
 var encounterTimer := Timer.new()
 
 @onready var boat: BoatChar = $BoatChar
+@onready var clock: Clock = %Clock
 
 
 # FIX, Day currently resets if switch scenes to an encounter. 
@@ -38,17 +39,20 @@ func _ready():
 	add_child(timer)
 	timer.start()
 
+func _process(delta: float) -> void:
+	boat.updateRange(clock.timeLeft)
+
 func workCrew(low: float, high: float):
 	CrewStatus.workCrew(low, high)
 
 func check_for_encounter():
-	var chance = Utils.RNG.randf()
 	if Utils.RNG.randf() < encounter_chance:
 		_triggerEncounter()
 
 
 func _dayEnd():
 	boat.isMoving = false
+	CrewStatus.boatPosition = boat.position
 	setTimers(false)
 	# todo base on distance traveled
 	workCrew(10, 25)
@@ -56,6 +60,7 @@ func _dayEnd():
 
 func _triggerEncounter():
 	boat.isMoving = false
+	CrewStatus.boatPosition = boat.position
 	setTimers(false)
 	
 	SceneLoader.goto_scene(Utils.ENCOUNTER_PATH)
@@ -85,3 +90,10 @@ func _on_can_dock(canDock: bool):
 func _on_dock_button_pressed() -> void:
 	CrewStatus.boatPosition = boat.position
 	SceneLoader.goto_scene(Utils.STORE_PATH)
+
+func _on_boat_char_moving(moving: bool) -> void:
+	var timeScale = 1.0 if moving else .1
+	clock.timeScale = timeScale
+
+func _on_clock_done() -> void:
+	_dayEnd()

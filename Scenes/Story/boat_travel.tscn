@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://djeobadgn1dv6"]
+[gd_scene load_steps=8 format=3 uid="uid://djeobadgn1dv6"]
 
 [ext_resource type="Script" uid="uid://bq6s6xn4lyojp" path="res://scripts/story/boat_travel.gd" id="1_otj04"]
 [ext_resource type="Script" uid="uid://beam0fqixwxq8" path="res://scripts/Utils/camera_drag.gd" id="2_5yjvc"]
 [ext_resource type="Script" uid="uid://bpi0q3ti505ih" path="res://scripts/story/boat_char.gd" id="3_blhhb"]
 [ext_resource type="Texture2D" uid="uid://chfrb3of5ahsp" path="res://resources/Sprites/Travel/Ship.png" id="5_7ds11"]
+[ext_resource type="PackedScene" uid="uid://csvt7rvw0l4xw" path="res://Scenes/UI/clock.tscn" id="6_qftmk"]
 [ext_resource type="PackedScene" uid="uid://xs4x3iduyd8g" path="res://Scenes/Story/world_gen.tscn" id="6_y142x"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7ds11"]
@@ -31,6 +32,7 @@ position = Vector2(555, 442)
 motion_mode = 1
 script = ExtResource("3_blhhb")
 speed = 150.0
+color = Color(1, 0, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BoatChar"]
 position = Vector2(0, 0.174988)
@@ -67,4 +69,19 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Dock"
 
+[node name="Clock" parent="CanvasLayer/Control" instance=ExtResource("6_qftmk")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -75.0
+offset_top = 10.0
+offset_right = -11.0
+offset_bottom = 74.0
+grow_horizontal = 0
+duration = 5.0
+
+[connection signal="moving" from="BoatChar" to="." method="_on_boat_char_moving"]
 [connection signal="pressed" from="CanvasLayer/Control/DockButton" to="." method="_on_dock_button_pressed"]
+[connection signal="done" from="CanvasLayer/Control/Clock" to="." method="_on_clock_done"]
