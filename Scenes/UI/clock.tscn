@@ -1,0 +1,152 @@
+[gd_scene load_steps=21 format=3 uid="uid://csvt7rvw0l4xw"]
+
+[ext_resource type="Script" uid="uid://cweck040rpmxn" path="res://scripts/UI/clock.gd" id="1_4wx4h"]
+[ext_resource type="Texture2D" uid="uid://dp5cqtmeeg0ip" path="res://resources/Sprites/UI/Clock.png" id="2_tdhdu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvmnw"]
+atlas = ExtResource("2_tdhdu")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gps55"]
+atlas = ExtResource("2_tdhdu")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mpxd"]
+atlas = ExtResource("2_tdhdu")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogg5m"]
+atlas = ExtResource("2_tdhdu")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ouae"]
+atlas = ExtResource("2_tdhdu")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7w2a"]
+atlas = ExtResource("2_tdhdu")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v22do"]
+atlas = ExtResource("2_tdhdu")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkejo"]
+atlas = ExtResource("2_tdhdu")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3tpe"]
+atlas = ExtResource("2_tdhdu")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06mco"]
+atlas = ExtResource("2_tdhdu")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejbt0"]
+atlas = ExtResource("2_tdhdu")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2sl7"]
+atlas = ExtResource("2_tdhdu")
+region = Rect2(768, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mr2jy"]
+atlas = ExtResource("2_tdhdu")
+region = Rect2(832, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1impy"]
+atlas = ExtResource("2_tdhdu")
+region = Rect2(896, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5l10"]
+atlas = ExtResource("2_tdhdu")
+region = Rect2(960, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xh2kq"]
+atlas = ExtResource("2_tdhdu")
+region = Rect2(1024, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwf28"]
+atlas = ExtResource("2_tdhdu")
+region = Rect2(1088, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_08se4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvmnw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gps55")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8mpxd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ogg5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ouae")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t7w2a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v22do")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkejo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3tpe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06mco")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejbt0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2sl7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mr2jy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1impy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5l10")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xh2kq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xwf28")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Clock" type="Control"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_4wx4h")
+duration = 10.0
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CenterContainer"]
+unique_name_in_owner = true
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_08se4")
+centered = false
