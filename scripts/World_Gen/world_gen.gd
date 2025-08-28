@@ -1,6 +1,8 @@
 @tool
 extends Node2D
 
+const PORTS_SCENE = preload("res://Scenes/Story/port.tscn")
+
 const maxWanders = 1000
 
 @export_tool_button('Generate') var generate = _generate
@@ -45,8 +47,12 @@ var portPositions: Array
 func _ready() -> void:
 	_setTileValues()
 	if !Engine.is_editor_hint():
-		rng = Utils.RNG
-		_generate()
+		if World.tileSet:
+			tileMap.tile_set = World.tileSet
+			_addPortsFromWorld(World.ports)
+		else:
+			rng = Utils.RNG
+			_generate()
 	else:
 		rng = RandomNumberGenerator.new()
 		if randSeed: seed = randi()
@@ -116,10 +122,8 @@ func _getPortsParent():
 	return portsNode
 
 func _buildScenePorts(ports: Array[Vector2], parent: Node2D):
-	var portScene = preload("res://Scenes/Story/port.tscn")
-
 	for p in ports:
-		var port = portScene.instantiate()
+		var port = PORTS_SCENE.instantiate()
 		parent.add_child(port)
 		port.position = Vector2(p.x * tileMap.tile_set.tile_size.x, p.y * tileMap.tile_set.tile_size.y) / 2
 
@@ -131,11 +135,11 @@ func _buildScenePorts(ports: Array[Vector2], parent: Node2D):
 		port.labelName = portName
 
 func _buildPortResources(portsNode: Node2D):
-	print('_buildPortResources: ', portsNode.get_child_count())
 	var ports = portsNode.get_children().filter(func(p): return is_instance_of(p, Port))
 	if !ports.size(): return
-	print('ports:', ports.size())
-
+	
+	var resources: Array[PortResource] = []
+	# TODO update how we get this it isnt accurate
 	var maxDistance = Vector2(0, 0).distance_to(Vector2(width, height))
 	for port: Port in ports:
 		var dist = port.position.distance_to(ports[0].position)
@@ -144,8 +148,18 @@ func _buildPortResources(portsNode: Node2D):
 		rsc.position = port.position
 
 		port.resource = rsc
-		# rsc.print()
+		resources.append(rsc)
 
+	World.ports = resources
+
+func _addPortsFromWorld(resources: Array[PortResource]):
+	var portsNode = _getPortsParent()
+
+	for i in range(resources.size()):
+		var port: Port = PORTS_SCENE.instantiate()
+		var rsc = resources[i]
+		portsNode.add_child(port)
+		port.resource = rsc
 
 func _buildToolPorts(ports: Array[Vector2], parent: Node2D):
 	for p in ports:
@@ -212,7 +226,7 @@ func _generateLand():
 					var tile = tiles[i].tile
 					tileMap.set_cell(Vector2(x, y), tile.source_id, tile.atlas_coordinates)
 					break
-
+	World.tileSet = tileMap.tile_set
 
 func _addNoiseValues(x: int, y: int):
 	var value: float = 1.0

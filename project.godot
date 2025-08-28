@@ -20,6 +20,8 @@ Utils="*res://scripts/Singletons/utils.gd"
 CrewStatus="*res://scripts/Crew/crewStatus.gd"
 SceneLoader="*res://scripts/Singletons/Scene_loader.gd"
 SignalBus="*res://scripts/Singletons/signalBus.gd"
+World="*res://scripts/Singletons/world.gd"
+SaveLoader="*res://scripts/Singletons/save_loader.gd"
 
 [display]
 

@@ -30,7 +30,6 @@ var subType: Variant:
 
 
 func _init(dist := 0, maxDist := 0):
-	print('dist: ', dist, ' maxDist: ', maxDist)
 	if type == null:
 		var i = Utils.RNG.randi_range(0, GlobalEnums.PortType.size() - 1)
 		type = GlobalEnums.PortType.get(i)
