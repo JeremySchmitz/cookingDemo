@@ -4,21 +4,19 @@ extends Node
 var current_scene = null
 
 func _ready():
-		var root = get_tree().get_root()
-		current_scene = root.get_child(root.get_child_count() - 1)
+	var root = get_tree().get_root()
+	current_scene = root.get_child(root.get_child_count() - 1)
 
 func gotoResults(
 	crewBefore: Array[Crew],
 	crewAfter: Array[Crew],
 	resultsAttrs: Array[GlobalEnums.CrewAttrs],
-	# nextScene: String
 	):
-	var scene = buildResultsScn(crewBefore, crewAfter, resultsAttrs,
-	# nextScene
-	)
+	var scene = buildResultsScn(crewBefore, crewAfter, resultsAttrs)
 	goto_scene(scene)
 	 	
 func goto_scene(path):
+	SaveLoader.save()
 	call_deferred("_deferred_goto_scene", path)
 
 
@@ -39,13 +37,11 @@ func _deferred_goto_scene(path):
 func buildResultsScn(
 	crewBefore: Array[Crew],
 	crewAfter: Array[Crew],
-	resultsAttrs: Array[GlobalEnums.CrewAttrs],
-	# nextScene: String
+	resultsAttrs: Array[GlobalEnums.CrewAttrs]
 	):
 	var results: Results = load(Utils.RESULTS_PATH).instantiate()
 	results.crewBefore = crewBefore
 	results.crewAfter = crewAfter
 	results.buildResults(resultsAttrs)
-	# results.nextScene = nextScene
 
 	return results

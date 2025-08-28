@@ -1,20 +1,30 @@
 extends Node
 
+const SAVE_PATH = "user://savegame.tres"
 
-func save_game():
+func saveGame():
 	var save = SavedGame.new()
 
-	var crewStatus = CrewResource.new()
-	crewStatus.crew = CrewStatus.crew
-	crewStatus.boatPosition = CrewStatus.boatPosition
-	crewStatus.inventory = CrewStatus.inventory
+	var crew = CrewResource.new()
+	crew.crew = CrewStatus.crew
+	crew.boatPosition = CrewStatus.boatPosition
+	crew.inventory = CrewStatus.inventory
 
+	var world = WorldResource.new()
+	world.tileSet = World.tileSet
+	world.ports = World.ports
 
-	save.crew = crewStatus
-	# var file: SavedGame = FileAccess.open("user://savegame.data", FileAccess.WRITE) as S
-	pass
+	save.crew = crew
+	save.world = world
 
+	ResourceSaver.save(save, SAVE_PATH)
 
-func load_game():
-	var file: SavedGame = load("user://savegame.data") as SavedGame
-	pass
+func loadGame():
+	var file: SavedGame = load(SAVE_PATH) as SavedGame
+
+	CrewStatus.crew = file.crew.crew as Array[Crew]
+	CrewStatus.boatPosition = file.crew.boatPosition
+	CrewStatus.inventory = file.crew.inventory
+
+	World.tileSet = file.world.tileSet
+	World.ports = file.world.ports

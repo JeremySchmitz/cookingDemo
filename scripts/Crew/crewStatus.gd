@@ -68,6 +68,6 @@ func _duplicate(val: Array[Crew] = _crew) -> Array[Crew]:
 	var new: Array[Crew] = []
 
 	for mate: Crew in val:
-		new.append(mate.duplicate())
+		new.append(mate.customDuplicate())
 
 	return new

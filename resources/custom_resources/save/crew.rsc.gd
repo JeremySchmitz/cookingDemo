@@ -1,6 +1,6 @@
 class_name CrewResource
 extends Resource
 
-var inventory := Inventory.new()
-var boatPosition := Vector2(0, 0)
-var crew: Array[Crew] = []
+@export var inventory: Inventory
+@export var boatPosition: Vector2
+@export var crew: Array[Crew]

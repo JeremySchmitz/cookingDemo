@@ -1,3 +1,4 @@
+extends Resource
 class_name Crew
 
 const nutritionMultiplier = .01
@@ -78,7 +79,7 @@ func getWorkForSum() -> float:
 func getResistForSum() -> float:
 	return satiety / float(maxSatiety) * 1.2
 
-func duplicate() -> Crew:
+func customDuplicate() -> Crew:
 	var new = Crew.new()
 
 	new.role = role
