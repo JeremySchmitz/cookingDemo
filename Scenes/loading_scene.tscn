@@ -1,0 +1,212 @@
+[gd_scene load_steps=23 format=3 uid="uid://b6rlbe5cluvk5"]
+
+[ext_resource type="Texture2D" uid="uid://cjcmfmqmy11rq" path="res://resources/Sprites/UI/Frying.png" id="1_twbmk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vl13c"]
+atlas = ExtResource("1_twbmk")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1du0"]
+atlas = ExtResource("1_twbmk")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlbop"]
+atlas = ExtResource("1_twbmk")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ob6bu"]
+atlas = ExtResource("1_twbmk")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76doy"]
+atlas = ExtResource("1_twbmk")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofb47"]
+atlas = ExtResource("1_twbmk")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvfgo"]
+atlas = ExtResource("1_twbmk")
+region = Rect2(576, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4asd"]
+atlas = ExtResource("1_twbmk")
+region = Rect2(672, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpkcx"]
+atlas = ExtResource("1_twbmk")
+region = Rect2(768, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ygkxh"]
+atlas = ExtResource("1_twbmk")
+region = Rect2(864, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxa7p"]
+atlas = ExtResource("1_twbmk")
+region = Rect2(960, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2tug"]
+atlas = ExtResource("1_twbmk")
+region = Rect2(1056, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6fdo"]
+atlas = ExtResource("1_twbmk")
+region = Rect2(1152, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4te4b"]
+atlas = ExtResource("1_twbmk")
+region = Rect2(1248, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ytui"]
+atlas = ExtResource("1_twbmk")
+region = Rect2(1344, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shiav"]
+atlas = ExtResource("1_twbmk")
+region = Rect2(1440, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13ksn"]
+atlas = ExtResource("1_twbmk")
+region = Rect2(1536, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14osx"]
+atlas = ExtResource("1_twbmk")
+region = Rect2(1632, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjb62"]
+atlas = ExtResource("1_twbmk")
+region = Rect2(1728, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n7uaf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vl13c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1du0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tlbop")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ob6bu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_76doy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ofb47")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mvfgo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x4asd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mpkcx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ygkxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rxa7p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2tug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6fdo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4te4b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ytui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shiav")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13ksn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_14osx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjb62")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_twbmk"]
+font_size = 56
+
+[node name="LoadingScene" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(1440, 810)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+custom_minimum_size = Vector2(1440, 810)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.420685, 0.513698, 0.600691, 1)
+
+[node name="Control" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -120.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Control/Control"]
+position = Vector2(-43, -26)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_n7uaf")
+autoplay = "default"
+frame = 16
+frame_progress = 0.411826
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -27.0
+offset_right = 250.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+text = "Loading"
+label_settings = SubResource("LabelSettings_twbmk")
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Control/VBoxContainer"]
+custom_minimum_size = Vector2(500, 25)
+layout_mode = 2
