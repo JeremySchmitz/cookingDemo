@@ -3,19 +3,19 @@ class_name Crew
 
 const nutritionMultiplier = .01
 
-var role: GlobalEnums.Role
-var name: String
-var health: int
+@export var role: GlobalEnums.Role
+@export var name: String
+@export var health: int
 # How Susceptable they are poisoned food and how quickly they heal
-var constitution: float
-var maxSatiety: float = 0:
+@export var constitution: float
+@export var maxSatiety: float = 0:
 	set(val):
 		maxSatiety = val
 		satiety = min(satiety, val)
-var satiety: float
-var strength: int
-var fishing: int
-var sanity: float
+@export var satiety: float
+@export var strength: int
+@export var fishing: int
+@export var sanity: float
 
 
 # TODO create function or signal for when they die

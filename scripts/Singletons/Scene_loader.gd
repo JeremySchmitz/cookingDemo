@@ -16,7 +16,6 @@ func gotoResults(
 	goto_scene(scene)
 	 	
 func goto_scene(path):
-	SaveLoader.save()
 	call_deferred("_deferred_goto_scene", path)
 
 
