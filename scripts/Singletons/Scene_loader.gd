@@ -1,46 +1,56 @@
-extends Node
+extends Node2D
 
+var loadingScene: LoadingScreen: set = _setLoadingScene
+var current_scene: Node = null
 
-var current_scene = null
-
-func _ready():
-	var root = get_tree().get_root()
-	current_scene = root.get_child(root.get_child_count() - 1)
+var buildingResults = false
+var results: Array = []
 
 func gotoResults(
 	crewBefore: Array[Crew],
 	crewAfter: Array[Crew],
 	resultsAttrs: Array[GlobalEnums.CrewAttrs],
 	):
-	var scene = buildResultsScn(crewBefore, crewAfter, resultsAttrs)
-	goto_scene(scene)
+	results.clear()
+	results.append_array([crewBefore, crewAfter, resultsAttrs])
+	buildingResults = true
+	goto_scene(Utils.RESULTS_PATH)
 	 	
 func goto_scene(path):
 	call_deferred("_deferred_goto_scene", path)
 
 
 func _deferred_goto_scene(path):
-	current_scene.free()
+	loadingScene.show()
 
 	if path is String:
-		var s = load(path)
-		current_scene = s.instantiate()
+		loadingScene.load(path)
 	elif path is Node:
 		current_scene = path
+		get_tree().get_root().add_child(current_scene)
+		get_tree().set_current_scene(current_scene)
 	else:
 		push_error('Unable to load scene')
 
+func buildResultsScn(scene):
+	scene.crewBefore = results[0]
+	scene.crewAfter = results[1]
+	scene.buildResults(results[2])
+
+	buildingResults = false
+
+func _setLoadingScene(val: LoadingScreen):
+	loadingScene = val
+	loadingScene.scene_loaded.connect(_on_scene_loaded)
+
+func _on_scene_loaded(path: String):
+	if current_scene: current_scene.queue_free()
+	loadingScene.hide()
+
+	var sceneResource = ResourceLoader.load_threaded_get(path)
+	current_scene = sceneResource.instantiate()
+
+	if buildingResults: buildResultsScn(current_scene)
+
 	get_tree().get_root().add_child(current_scene)
 	get_tree().set_current_scene(current_scene)
-
-func buildResultsScn(
-	crewBefore: Array[Crew],
-	crewAfter: Array[Crew],
-	resultsAttrs: Array[GlobalEnums.CrewAttrs]
-	):
-	var results: Results = load(Utils.RESULTS_PATH).instantiate()
-	results.crewBefore = crewBefore
-	results.crewAfter = crewAfter
-	results.buildResults(resultsAttrs)
-
-	return results

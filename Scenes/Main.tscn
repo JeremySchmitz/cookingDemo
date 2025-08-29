@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1a42wro6vq1r"]
+[gd_scene load_steps=3 format=3 uid="uid://b1a42wro6vq1r"]
 
 [ext_resource type="Script" uid="uid://brev7s1sbnur2" path="res://scripts/main.gd" id="1_r150o"]
+[ext_resource type="PackedScene" uid="uid://b6rlbe5cluvk5" path="res://Scenes/loading_scene.tscn" id="2_idj7w"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_r150o")
+
+[node name="CanvasLayer_Loading" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="LoadingScene" parent="CanvasLayer_Loading" instance=ExtResource("2_idj7w")]
+unique_name_in_owner = true
+visible = false
+z_index = 0
+z_as_relative = true
