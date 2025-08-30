@@ -27,7 +27,6 @@ var showStorage = true
 
 
 func _ready() -> void:
-	_hideStorage()
 	for food in inventory.food:
 		var foodScene: PackedScene = load(food.scenePath) as PackedScene
 		var barrel: FoodBarrel = FOODBARREL_SCENE.instantiate()

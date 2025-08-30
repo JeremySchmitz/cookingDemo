@@ -1,6 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://0pmklft4kfgs"]
+[gd_scene load_steps=7 format=3 uid="uid://0pmklft4kfgs"]
 
+[ext_resource type="StyleBox" uid="uid://b6gar6rd8vqd5" path="res://resources/UI/default_style_box_flat.tres" id="1_6es6w"]
 [ext_resource type="Script" uid="uid://dbgjubnrrmymo" path="res://scripts/Encounters/encounter.gd" id="1_cyi17"]
+
+[sub_resource type="Theme" id="Theme_bdpfw"]
+MarginContainer/constants/margin_bottom = 20
+MarginContainer/constants/margin_left = 20
+MarginContainer/constants/margin_right = 20
+MarginContainer/constants/margin_top = 20
+PanelContainer/styles/panel = ExtResource("1_6es6w")
 
 [sub_resource type="LabelSettings" id="LabelSettings_cyi17"]
 font_size = 56
@@ -11,34 +19,87 @@ font_size = 36
 [sub_resource type="LabelSettings" id="LabelSettings_bdpfw"]
 font_size = 40
 
-[sub_resource type="LabelSettings" id="LabelSettings_e1gwh"]
-font_size = 24
-
-[node name="Encounter" type="Node2D"]
+[node name="Encounter" type="Control"]
+custom_minimum_size = Vector2(1440, 810)
+layout_mode = 3
+anchors_preset = 0
+mouse_force_pass_scroll_events = false
+theme = SubResource("Theme_bdpfw")
 script = ExtResource("1_cyi17")
 
-[node name="ContBtn" type="Button" parent="."]
-offset_left = 982.0
-offset_top = 552.0
-offset_right = 1082.0
-offset_bottom = 592.0
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Label" type="Label" parent="ContBtn"]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 8.0
-offset_right = 99.0
-offset_bottom = 31.0
-text = "Cont."
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(1102, 620)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "!!ENCOUNTER!!"
+label_settings = SubResource("LabelSettings_cyi17")
 horizontal_alignment = 1
 
-[node name="ReplayBtn" type="Button" parent="."]
-offset_left = 864.0
-offset_top = 553.0
-offset_right = 964.0
-offset_bottom = 593.0
+[node name="Name" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "NAME"
+label_settings = SubResource("LabelSettings_6es6w")
+horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="ReplayBtn"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Description" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "DESC"
+label_settings = SubResource("LabelSettings_bdpfw")
+autowrap_mode = 2
+
+[node name="Results" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Results
+"
+label_settings = SubResource("LabelSettings_bdpfw")
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Run" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "RUN ENCOUNTER"
+
+[node name="Control" type="Control" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ReplayBtn" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ReplayBtn"]
 layout_mode = 0
 offset_top = 8.0
 offset_right = 101.0
@@ -46,55 +107,12 @@ offset_bottom = 31.0
 text = "Replay"
 horizontal_alignment = 1
 
-[node name="Header" type="Label" parent="."]
-offset_right = 1154.0
-offset_bottom = 72.0
-text = "!!ENCOUNTER!!"
-label_settings = SubResource("LabelSettings_cyi17")
-horizontal_alignment = 1
+[node name="ContBtn" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "CONTINUE"
 
-[node name="Name" type="Label" parent="."]
-offset_top = 75.0
-offset_right = 1154.0
-offset_bottom = 152.0
-text = "NAME"
-label_settings = SubResource("LabelSettings_6es6w")
-horizontal_alignment = 1
-
-[node name="Description" type="Label" parent="."]
-offset_left = 61.0
-offset_top = 177.0
-offset_right = 1093.0
-offset_bottom = 368.0
-text = "DESC"
-label_settings = SubResource("LabelSettings_bdpfw")
-autowrap_mode = 2
-
-[node name="Results" type="Label" parent="."]
-offset_left = 61.0
-offset_top = 362.0
-offset_right = 1093.0
-offset_bottom = 513.0
-text = "Results
-"
-label_settings = SubResource("LabelSettings_bdpfw")
-autowrap_mode = 2
-
-[node name="Run" type="Button" parent="."]
-offset_left = 90.0
-offset_top = 524.0
-offset_right = 290.0
-offset_bottom = 604.0
-
-[node name="Label" type="Label" parent="Run"]
-layout_mode = 0
-offset_right = 200.0
-offset_bottom = 80.0
-text = "Run Encounter"
-label_settings = SubResource("LabelSettings_e1gwh")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[connection signal="pressed" from="ContBtn" to="." method="_on_cont_btn_pressed"]
-[connection signal="pressed" from="ReplayBtn" to="." method="_on_replay_btn_pressed"]
-[connection signal="pressed" from="Run" to="." method="_on_run_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Run" to="." method="_on_run_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ReplayBtn" to="." method="_on_replay_btn_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ContBtn" to="." method="_on_cont_btn_pressed"]

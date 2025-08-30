@@ -1,9 +1,10 @@
 extends Control
 class_name Results
 
-var nextScene: String = ""
-
 const CREW_SUMMARY_SCENE = preload("res://Scenes/food/crew_summary.tscn")
+
+@export var hideOnContinue = false
+@export var nextScene = Utils.TRAVEL_PATH
 
 var crewBefore: Array[Crew] = []
 var crewAfter: Array[Crew] = []
@@ -60,8 +61,8 @@ func _buildSummary(before: Crew, after: Crew, attrs: Array[GlobalEnums.CrewAttrs
 
 
 func _on_cont_btn_pressed() -> void:
-	hide()
-	SceneLoader.goto_scene(Utils.TRAVEL_PATH)
+	if hideOnContinue: hide()
+	else: SceneLoader.goto_scene(nextScene)
 
 func _loadKitchen():
 	var kitchenScn := load(Utils.KITCHEN_PATH)

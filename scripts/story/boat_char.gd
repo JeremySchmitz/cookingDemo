@@ -13,6 +13,11 @@ signal moving(moving: bool)
 
 var isMoving = false
 var prevPos = position
+var disabled = false:
+	set(val):
+		disabled = val
+		velocity = Vector2(0, 0)
+		isMoving = false
 
 func _process(delta: float) -> void:
 	if prevPos != position and !isMoving:
@@ -26,6 +31,7 @@ func _process(delta: float) -> void:
 		
 
 func _input(event: InputEvent) -> void:
+	if disabled: return
 	Input.get_vector('left', 'right', 'up', 'down')
 	velocity = Input.get_vector('left', 'right', 'up', 'down') * speed
 

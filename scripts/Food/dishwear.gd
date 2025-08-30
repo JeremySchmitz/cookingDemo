@@ -22,9 +22,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	var parent = area.get_parent()
 	if parent is Food and parent.get_parent() == self:
-		#Todo find a better way to get top parent
-		var selfParent = get_parent().get_parent()
-		call_deferred("_reparent", parent, selfParent)
+		call_deferred("_reparent", parent, get_node("/root/Kitchen"))
 
 func _reparent(node: Node2D, parent: Node2D):
 	node.reparent(parent)

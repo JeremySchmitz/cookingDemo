@@ -5,22 +5,8 @@ const NUM_CREW = 3
 
 func _ready() -> void:
 	SceneLoader.loadingScene = %LoadingScene
-	SceneLoader.resultsScene = %Results
 	CrewStatus.buildCrew(NUM_CREW)
 	loadEncounters()
-
-	# SceneLoader.goto_scene("res://Scenes/Story/boat_travel.tscn")
-
-	# var boat_scene = preload("res://Scenes/Story/boat_travel.tscn").instantiate()
-	# add_child(boat_scene)
-
-	# var prepScene := ResourceLoader.load("res://Scenes/kitchen.tscn")
-	# var prepInstance = prepScene.instantiate()
-	# add_child(prepInstance)
-	
-	# var encounterScn := ResourceLoader.load("res://Scenes/Encounters/encounter.tscn")
-	# var encounterInstance = encounterScn.instantiate()
-	# add_child(encounterInstance)
 
 func loadEncounters():
 	var loader = EncounterLoader.new()

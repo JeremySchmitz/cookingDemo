@@ -19,6 +19,7 @@ func _on_continue_btn_pressed() -> void:
 	hide()
 
 func _on_start_btn_pressed() -> void:
+	Utils.RNG.randomize()
 	SceneLoader.goto_scene(Utils.TRAVEL_PATH)
 	hide()
 	pass

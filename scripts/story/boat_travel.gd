@@ -3,15 +3,14 @@ class_name BoatTravel
 
 var crew_satiety: int = 100
 var dock_ports: Array = []
-var encounter_chance: float = 0.05 # %chance
+var encounter_chance: float = .05 # %chance
 
 @export var dayLength = 1.5 # seconds
-var dayTimer := Timer.new()
 @export var encounterSpeed = 0.75
-var encounterTimer := Timer.new()
 
 @onready var boat: BoatChar = $BoatChar
 @onready var clock: Clock = %Clock
+@onready var encounterPanel: EncounterScene = %Encounter
 
 
 # FIX, Day currently resets if switch scenes to an encounter. 
@@ -26,15 +25,6 @@ func _ready():
 	$Camera2D.limitRight = $Camera2D.get_window().size.x - $world_gen.width
 	$Camera2D.limitDown = $Camera2D.get_window().size.y - $world_gen.height
 
-
-	dayTimer.wait_time = dayLength
-	dayTimer.connect("timeout", _dayEnd)
-	add_child(dayTimer)
-
-	encounterTimer.wait_time = encounterSpeed
-	encounterTimer.connect("timeout", check_for_encounter)
-	add_child(encounterTimer)
-
 	_setBoatPosition()
 
 	var timer = Timer.new()
@@ -42,6 +32,8 @@ func _ready():
 	timer.one_shot = true
 	add_child(timer)
 	timer.start()
+	clock.encounterPeriod = encounterSpeed
+	clock.duration = dayLength
 
 func _process(delta: float) -> void:
 	boat.updateRange(clock.timeLeft)
@@ -57,7 +49,6 @@ func check_for_encounter():
 func _dayEnd():
 	boat.isMoving = false
 	CrewStatus.boatPosition = boat.position
-	setTimers(false)
 	# todo base on distance traveled
 	workCrew(10, 25)
 	SceneLoader.goto_scene(Utils.KITCHEN_PATH)
@@ -65,17 +56,11 @@ func _dayEnd():
 func _triggerEncounter():
 	boat.isMoving = false
 	CrewStatus.boatPosition = boat.position
-	setTimers(false)
+	clock.pause()
+	boat.disabled = true
 	
-	SceneLoader.goto_scene(Utils.ENCOUNTER_PATH)
-
-func setTimers(val: bool):
-	if val:
-		dayTimer.start()
-		encounterTimer.start()
-	else:
-		dayTimer.stop()
-		encounterTimer.stop()
+	encounterPanel.loadEncounter()
+	encounterPanel.show()
 
 func _setBoatPosition():
 	var pos: Vector2
@@ -101,3 +86,11 @@ func _on_boat_char_moving(moving: bool) -> void:
 
 func _on_clock_done() -> void:
 	_dayEnd()
+
+func _on_clock_encounter_check() -> void:
+	check_for_encounter()
+
+func _on_results_hidden() -> void:
+	boat.disabled = false
+	clock.timeScale = 0.1
+	clock.start()

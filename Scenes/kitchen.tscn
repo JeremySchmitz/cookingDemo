@@ -20,8 +20,8 @@
 [ext_resource type="Script" uid="uid://c2w2t0wc0srsr" path="res://scripts/hand.gd" id="18_2l700"]
 [ext_resource type="Script" uid="uid://3qtest46ag4a" path="res://scripts/components/health.gd" id="19_r0dk1"]
 [ext_resource type="PackedScene" uid="uid://dpjoi167t6yho" path="res://Scenes/UI/stamina_bar.tscn" id="21_bgcuo"]
+[ext_resource type="PackedScene" uid="uid://dnun76p5l30rw" path="res://Scenes/food/results.tscn" id="23_1i8y3"]
 [ext_resource type="PackedScene" uid="uid://bs6vnlh5eb2mf" path="res://Scenes/food/food_barrel.tscn" id="23_hc3lq"]
-[ext_resource type="PackedScene" uid="uid://cpp0ybo4g536c" path="res://Scenes/food/bowl.tscn" id="24_1i8y3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fo5ed"]
 size = Vector2(499, 293)
@@ -100,15 +100,19 @@ position = Vector2(1066, 518)
 [node name="Bowls" type="Node" parent="."]
 
 [node name="food" parent="." instance=ExtResource("5_32235")]
+visible = false
 position = Vector2(161, 181)
 
 [node name="Tuna" parent="." instance=ExtResource("5_t5hpn")]
+visible = false
 position = Vector2(164, 348)
 
 [node name="Crab" parent="." instance=ExtResource("16_5ukof")]
+visible = false
 position = Vector2(375, 365)
 
 [node name="Pufferfish" parent="." instance=ExtResource("17_iw6an")]
+visible = false
 position = Vector2(419, 171)
 
 [node name="knifeChopper" type="Area2D" parent="."]
@@ -234,6 +238,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 
 [node name="TabContainer" type="TabContainer" parent="HUD/HUD/StoragePanel"]
 custom_minimum_size = Vector2(0, 270)
@@ -247,6 +252,7 @@ current_tab = 0
 
 [node name="Bowls" type="Control" parent="HUD/HUD/StoragePanel/TabContainer"]
 layout_mode = 2
+mouse_filter = 2
 metadata/_tab_index = 0
 
 [node name="BowlWrapper" type="HFlowContainer" parent="HUD/HUD/StoragePanel/TabContainer/Bowls"]
@@ -262,30 +268,10 @@ mouse_filter = 2
 theme_override_constants/h_separation = 18
 alignment = 1
 
-[node name="Bowl" parent="HUD/HUD/StoragePanel/TabContainer/Bowls/BowlWrapper" instance=ExtResource("24_1i8y3")]
-layout_mode = 2
-
-[node name="Bowl7" parent="HUD/HUD/StoragePanel/TabContainer/Bowls/BowlWrapper" instance=ExtResource("24_1i8y3")]
-layout_mode = 2
-
-[node name="Bowl2" parent="HUD/HUD/StoragePanel/TabContainer/Bowls/BowlWrapper" instance=ExtResource("24_1i8y3")]
-layout_mode = 2
-
-[node name="Bowl3" parent="HUD/HUD/StoragePanel/TabContainer/Bowls/BowlWrapper" instance=ExtResource("24_1i8y3")]
-layout_mode = 2
-
-[node name="Bowl4" parent="HUD/HUD/StoragePanel/TabContainer/Bowls/BowlWrapper" instance=ExtResource("24_1i8y3")]
-layout_mode = 2
-
-[node name="Bowl5" parent="HUD/HUD/StoragePanel/TabContainer/Bowls/BowlWrapper" instance=ExtResource("24_1i8y3")]
-layout_mode = 2
-
-[node name="Bowl6" parent="HUD/HUD/StoragePanel/TabContainer/Bowls/BowlWrapper" instance=ExtResource("24_1i8y3")]
-layout_mode = 2
-
 [node name="Storage" type="Control" parent="HUD/HUD/StoragePanel/TabContainer"]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 metadata/_tab_index = 1
 
 [node name="FoodBarrelWrapper" type="HBoxContainer" parent="HUD/HUD/StoragePanel/TabContainer/Storage"]
@@ -313,6 +299,7 @@ offset_top = -30.0
 offset_bottom = 30.0
 grow_horizontal = 2
 pivot_offset = Vector2(0, 60)
+mouse_filter = 2
 alignment = 2
 
 [node name="dinnerBellBtn" type="Button" parent="HUD/HUD/StoragePanel/StorageButtonPanel"]
@@ -340,6 +327,9 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 text = "^"
+
+[node name="Results" parent="HUD" instance=ExtResource("23_1i8y3")]
+visible = false
 
 [connection signal="cutBone" from="knifeChopper" to="." method="_on_knife_chopper_cut_bone"]
 [connection signal="cutBone" from="knifeSlicer" to="." method="_on_knife_slicer_cut_bone"]

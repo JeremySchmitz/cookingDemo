@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://djeobadgn1dv6"]
+[gd_scene load_steps=10 format=3 uid="uid://djeobadgn1dv6"]
 
 [ext_resource type="Script" uid="uid://bq6s6xn4lyojp" path="res://scripts/story/boat_travel.gd" id="1_otj04"]
 [ext_resource type="Script" uid="uid://beam0fqixwxq8" path="res://scripts/Utils/camera_drag.gd" id="2_5yjvc"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://chfrb3of5ahsp" path="res://resources/Sprites/Travel/Ship.png" id="5_7ds11"]
 [ext_resource type="PackedScene" uid="uid://csvt7rvw0l4xw" path="res://Scenes/UI/clock.tscn" id="6_qftmk"]
 [ext_resource type="PackedScene" uid="uid://xs4x3iduyd8g" path="res://Scenes/Story/world_gen.tscn" id="6_y142x"]
+[ext_resource type="PackedScene" uid="uid://0pmklft4kfgs" path="res://Scenes/Encounters/encounter.tscn" id="7_qftmk"]
+[ext_resource type="PackedScene" uid="uid://dnun76p5l30rw" path="res://Scenes/food/results.tscn" id="8_2661v"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7ds11"]
 radius = 14.0
@@ -83,6 +85,18 @@ offset_bottom = 74.0
 grow_horizontal = 0
 duration = 5.0
 
+[node name="Encounter" parent="CanvasLayer/Control" node_paths=PackedStringArray("resultsScene") instance=ExtResource("7_qftmk")]
+unique_name_in_owner = true
+visible = false
+resultsScene = NodePath("../Results")
+
+[node name="Results" parent="CanvasLayer/Control" instance=ExtResource("8_2661v")]
+unique_name_in_owner = true
+visible = false
+hideOnContinue = true
+
 [connection signal="moving" from="BoatChar" to="." method="_on_boat_char_moving"]
 [connection signal="pressed" from="CanvasLayer/Control/DockButton" to="." method="_on_dock_button_pressed"]
 [connection signal="done" from="CanvasLayer/Control/Clock" to="." method="_on_clock_done"]
+[connection signal="encounterCheck" from="CanvasLayer/Control/Clock" to="." method="_on_clock_encounter_check"]
+[connection signal="hidden" from="CanvasLayer/Control/Results" to="." method="_on_results_hidden"]

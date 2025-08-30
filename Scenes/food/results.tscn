@@ -8,6 +8,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1440.0
 offset_bottom = 810.0
+mouse_force_pass_scroll_events = false
 theme = ExtResource("1_bbof3")
 script = ExtResource("1_jjlkr")
 

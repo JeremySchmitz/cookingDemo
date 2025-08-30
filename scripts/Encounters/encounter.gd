@@ -1,12 +1,23 @@
-extends Node2D
+extends Control
 class_name EncounterScene
 
 const RESULTS_SCENE = preload("res://Scenes/food/results.tscn")
 
-@onready var nameLabel = $Name
-@onready var description = $Description
-@onready var results = $Results
-@onready var contBtn = $ContBtn
+const RESULTS_ATTRS: Array[GlobalEnums.CrewAttrs] = [
+		GlobalEnums.CrewAttrs.HEALTH,
+		GlobalEnums.CrewAttrs.HUNGER,
+		GlobalEnums.CrewAttrs.CONSTITUTION,
+		GlobalEnums.CrewAttrs.STRENGTH,
+		GlobalEnums.CrewAttrs.FISHING,
+		GlobalEnums.CrewAttrs.SANITY
+		]
+
+@export var resultsScene: Results
+
+@onready var nameLabel = %Name
+@onready var description = %Description
+@onready var results = %Results
+@onready var contBtn = %ContBtn
 
 var encounterRun:
 	set(val):
@@ -31,6 +42,9 @@ var crew: Array[Crew] = CrewStatus.crew
 
 
 func _ready() -> void:
+	currentEncounter = Utils.getEncounter()
+
+func loadEncounter():
 	currentEncounter = Utils.getEncounter()
 
 func runEncounter():
@@ -191,19 +205,13 @@ func _penalty(target: Crew, penalty: GlobalEnums.TrialPenalty, count: int):
 
 func _on_replay_btn_pressed() -> void:
 	currentEncounter = Utils.getEncounter()
-	pass # Replace with function body.
 
 
 func _on_cont_btn_pressed() -> void:
-	var resultsAttrs: Array[GlobalEnums.CrewAttrs] = [
-		GlobalEnums.CrewAttrs.HEALTH,
-		GlobalEnums.CrewAttrs.HUNGER,
-		GlobalEnums.CrewAttrs.CONSTITUTION,
-		GlobalEnums.CrewAttrs.STRENGTH,
-		GlobalEnums.CrewAttrs.FISHING,
-		GlobalEnums.CrewAttrs.SANITY
-		]
-	SceneLoader.showResults(crewBefore, crew, resultsAttrs)
+	buildResults()
+	resultsScene.buildResults(RESULTS_ATTRS)
+	hide()
+	resultsScene.show()
 
 
 func _on_run_pressed() -> void:
@@ -211,19 +219,7 @@ func _on_run_pressed() -> void:
 	encounterRun = true
 
 
-func buildResultsScn():
-	var resultsScn = RESULTS_SCENE.instantiate()
-	resultsScn.crewBefore = crewBefore
-	resultsScn.crewAfter = crew
-	var resultsAttrs: Array[GlobalEnums.CrewAttrs] = [
-		GlobalEnums.CrewAttrs.HEALTH,
-		GlobalEnums.CrewAttrs.HUNGER,
-		GlobalEnums.CrewAttrs.CONSTITUTION,
-		GlobalEnums.CrewAttrs.STRENGTH,
-		GlobalEnums.CrewAttrs.FISHING,
-		GlobalEnums.CrewAttrs.SANITY
-		 ]
-	resultsScn.buildResults(resultsAttrs)
-	resultsScn.nextScene = "kitchen"
-
-	return resultsScn
+func buildResults():
+	resultsScene.crewBefore = crewBefore
+	resultsScene.crewAfter = crew
+	resultsScene.buildResults(RESULTS_ATTRS)
