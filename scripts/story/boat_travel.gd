@@ -17,11 +17,15 @@ var encounterTimer := Timer.new()
 # FIX, Day currently resets if switch scenes to an encounter. 
 func _ready():
 	SignalBus.canDock.connect(_on_can_dock)
-	# TODO run simple day timer
+
+	if World.tileSet:
+		%world_gen._loadWorld()
+	else:
+		%world_gen._generate()
+
 	$Camera2D.limitRight = $Camera2D.get_window().size.x - $world_gen.width
 	$Camera2D.limitDown = $Camera2D.get_window().size.y - $world_gen.height
 
-	set_process(true)
 
 	dayTimer.wait_time = dayLength
 	dayTimer.connect("timeout", _dayEnd)
@@ -78,7 +82,7 @@ func _setBoatPosition():
 	if CrewStatus.boatPosition != Vector2(0, 0):
 		pos = CrewStatus.boatPosition
 	else:
-		var ports = $world_gen.portPositions
+		var ports: Array = $world_gen.portPositions
 		pos = ports[0]
 
 	boat.position = pos

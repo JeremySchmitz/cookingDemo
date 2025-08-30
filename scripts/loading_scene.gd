@@ -8,6 +8,8 @@ var path: String
 var progress_value := 0.0
 
 func load(path_to_load: String):
+	progress_value = 0.0
+	progressBar.value = 0.0
 	path = path_to_load
 	ResourceLoader.load_threaded_request(path)
 

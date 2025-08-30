@@ -16,6 +16,7 @@ config/features=PackedStringArray("4.4", "Forward Plus")
 
 [autoload]
 
+Settings="*res://scripts/Singletons/settings.gd"
 SaveLoader="*res://scripts/Singletons/save_loader.gd"
 Utils="*res://scripts/Singletons/utils.gd"
 CrewStatus="*res://scripts/Crew/crewStatus.gd"

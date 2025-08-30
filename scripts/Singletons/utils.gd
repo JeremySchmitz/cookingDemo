@@ -1,5 +1,7 @@
 extends Node
 
+const SAVE_PATH = "user://savegame.tres"
+
 const KITCHEN_PATH = "res://Scenes/kitchen.tscn"
 const TRAVEL_PATH = "res://Scenes/Story/boat_travel.tscn"
 const ENCOUNTER_PATH = "res://Scenes/Encounters/encounter.tscn"

@@ -1,7 +1,5 @@
 extends Node
 
-const SAVE_PATH = "user://savegame.tres"
-
 func saveGame():
 	var save = SavedGame.new()
 
@@ -17,10 +15,12 @@ func saveGame():
 	save.crew = crew
 	save.world = world
 
-	ResourceSaver.save(save, SAVE_PATH)
+	save.currentScene = SceneLoader.current_path
+
+	ResourceSaver.save(save, Utils.SAVE_PATH)
 
 func loadGame():
-	var file: SavedGame = load(SAVE_PATH) as SavedGame
+	var file: SavedGame = load(Utils.SAVE_PATH) as SavedGame
 
 	CrewStatus.crew = file.crew.crew as Array[Crew]
 	CrewStatus.boatPosition = file.crew.boatPosition
@@ -28,3 +28,5 @@ func loadGame():
 
 	World.tileSet = file.world.tileSet
 	World.ports = file.world.ports
+
+	SceneLoader.goto_scene(file.currentScene)

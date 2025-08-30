@@ -5,6 +5,7 @@ const PORTS_SCENE = preload("res://Scenes/Story/port.tscn")
 
 const maxWanders = 1000
 
+@export_tool_button('Load') var loadWorld = _loadWorld
 @export_tool_button('Generate') var generate = _generate
 @export_tool_button('Generate Land') var generateLand = _generateLand
 @export_tool_button('Generate Ports') var generatePorts = _generatePorts
@@ -45,15 +46,7 @@ var portPositions: Array
 
 
 func _ready() -> void:
-	_setTileValues()
-	if !Engine.is_editor_hint():
-		if World.tileSet:
-			tileMap.tile_set = World.tileSet
-			_addPortsFromWorld(World.ports)
-		else:
-			rng = Utils.RNG
-			_generate()
-	else:
+	if Engine.is_editor_hint():
 		rng = RandomNumberGenerator.new()
 		if randSeed: seed = randi()
 		rng.seed = seed
@@ -68,7 +61,13 @@ func _clearPorts():
 		for child in portsNode.get_children():
 			portsNode.remove_child(child)
 
+func _loadWorld():
+	tileMap.tile_set = World.tileSet
+	_addPortsFromWorld(World.ports)
+
 func _generate():
+	if !rng: rng = Utils.RNG
+	_setTileValues()
 	_generateLand()
 	_generatePorts()
 
@@ -105,7 +104,7 @@ func _generatePorts():
 	else:
 		_buildScenePorts(ports, portsNode)
 		_buildPortResources(portsNode)
-	portPositions = ports.map(func(m): return Vector2(m.x * tileMap.tile_set.tile_size.x, m.y * tileMap.tile_set.tile_size.y) / 2) as Array[Vector2]
+	portPositions = ports.map(func(m): return Vector2(m.x * tileMap.tile_set.tile_size.x, m.y * tileMap.tile_set.tile_size.y) / 2)
 
 func _getPortsParent():
 	var portsNode

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1a42wro6vq1r"]
+[gd_scene load_steps=4 format=3 uid="uid://b1a42wro6vq1r"]
 
 [ext_resource type="Script" uid="uid://brev7s1sbnur2" path="res://scripts/main.gd" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://b6rlbe5cluvk5" path="res://Scenes/loading_scene.tscn" id="2_idj7w"]
+[ext_resource type="PackedScene" uid="uid://fqeu1qvtnemu" path="res://Scenes/UI/Main_menu.tscn" id="3_kln2b"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_r150o")
@@ -14,3 +15,6 @@ unique_name_in_owner = true
 visible = false
 z_index = 0
 z_as_relative = true
+
+[node name="MainMenu" parent="CanvasLayer_Loading" instance=ExtResource("3_kln2b")]
+unique_name_in_owner = true

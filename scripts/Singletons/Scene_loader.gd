@@ -2,6 +2,7 @@ extends Node2D
 
 var loadingScene: LoadingScreen: set = _setLoadingScene
 var current_scene: Node = null
+var current_path: String
 
 var buildingResults = false
 var results: Array = []
@@ -49,6 +50,7 @@ func _on_scene_loaded(path: String):
 
 	var sceneResource = ResourceLoader.load_threaded_get(path)
 	current_scene = sceneResource.instantiate()
+	current_path = path
 
 	if buildingResults: buildResultsScn(current_scene)
 

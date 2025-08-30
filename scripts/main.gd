@@ -8,7 +8,7 @@ func _ready() -> void:
 	CrewStatus.buildCrew(NUM_CREW)
 	loadEncounters()
 
-	SceneLoader.goto_scene("res://Scenes/Story/boat_travel.tscn")
+	# SceneLoader.goto_scene("res://Scenes/Story/boat_travel.tscn")
 
 	# var boat_scene = preload("res://Scenes/Story/boat_travel.tscn").instantiate()
 	# add_child(boat_scene)
