@@ -13,6 +13,7 @@ config_version=5
 config/name="cookingDemo"
 run/main_scene="uid://b1a42wro6vq1r"
 config/features=PackedStringArray("4.4", "Forward Plus")
+run/max_fps=60
 
 [autoload]
 

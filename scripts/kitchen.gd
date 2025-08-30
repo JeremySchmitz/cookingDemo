@@ -66,7 +66,7 @@ func _on_dinner_bell_btn_pressed() -> void:
 		GlobalEnums.CrewAttrs.HEALTH,
 		GlobalEnums.CrewAttrs.HUNGER
 		]
-	SceneLoader.gotoResults(crewBefore, crew, resultsAttrs)
+	SceneLoader.showResults(crewBefore, crew, resultsAttrs)
 	
 func buildResultsScn(crewBefore: Array[Crew], crewAfter: Array[Crew]):
 	var results = RESULTS_SCENE.instantiate()

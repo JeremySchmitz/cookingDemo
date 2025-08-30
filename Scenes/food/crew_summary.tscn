@@ -1,9 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://vofhagloy308"]
+[gd_scene load_steps=4 format=3 uid="uid://vofhagloy308"]
 
 [ext_resource type="Script" uid="uid://dsnogseiokxbe" path="res://Scenes/food/crew_summary.gd" id="1_ql38m"]
-[ext_resource type="LabelSettings" uid="uid://ckv8oeie7ixbj" path="res://resources/LabelSettings/mealSummary_label_settings.tres" id="1_wnfpm"]
 
-[node name="CrewSummary" type="Node2D"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_foyhc"]
+bg_color = Color(0.675507, 0.866395, 0.936232, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="Theme" id="Theme_wk5nk"]
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/font_sizes/font_size = 16
+LabelTitle/base_type = &"Label"
+LabelTitle/font_sizes/font_size = 20
+MarginContainer/constants/margin_bottom = 10
+MarginContainer/constants/margin_left = 10
+MarginContainer/constants/margin_right = 10
+MarginContainer/constants/margin_top = 10
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_foyhc")
+
+[node name="CrewSummary" type="PanelContainer"]
+custom_minimum_size = Vector2(300, 100)
+offset_right = 300.0
+offset_bottom = 100.0
+theme = SubResource("Theme_wk5nk")
 script = ExtResource("1_ql38m")
 paddingTop = 25.0
 paddingLeft = 10.0
@@ -11,17 +32,40 @@ labelHeight = 25.0
 titleWidth = 150.0
 resultsWidth = 100.0
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(0, 0, 300, 0, 300, 100, 0, 100)
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
 
-[node name="LabelSpawn" type="Node2D" parent="."]
-position = Vector2(15, 40)
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
 
-[node name="Name" type="Label" parent="."]
-offset_top = 10.0
-offset_right = 300.0
-offset_bottom = 33.0
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"LabelTitle"
 text = "[!DYN!]"
-label_settings = ExtResource("1_wnfpm")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/LabelContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/LabelContainer/HBoxContainer"]
+layout_mode = 2
+text = "Test"
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/MarginContainer/LabelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/LabelContainer/HBoxContainer"]
+layout_mode = 2
+text = "Test"

@@ -96,7 +96,7 @@ func _on_dock_button_pressed() -> void:
 	SceneLoader.goto_scene(Utils.STORE_PATH)
 
 func _on_boat_char_moving(moving: bool) -> void:
-	var timeScale = 1.0 if moving else .1
+	var timeScale = 1.0 if moving else 0.1
 	clock.timeScale = timeScale
 
 func _on_clock_done() -> void:

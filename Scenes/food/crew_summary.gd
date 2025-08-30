@@ -1,4 +1,4 @@
-extends Node2D
+extends PanelContainer
 
 class_name CrewSummary
 
@@ -10,12 +10,11 @@ const labelSettings = preload("res://resources/LabelSettings/mealSummary_label_s
 @export var titleWidth: float
 @export var resultsWidth: float
 
-@onready var spawn: Node2D = $LabelSpawn
 
 var crewName: String = "":
 	set(val):
 		crewName = val
-		$Name.text = val
+		%Name.text = val
 
 var beforeAttrs = {
 	GlobalEnums.CrewAttrs.HEALTH: 0,
@@ -64,29 +63,22 @@ func buildSummary(attrs: Array):
 	for i in range(0, attrs.size()):
 		var attr = attrs[i]
 		var label = buildAttr(attr, beforeAttrs[attr], afterAttrs[attr])
-		$LabelSpawn.add_child(label)
-		label.position.y += paddingTop * i
+		%LabelContainer.add_child(label)
 
-	setBackgroundSize(attrs.size())
+func buildAttr(attr: GlobalEnums.CrewAttrs, before: int, after: int) -> HBoxContainer:
+	var title := Label.new()
+	var results := Label.new()
+	var container := HBoxContainer.new()
 
-func buildAttr(attr: GlobalEnums.CrewAttrs, before: int, after: int) -> Label:
-	var title = Label.new()
-	var results = Label.new()
+	title.size_flags_horizontal = Control.SIZE_EXPAND
 
 	title.text = GlobalEnums.CrewAttrs.find_key(attr)
 	results.text = "%s -> %s" % [before, after]
-	title.label_settings = labelSettings
-	results.label_settings = labelSettings
+	container.add_child(title)
+	container.add_child(results)
+	
 
-	title.add_child(results)
-
-	# title.set_deferred(
-	title.set_size(Vector2(titleWidth, labelHeight))
-	results.set_size(Vector2(resultsWidth, labelHeight))
-
-	results.position.x = titleWidth + paddingLeft
-
-	return title
+	return container
 
 func setBackgroundSize(count: int):
 	var bg: Polygon2D = $Polygon2D

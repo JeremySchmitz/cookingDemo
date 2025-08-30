@@ -5,6 +5,7 @@ const NUM_CREW = 3
 
 func _ready() -> void:
 	SceneLoader.loadingScene = %LoadingScene
+	SceneLoader.resultsScene = %Results
 	CrewStatus.buildCrew(NUM_CREW)
 	loadEncounters()
 

@@ -1,11 +1,23 @@
 extends Node2D
 
 var loadingScene: LoadingScreen: set = _setLoadingScene
+var resultsScene: Results
 var current_scene: Node = null
 var current_path: String
 
 var buildingResults = false
 var results: Array = []
+
+
+func showResults(
+	crewBefore: Array[Crew],
+	crewAfter: Array[Crew],
+	resultsAttrs: Array[GlobalEnums.CrewAttrs]
+	):
+	resultsScene.crewBefore = crewBefore
+	resultsScene.crewAfter = crewAfter
+	resultsScene.buildResults(resultsAttrs)
+	resultsScene.show()
 
 func gotoResults(
 	crewBefore: Array[Crew],

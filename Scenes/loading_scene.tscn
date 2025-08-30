@@ -180,7 +180,7 @@ grow_horizontal = 0
 grow_vertical = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Control2"]
-position = Vector2(-43, -26)
+position = Vector2(-43, 25.6)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_n7uaf")
 autoplay = "default"

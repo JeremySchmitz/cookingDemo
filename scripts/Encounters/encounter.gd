@@ -203,7 +203,7 @@ func _on_cont_btn_pressed() -> void:
 		GlobalEnums.CrewAttrs.FISHING,
 		GlobalEnums.CrewAttrs.SANITY
 		]
-	SceneLoader.gotoResults(crewBefore, crew, resultsAttrs)
+	SceneLoader.showResults(crewBefore, crew, resultsAttrs)
 
 
 func _on_run_pressed() -> void:

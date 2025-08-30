@@ -1,35 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://fqeu1qvtnemu"]
+[gd_scene load_steps=4 format=3 uid="uid://fqeu1qvtnemu"]
 
 [ext_resource type="Script" uid="uid://cae50uibicc8y" path="res://scripts/UI/main_menu.gd" id="1_fxsns"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ypja4"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fxsns"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ypja4"]
-bg_color = Color(0.364797, 0.50665, 0.63119, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-shadow_color = Color(0.355314, 0.355314, 0.355314, 0.6)
-shadow_size = 10
-
-[sub_resource type="Theme" id="Theme_fxsns"]
-CloseButton/base_type = &"Button"
-CloseButton/colors/font_focus_color = Color(0, 0, 0, 1)
-CloseButton/colors/font_hover_color = Color(0, 0, 0, 1)
-CloseButton/font_sizes/font_size = 25
-CloseButton/styles/hover = SubResource("StyleBoxEmpty_ypja4")
-CloseButton/styles/normal = SubResource("StyleBoxEmpty_fxsns")
-HBoxContainer/constants/separation = 20
-HeaderLabel/base_type = &"Label"
-HeaderLabel/font_sizes/font_size = 22
-MarginContainer/constants/margin_bottom = 10
-MarginContainer/constants/margin_left = 10
-MarginContainer/constants/margin_right = 10
-MarginContainer/constants/margin_top = 10
-Panel/styles/panel = SubResource("StyleBoxFlat_ypja4")
+[ext_resource type="Theme" uid="uid://dh0c6psx35q2e" path="res://resources/UI/Main_menu.tres" id="1_ypja4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_oy1mv"]
 font_size = 66
@@ -44,7 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_fxsns")
+theme = ExtResource("1_ypja4")
 script = ExtResource("1_fxsns")
 
 [node name="ColorRect" type="ColorRect" parent="."]

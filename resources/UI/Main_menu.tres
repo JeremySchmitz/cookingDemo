@@ -1,0 +1,26 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://dh0c6psx35q2e"]
+
+[ext_resource type="StyleBox" uid="uid://b6gar6rd8vqd5" path="res://resources/UI/default_style_box_flat.tres" id="1_143m7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ypja4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fxsns"]
+
+[resource]
+CloseButton/base_type = &"Button"
+CloseButton/colors/font_focus_color = Color(0, 0, 0, 1)
+CloseButton/colors/font_hover_color = Color(0, 0, 0, 1)
+CloseButton/font_sizes/font_size = 25
+CloseButton/styles/hover = SubResource("StyleBoxEmpty_ypja4")
+CloseButton/styles/normal = SubResource("StyleBoxEmpty_fxsns")
+HBoxContainer/constants/separation = 20
+HFlowContainer/constants/h_separation = 60
+HFlowContainer/constants/v_separation = 30
+HeaderLabel/base_type = &"Label"
+HeaderLabel/font_sizes/font_size = 22
+MarginContainer/constants/margin_bottom = 10
+MarginContainer/constants/margin_left = 10
+MarginContainer/constants/margin_right = 10
+MarginContainer/constants/margin_top = 10
+Panel/styles/panel = ExtResource("1_143m7")
+VBoxContainer/constants/separation = 20
