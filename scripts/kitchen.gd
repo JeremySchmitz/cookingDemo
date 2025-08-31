@@ -65,6 +65,9 @@ func _on_dinner_bell_btn_pressed() -> void:
 		GlobalEnums.CrewAttrs.HEALTH,
 		GlobalEnums.CrewAttrs.HUNGER
 		]
+
+	_saveGame()
+
 	SceneLoader.showResults(crewBefore, crew, resultsAttrs)
 	
 func buildResultsScn(crewBefore: Array[Crew], crewAfter: Array[Crew]):
@@ -162,3 +165,22 @@ func _showStorage():
 func _on_show_pannel_button_pressed() -> void:
 	if showStorage: _hideStorage()
 	else: _showStorage()
+
+func _saveGame():
+	CrewStatus.crew = crew
+	_updateInventory()
+	SaveLoader.saveGame()
+
+func _updateInventory():
+	for barrel: FoodBarrel in %FoodBarrelWrapper.get_children():
+		var count = barrel.getCount()
+		var fName = barrel.foodName
+
+		var i = inventory.food.find_custom(func(f: InvFood): return f.name == fName)
+
+		if inventory.food[i]:
+			var food = inventory.food[i]
+			if count <= 0: inventory.removeItem(food)
+			else: food.count = count
+		else:
+			push_warning('Unable to find food in inventory')

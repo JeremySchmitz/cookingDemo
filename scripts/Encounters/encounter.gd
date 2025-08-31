@@ -100,6 +100,9 @@ func _runTrial(encounter: Encounter_Entry):
 
 	# TODO theres more to do here
 
+	CrewStatus.crew = crew
+	SaveLoader.saveGame()
+
 func _getTrialTarget(type: GlobalEnums.TrialType):
 	print('_getTrialTarget trial type: ', type)
 	var target: Crew

@@ -25,6 +25,8 @@ func _ready():
 	$Camera2D.limitRight = $Camera2D.get_window().size.x - $world_gen.width
 	$Camera2D.limitDown = $Camera2D.get_window().size.y - $world_gen.height
 
+	%Inventory.inventory = CrewStatus.inventory
+
 	_setBoatPosition()
 
 	clock.encounterPeriod = encounterSpeed
@@ -47,6 +49,7 @@ func _dayEnd():
 	CrewStatus.boatPosition = boat.position
 	# todo base on distance traveled
 	workCrew(10, 25)
+	SaveLoader.saveGame()
 	SceneLoader.goto_scene(Utils.KITCHEN_PATH)
 
 func _triggerEncounter():
@@ -55,6 +58,8 @@ func _triggerEncounter():
 	clock.pause()
 	boat.disabled = true
 	
+	SaveLoader.saveGame()
+
 	encounterPanel.loadEncounter()
 	encounterPanel.show()
 
@@ -90,3 +95,7 @@ func _on_results_hidden() -> void:
 	boat.disabled = false
 	clock.timeScale = 0.1
 	clock.start()
+
+func _on_inventory_btn_pressed() -> void:
+	if %Inventory.visible: %Inventory.hide()
+	else: %Inventory.show()

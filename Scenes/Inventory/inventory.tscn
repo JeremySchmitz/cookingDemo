@@ -73,6 +73,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 theme = ExtResource("1_de3ro")
 script = ExtResource("2_0dubb")
 inventory = ExtResource("3_evvmy")
@@ -296,25 +297,26 @@ size_flags_vertical = 3
 allow_search = false
 fixed_icon_size = Vector2i(40, 40)
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="NodeWrapper/MarginContainer/VBoxContainer3"]
+[node name="StoreButtonsContainer" type="HBoxContainer" parent="NodeWrapper/MarginContainer/VBoxContainer3"]
+unique_name_in_owner = true
 layout_direction = 3
 layout_mode = 2
 
-[node name="ButtonBuy" type="Button" parent="NodeWrapper/MarginContainer/VBoxContainer3/HBoxContainer3"]
+[node name="ButtonBuy" type="Button" parent="NodeWrapper/MarginContainer/VBoxContainer3/StoreButtonsContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 disabled = true
 text = "Buy"
 
-[node name="ButtonBarter" type="Button" parent="NodeWrapper/MarginContainer/VBoxContainer3/HBoxContainer3"]
+[node name="ButtonBarter" type="Button" parent="NodeWrapper/MarginContainer/VBoxContainer3/StoreButtonsContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 disabled = true
 text = "Barter"
 
-[node name="ButtonLeave" type="Button" parent="NodeWrapper/MarginContainer/VBoxContainer3/HBoxContainer3"]
+[node name="ButtonLeave" type="Button" parent="NodeWrapper/MarginContainer/VBoxContainer3/StoreButtonsContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
@@ -325,6 +327,6 @@ text = "Leave"
 [connection signal="pressed" from="NodeWrapper/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer/PanelAddButtons/ButtonAdd" to="." method="_on_button_add_pressed"]
 [connection signal="pressed" from="NodeWrapper/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer/PanelSelection/MarginContainer/VBoxContainer/PanelAddButtons/ButtonSubtract" to="." method="_on_button_subtract_pressed"]
 [connection signal="item_selected" from="NodeWrapper/MarginContainer/VBoxContainer3/HBoxContainer2/VBoxContainer/PanelSecondaryList/VBoxContainer/ListSecondary" to="." method="_on_list_secondary_item_selected"]
-[connection signal="pressed" from="NodeWrapper/MarginContainer/VBoxContainer3/HBoxContainer3/ButtonBuy" to="." method="_on_button_buy_pressed"]
-[connection signal="pressed" from="NodeWrapper/MarginContainer/VBoxContainer3/HBoxContainer3/ButtonBarter" to="." method="_on_button_barter_pressed"]
-[connection signal="pressed" from="NodeWrapper/MarginContainer/VBoxContainer3/HBoxContainer3/ButtonLeave" to="." method="_on_button_leave_pressed"]
+[connection signal="pressed" from="NodeWrapper/MarginContainer/VBoxContainer3/StoreButtonsContainer/ButtonBuy" to="." method="_on_button_buy_pressed"]
+[connection signal="pressed" from="NodeWrapper/MarginContainer/VBoxContainer3/StoreButtonsContainer/ButtonBarter" to="." method="_on_button_barter_pressed"]
+[connection signal="pressed" from="NodeWrapper/MarginContainer/VBoxContainer3/StoreButtonsContainer/ButtonLeave" to="." method="_on_button_leave_pressed"]

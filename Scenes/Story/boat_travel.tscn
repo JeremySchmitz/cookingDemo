@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://djeobadgn1dv6"]
+[gd_scene load_steps=21 format=3 uid="uid://djeobadgn1dv6"]
 
 [ext_resource type="Script" uid="uid://bq6s6xn4lyojp" path="res://scripts/story/boat_travel.gd" id="1_otj04"]
 [ext_resource type="Script" uid="uid://beam0fqixwxq8" path="res://scripts/Utils/camera_drag.gd" id="2_5yjvc"]
@@ -7,11 +7,50 @@
 [ext_resource type="PackedScene" uid="uid://csvt7rvw0l4xw" path="res://Scenes/UI/clock.tscn" id="6_qftmk"]
 [ext_resource type="PackedScene" uid="uid://xs4x3iduyd8g" path="res://Scenes/Story/world_gen.tscn" id="6_y142x"]
 [ext_resource type="PackedScene" uid="uid://0pmklft4kfgs" path="res://Scenes/Encounters/encounter.tscn" id="7_qftmk"]
+[ext_resource type="Texture2D" uid="uid://cq2vl5oyoqsio" path="res://resources/Sprites/UI/Barrells.png" id="7_xf8j0"]
+[ext_resource type="Texture2D" uid="uid://bgggvw0pmdnds" path="res://resources/Sprites/UI/Barrells_hover.png" id="8_8m0qq"]
 [ext_resource type="PackedScene" uid="uid://dnun76p5l30rw" path="res://Scenes/food/results.tscn" id="8_2661v"]
+[ext_resource type="PackedScene" uid="uid://d2naldp06yot" path="res://Scenes/Inventory/inventory.tscn" id="9_xq6nw"]
+[ext_resource type="Script" uid="uid://b7sudjpcc7xtc" path="res://resources/custom_resources/inventory/inv_food.gd" id="10_erlgd"]
+[ext_resource type="Resource" uid="uid://bwsngxxxr4cpx" path="res://resources/custom_resources/inventory/Test/test_food_02.tres" id="11_xf8j0"]
+[ext_resource type="Texture2D" uid="uid://cteec7c7pkf00" path="res://resources/Sprites/PufferFish_02/pufferFiish02_Body.png" id="12_8m0qq"]
+[ext_resource type="Script" uid="uid://drwwte2xllcv7" path="res://resources/custom_resources/inventory/inv_resource.gd" id="13_1vmx0"]
+[ext_resource type="Script" uid="uid://bbxis0e5mu55p" path="res://resources/custom_resources/inventory/inventory.gd" id="14_s1um0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7ds11"]
 radius = 14.0
 height = 53.65
+
+[sub_resource type="Resource" id="Resource_xf8j0"]
+resource_local_to_scene = true
+script = ExtResource("10_erlgd")
+scenePath = ""
+name = "Puffer Fish"
+count = 5
+sprite = ExtResource("12_8m0qq")
+description = "This is a puffer fish. Be careful cause they can be poisonous if not handled properly."
+cost = 100
+metadata/_custom_type_script = "uid://b7sudjpcc7xtc"
+
+[sub_resource type="Resource" id="Resource_8m0qq"]
+resource_local_to_scene = true
+script = ExtResource("13_1vmx0")
+type = 0
+name = "Wood"
+count = 4
+sprite = ExtResource("5_7ds11")
+description = "A simple material with many uses"
+cost = 50
+metadata/_custom_type_script = "uid://drwwte2xllcv7"
+
+[sub_resource type="Resource" id="Resource_1vmx0"]
+resource_local_to_scene = true
+script = ExtResource("14_s1um0")
+name = "Klifton Clerryman"
+money = 200.0
+food = Array[ExtResource("10_erlgd")]([ExtResource("11_xf8j0"), SubResource("Resource_xf8j0")])
+resources = Array[ExtResource("13_1vmx0")]([SubResource("Resource_8m0qq")])
+metadata/_custom_type_script = "uid://bbxis0e5mu55p"
 
 [node name="BoatTravel" type="Node2D"]
 script = ExtResource("1_otj04")
@@ -55,42 +94,73 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="DockButton" type="Button" parent="CanvasLayer/Control"]
-custom_minimum_size = Vector2(75, 40)
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -95.0
-offset_top = -60.0
-offset_right = -20.0
-offset_bottom = -20.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Dock"
-
 [node name="Clock" parent="CanvasLayer/Control" instance=ExtResource("6_qftmk")]
 unique_name_in_owner = true
 layout_mode = 1
-offset_left = 15.0
-offset_top = 15.0
-offset_right = 79.0
-offset_bottom = 79.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 84.0
+offset_bottom = 84.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -104.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 35
+
+[node name="InventoryBtn" type="TextureButton" parent="CanvasLayer/Control/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("7_xf8j0")
+texture_pressed = ExtResource("8_8m0qq")
+texture_hover = ExtResource("8_8m0qq")
+texture_disabled = ExtResource("8_8m0qq")
+texture_focused = ExtResource("8_8m0qq")
+stretch_mode = 4
+
+[node name="DockButton" type="Button" parent="CanvasLayer/Control/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(75, 40)
+layout_mode = 2
+text = "Dock"
 
 [node name="Encounter" parent="CanvasLayer/Control" node_paths=PackedStringArray("resultsScene") instance=ExtResource("7_qftmk")]
 unique_name_in_owner = true
 visible = false
 resultsScene = NodePath("../Results")
+metadata/_edit_lock_ = true
 
 [node name="Results" parent="CanvasLayer/Control" instance=ExtResource("8_2661v")]
 unique_name_in_owner = true
 visible = false
 hideOnContinue = true
+metadata/_edit_lock_ = true
+
+[node name="Inventory" parent="CanvasLayer/Control" instance=ExtResource("9_xq6nw")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+shopInventory = SubResource("Resource_1vmx0")
+mode = 1
+metadata/_edit_lock_ = true
 
 [connection signal="moving" from="BoatChar" to="." method="_on_boat_char_moving"]
-[connection signal="pressed" from="CanvasLayer/Control/DockButton" to="." method="_on_dock_button_pressed"]
 [connection signal="done" from="CanvasLayer/Control/Clock" to="." method="_on_clock_done"]
 [connection signal="encounterCheck" from="CanvasLayer/Control/Clock" to="." method="_on_clock_encounter_check"]
+[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/HBoxContainer/InventoryBtn" to="." method="_on_inventory_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/HBoxContainer/DockButton" to="." method="_on_dock_button_pressed"]
 [connection signal="hidden" from="CanvasLayer/Control/Results" to="." method="_on_results_hidden"]

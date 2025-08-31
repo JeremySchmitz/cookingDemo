@@ -60,14 +60,13 @@ var bartered = false:
 		_updateButtons()
 
 func _ready() -> void:
-	generateTestArrays()
-
 	nodeMoneyCount.text = str(inventory.money)
 	if mode == InventoryMode.PLAYER:
 		nodeCharacterName.text = inventory.name
 
 		nodePanelCart.visible = false
 		nodePanelAddButtons.visible = false
+		%StoreButtonsContainer.visible = false
 
 		if inventory.food:
 			listMain = inventory.food
@@ -87,7 +86,6 @@ func _ready() -> void:
 		
 func _addItemsToList(list: Array, nodeList: ItemList):
 	for item: InvItem in list:
-		print('addItemToList:', item.name, item.count)
 		nodeList.add_item(_getItemText(item), item.sprite)
 
 func _on_list_main_item_selected(index: int) -> void:
@@ -121,6 +119,7 @@ func _selectItem(i: int, list: ItemList):
 		selectedItem = cart[i]
 
 func _setSelectedItem(val: InvItem):
+	# print('selected item', val.name, val.description, val.count, val.sprite)
 	selectedItem = val
 	nodeSelectedName.text = val.name
 	nodeSelectedDescription.text = val.description
@@ -252,38 +251,3 @@ func _setUpShopLists():
 	if inventory.resources:
 		listSecondary.append_array(inventory.resources)
 		_addItemsToList(inventory.resources, nodeListSecondary)
-
-
-# FOR TEST
-func generateTestArrays():
-	var food01 = InvFood.new()
-	food01.sprite = load("res://resources/Sprites/Crab/crab_body.png")
-	food01.count = 3
-	food01.cost = 30
-	var food02 = InvFood.new()
-	food02.sprite = load("res://resources/Sprites/PufferFish_02/pufferFiish02_Body.png")
-	food02.count = 2
-	food02.cost = 100
-	var resource01 = InvResource.new()
-	resource01.sprite = load("res://resources/Sprites/Travel/dock.png")
-	resource01.count = 20
-	resource01.cost = 12
-	
-	inventory.food = [food01, food02]
-	inventory.resources = [resource01]
-	
-	var food03 = InvFood.new()
-	food03.sprite = load("res://resources/Sprites/Crab/crab_body.png")
-	food03.count = 6
-	food03.cost = 80
-	var food04 = InvFood.new()
-	food04.sprite = load("res://resources/Sprites/PufferFish_02/pufferFiish02_Body.png")
-	food04.cost = 96
-	food04.count = 7
-	var resource02 = InvResource.new()
-	resource02.sprite = load("res://resources/Sprites/Travel/dock.png")
-	resource02.count = 50
-	resource02.cost = 20
-
-	shopInventory.food = [food03, food04]
-	shopInventory.resources = [resource02]
