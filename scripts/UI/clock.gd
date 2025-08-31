@@ -6,9 +6,9 @@ const TIME_BUFFER = .01
 signal done()
 signal encounterCheck()
 
-@export var duration: float
-@export var encounterPeriod: float = .5
-@export var timeScale := 1.0
+var duration: float
+var encounterPeriod: float = .5
+var timeScale := 1.0
 @onready var sprite: AnimatedSprite2D = $%AnimatedSprite2D
 @onready var frameCount: int = sprite.sprite_frames.get_frame_count('default')
 var started = false

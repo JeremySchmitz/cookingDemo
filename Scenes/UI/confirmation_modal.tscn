@@ -1,0 +1,94 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsee3xufv8ikw"]
+
+[ext_resource type="Script" uid="uid://cjb3gxafd4w7s" path="res://scripts/UI/confirmation_modal.gd" id="1_vpllo"]
+[ext_resource type="Theme" uid="uid://dh0c6psx35q2e" path="res://resources/UI/Main_menu.tres" id="2_vgxjs"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fmdkc"]
+font_size = 41
+
+[sub_resource type="LabelSettings" id="LabelSettings_vpllo"]
+font_size = 20
+
+[node name="ConfirmationModal" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vpllo")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.189323, 0.260768, 0.325364, 0.905882)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="CenterContainer/PanelContainer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 15.0
+offset_bottom = 72.0
+grow_horizontal = 2
+text = "TEST"
+label_settings = SubResource("LabelSettings_fmdkc")
+horizontal_alignment = 1
+
+[node name="Info" type="Label" parent="CenterContainer/PanelContainer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 32.0
+offset_top = 77.0
+offset_right = -32.0
+offset_bottom = 184.0
+grow_horizontal = 2
+text = "TEST"
+label_settings = SubResource("LabelSettings_vpllo")
+autowrap_mode = 3
+
+[node name="CancelBtn" type="Button" parent="CenterContainer/PanelContainer/Control"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(125, 50)
+layout_mode = 2
+offset_left = 66.0
+offset_top = 202.0
+offset_right = 191.0
+offset_bottom = 252.0
+text = "NO
+"
+
+[node name="ConfirmBtn" type="Button" parent="CenterContainer/PanelContainer/Control"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(125, 50)
+layout_mode = 2
+offset_left = 295.0
+offset_top = 202.0
+offset_right = 420.0
+offset_bottom = 252.0
+theme = ExtResource("2_vgxjs")
+text = "YES"
+
+[connection signal="pressed" from="CenterContainer/PanelContainer/Control/CancelBtn" to="." method="_on_cancel_btn_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/Control/ConfirmBtn" to="." method="_on_confirm_btn_pressed"]

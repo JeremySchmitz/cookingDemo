@@ -5,24 +5,23 @@ class_name MainMenu
 @onready var startButton: Button = %StartBtn
 @onready var settingsButton: Button = %SettingsBtn
 @onready var creditsButton: Button = %CreditsBtn
+@onready var pauseMenu: PauseMenu = %PauseMenu
 
 
 func _ready() -> void:
 	var hasSave = ResourceLoader.exists(Utils.SAVE_PATH)
 	continueButton.disabled = !hasSave
 
-	pass
-
-
 func _on_continue_btn_pressed() -> void:
 	SaveLoader.loadGame()
+	pauseMenu.show()
 	hide()
 
 func _on_start_btn_pressed() -> void:
 	Utils.RNG.randomize()
 	SceneLoader.goto_scene(Utils.TRAVEL_PATH)
 	hide()
-	pass
+	pauseMenu.show()
 
 func _on_settings_btn_pressed() -> void:
 	%Settings.show()
@@ -47,9 +46,6 @@ func _on_check_button_toggled(toggled_on: bool) -> void:
 
 func _on_fullscreen_button_toggled(toggled_on: bool) -> void:
 	Settings.fullscreen = toggled_on
-
-func _on_settings_close_btn_pressed() -> void:
-	%Settings.hide()
 
 func _on_credits_close_btn_pressed() -> void:
 	%Credits.hide()

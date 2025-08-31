@@ -1,14 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1a42wro6vq1r"]
+[gd_scene load_steps=5 format=3 uid="uid://b1a42wro6vq1r"]
 
 [ext_resource type="Script" uid="uid://brev7s1sbnur2" path="res://scripts/main.gd" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://b6rlbe5cluvk5" path="res://Scenes/loading_scene.tscn" id="2_idj7w"]
 [ext_resource type="PackedScene" uid="uid://fqeu1qvtnemu" path="res://Scenes/UI/Main_menu.tscn" id="3_kln2b"]
+[ext_resource type="PackedScene" uid="uid://b10q1vlf4yv4a" path="res://Scenes/UI/pause_menu.tscn" id="4_rgh2o"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_r150o")
 
 [node name="CanvasLayer_Loading" type="CanvasLayer" parent="."]
 layer = 10
+
+[node name="PauseMenu" parent="CanvasLayer_Loading" instance=ExtResource("4_rgh2o")]
+unique_name_in_owner = true
+visible = false
 
 [node name="LoadingScene" parent="CanvasLayer_Loading" instance=ExtResource("2_idj7w")]
 unique_name_in_owner = true

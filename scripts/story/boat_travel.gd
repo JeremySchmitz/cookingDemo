@@ -5,7 +5,7 @@ var crew_satiety: int = 100
 var dock_ports: Array = []
 var encounter_chance: float = .05 # %chance
 
-@export var dayLength = 1.5 # seconds
+@export var dayLength = 5 # seconds
 @export var encounterSpeed = 0.75
 
 @onready var boat: BoatChar = $BoatChar
@@ -27,13 +27,9 @@ func _ready():
 
 	_setBoatPosition()
 
-	var timer = Timer.new()
-	timer.wait_time = 0.1
-	timer.one_shot = true
-	add_child(timer)
-	timer.start()
 	clock.encounterPeriod = encounterSpeed
 	clock.duration = dayLength
+	clock.start()
 
 func _process(delta: float) -> void:
 	boat.updateRange(clock.timeLeft)

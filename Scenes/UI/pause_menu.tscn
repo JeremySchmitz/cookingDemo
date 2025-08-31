@@ -1,0 +1,103 @@
+[gd_scene load_steps=7 format=3 uid="uid://b10q1vlf4yv4a"]
+
+[ext_resource type="Theme" uid="uid://dh0c6psx35q2e" path="res://resources/UI/Main_menu.tres" id="1_702e2"]
+[ext_resource type="Script" uid="uid://i2qmskluhau2" path="res://scripts/UI/pause_menu.gd" id="1_oykix"]
+[ext_resource type="PackedScene" uid="uid://jiqq44fcp0o1" path="res://Scenes/UI/settings.tscn" id="1_rrvs5"]
+[ext_resource type="Texture2D" uid="uid://c472mryurxtlb" path="res://resources/Sprites/UI/Gear.png" id="2_8rf44"]
+[ext_resource type="PackedScene" uid="uid://bsee3xufv8ikw" path="res://Scenes/UI/confirmation_modal.tscn" id="3_kdnb7"]
+[ext_resource type="Texture2D" uid="uid://20oosrupq3nd" path="res://resources/Sprites/UI/Gear_hover.png" id="3_r2i2h"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_702e2")
+script = ExtResource("1_oykix")
+
+[node name="Menu" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2301, 0.312715, 0.39, 0.905882)
+
+[node name="CenterContainer" type="CenterContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/CenterContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="ResumeBtn" type="Button" parent="Menu/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "RESUME"
+
+[node name="SettingsBtn" type="Button" parent="Menu/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "SETTINGS"
+
+[node name="QuitBtn" type="Button" parent="Menu/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "QUIT TO MAIN MENU"
+
+[node name="CloseBtn" type="Button" parent="Menu/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "CLOSE GAME"
+
+[node name="Settings" parent="Menu/CenterContainer" instance=ExtResource("1_rrvs5")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="ConfirmationModal" parent="Menu" instance=ExtResource("3_kdnb7")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="button" type="TextureButton" parent="."]
+process_mode = 3
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -52.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 52.0
+grow_horizontal = 0
+texture_normal = ExtResource("2_8rf44")
+texture_pressed = ExtResource("3_r2i2h")
+texture_hover = ExtResource("3_r2i2h")
+texture_disabled = ExtResource("3_r2i2h")
+
+[connection signal="pressed" from="Menu/CenterContainer/VBoxContainer/ResumeBtn" to="." method="_on_resume_btn_pressed"]
+[connection signal="pressed" from="Menu/CenterContainer/VBoxContainer/SettingsBtn" to="." method="_on_settings_btn_pressed"]
+[connection signal="pressed" from="Menu/CenterContainer/VBoxContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]
+[connection signal="pressed" from="Menu/CenterContainer/VBoxContainer/CloseBtn" to="." method="_on_close_btn_pressed"]
+[connection signal="pressed" from="button" to="." method="_on_button_pressed"]

@@ -69,11 +69,12 @@ radius = 6.0
 script = ExtResource("1_4clir")
 inventory = ExtResource("2_m1yx5")
 
-[node name="BG" type="Polygon2D" parent="."]
-position = Vector2(585, 35)
-color = Color(0.703808, 0.703808, 0.703808, 1)
-polygon = PackedVector2Array(-608, -56, 2272, -40, 2282, 933, -622, 877)
-uv = PackedVector2Array(-608, -56, 584, -80, 576, 256, -584, 264)
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(1440, 810)
+offset_right = 1440.0
+offset_bottom = 810.0
+color = Color(0.607038, 0.664185, 0.743253, 1)
+metadata/_edit_lock_ = true
 
 [node name="CameraMain" type="Camera2D" parent="."]
 z_index = 10
@@ -82,17 +83,18 @@ position_smoothing_enabled = true
 script = ExtResource("8_2l700")
 
 [node name="cuttingBoard" type="Area2D" parent="."]
-position = Vector2(400, 250)
+position = Vector2(406, 295)
+scale = Vector2(1.5, 1.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="cuttingBoard"]
-position = Vector2(-116.5, -64.5)
 shape = SubResource("RectangleShape2D_fo5ed")
+metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="cuttingBoard"]
 texture_filter = 1
-position = Vector2(-118, -63)
 scale = Vector2(4.78125, 4.78125)
 texture = ExtResource("2_t5hpn")
+metadata/_edit_lock_ = true
 
 [node name="FryingPan" parent="." instance=ExtResource("10_2cl3g")]
 position = Vector2(1066, 518)
@@ -326,7 +328,7 @@ expand_mode = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
-text = "^"
+text = "V"
 
 [node name="Results" parent="HUD" instance=ExtResource("23_1i8y3")]
 visible = false

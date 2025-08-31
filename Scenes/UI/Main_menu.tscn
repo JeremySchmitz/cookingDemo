@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://fqeu1qvtnemu"]
+[gd_scene load_steps=5 format=3 uid="uid://fqeu1qvtnemu"]
 
 [ext_resource type="Script" uid="uid://cae50uibicc8y" path="res://scripts/UI/main_menu.gd" id="1_fxsns"]
 [ext_resource type="Theme" uid="uid://dh0c6psx35q2e" path="res://resources/UI/Main_menu.tres" id="1_ypja4"]
+[ext_resource type="PackedScene" uid="uid://jiqq44fcp0o1" path="res://Scenes/UI/settings.tscn" id="3_dt2kf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_oy1mv"]
 font_size = 66
@@ -70,151 +71,9 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "CREDITS"
 
-[node name="Settings" type="Panel" parent="CenterContainer"]
+[node name="Settings" parent="CenterContainer" instance=ExtResource("3_dt2kf")]
 unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(500, 500)
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Settings"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Control" type="Control" parent="CenterContainer/Settings/MarginContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer/Settings/MarginContainer/Control"]
-layout_mode = 2
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 470.0
-offset_bottom = 470.0
-
-[node name="SettingsCloseBtn" type="Button" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2"]
-texture_filter = 2
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_type_variation = &"CloseButton"
-text = "x"
-
-[node name="Label" type="Label" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2"]
-layout_mode = 2
-theme_type_variation = &"HeaderLabel"
-text = "SETTINGS"
-horizontal_alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(300, 50)
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-text = "Master Volume"
-
-[node name="volumeLabel" type="Label" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-text = "100"
-
-[node name="VolumeSlider" type="HSlider" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-value = 100.0
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(300, 50)
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-text = "Music"
-
-[node name="musicLabel" type="Label" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-text = "100"
-
-[node name="MusicSlider" type="HSlider" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-value = 100.0
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(300, 50)
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer3"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-text = "Sound Effects"
-
-[node name="sfxLabel" type="Label" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer3"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-text = "100"
-
-[node name="SfxSlider" type="HSlider" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-value = 100.0
-
-[node name="HBoxContainer4" type="HBoxContainer" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(300, 50)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer4"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-text = "Screen Shake"
-
-[node name="Control" type="Control" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer4"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="CheckButton" type="CheckButton" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer4"]
-layout_mode = 2
-button_pressed = true
-
-[node name="HBoxContainer5" type="HBoxContainer" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(300, 50)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer5"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-text = "Full Screen"
-
-[node name="Control" type="Control" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer5"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FullscreenButton" type="CheckButton" parent="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer5"]
 layout_mode = 2
 
 [node name="Credits" type="Panel" parent="CenterContainer"]
@@ -269,10 +128,4 @@ horizontal_alignment = 1
 [connection signal="pressed" from="CenterContainer/VBoxContainer/VBoxContainer/StartBtn" to="." method="_on_start_btn_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/VBoxContainer/SettingsBtn" to="." method="_on_settings_btn_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/VBoxContainer/CreditsBtn" to="." method="_on_credits_btn_pressed"]
-[connection signal="pressed" from="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/SettingsCloseBtn" to="." method="_on_settings_close_btn_pressed"]
-[connection signal="value_changed" from="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
-[connection signal="value_changed" from="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer2/MusicSlider" to="." method="_on_music_slider_value_changed"]
-[connection signal="value_changed" from="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer3/SfxSlider" to="." method="_on_sfx_slider_value_changed"]
-[connection signal="toggled" from="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer4/CheckButton" to="." method="_on_check_button_toggled"]
-[connection signal="toggled" from="CenterContainer/Settings/MarginContainer/Control/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer5/FullscreenButton" to="." method="_on_fullscreen_button_toggled"]
 [connection signal="pressed" from="CenterContainer/Credits/MarginContainer/Control/VBoxContainer2/CreditsCloseBtn" to="." method="_on_credits_close_btn_pressed"]

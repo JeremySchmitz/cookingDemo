@@ -21,7 +21,7 @@ func _connectListeners():
 
 # Camera Shake
 func _applyShake():
-	shakeStrength = randomStrength
+	if Settings.screenShake: shakeStrength = randomStrength
 
 func _shake(delta):
 	shakeStrength = lerpf(shakeStrength, 0, shakeFade * delta)

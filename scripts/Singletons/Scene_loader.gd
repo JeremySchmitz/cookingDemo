@@ -1,5 +1,7 @@
 extends Node2D
 
+signal quitToMenu()
+
 var loadingScene: LoadingScreen: set = _setLoadingScene
 var resultsScene: Results
 var current_scene: Node = null
@@ -10,6 +12,11 @@ var results: Array = []
 
 func goto_scene(path):
 	call_deferred("_deferred_goto_scene", path)
+
+
+func gotoMainMenu():
+	if current_scene: current_scene.queue_free()
+	quitToMenu.emit()
 
 
 func _deferred_goto_scene(path):
