@@ -252,29 +252,10 @@ grow_horizontal = 2
 grow_vertical = 2
 current_tab = 0
 
-[node name="Bowls" type="Control" parent="HUD/HUD/StoragePanel/TabContainer"]
+[node name="Storage" type="Control" parent="HUD/HUD/StoragePanel/TabContainer"]
 layout_mode = 2
 mouse_filter = 2
 metadata/_tab_index = 0
-
-[node name="BowlWrapper" type="HFlowContainer" parent="HUD/HUD/StoragePanel/TabContainer/Bowls"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(1000, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/h_separation = 18
-alignment = 1
-
-[node name="Storage" type="Control" parent="HUD/HUD/StoragePanel/TabContainer"]
-visible = false
-layout_mode = 2
-mouse_filter = 2
-metadata/_tab_index = 1
 
 [node name="FoodBarrelWrapper" type="HBoxContainer" parent="HUD/HUD/StoragePanel/TabContainer/Storage"]
 unique_name_in_owner = true
@@ -290,6 +271,25 @@ alignment = 1
 
 [node name="FoodBarrel" parent="HUD/HUD/StoragePanel/TabContainer/Storage/FoodBarrelWrapper" instance=ExtResource("23_hc3lq")]
 layout_mode = 2
+
+[node name="Bowls" type="Control" parent="HUD/HUD/StoragePanel/TabContainer"]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+metadata/_tab_index = 1
+
+[node name="BowlWrapper" type="HFlowContainer" parent="HUD/HUD/StoragePanel/TabContainer/Bowls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 18
+alignment = 1
 
 [node name="StorageButtonPanel" type="HBoxContainer" parent="HUD/HUD/StoragePanel"]
 unique_name_in_owner = true

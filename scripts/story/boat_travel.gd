@@ -7,6 +7,7 @@ var encounter_chance: float = .05 # %chance
 
 @export var dayLength = 5 # seconds
 @export var encounterSpeed = 0.75
+@export var slowTimeScale = .05
 
 @onready var boat: BoatChar = $BoatChar
 @onready var clock: Clock = %Clock
@@ -82,7 +83,7 @@ func _on_dock_button_pressed() -> void:
 	SceneLoader.goto_scene(Utils.STORE_PATH)
 
 func _on_boat_char_moving(moving: bool) -> void:
-	var timeScale = 1.0 if moving else 0.1
+	var timeScale = 1.0 if moving else slowTimeScale
 	clock.timeScale = timeScale
 
 func _on_clock_done() -> void:
@@ -93,7 +94,7 @@ func _on_clock_encounter_check() -> void:
 
 func _on_results_hidden() -> void:
 	boat.disabled = false
-	clock.timeScale = 0.1
+	clock.timeScale = slowTimeScale
 	clock.start()
 
 func _on_inventory_btn_pressed() -> void:
