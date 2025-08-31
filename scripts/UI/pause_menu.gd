@@ -2,19 +2,23 @@ extends Control
 
 class_name PauseMenu
 
-var paused = false
+var paused = false:
+	set(val):
+		paused = val
+		get_tree().paused = val
+
 
 func _on_button_pressed() -> void:
 	if paused: resumeGame()
 	else: pauseGame()
 
 func pauseGame():
-	get_tree().paused = true
+	paused = true
 	%Menu.show()
 
 func resumeGame():
 	%Menu.hide()
-	get_tree().paused = false
+	paused = false
 
 func _on_resume_btn_pressed() -> void:
 	resumeGame()
@@ -40,7 +44,7 @@ func _on_close_btn_pressed() -> void:
 
 
 func quitToMenu():
-	get_tree().paused = false
+	resumeGame()
 	%ConfirmationModal.hide()
 	SceneLoader.gotoMainMenu()
 
