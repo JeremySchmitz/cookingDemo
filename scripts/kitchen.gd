@@ -5,6 +5,7 @@ class_name Kitchen
 const BOWL_SCENE = preload("res://Scenes/food/bowl.tscn")
 const RESULTS_SCENE = preload("res://Scenes/food/results.tscn")
 const FOODBARREL_SCENE = preload("res://Scenes/food/food_barrel.tscn")
+var MATERIAL_NOISE: FastNoiseLite = preload("res://resources/kitchen_shader_noise.tres")
 
 @export var cameraMoveWait = .2;
 @onready var boneParticles: CPUParticles2D = $BoneParticles
@@ -25,6 +26,14 @@ var recovering = false
 @onready var storageButtonPanel = %StorageButtonPanel
 var showStorage = true
 
+@onready var distortionMaterial: ShaderMaterial = %Distortion.material
+var distortionSpeed = 10
+var distortionStrength := 0.0:
+	set(val):
+		distortionMaterial.set_shader_parameter('DISPLACEMENT', val)
+	get():
+		return distortionMaterial.get_shader_parameter('DISPLACEMENT')
+
 
 func _ready() -> void:
 	for food in inventory.food:
@@ -41,6 +50,11 @@ func _ready() -> void:
 	SignalBus.drop.connect(_recover)
 	SignalBus.progressBarFull.connect(_on_progress_bar_full)
 	SignalBus.progressBarEmpty.connect(_on_progress_bar_empty)
+
+# func _process(delta: float) -> void:
+# 	MATERIAL_NOISE.offset.x += delta * distortionSpeed
+# 	distortionStrength += delta
+# 	print('distortionStrength')
 
 	
 func _buildBowl(i: int):

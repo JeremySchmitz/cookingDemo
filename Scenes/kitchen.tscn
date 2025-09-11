@@ -1,8 +1,9 @@
-[gd_scene load_steps=31 format=3 uid="uid://cax40kgn23m3q"]
+[gd_scene load_steps=33 format=3 uid="uid://cax40kgn23m3q"]
 
 [ext_resource type="Script" uid="uid://bq6d71fqsv1h6" path="res://scripts/kitchen.gd" id="1_4clir"]
 [ext_resource type="Resource" uid="uid://bnuvdnc3ep10k" path="res://resources/custom_resources/inventory/Test/test_inventory_01.tres" id="2_m1yx5"]
 [ext_resource type="Texture2D" uid="uid://roubacvs6dht" path="res://resources/Sprites/Kitchen/CuttingBoard.png" id="2_t5hpn"]
+[ext_resource type="Material" uid="uid://dvmaugih34a87" path="res://resources/kitchen_shader.tres" id="4_1i8y3"]
 [ext_resource type="PackedScene" uid="uid://m483g8c2ihkp" path="res://Scenes/UI/health_bar.tscn" id="4_i6vcq"]
 [ext_resource type="PackedScene" uid="uid://ccw7uq7go4ivt" path="res://Scenes/food/food.tscn" id="5_32235"]
 [ext_resource type="PackedScene" uid="uid://dfla850nsg8il" path="res://Scenes/food/Food_types/Tuna/Tuna.tscn" id="5_t5hpn"]
@@ -22,6 +23,8 @@
 [ext_resource type="PackedScene" uid="uid://dpjoi167t6yho" path="res://Scenes/UI/stamina_bar.tscn" id="21_bgcuo"]
 [ext_resource type="PackedScene" uid="uid://dnun76p5l30rw" path="res://Scenes/food/results.tscn" id="23_1i8y3"]
 [ext_resource type="PackedScene" uid="uid://bs6vnlh5eb2mf" path="res://Scenes/food/food_barrel.tscn" id="23_hc3lq"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_j87t8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fo5ed"]
 size = Vector2(499, 293)
@@ -69,18 +72,29 @@ radius = 6.0
 script = ExtResource("1_4clir")
 inventory = ExtResource("2_m1yx5")
 
+[node name="CameraMain" type="Camera2D" parent="."]
+z_index = 10
+anchor_mode = 0
+position_smoothing_enabled = true
+script = ExtResource("8_2l700")
+
+[node name="CanvasLayer_Distortion" type="CanvasLayer" parent="CameraMain"]
+layer = 2
+
+[node name="Distortion" type="TextureRect" parent="CameraMain/CanvasLayer_Distortion"]
+unique_name_in_owner = true
+material = ExtResource("4_1i8y3")
+custom_minimum_size = Vector2(1440, 810)
+offset_right = 1440.0
+offset_bottom = 810.0
+texture = SubResource("CanvasTexture_j87t8")
+
 [node name="ColorRect" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(1440, 810)
 offset_right = 1440.0
 offset_bottom = 810.0
 color = Color(0.607038, 0.664185, 0.743253, 1)
 metadata/_edit_lock_ = true
-
-[node name="CameraMain" type="Camera2D" parent="."]
-z_index = 10
-anchor_mode = 0
-position_smoothing_enabled = true
-script = ExtResource("8_2l700")
 
 [node name="cuttingBoard" type="Area2D" parent="."]
 position = Vector2(406, 295)

@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dvmaugih34a87"]
+
+[ext_resource type="Shader" uid="uid://bdlthw0ikcap5" path="res://resources/kitchen.gdshader" id="1_amayb"]
+[ext_resource type="FastNoiseLite" uid="uid://de6f7h26mm7ae" path="res://resources/kitchen_shader_noise.tres" id="2_1tskp"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1i8y3"]
+resource_local_to_scene = true
+invert = true
+seamless = true
+noise = ExtResource("2_1tskp")
+
+[resource]
+shader = ExtResource("1_amayb")
+shader_parameter/NOISE_PATTERN = SubResource("NoiseTexture2D_1i8y3")
+shader_parameter/DISPLACEMENT = 0.01
