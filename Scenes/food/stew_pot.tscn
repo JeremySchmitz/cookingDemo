@@ -1,0 +1,95 @@
+[gd_scene load_steps=13 format=3 uid="uid://cyomw0tidmtdy"]
+
+[ext_resource type="Script" uid="uid://w62w3g3ptp1k" path="res://scripts/Food/dishwear.gd" id="1_fyh46"]
+[ext_resource type="Texture2D" uid="uid://dg3tplgihssrm" path="res://resources/Sprites/Kitchen/stewPot.png" id="1_imptd"]
+[ext_resource type="Texture2D" uid="uid://cv5f4f0th3nmo" path="res://resources/Sprites/Kitchen/stewPot_water.png" id="2_cjgsy"]
+[ext_resource type="Script" uid="uid://ip3nwschvvkb" path="res://scripts/components/dragable_area.gd" id="3_cjgsy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fyh46"]
+atlas = ExtResource("2_cjgsy")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcjdo"]
+atlas = ExtResource("2_cjgsy")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vipm"]
+atlas = ExtResource("2_cjgsy")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_etylv"]
+atlas = ExtResource("2_cjgsy")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dgxrm"]
+atlas = ExtResource("2_cjgsy")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ht8my"]
+atlas = ExtResource("2_cjgsy")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uuu1i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fyh46")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lcjdo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0vipm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etylv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dgxrm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ht8my")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lcjdo"]
+radius = 155.013
+
+[node name="StewPot" type="Node2D"]
+script = ExtResource("1_fyh46")
+
+[node name="sprite_bow" type="Sprite2D" parent="."]
+scale = Vector2(3.129, 3.129)
+texture = ExtResource("1_imptd")
+
+[node name="sprite_water" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(3.129, 3.129)
+sprite_frames = SubResource("SpriteFrames_uuu1i")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 1)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_lcjdo")
+
+[node name="DraggableArea" type="Area2D" parent="."]
+script = ExtResource("3_cjgsy")
+metadata/_custom_type_script = "uid://ip3nwschvvkb"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DraggableArea"]
+scale = Vector2(3.129, 3.129)
+polygon = PackedVector2Array(-46, -20, -51, -20, -55, -18, -59, -14, -60, -7, -60, 7, -59, 13, -56, 17, -54, 19, -50, 20, -45, 20, -47, 15, -52, 13, -54, 9, -55, 7, -55, -7, -54, -10, -51, -14, -47, -15)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="DraggableArea"]
+position = Vector2(0, 1)
+scale = Vector2(-3.129, 3.129)
+polygon = PackedVector2Array(-46, -20, -51, -20, -55, -18, -59, -14, -60, -7, -60, 7, -59, 13, -56, 17, -54, 19, -50, 20, -45, 20, -47, 15, -52, 13, -54, 9, -55, 7, -55, -7, -54, -10, -51, -14, -47, -15)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

@@ -48,7 +48,6 @@ func chopped():
 func _unhandled_input(event):
 	# we stop listening cause if we disable the collider we cant cut
 	if disabledTillCut and !hasBeenCut: return
-
 	if draggable:
 		var handled = false
 		if (mouse_over
@@ -56,6 +55,7 @@ func _unhandled_input(event):
 			and event.button_index == MOUSE_BUTTON_LEFT
 			and event.pressed
 		):
+			print('lifted:')
 			lifted = true
 			offset = get_global_mouse_position() - get_parent().global_position
 			handled = true
@@ -63,6 +63,7 @@ func _unhandled_input(event):
 				newParent = nodeKitchen
 			
 		if lifted and event is InputEventMouseMotion:
+			print('dragging:')
 			_set_position()
 			handled = true
 		

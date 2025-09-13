@@ -1,12 +1,10 @@
-[gd_scene load_steps=33 format=3 uid="uid://cax40kgn23m3q"]
+[gd_scene load_steps=39 format=3 uid="uid://cax40kgn23m3q"]
 
 [ext_resource type="Script" uid="uid://bq6d71fqsv1h6" path="res://scripts/kitchen.gd" id="1_4clir"]
 [ext_resource type="Resource" uid="uid://bnuvdnc3ep10k" path="res://resources/custom_resources/inventory/Test/test_inventory_01.tres" id="2_m1yx5"]
 [ext_resource type="Texture2D" uid="uid://roubacvs6dht" path="res://resources/Sprites/Kitchen/CuttingBoard.png" id="2_t5hpn"]
 [ext_resource type="Material" uid="uid://dvmaugih34a87" path="res://resources/kitchen_shader.tres" id="4_1i8y3"]
 [ext_resource type="PackedScene" uid="uid://m483g8c2ihkp" path="res://Scenes/UI/health_bar.tscn" id="4_i6vcq"]
-[ext_resource type="PackedScene" uid="uid://ccw7uq7go4ivt" path="res://Scenes/food/food.tscn" id="5_32235"]
-[ext_resource type="PackedScene" uid="uid://dfla850nsg8il" path="res://Scenes/food/Food_types/Tuna/Tuna.tscn" id="5_t5hpn"]
 [ext_resource type="Script" uid="uid://cplwxfa5c4wal" path="res://scripts/knives/knife_chopper.gd" id="6_5ukof"]
 [ext_resource type="Script" uid="uid://cepynjnto0btg" path="res://scripts/knives/knife_slicer.gd" id="7_iw6an"]
 [ext_resource type="Script" uid="uid://c2pkk8qcndtku" path="res://scripts/Utils/camera_main.gd" id="8_2l700"]
@@ -16,13 +14,12 @@
 [ext_resource type="Texture2D" uid="uid://3at5wmtrlu2r" path="res://resources/Sprites/Kitchen/knives/knife_chop.png" id="11_32235"]
 [ext_resource type="Texture2D" uid="uid://ctb4y1xwha2l" path="res://resources/Sprites/Kitchen/knives/knife_slice.png" id="12_5ukof"]
 [ext_resource type="PackedScene" uid="uid://euo8cywo2d7e" path="res://Scenes/food/knife_bag.tscn" id="14_ykbxl"]
-[ext_resource type="PackedScene" uid="uid://bfvipwuuj2khy" path="res://Scenes/food/Food_types/Crab/crab.tscn" id="16_5ukof"]
-[ext_resource type="PackedScene" uid="uid://ykut86xvitu3" path="res://Scenes/food/Food_types/Puffer_Fish/pufferfish.tscn" id="17_iw6an"]
 [ext_resource type="Script" uid="uid://c2w2t0wc0srsr" path="res://scripts/hand.gd" id="18_2l700"]
 [ext_resource type="Script" uid="uid://3qtest46ag4a" path="res://scripts/components/health.gd" id="19_r0dk1"]
 [ext_resource type="PackedScene" uid="uid://dpjoi167t6yho" path="res://Scenes/UI/stamina_bar.tscn" id="21_bgcuo"]
 [ext_resource type="PackedScene" uid="uid://dnun76p5l30rw" path="res://Scenes/food/results.tscn" id="23_1i8y3"]
 [ext_resource type="PackedScene" uid="uid://bs6vnlh5eb2mf" path="res://Scenes/food/food_barrel.tscn" id="23_hc3lq"]
+[ext_resource type="PackedScene" uid="uid://cyomw0tidmtdy" path="res://Scenes/food/stew_pot.tscn" id="24_1i8y3"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_j87t8"]
 
@@ -68,11 +65,421 @@ size = Vector2(18, 229)
 [sub_resource type="CircleShape2D" id="CircleShape2D_r0dk1"]
 radius = 6.0
 
+[sub_resource type="Curve" id="Curve_hqj0s"]
+_data = [Vector2(0.127413, 0.138934), 0.0, 0.0, 0, 0, Vector2(0.918455, 1), 1.57162, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_hc3lq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale_amount_max")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale_amount_curve")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("Curve_hqj0s")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:lifetime")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.34]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:scale_amount_min")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.02]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:speed_scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5]
+}
+
+[sub_resource type="Animation" id="Animation_1i8y3"]
+resource_name = "Stew_Simmer"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale_amount_max")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.03]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale_amount_curve")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("Curve_hqj0s")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:lifetime")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.34]
+}
+
+[sub_resource type="Animation" id="Animation_hqj0s"]
+resource_name = "Stew_Simmer_med"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:lifetime")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.34]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale_amount_min")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.02]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale_amount_max")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.03]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:scale_amount_curve")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("Curve_hqj0s")]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:speed_scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5]
+}
+
+[sub_resource type="Animation" id="Animation_ocwuj"]
+resource_name = "Stew_Boil_high"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [15]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:lifetime")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.22]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:speed_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale_amount_max")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.05]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:scale_amount_min")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.02]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_v7v86"]
+resource_name = "Stew_Boil_hi"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [30]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:lifetime")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.22]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:speed_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale_amount_max")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.06]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:scale_amount_min")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.02]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j87t8"]
+_data = {
+&"RESET": SubResource("Animation_hc3lq"),
+&"Stew_Boil_hi": SubResource("Animation_v7v86"),
+&"Stew_Boil_low": SubResource("Animation_ocwuj"),
+&"Stew_Simmer_hi": SubResource("Animation_hqj0s"),
+&"Stew_Simmer_low": SubResource("Animation_1i8y3")
+}
+
+[sub_resource type="Gradient" id="Gradient_hc3lq"]
+offsets = PackedFloat32Array(0.616114, 0.630332, 0.696682, 0.701422)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1i8y3"]
+gradient = SubResource("Gradient_hc3lq")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="Kitchen" type="Node2D"]
 script = ExtResource("1_4clir")
 inventory = ExtResource("2_m1yx5")
 
 [node name="CameraMain" type="Camera2D" parent="."]
+visible = false
 z_index = 10
 anchor_mode = 0
 position_smoothing_enabled = true
@@ -80,6 +487,7 @@ script = ExtResource("8_2l700")
 
 [node name="CanvasLayer_Distortion" type="CanvasLayer" parent="CameraMain"]
 layer = 2
+visible = false
 
 [node name="Distortion" type="TextureRect" parent="CameraMain/CanvasLayer_Distortion"]
 unique_name_in_owner = true
@@ -87,6 +495,7 @@ material = ExtResource("4_1i8y3")
 custom_minimum_size = Vector2(1440, 810)
 offset_right = 1440.0
 offset_bottom = 810.0
+mouse_filter = 2
 texture = SubResource("CanvasTexture_j87t8")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -101,6 +510,7 @@ position = Vector2(406, 295)
 scale = Vector2(1.5, 1.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="cuttingBoard"]
+visible = false
 shape = SubResource("RectangleShape2D_fo5ed")
 metadata/_edit_lock_ = true
 
@@ -111,25 +521,7 @@ texture = ExtResource("2_t5hpn")
 metadata/_edit_lock_ = true
 
 [node name="FryingPan" parent="." instance=ExtResource("10_2cl3g")]
-position = Vector2(1066, 518)
-
-[node name="Bowls" type="Node" parent="."]
-
-[node name="food" parent="." instance=ExtResource("5_32235")]
-visible = false
-position = Vector2(161, 181)
-
-[node name="Tuna" parent="." instance=ExtResource("5_t5hpn")]
-visible = false
-position = Vector2(164, 348)
-
-[node name="Crab" parent="." instance=ExtResource("16_5ukof")]
-visible = false
-position = Vector2(375, 365)
-
-[node name="Pufferfish" parent="." instance=ExtResource("17_iw6an")]
-visible = false
-position = Vector2(419, 171)
+position = Vector2(1071, 592)
 
 [node name="knifeChopper" type="Area2D" parent="."]
 script = ExtResource("6_5ukof")
@@ -198,7 +590,6 @@ rotation = -1.5708
 scale = Vector2(3, 3)
 
 [node name="Hand" type="Area2D" parent="." node_paths=PackedStringArray("particles", "health")]
-visible = false
 collision_mask = 2
 script = ExtResource("18_2l700")
 particles = NodePath("../BloodParticles")
@@ -225,7 +616,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+mouse_filter = 1
 metadata/_edit_lock_ = true
 
 [node name="TopPanel" type="HBoxContainer" parent="HUD/HUD"]
@@ -346,6 +737,34 @@ text = "V"
 
 [node name="Results" parent="HUD" instance=ExtResource("23_1i8y3")]
 visible = false
+mouse_filter = 2
+
+[node name="StewAnimPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../StewParticles")
+libraries = {
+&"": SubResource("AnimationLibrary_j87t8")
+}
+next/Stew_Simmer_low = &"RESET"
+blend_times = [&"RESET", &"RESET", 0.5, &"RESET", &"Stew_Boil_hi", 0.5, &"RESET", &"Stew_Boil_low", 0.5, &"RESET", &"Stew_Simmer_hi", 0.5, &"RESET", &"Stew_Simmer_low", 0.5]
+
+[node name="StewParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 4
+texture = SubResource("GradientTexture2D_1i8y3")
+lifetime = 0.34
+speed_scale = 1.5
+randomness = 1.0
+lifetime_randomness = 0.54
+emission_shape = 1
+emission_sphere_radius = 30.0
+spread = 180.0
+gravity = Vector2(0, 0)
+scale_amount_min = 0.02
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_hqj0s")
+
+[node name="StewPot" parent="." instance=ExtResource("24_1i8y3")]
+position = Vector2(1130, 198)
 
 [connection signal="cutBone" from="knifeChopper" to="." method="_on_knife_chopper_cut_bone"]
 [connection signal="cutBone" from="knifeSlicer" to="." method="_on_knife_slicer_cut_bone"]

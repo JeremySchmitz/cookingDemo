@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://q24kpwk6bqes"]
 
 [ext_resource type="Texture2D" uid="uid://bbyvhj26ia1t7" path="res://resources/Sprites/Kitchen/FryingPan.png" id="1_dp5ma"]
-[ext_resource type="Script" uid="uid://w62w3g3ptp1k" path="res://scripts/food/dishwear.gd" id="1_o3fws"]
+[ext_resource type="Script" uid="uid://w62w3g3ptp1k" path="res://scripts/Food/dishwear.gd" id="1_o3fws"]
 [ext_resource type="Script" uid="uid://ip3nwschvvkb" path="res://scripts/components/dragable_area.gd" id="2_o3fws"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dj5rl"]
