@@ -80,6 +80,12 @@ down={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Burner"
+2d_physics/layer_2="StewPot"
+2d_physics/layer_3="Spikes"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

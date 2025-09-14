@@ -105,6 +105,7 @@ stats = SubResource("Resource_1ib3v")
 bitmap = ExtResource("17_ddhe2")
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_mask = 3
 script = ExtResource("12_46my7")
 health = NodePath("../Health")
 

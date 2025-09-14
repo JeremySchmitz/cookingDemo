@@ -72,6 +72,7 @@ metadata/_custom_type_script = "uid://ip3nwschvvkb"
 polygon = PackedVector2Array(1, 1, 1, 0, 0, 1)
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_mask = 3
 script = ExtResource("6_1n0ni")
 health = NodePath("../Health")
 metadata/_custom_type_script = "uid://dik22bwv6x5l5"

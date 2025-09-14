@@ -55,7 +55,6 @@ func _unhandled_input(event):
 			and event.button_index == MOUSE_BUTTON_LEFT
 			and event.pressed
 		):
-			print('lifted:')
 			lifted = true
 			offset = get_global_mouse_position() - get_parent().global_position
 			handled = true
@@ -63,7 +62,6 @@ func _unhandled_input(event):
 				newParent = nodeKitchen
 			
 		if lifted and event is InputEventMouseMotion:
-			print('dragging:')
 			_set_position()
 			handled = true
 		

@@ -31,7 +31,7 @@ scale = Vector2(3, 3)
 mouse_filter = 2
 texture = ExtResource("1_ujf18")
 
-[node name="FoodNode" type="Control" parent="."]
+[node name="BarrelFoodNode" type="Control" parent="."]
 unique_name_in_owner = true
 z_index = 1
 layout_mode = 1

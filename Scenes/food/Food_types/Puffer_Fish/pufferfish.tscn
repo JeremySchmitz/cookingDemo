@@ -195,7 +195,7 @@ scale = Vector2(3, 3)
 texture = ExtResource("23_uaxqq")
 
 [node name="Hitbox" type="Area2D" parent="TopOrgans/Spike_01"]
-collision_layer = 2
+collision_layer = 4
 script = ExtResource("24_mfhaf")
 frequency = 0.0
 metadata/_custom_type_script = "uid://jgkb3k3cebao"
@@ -243,7 +243,7 @@ scale = Vector2(3, 3)
 texture = ExtResource("26_d0wah")
 
 [node name="Hitbox" type="Area2D" parent="TopOrgans/Spike_03"]
-collision_layer = 2
+collision_layer = 4
 script = ExtResource("24_mfhaf")
 frequency = 0.0
 metadata/_custom_type_script = "uid://jgkb3k3cebao"
@@ -267,7 +267,7 @@ scale = Vector2(3, 3)
 texture = ExtResource("27_vdelw")
 
 [node name="Hitbox" type="Area2D" parent="TopOrgans/Spike_04"]
-collision_layer = 2
+collision_layer = 4
 script = ExtResource("24_mfhaf")
 frequency = 0.0
 metadata/_custom_type_script = "uid://jgkb3k3cebao"
@@ -291,7 +291,7 @@ scale = Vector2(3, 3)
 texture = ExtResource("28_0e0qx")
 
 [node name="Hitbox" type="Area2D" parent="TopOrgans/Spike_05"]
-collision_layer = 2
+collision_layer = 4
 script = ExtResource("24_mfhaf")
 frequency = 0.0
 metadata/_custom_type_script = "uid://jgkb3k3cebao"
@@ -315,7 +315,7 @@ scale = Vector2(3, 3)
 texture = ExtResource("29_o0560")
 
 [node name="Hitbox" type="Area2D" parent="TopOrgans/Spike_06"]
-collision_layer = 2
+collision_layer = 4
 script = ExtResource("24_mfhaf")
 frequency = 0.0
 metadata/_custom_type_script = "uid://jgkb3k3cebao"
@@ -339,7 +339,7 @@ scale = Vector2(3, 3)
 texture = ExtResource("30_0wbql")
 
 [node name="Hitbox" type="Area2D" parent="TopOrgans/Spike_07"]
-collision_layer = 2
+collision_layer = 4
 script = ExtResource("24_mfhaf")
 frequency = 0.0
 metadata/_custom_type_script = "uid://jgkb3k3cebao"
@@ -363,7 +363,7 @@ scale = Vector2(3, 3)
 texture = ExtResource("31_r3cya")
 
 [node name="Hitbox" type="Area2D" parent="TopOrgans/Spike_08"]
-collision_layer = 2
+collision_layer = 4
 script = ExtResource("24_mfhaf")
 frequency = 0.0
 metadata/_custom_type_script = "uid://jgkb3k3cebao"
@@ -387,7 +387,7 @@ scale = Vector2(3, 3)
 texture = ExtResource("32_71dv2")
 
 [node name="Hitbox" type="Area2D" parent="TopOrgans/Spike_09"]
-collision_layer = 2
+collision_layer = 4
 script = ExtResource("24_mfhaf")
 frequency = 0.0
 metadata/_custom_type_script = "uid://jgkb3k3cebao"
@@ -397,6 +397,7 @@ position = Vector2(75, 19)
 shape = SubResource("CircleShape2D_n6v2b")
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_mask = 3
 script = ExtResource("16_ea0t4")
 health = NodePath("../Health")
 

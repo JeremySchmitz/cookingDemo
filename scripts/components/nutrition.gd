@@ -1,6 +1,7 @@
 class_name Nutrition
 extends Node
 
+signal nutrtionUpdated(nutrition: Nutrition)
 
 @export var health: HealthFood
 @export var maxNutrition := 100.0
@@ -34,7 +35,7 @@ func _on_health_cooked_burnt() -> void:
 	cooked = GlobalEnums.Cooked.BURNT
 	nutrition = 0.8 * maxNutrition
 
-func updateNutrition(diff: float):
+func updateNutrition(diff: float, emit = true):
 	var strength
 	match cooked:
 		GlobalEnums.Cooked.RAW:
@@ -49,6 +50,8 @@ func updateNutrition(diff: float):
 			strength = 0
 			
 	nutrition += diff * strength
+
+	if emit: nutrtionUpdated.emit(self)
 
 func updateNutritionAfterChop(percent: float):
 	var newMax = maxNutrition * percent * rentention

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://by3nll5e0dpud"]
+[gd_scene load_steps=11 format=3 uid="uid://bj3a27px0ofhi"]
 
 [ext_resource type="Script" uid="uid://dg7r1dj7qqv6f" path="res://scripts/Food/organ.gd" id="1_13a1j"]
 [ext_resource type="Script" uid="uid://c4wtk3o8jrujm" path="res://scripts/components/health_food.gd" id="2_13a1j"]
@@ -55,6 +55,7 @@ metadata/_custom_type_script = "uid://ip3nwschvvkb"
 polygon = PackedVector2Array(-1, -2, -1, -1, -2, -1, -2, 1, -1, 1, -1, 2, 1, 2, 1, 1, 2, 1, 2, -1, 1, -1, 1, -2)
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_mask = 3
 script = ExtResource("9_7bcvh")
 health = NodePath("../Health")
 metadata/_custom_type_script = "uid://dik22bwv6x5l5"

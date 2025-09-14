@@ -1,4 +1,5 @@
 extends Node2D
+class_name Dishwear
 
 @onready var prevPos = position
 var moving = false
@@ -12,10 +13,13 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if moving: return
 
 	var parent = area.get_parent()
-	if (parent is Food and
-		parent.get_parent().name != 'Organs' and
-		parent.get_parent().name != 'VisibleOrgans' and
-		parent.get_parent() != self):
+	if (parent is Food &&
+		parent.get_parent() != self &&
+		parent.get_parent().name != 'Organs' &&
+		parent.get_parent().name != 'VisibleOrgans' &&
+		parent.get_parent().name != 'TopOrgans' &&
+		parent.get_parent().name != 'BarrelFoodNode'
+		):
 		call_deferred("_reparent", parent, self)
 
 

@@ -586,6 +586,7 @@ scale = Vector2(3, 3)
 texture = ExtResource("11_leq4n")
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_mask = 3
 script = ExtResource("12_lipgs")
 health = NodePath("../Health")
 

@@ -1,7 +1,7 @@
 extends Control
 class_name FoodBarrel
 
-@onready var foodNode: Control = %FoodNode
+@onready var foodNode: Control = %BarrelFoodNode
 var foodName: String
 var foodScene: PackedScene
 
