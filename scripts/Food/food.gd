@@ -34,7 +34,7 @@ func _ready() -> void:
 		
 
 func _process(delta: float) -> void:
-	if find_child("Label"): find_child("Label").text = str(health.health)
+	if find_child("Label"): find_child("Label").text = str($Nutrition.nutrition)
 
 func _on_health_cooked_changed(val: int) -> void:
 	if shader_mat:

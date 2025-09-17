@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cyomw0tidmtdy"]
+[gd_scene load_steps=26 format=3 uid="uid://cyomw0tidmtdy"]
 
 [ext_resource type="Script" uid="uid://hrevc2ihnc0f" path="res://scripts/Food/stew_pot.gd" id="1_etylv"]
 [ext_resource type="Texture2D" uid="uid://dg3tplgihssrm" path="res://resources/Sprites/Kitchen/stewPot.png" id="1_imptd"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://ip3nwschvvkb" path="res://scripts/components/dragable_area.gd" id="3_cjgsy"]
 [ext_resource type="Script" uid="uid://jgkb3k3cebao" path="res://scripts/components/hitbox.gd" id="4_lcjdo"]
 [ext_resource type="Script" uid="uid://dik22bwv6x5l5" path="res://scripts/components/hurtbox.gd" id="6_0vipm"]
+[ext_resource type="Script" uid="uid://cx3k7xle3gw0c" path="res://scripts/components/nutrition.gd" id="8_dgxrm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fyh46"]
 atlas = ExtResource("2_cjgsy")
@@ -600,6 +601,20 @@ gravity = Vector2(0, 0)
 scale_amount_min = 0.02
 scale_amount_max = 0.1
 scale_amount_curve = SubResource("Curve_hqj0s")
+
+[node name="LabelNutrition" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 197.0
+offset_top = -56.0
+offset_right = 388.0
+offset_bottom = 55.0
+text = "0.0"
+
+[node name="Nutrition" type="Node" parent="."]
+script = ExtResource("8_dgxrm")
+maxNutrition = 10000.0
+nutrition = 0.0
+metadata/_custom_type_script = "uid://cx3k7xle3gw0c"
 
 [connection signal="tempUpdated" from="HealthWater" to="." method="_on_health_water_temp_updated"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_area_2d_area_entered"]

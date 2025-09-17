@@ -51,7 +51,7 @@ func _updatePoison(poisonNode: Poison, subtract = false):
 	else: poison = poison + poisonNode.poison
 
 func _updateNutrition(nutritionNode: Nutrition, subtract = false):
-	if subtract: nutrition = nutrition - nutritionNode.nutrition
+	if subtract: nutrition = nutrition - nutritionNode.getFinalNutrition()
 	else: nutrition = nutrition + nutritionNode.nutrition
 
 func _getSibling(className: Variant, node: Node2D):
